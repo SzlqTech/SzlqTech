@@ -1,13 +1,12 @@
 ﻿
-
 using HslCommunication;
 using NLog;
-using System.Xml.Linq;
 using SzlqTech.Common.EnumType;
+using SzlqTech.Common.Exceptions;
 
 namespace SzlqTech.Equipment.Machine
 {
-    public class HslExtension
+    public static class HslExtension
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
