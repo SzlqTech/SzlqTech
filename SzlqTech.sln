@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech", "SzlqTech\SzlqTech.csproj", "{36F10319-178C-45A2-96EC-76CA5374747C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.Equipment", "SzlqTech.Equipment\SzlqTech.Equipment.csproj", "{7556191E-18EC-4DFF-A61E-C8820A8572DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.ApiBLL", "SzlqTech.ApiBLL\SzlqTech.ApiBLL.csproj", "{76DBD7A6-549C-4B21-9AE1-88F45B211DD7}"
@@ -13,16 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.Common", "SzlqTech
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.DbHelper", "SzlqTech.DbHelper\SzlqTech.DbHelper.csproj", "{ADC8B29C-2C02-44B9-A08E-EEC222105652}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlqTech.SharedView", "SqlqTech.SharedView\SqlqTech.SharedView.csproj", "{740A3CDA-B7A4-44F0-B1D8-44A921C8DC83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech", "SzlqTech\SzlqTech.csproj", "{E69D83DC-81B2-4DE3-8F63-B4AE1D24A7F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.Core", "SzlqTech.Core\SzlqTech.Core.csproj", "{84933C18-5FA9-4E0A-A354-02B7094A77F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{36F10319-178C-45A2-96EC-76CA5374747C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36F10319-178C-45A2-96EC-76CA5374747C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36F10319-178C-45A2-96EC-76CA5374747C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36F10319-178C-45A2-96EC-76CA5374747C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7556191E-18EC-4DFF-A61E-C8820A8572DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7556191E-18EC-4DFF-A61E-C8820A8572DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7556191E-18EC-4DFF-A61E-C8820A8572DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +39,18 @@ Global
 		{ADC8B29C-2C02-44B9-A08E-EEC222105652}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC8B29C-2C02-44B9-A08E-EEC222105652}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC8B29C-2C02-44B9-A08E-EEC222105652}.Release|Any CPU.Build.0 = Release|Any CPU
+		{740A3CDA-B7A4-44F0-B1D8-44A921C8DC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740A3CDA-B7A4-44F0-B1D8-44A921C8DC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740A3CDA-B7A4-44F0-B1D8-44A921C8DC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740A3CDA-B7A4-44F0-B1D8-44A921C8DC83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E69D83DC-81B2-4DE3-8F63-B4AE1D24A7F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E69D83DC-81B2-4DE3-8F63-B4AE1D24A7F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E69D83DC-81B2-4DE3-8F63-B4AE1D24A7F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E69D83DC-81B2-4DE3-8F63-B4AE1D24A7F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84933C18-5FA9-4E0A-A354-02B7094A77F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84933C18-5FA9-4E0A-A354-02B7094A77F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84933C18-5FA9-4E0A-A354-02B7094A77F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84933C18-5FA9-4E0A-A354-02B7094A77F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
