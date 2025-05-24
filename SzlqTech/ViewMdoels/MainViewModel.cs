@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SzlqTech.ViewMdoels
 {
-    internal class MainViewModel
+    public class MainViewModel
     {
     }
 }

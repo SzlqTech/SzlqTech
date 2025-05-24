@@ -4,6 +4,8 @@ using Prism.Ioc;
 using System.Windows;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.App;
+using SzlqTech.Core.Services.Session;
+using SzlqTech.Services.Sessions;
 using SzlqTech.ViewMdoels;
 using SzlqTech.Views;
 
@@ -25,6 +27,7 @@ namespace SzlqTech
             service.RegisterForNavigation<MainView,MainViewModel>(AppViews.Main);
             service.RegisterDialog<LoginView,LoginViewModel>(AppViews.Login);
             service.RegisterSingleton<IAppStartService, MainStartService>();
+            service.RegisterSingleton<IHostDialogService, DialogHostService>();
         }
 
         protected override  void OnInitialized()

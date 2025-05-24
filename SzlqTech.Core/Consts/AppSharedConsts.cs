@@ -1,7 +1,7 @@
 ﻿
 namespace SzlqTech.Core.Consts
 {
-    public class AppSharedConsts
+    public static class AppSharedConsts
     {
         /// <summary>
         /// 默认的页面数量
@@ -22,7 +22,7 @@ namespace SzlqTech.Core.Consts
         /// <summary>
         /// 登录页的唯一会话标识
         /// </summary>
-        public const string LoginIdentifier = "Login";
+        public  const string LoginIdentifier = "Login";
 
         /// <summary>
         /// 首页的唯一会话标识 

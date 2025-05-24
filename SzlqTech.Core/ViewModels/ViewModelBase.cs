@@ -7,7 +7,7 @@ namespace SzlqTech.Core.ViewModels
     public partial class ViewModelBase: ObservableObject
     {
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(IsNotBusy))]
+       // [NotifyCanExecuteChangedFor(nameof(IsNotBusy))]
         public bool isBusy;
 
         

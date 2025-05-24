@@ -38,12 +38,18 @@ namespace SzlqTech
 
         public void Exit()
         {
-            
+            if (System.Windows.Application.Current is IAppTaskBar appTaskBar)
+                appTaskBar.Dispose();
+
+            Environment.Exit(0);
         }
 
         public void Logout()
         {
-           
+            App.Current.MainWindow.Hide();   
+            App.Current.MainWindow.Show();
+            if (App.Current.MainWindow.DataContext is INavigationAware navigationAware)
+                navigationAware.OnNavigatedTo(null);
         }
     }
 }
