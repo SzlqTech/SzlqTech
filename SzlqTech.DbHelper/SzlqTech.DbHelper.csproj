@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Masuit.Tools.Core" Version="2025.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.4.0" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.193" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SzlqTech.Common\SzlqTech.Common.csproj" />
   </ItemGroup>
 
 </Project>

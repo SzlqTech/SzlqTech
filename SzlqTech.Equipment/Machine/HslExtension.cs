@@ -532,8 +532,7 @@ namespace SzlqTech.Equipment.Machine
                 if (failThrowEx)
                 {
                     throw new EquipmentException(writeFailMessage);
-                }
-                else
+                }              else
                 {
                     Logger.Error(writeFailMessage);
                 }
