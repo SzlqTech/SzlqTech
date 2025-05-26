@@ -6,34 +6,50 @@ using Prism.Services.Dialogs;
 using SzlqTech.Core.Consts;
 using Prism.Regions;
 using System.Windows;
+using NLog;
+using System.IO;
+using System.Windows.Threading;
 
 namespace SzlqTech
 {
     public class MainStartService : IAppStartService
     {
+       
         public void CreateShell()
         {
-            var container = ContainerLocator.Container;
-            if (!Authorization()) Exit();
-            var shell = container.Resolve<object>(AppViews.Main);
-            if (shell is Window view)
-            {
-                var regionManager = container.Resolve<IRegionManager>();
-                RegionManager.SetRegionManager(view, regionManager);
-                RegionManager.UpdateRegions();
+            //var container = ContainerLocator.Container;
+            //if (!Authorization()) Exit();
+            //var shell = container.Resolve<object>(AppViews.Main);
+            //if (shell is Window view)
+            //{
+            //    var regionManager = container.Resolve<IRegionManager>();
+            //    RegionManager.SetRegionManager(view, regionManager);
+            //    RegionManager.UpdateRegions();
 
-                if (view.DataContext is INavigationAware navigationAware)
-                {
-                    navigationAware.OnNavigatedTo(null);
-                    App.Current.MainWindow = view;
-                }
-            }
+            //    if (view.DataContext is INavigationAware navigationAware)
+            //    {
+            //        navigationAware.OnNavigatedTo(null);
+            //        App.Current.MainWindow = view;
+            //    }
+            //}
         }
 
         private bool Authorization()
         {
-            var dialogService = ContainerLocator.Container.Resolve<IHostDialogService>();
-            return dialogService.ShowWindow(AppViews.Login).Result==ButtonResult.OK;
+            //var dialogService = ContainerLocator.Container.Resolve<IHostDialogService>();
+            //return dialogService.ShowWindow(AppViews.Login).Result==ButtonResult.OK;
+
+            var validationResult = Validation();
+            //if (validationResult == ButtonResult.Retry)
+            //    return Authorization();
+
+            return validationResult == ButtonResult.OK;
+
+            static ButtonResult Validation()
+            {
+                var dialogService = ContainerLocator.Container.Resolve<IHostDialogService>();
+                return dialogService.ShowWindow(AppViews.Login).Result;
+            }
         }
 
         public void Exit()
@@ -51,5 +67,7 @@ namespace SzlqTech
             if (App.Current.MainWindow.DataContext is INavigationAware navigationAware)
                 navigationAware.OnNavigatedTo(null);
         }
+
+       
     }
 }

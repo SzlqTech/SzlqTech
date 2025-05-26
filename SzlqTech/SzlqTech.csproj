@@ -11,12 +11,15 @@
   <ItemGroup>
     <None Remove="Assets\Images\back.png" />
     <None Remove="Assets\Images\logo.ico" />
+    <None Remove="Assets\Images\message.png" />
+    <None Remove="Assets\Images\notification.png" />
   </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="MaterialDesignColors" Version="5.2.1" />
 		<PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+		<PackageReference Include="NLog" Version="5.4.0" />
 		<PackageReference Include="Prism.DryIoc" Version="8.1.97" />
 	</ItemGroup>
 
@@ -27,6 +30,8 @@
 	<ItemGroup>
 	  <Resource Include="Assets\Images\back.png" />
 	  <Resource Include="Assets\Images\logo.ico" />
+	  <Resource Include="Assets\Images\message.png" />
+	  <Resource Include="Assets\Images\notification.png" />
 	</ItemGroup>
 
 </Project>
