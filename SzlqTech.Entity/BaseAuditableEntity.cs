@@ -1,7 +1,7 @@
 ﻿using SqlSugar;
 
 
-namespace SzlqTech.DbHelper
+namespace SzlqTech.Entity
 {
     public class BaseAuditableEntity:BaseEntity
     {

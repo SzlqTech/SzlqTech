@@ -1,6 +1,7 @@
 ﻿using Masuit.Tools;
 using System.Linq.Expressions;
 using SzlqTech.Common.Assert;
+using SzlqTech.Entity;
 
 namespace SzlqTech.DbHelper
 {

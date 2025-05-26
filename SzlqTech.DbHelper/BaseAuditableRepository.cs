@@ -1,6 +1,7 @@
 ﻿using SqlSugar;
 using System.Linq.Expressions;
 using SzlqTech.Common.Context;
+using SzlqTech.Entity;
 
 namespace SzlqTech.DbHelper
 {

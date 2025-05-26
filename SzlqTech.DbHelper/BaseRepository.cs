@@ -3,6 +3,7 @@ using SqlSugar;
 using System.Configuration;
 using System.Data;
 using System.Linq.Expressions;
+using SzlqTech.Entity;
 
 namespace SzlqTech.DbHelper
 {
