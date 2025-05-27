@@ -133,5 +133,9 @@ namespace SzlqTech.Core.Consts
         public const string HostMessageBox = "HostMessageBoxView";
 
         public const string MessageBox = "MessageBoxView";
+
+
+        //公共页面
+        public const string MachineSetting = "MachineSettingView";
     }
 }

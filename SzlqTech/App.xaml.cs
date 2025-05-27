@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Threading;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.App;
-using SzlqTech.Core.Services.Session;
+using SzlqTech.Extensions;
 using SzlqTech.Services.Sessions;
 using SzlqTech.ViewMdoels;
 using SzlqTech.Views;
@@ -36,8 +36,9 @@ namespace SzlqTech
         {
             service.RegisterForNavigation<MainView,MainViewModel>(AppViews.Main);
             service.RegisterDialog<LoginView,LoginViewModel>(AppViews.Login);
-            service.RegisterSingleton<IAppStartService, MainStartService>();
-            service.RegisterSingleton<IHostDialogService, DialogHostService>();
+            service.AddRepository();
+            service.AddDbService();
+            service.AddService();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

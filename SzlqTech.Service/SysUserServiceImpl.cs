@@ -5,10 +5,10 @@ using SzlqTech.IService;
 
 namespace SzlqTech.Service
 {
-    public class SysUserService
+    public class SysUserServiceImpl
         : BaseAuditableServiceImpl<ISysUserRepository, SysUser>, ISysUserService
     {
-        public SysUserService(ISysUserRepository baseRepository) : base(baseRepository)
+        public SysUserServiceImpl(ISysUserRepository baseRepository) : base(baseRepository)
         {
         }
     }

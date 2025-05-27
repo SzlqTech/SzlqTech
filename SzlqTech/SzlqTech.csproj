@@ -11,11 +11,41 @@
   <ItemGroup>
     <None Remove="Assets\Images\back.png" />
     <None Remove="Assets\Images\logo.ico" />
+    <None Remove="Assets\Images\menus\accounts.png" />
+    <None Remove="Assets\Images\menus\addr.png" />
+    <None Remove="Assets\Images\menus\auditlog.png" />
+    <None Remove="Assets\Images\menus\dashboard.png" />
+    <None Remove="Assets\Images\menus\demo.png" />
+    <None Remove="Assets\Images\menus\download.png" />
+    <None Remove="Assets\Images\menus\edition.png" />
+    <None Remove="Assets\Images\menus\email.png" />
+    <None Remove="Assets\Images\menus\home.png" />
+    <None Remove="Assets\Images\menus\language.png" />
+    <None Remove="Assets\Images\menus\link.png" />
+    <None Remove="Assets\Images\menus\loginattempts.png" />
+    <None Remove="Assets\Images\menus\logout.png" />
+    <None Remove="Assets\Images\menus\manageuser.png" />
+    <None Remove="Assets\Images\menus\mysettings.png" />
+    <None Remove="Assets\Images\menus\organization.png" />
+    <None Remove="Assets\Images\menus\password.png" />
+    <None Remove="Assets\Images\menus\phone.png" />
+    <None Remove="Assets\Images\menus\picture.png" />
+    <None Remove="Assets\Images\menus\PLC.png" />
+    <None Remove="Assets\Images\menus\property.png" />
+    <None Remove="Assets\Images\menus\role.png" />
+    <None Remove="Assets\Images\menus\setting.png" />
+    <None Remove="Assets\Images\menus\tenant.png" />
+    <None Remove="Assets\Images\menus\time.png" />
+    <None Remove="Assets\Images\menus\tree.png" />
+    <None Remove="Assets\Images\menus\user.png" />
+    <None Remove="Assets\Images\menus\version.png" />
+    <None Remove="Assets\Images\menus\visual.png" />
     <None Remove="Assets\Images\message.png" />
     <None Remove="Assets\Images\notification.png" />
   </ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="14.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="MaterialDesignColors" Version="5.2.1" />
 		<PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
@@ -26,11 +56,42 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\SqlqTech.SharedView\SqlqTech.SharedView.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Core\SzlqTech.Core.csproj" />
+	  <ProjectReference Include="..\SzlqTech.Repository\SzlqTech.Repository.csproj" />
+	  <ProjectReference Include="..\SzlqTech.Service\SzlqTech.Service.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Resource Include="Assets\Images\back.png" />
 	  <Resource Include="Assets\Images\logo.ico" />
+	  <Resource Include="Assets\Images\menus\accounts.png" />
+	  <Resource Include="Assets\Images\menus\addr.png" />
+	  <Resource Include="Assets\Images\menus\auditlog.png" />
+	  <Resource Include="Assets\Images\menus\dashboard.png" />
+	  <Resource Include="Assets\Images\menus\demo.png" />
+	  <Resource Include="Assets\Images\menus\download.png" />
+	  <Resource Include="Assets\Images\menus\edition.png" />
+	  <Resource Include="Assets\Images\menus\email.png" />
+	  <Resource Include="Assets\Images\menus\home.png" />
+	  <Resource Include="Assets\Images\menus\language.png" />
+	  <Resource Include="Assets\Images\menus\link.png" />
+	  <Resource Include="Assets\Images\menus\loginattempts.png" />
+	  <Resource Include="Assets\Images\menus\logout.png" />
+	  <Resource Include="Assets\Images\menus\manageuser.png" />
+	  <Resource Include="Assets\Images\menus\mysettings.png" />
+	  <Resource Include="Assets\Images\menus\organization.png" />
+	  <Resource Include="Assets\Images\menus\password.png" />
+	  <Resource Include="Assets\Images\menus\phone.png" />
+	  <Resource Include="Assets\Images\menus\picture.png" />
+	  <Resource Include="Assets\Images\menus\PLC.png" />
+	  <Resource Include="Assets\Images\menus\property.png" />
+	  <Resource Include="Assets\Images\menus\role.png" />
+	  <Resource Include="Assets\Images\menus\setting.png" />
+	  <Resource Include="Assets\Images\menus\tenant.png" />
+	  <Resource Include="Assets\Images\menus\time.png" />
+	  <Resource Include="Assets\Images\menus\tree.png" />
+	  <Resource Include="Assets\Images\menus\user.png" />
+	  <Resource Include="Assets\Images\menus\version.png" />
+	  <Resource Include="Assets\Images\menus\visual.png" />
 	  <Resource Include="Assets\Images\message.png" />
 	  <Resource Include="Assets\Images\notification.png" />
 	</ItemGroup>

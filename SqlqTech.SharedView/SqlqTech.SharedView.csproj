@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
@@ -16,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\SzlqTech.Core\SzlqTech.Core.csproj" />
     <ProjectReference Include="..\SzlqTech.Entity\SzlqTech.Entity.csproj" />
+    <ProjectReference Include="..\SzlqTech.Repository\SzlqTech.Repository.csproj" />
+    <ProjectReference Include="..\SzlqTech.Service\SzlqTech.Service.csproj" />
   </ItemGroup>
 
 </Project>
