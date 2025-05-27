@@ -7,6 +7,7 @@ using SzlqTech.IService;
 using SzlqTech.Repository;
 using SzlqTech.Service;
 using SzlqTech.Services.Mapper;
+using SzlqTech.Services.Navigation;
 using SzlqTech.Services.Sessions;
 
 namespace SzlqTech.Extensions
@@ -38,6 +39,7 @@ namespace SzlqTech.Extensions
                 config.AddProfile(new AutoMapperProfile());
             });
             container.RegisterInstance<IMapper>(config.CreateMapper());
+            container.Register<NavigationService>();
         }
     }
 }

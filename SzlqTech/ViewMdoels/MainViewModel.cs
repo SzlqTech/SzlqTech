@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Models;
 using SzlqTech.Core.ViewModels;
+using SzlqTech.Services.Navigation;
 using SzlqTech.Services.Sessions;
 
 namespace SzlqTech.ViewMdoels
@@ -17,19 +18,24 @@ namespace SzlqTech.ViewMdoels
     public partial class MainViewModel : NavigationViewModel, IConfigureService
     {
         private readonly IRegionManager regionManager;
+        public NavigationService NavigationService { get; set; }
 
-        public MainViewModel(IRegionManager regionManager)
+        public MainViewModel(IRegionManager regionManager, NavigationService navigationService)
         {
             this.regionManager = regionManager;
+            NavigationService = navigationService;
         }
 
         [ObservableProperty]
         public ObservableCollection<NavigationItem> navigationItems;
 
-        [RelayCommand]
-        public void Navigate()
-        {
+      
 
+        [RelayCommand]
+        public void Navigate(NavigationItem item)
+        {
+            if (item == null) return;
+            NavigationService.Navigate(item.PageViewName);
         }
 
         public void InitConfig()

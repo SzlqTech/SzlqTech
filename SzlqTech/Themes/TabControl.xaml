@@ -97,9 +97,9 @@
                                   Typography.Capitals="{TemplateBinding Typography.Capitals}" />
 
                                 <Button
-                                  x:Name="PART_DeleteButton"
-                                  Grid.Column="1"
-                                  Content="{DynamicResource Close}"
+                                  x:Name="PART_DeleteButton"                             
+                                  Grid.Column="1"                                  
+                                  Content="{wpf:PackIcon Kind=Close, Size=15}"
                                   Style="{DynamicResource IconButtonStyle}"
                                   Visibility="Hidden" />
                             </Grid>
@@ -350,7 +350,7 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Top">
                             <Setter Property="BorderThickness" Value="0,0,0,1" />
-                            
+                            <Setter Property="wpf:ShadowAssist.Darken" Value="False"/>
                             <Setter TargetName="DividerRect" Property="Grid.ColumnSpan" Value="2" />
                             <Setter TargetName="DividerRect" Property="Grid.RowSpan" Value="1" />
                             <Setter TargetName="DividerRect" Property="Height" Value="1" />
@@ -363,7 +363,7 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter Property="BorderThickness" Value="0,1,0,0" />
-                            
+                            <Setter Property="wpf:ShadowAssist.Darken" Value="False"/>
                             <Setter TargetName="DividerRect" Property="Grid.ColumnSpan" Value="2" />
                             <Setter TargetName="DividerRect" Property="Grid.RowSpan" Value="1" />
                             <Setter TargetName="DividerRect" Property="Height" Value="1" />
@@ -376,7 +376,7 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="BorderThickness" Value="1,0,0,0" />
-                           
+                            <Setter Property="wpf:ShadowAssist.Darken" Value="False"/>
                             <Setter TargetName="DividerRect" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="TabGrid" Property="DockPanel.Dock" Value="Right" />
                         </Trigger>
@@ -387,6 +387,6 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="wpf:ElevationAssist.Elevation" Value="Dp0" />
         <Setter Property="wpf:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-       
+        <Setter Property="wpf:ShadowAssist.Darken" Value="False"/>
     </Style>
 </ResourceDictionary>

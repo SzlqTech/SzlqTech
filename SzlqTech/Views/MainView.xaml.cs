@@ -30,6 +30,15 @@ namespace SzlqTech.Views
             InitializeComponent();
             this.appStartService = appStartService;
 
+            HeaderBorder.MouseDown += (s, e) =>
+            {
+                if (e.ClickCount == 2) SetWindowState();
+            };
+            HeaderBorder.MouseMove += (s, e) =>
+            {
+                if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+                    this.DragMove();
+            };
             BtnMin.Click += BtnMin_Click;
             BtnMax.Click += BtnMax_Click;
             BtnClose.Click += BtnClose_Click;
@@ -66,9 +75,8 @@ namespace SzlqTech.Views
             {
                 if (this.DataContext is MainViewModel viewModel)
                 {
-
-                }
-                   // viewModel.NavigationService.RemoveView(tabItem.Content);
+                    viewModel.NavigationService.RemoveView(tabItem.Content);
+                }     
             }
         }
     }

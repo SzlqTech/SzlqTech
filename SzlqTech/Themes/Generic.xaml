@@ -4,6 +4,7 @@
     xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/SzlqTech;component/Themes/TabControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SzlqTech;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="closeTextBlock" TargetType="TextBlock">

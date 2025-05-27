@@ -21,6 +21,7 @@
                 <ResourceDictionary Source="pack://application:,,,/SzlqTech;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -41,17 +42,36 @@
 
         <DataGrid
             Grid.Row="1"
-            Margin="10"
+            Margin="10 0 10 10"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
-            CanUserSortColumns="False"
+            CanUserSortColumns="False"         
             IsReadOnly="False"
-            ItemsSource="{Binding MachineSettings}"
+            ItemsSource="{Binding MachineSettingVos}"
             Style="{StaticResource MaterialDesignDataGrid}">
+            <DataGrid.Resources>
+                <!-- 定义居中样式 -->
+                <Style x:Key="CenterCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="PLC类型" />
-                <DataGridTextColumn Width="*" Header="PLC地址" />
-                <DataGridTextColumn Width="*" Header="PLC说明" />
+                <DataGridTextColumn Width="*" Header="PLC类型" CellStyle="{StaticResource CenterCellStyle}" >
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="PLC地址" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="PLC说明" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn Width="*" Header="操作">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
