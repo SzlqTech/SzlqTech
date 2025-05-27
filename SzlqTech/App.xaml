@@ -15,6 +15,7 @@
                     PrimaryColor="DeepPurple"
                     SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SzlqTech;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <bar:TaskbarIcon
                 x:Key="taskBar"
@@ -37,5 +38,6 @@
                 </bar:TaskbarIcon.ContextMenu>
             </bar:TaskbarIcon>
         </ResourceDictionary>
+
     </Application.Resources>
 </prism:PrismApplication>

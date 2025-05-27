@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SzlqTech.Themes.Controls;
+using SzlqTech.ViewMdoels;
 
 namespace SzlqTech.Views
 {
@@ -22,6 +24,18 @@ namespace SzlqTech.Views
         public MainView()
         {
             InitializeComponent();
+        }
+
+        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource != null && e.OriginalSource is TabCloseItem tabItem)
+            {
+                if (this.DataContext is MainViewModel viewModel)
+                {
+
+                }
+                   // viewModel.NavigationService.RemoveView(tabItem.Content);
+            }
         }
     }
 }
