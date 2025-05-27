@@ -1,9 +1,10 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
-using Microsoft.VisualBasic.Logging;
 using NLog;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Modularity;
 using Prism.Services.Dialogs;
+using SqlqTech.SharedView;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
@@ -37,6 +38,11 @@ namespace SzlqTech
             service.RegisterDialog<LoginView,LoginViewModel>(AppViews.Login);
             service.RegisterSingleton<IAppStartService, MainStartService>();
             service.RegisterSingleton<IHostDialogService, DialogHostService>();
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<SharedViewModules>();
         }
 
         protected override  void OnInitialized()

@@ -9,7 +9,7 @@
     xmlns:local="clr-namespace:SzlqTech.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:prism="http://prismlibrary.com/"
+    xmlns:prism="http://prismlibrary.com/"   
     Title="MainView"
     Width="1600"
     Height="900"
@@ -327,6 +327,7 @@
                     HorizontalContentAlignment="Left"
                     controls:TabCloseItem.CloseClick="OnCloseButtonClick"
                     md:ElevationAssist.Elevation="Dp1"
+                    prism:RegionManager.RegionName="{x:Static const:AppRegions.Main}"
                     SelectedIndex="{Binding NavigationService.SelectedIndex}"
                     Style="{StaticResource DefaultMaterialDesignTabControl}">
                     <TabControl.ItemTemplate>

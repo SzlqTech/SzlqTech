@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="SqlqTech.SharedView.Views.MachineSettingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SqlqTech.SharedView.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    d:DesignHeight="800"
+    d:DesignWidth="1280"
+    Background="{DynamicResource MaterialDesignCardBackground}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <md:BundledTheme
+                    BaseTheme="Light"
+                    PrimaryColor="DeepPurple"
+                    SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SzlqTech;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <StackPanel
+                Margin="10"
+                DockPanel.Dock="Right"
+                Orientation="Horizontal">
+                <Button md:ButtonAssist.CornerRadius="5" Content="添加PLC" />
+                <Button
+                    Margin="5,0,5,0"
+                    md:ButtonAssist.CornerRadius="5"
+                    Content="PLC明细" />
+            </StackPanel>
+        </DockPanel>
+
+        <DataGrid
+            Grid.Row="1"
+            Margin="10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserSortColumns="False"
+            IsReadOnly="False"
+            Style="{StaticResource MaterialDesignDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="PLC类型" />
+                <DataGridTextColumn Width="*" Header="PLC地址" />
+                <DataGridTextColumn Width="*" Header="PLC说明" />
+                <DataGridTemplateColumn Width="*" Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="0,0,5,0" Content="PLC详情" />
+                                <Button Margin="0,0,5,0" Content="删除" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

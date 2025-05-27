@@ -10,8 +10,7 @@
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
     Width="940"
-    Height="550"
-    
+    Height="550"  
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
     <prism:Dialog.WindowStyle>

@@ -10,6 +10,12 @@ namespace SzlqTech.ViewMdoels
 {
     public class MainViewModel : NavigationViewModel, IConfigureService
     {
+
+        public MainViewModel()
+        {
+            
+        }
+
         public void Configure()
         {
             

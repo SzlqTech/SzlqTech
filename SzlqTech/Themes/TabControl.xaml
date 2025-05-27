@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:SzlqTech.Themes.Controls"
     xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes">
-    <Style x:Key="DefaultMaterialDesignTabItem" TargetType="{x:Type control:TabControl}">
+    <Style x:Key="DefaultMaterialDesignTabItem" TargetType="{x:Type control:TabCloseItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Padding" Value="10,0,0,0" />
@@ -15,108 +15,108 @@
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="SelectHorizontalTabItem">
                             <DoubleAnimation
-                                Storyboard.TargetName="ScaleTransform"
-                                Storyboard.TargetProperty="ScaleY"
-                                From="0"
-                                To="1"
-                                Duration="0" />
+                              Storyboard.TargetName="ScaleTransform"
+                              Storyboard.TargetProperty="ScaleY"
+                              From="0"
+                              To="1"
+                              Duration="0" />
                             <DoubleAnimation
-                                Storyboard.TargetName="ScaleTransform"
-                                Storyboard.TargetProperty="ScaleX"
-                                From="0"
-                                To="1"
-                                Duration="0:0:0.3">
+                              Storyboard.TargetName="ScaleTransform"
+                              Storyboard.TargetProperty="ScaleX"
+                              From="0"
+                              To="1"
+                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation
-                                BeginTime="0:0:0.3"
-                                Storyboard.TargetName="PART_BackgroundSelection"
-                                Storyboard.TargetProperty="Opacity"
-                                To="0.12"
-                                Duration="0" />
+                              BeginTime="0:0:0.3"
+                              Storyboard.TargetName="PART_BackgroundSelection"
+                              Storyboard.TargetProperty="Opacity"
+                              To="0.12"
+                              Duration="0" />
                         </Storyboard>
                         <Storyboard x:Key="SelectVerticalTabItem">
                             <DoubleAnimation
-                                Storyboard.TargetName="ScaleTransform"
-                                Storyboard.TargetProperty="ScaleX"
-                                From="0"
-                                To="1"
-                                Duration="0" />
+                              Storyboard.TargetName="ScaleTransform"
+                              Storyboard.TargetProperty="ScaleX"
+                              From="0"
+                              To="1"
+                              Duration="0" />
                             <DoubleAnimation
-                                Storyboard.TargetName="ScaleTransform"
-                                Storyboard.TargetProperty="ScaleY"
-                                From="0"
-                                To="1"
-                                Duration="0:0:0.3">
+                              Storyboard.TargetName="ScaleTransform"
+                              Storyboard.TargetProperty="ScaleY"
+                              From="0"
+                              To="1"
+                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation
-                                BeginTime="0:0:0.3"
-                                Storyboard.TargetName="PART_BackgroundSelection"
-                                Storyboard.TargetProperty="Opacity"
-                                To="0.12"
-                                Duration="0" />
+                              BeginTime="0:0:0.3"
+                              Storyboard.TargetName="PART_BackgroundSelection"
+                              Storyboard.TargetProperty="Opacity"
+                              To="0.12"
+                              Duration="0" />
                         </Storyboard>
                     </ControlTemplate.Resources>
                     <Grid x:Name="Root">
                         <!--  This is the Header label ColorZone.  -->
                         <wpf:ColorZone
-                            x:Name="ColorZoneHeader"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Panel.ZIndex="1"
-                            Focusable="False"
-                            Foreground="{DynamicResource PrimaryHueMidBrush}"
-                            Mode="Custom">
+                          x:Name="ColorZoneHeader"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Panel.ZIndex="1"
+                          Focusable="False"
+                          Foreground="{DynamicResource PrimaryHueMidBrush}"
+                          Mode="Custom">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <wpf:Ripple
-                                    x:Name="contentPresenter"
-                                    Padding="{TemplateBinding Padding}"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Content="{TemplateBinding Header}"
-                                    ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                    ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
-                                    Focusable="False"
-                                    Opacity=".82"
-                                    RecognizesAccessKey="True"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                    TextBlock.FontSize="14"
-                                    TextBlock.FontWeight="Medium"
-                                    TextOptions.TextFormattingMode="Ideal"
-                                    TextOptions.TextRenderingMode="Auto"
-                                    Typography.Capitals="{TemplateBinding Typography.Capitals}" />
+                                  x:Name="contentPresenter"
+                                  Padding="{TemplateBinding Padding}"
+                                  HorizontalContentAlignment="Center"
+                                  VerticalContentAlignment="Center"
+                                  Content="{TemplateBinding Header}"
+                                  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                  ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                  Focusable="False"
+                                  Opacity=".82"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  TextBlock.FontSize="14"
+                                  TextBlock.FontWeight="Medium"
+                                  TextOptions.TextFormattingMode="Ideal"
+                                  TextOptions.TextRenderingMode="Auto"
+                                  Typography.Capitals="{TemplateBinding Typography.Capitals}" />
 
                                 <Button
-                                    x:Name="PART_DeleteButton"
-                                    Grid.Column="1"
-                                    Content="{DynamicResource Close}"
-                                    Style="{DynamicResource IconButtonStyle}"
-                                    Visibility="Hidden" />
+                                  x:Name="PART_DeleteButton"
+                                  Grid.Column="1"
+                                  Content="{DynamicResource Close}"
+                                  Style="{DynamicResource IconButtonStyle}"
+                                  Visibility="Hidden" />
                             </Grid>
                         </wpf:ColorZone>
                         <Border
-                            x:Name="SelectionHighlightBorder"
-                            BorderBrush="{Binding Path=Foreground, ElementName=ColorZoneHeader}"
-                            BorderThickness="0,0,0,2"
-                            RenderTransformOrigin="0.5,0.5"
-                            Visibility="Hidden">
+                          x:Name="SelectionHighlightBorder"
+                          BorderBrush="{Binding Path=Foreground, ElementName=ColorZoneHeader}"
+                          BorderThickness="0,0,0,2"
+                          RenderTransformOrigin="0.5,0.5"
+                          Visibility="Hidden">
                             <Border.RenderTransform>
                                 <ScaleTransform x:Name="ScaleTransform" ScaleX="0" ScaleY="0" />
                             </Border.RenderTransform>
                             <Rectangle
-                                x:Name="PART_BackgroundSelection"
-                                Fill="{TemplateBinding Background}"
-                                Opacity="0.0" />
+                              x:Name="PART_BackgroundSelection"
+                              Fill="{TemplateBinding Background}"
+                              Opacity="0.0" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -244,9 +244,9 @@
     </Style>
 
     <Style
-        x:Key="DefaultMaterialDesignTabItemStyle"
-        BasedOn="{StaticResource DefaultMaterialDesignTabItem}"
-        TargetType="{x:Type control:TabCloseItem}" />
+      x:Key="DefaultMaterialDesignTabItemStyle"
+      BasedOn="{StaticResource DefaultMaterialDesignTabItem}"
+      TargetType="{x:Type control:TabCloseItem}" />
 
     <Style x:Key="DefaultMaterialDesignTabControl" TargetType="{x:Type control:TabControl}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
@@ -262,23 +262,24 @@
                     <DockPanel Background="{TemplateBinding Background}" KeyboardNavigation.TabNavigation="Local">
                         <!--  tabs  -->
                         <Grid
-                            x:Name="TabGrid"
-                            DockPanel.Dock="Left"
-                            SnapsToDevicePixels="True">
+                          x:Name="TabGrid"
+                          DockPanel.Dock="Left"
+                          SnapsToDevicePixels="True">
                             <wpf:Card
-                                x:Name="shadowCard"
-                                wpf:ElevationAssist.Elevation="Dp1"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{DynamicResource MaterialDesignDivider}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                UniformCornerRadius="0"
-                                Visibility="Visible" />
+                              x:Name="shadowCard"
+                              wpf:ElevationAssist.Elevation="Dp1"
+                             
+                              Background="{TemplateBinding Background}"
+                              BorderBrush="{DynamicResource MaterialDesignDivider}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              UniformCornerRadius="0"
+                              Visibility="Visible" />
 
                             <wpf:ColorZone
-                                x:Name="PART_HeaderCard"
-                                VerticalAlignment="Stretch"
-                                Focusable="False"
-                                Mode="Custom">
+                              x:Name="PART_HeaderCard"
+                              VerticalAlignment="Stretch"
+                              Focusable="False"
+                              Mode="Custom">
                                 <Grid Background="{Binding ElementName=PART_HeaderCard, Path=Background}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -289,54 +290,54 @@
                                         <ColumnDefinition Width="1*" />
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter
-                                        x:Name="FloatingContentPanel"
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:NavigationRailAssist.FloatingContent)}"
-                                        Focusable="False" />
+                                      x:Name="FloatingContentPanel"
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:NavigationRailAssist.FloatingContent)}"
+                                      Focusable="False" />
 
                                     <WrapPanel
-                                        x:Name="HeaderPanel"
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Focusable="False"
-                                        IsItemsHost="True"
-                                        Orientation="Horizontal" />
+                                      x:Name="HeaderPanel"
+                                      Grid.Row="1"
+                                      Grid.Column="0"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Focusable="False"
+                                      IsItemsHost="True"
+                                      Orientation="Horizontal" />
 
                                     <Rectangle
-                                        x:Name="DividerRect"
-                                        Grid.RowSpan="2"
-                                        Width="1"
-                                        Height="Auto"
-                                        HorizontalAlignment="Right"
-                                        Fill="{DynamicResource MaterialDesignDivider}"
-                                        Visibility="Collapsed" />
+                                      x:Name="DividerRect"
+                                      Grid.RowSpan="2"
+                                      Width="1"
+                                      Height="Auto"
+                                      HorizontalAlignment="Right"
+                                      Fill="{DynamicResource MaterialDesignDivider}"
+                                      Visibility="Collapsed" />
                                 </Grid>
                             </wpf:ColorZone>
                         </Grid>
                         <!--  selected content  -->
                         <wpf:ColorZone
-                            x:Name="PART_HeaderCardSelectedContent"
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="{x:Null}"
-                            Foreground="{DynamicResource MaterialDesignBody}"
-                            Mode="Standard">
+                          x:Name="PART_HeaderCardSelectedContent"
+                          Padding="{TemplateBinding Padding}"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="{x:Null}"
+                          Foreground="{DynamicResource MaterialDesignBody}"
+                          Mode="Standard">
 
                             <ContentPresenter
-                                x:Name="PART_SelectedContentHost"
-                                Margin="{TemplateBinding Padding}"
-                                ContentSource="SelectedContent"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                Focusable="False"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                              x:Name="PART_SelectedContentHost"
+                              Margin="{TemplateBinding Padding}"
+                              ContentSource="SelectedContent"
+                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                              Focusable="False"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </wpf:ColorZone>
                     </DockPanel>
                     <ControlTemplate.Triggers>
@@ -349,7 +350,7 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Top">
                             <Setter Property="BorderThickness" Value="0,0,0,1" />
-
+                            
                             <Setter TargetName="DividerRect" Property="Grid.ColumnSpan" Value="2" />
                             <Setter TargetName="DividerRect" Property="Grid.RowSpan" Value="1" />
                             <Setter TargetName="DividerRect" Property="Height" Value="1" />
@@ -362,7 +363,7 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter Property="BorderThickness" Value="0,1,0,0" />
-
+                            
                             <Setter TargetName="DividerRect" Property="Grid.ColumnSpan" Value="2" />
                             <Setter TargetName="DividerRect" Property="Grid.RowSpan" Value="1" />
                             <Setter TargetName="DividerRect" Property="Height" Value="1" />
@@ -375,7 +376,7 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="BorderThickness" Value="1,0,0,0" />
-
+                           
                             <Setter TargetName="DividerRect" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="TabGrid" Property="DockPanel.Dock" Value="Right" />
                         </Trigger>
@@ -386,6 +387,6 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="wpf:ElevationAssist.Elevation" Value="Dp0" />
         <Setter Property="wpf:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-
+       
     </Style>
 </ResourceDictionary>
