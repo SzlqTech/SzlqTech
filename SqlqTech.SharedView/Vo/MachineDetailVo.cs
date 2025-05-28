@@ -40,6 +40,12 @@ namespace SqlqTech.SharedView.Vo
         [ObservableProperty]
         public int dataType;
 
+        [ObservableProperty]
+        public string dataTypeName;
+
+        [ObservableProperty]
+        public bool isEnableScan;
+
         /// <summary>
         /// 数据类型枚举
         /// </summary>
@@ -59,7 +65,10 @@ namespace SqlqTech.SharedView.Vo
         /// 扫描周期 扫描周期10/50/100/200/500/1000/5000
         /// </summary>
         [ObservableProperty]
-        public int scanCycle  = 1000;
+        public int scanCycle =0;
+
+        [ObservableProperty]
+        public int scanCycleValue ;
 
 
         [Description("小数点移位")]
