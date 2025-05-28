@@ -48,5 +48,8 @@ namespace SzlqTech.Entity
 
         [ObservableProperty]
         public bool isSelected;
+
+        [ObservableProperty]
+        public long id;
     }
 }

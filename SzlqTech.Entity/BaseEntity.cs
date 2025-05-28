@@ -5,7 +5,7 @@ namespace SzlqTech.Entity
 {
     public class BaseEntity
     {
-        [SugarColumn(ColumnName = "code", ColumnDescription = "编码", Length = 50)]
+        [SugarColumn(ColumnName = "code", IsNullable =true, ColumnDescription = "编码", Length = 50)]
         public virtual string Code { get; set; }
 
         [SugarColumn(IsIgnore = true)]

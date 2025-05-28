@@ -7,7 +7,6 @@ using SzlqTech.IService;
 using SzlqTech.Repository;
 using SzlqTech.Service;
 using SzlqTech.Services.Mapper;
-using SzlqTech.Services.Navigation;
 using SzlqTech.Services.Sessions;
 
 namespace SzlqTech.Extensions
@@ -20,12 +19,14 @@ namespace SzlqTech.Extensions
         {
             container.Register<ISysUserRepository, SysUserRepository>();
             container.Register<IMachineSettingRepository, MachineSettingRepository>();
+            container.Register<IMachineDetailRepository, MachineDetailRepository>();
         }
 
         public static void AddDbService(this IContainerRegistry container)
         {
             container.Register<ISysUserService, SysUserServiceImpl>();
             container.Register<IMachineSettingService, MachineSettingServiceImpl>();
+            container.Register<IMachineDetailService,MachineDetailServiceImpl>();
         } 
         #endregion
 

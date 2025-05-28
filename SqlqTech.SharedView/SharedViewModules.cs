@@ -15,7 +15,8 @@ namespace SqlqTech.SharedView
 
         public void RegisterTypes(IContainerRegistry service)
         {
-            service.RegisterForNavigation<MachineSettingView, MachineSettingViewModel>();
+            service.RegisterForNavigation<MachineSettingView, MachineSettingViewModel>();       
+            service.RegisterForNavigation<MachineDetailView, MachineDetailViewModel>();
         }
     }
 }

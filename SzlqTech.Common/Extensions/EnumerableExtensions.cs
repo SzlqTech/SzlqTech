@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SzlqTech.Extensions
+namespace SzlqTech.Common.Extensions
 {
     public static class EnumerableExtensions
     {

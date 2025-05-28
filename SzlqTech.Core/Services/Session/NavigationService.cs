@@ -1,14 +1,12 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 using System.Windows.Controls;
+using SzlqTech.Common.Extensions;
 using SzlqTech.Core.Consts;
-using SzlqTech.Extensions;
 
-
-namespace SzlqTech.Services.Navigation
+namespace SzlqTech.Core.Services.Session
 {
-    
-    public  class NavigationService:BindableBase
+    public class NavigationService : BindableBase
     {
         private readonly IRegionManager regionManager;
         private IRegion NavigationRegion => regionManager.Regions[AppRegions.Main];
@@ -37,7 +35,7 @@ namespace SzlqTech.Services.Navigation
             }
             else
             {
-                SelectedIndex = NavigationRegion.Views.IndexOf(view);             
+                SelectedIndex = NavigationRegion.Views.IndexOf(view);
             }
         }
 
