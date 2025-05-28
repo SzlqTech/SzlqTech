@@ -1,26 +1,31 @@
 ﻿
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace SzlqTech.Entity
 {
-    public class BaseVo
+    public partial class BaseVo: ObservableObject
     {
+        [ObservableProperty]
+        public long? createUser;
+
+
+        [ObservableProperty]
+        public DateTime? createTime;
+
+
+        [ObservableProperty]
+        public long? updateUser;
+
+        [ObservableProperty]
+        public DateTime? updateTime;
+
+        [ObservableProperty]
+        public  int status;
+
+
         
-        public long? CreateUser { get; set; }
-
-     
-        public DateTime? CreateTime { get; set; }
-
-      
-        public long? UpdateUser { get; set; }
-
-        
-        public DateTime? UpdateTime { get; set; }
-
-      
-        public virtual int Status { get; set; }
-
-  
-        public virtual bool StatusEnable
+        public virtual bool statusEnable
         {
             get
             {
@@ -32,16 +37,16 @@ namespace SzlqTech.Entity
             }
         }
 
-       
-        public int Deleted { get; set; }
+        [ObservableProperty]
+        public int deleted;
 
-       
-        public string? Remark { get; set; }
+        [ObservableProperty]
+        public string? remark;
 
+        [ObservableProperty]
+        public string code;
 
-        public  string Code { get; set; }
-
-     
-        public bool IsSelected { get; set; }
+        [ObservableProperty]
+        public bool isSelected;
     }
 }

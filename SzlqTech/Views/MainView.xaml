@@ -9,7 +9,7 @@
     xmlns:local="clr-namespace:SzlqTech.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:prism="http://prismlibrary.com/"   
+    xmlns:prism="http://prismlibrary.com/"
     Title="MainView"
     Width="1600"
     Height="900"
@@ -121,6 +121,13 @@
                                                                             Grid.ColumnSpan="2"
                                                                             CornerRadius="2" />
 
+                                                                        <Rectangle
+                                                                            x:Name="rect"
+                                                                            Width="2"
+                                                                            Height="20"
+                                                                            HorizontalAlignment="Left"
+                                                                            Fill="Blue"
+                                                                            Visibility="Collapsed" />
                                                                         <Image
                                                                             Width="20"
                                                                             Height="20"
@@ -136,6 +143,7 @@
                                                                     <ControlTemplate.Triggers>
                                                                         <Trigger Property="IsChecked" Value="true">
                                                                             <Setter TargetName="bg" Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
+                                                                            <Setter TargetName="rect" Property="Visibility" Value="Visible" />
                                                                         </Trigger>
                                                                     </ControlTemplate.Triggers>
                                                                 </ControlTemplate>

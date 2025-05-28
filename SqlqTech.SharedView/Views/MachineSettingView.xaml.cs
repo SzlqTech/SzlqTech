@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Common.EnumType;
 
 namespace SqlqTech.SharedView.Views
 {
@@ -23,6 +24,12 @@ namespace SqlqTech.SharedView.Views
         public MachineSettingView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            cboxPLC.ItemsSource= Enum.GetNames(typeof(MachineModel)).ToList();
+
         }
     }
 }

@@ -20,8 +20,8 @@ namespace SzlqTech.Common.EnumType
         ModbusTcp = 10,
 
 
-        [Description("Modbus RTU协议驱动")]
-        ModbusRtu = 11,
+        //[Description("Modbus RTU协议驱动")]
+        //ModbusRtu = 11,
 
         [Description("汇川H3U系列以太网驱动")]
         InovanceH3UNet = 20,
@@ -35,32 +35,32 @@ namespace SzlqTech.Common.EnumType
         [Description("汇川AM系列以太网驱动")]
         InovanceAMNet = 23,
 
-        [Description("汇川H3U系列串口驱动")]
-        InovanceH3USerial = 30,
+        //[Description("汇川H3U系列串口驱动")]
+        //InovanceH3USerial = 30,
 
-        [Description("汇川H5U系列串口驱动")]
-        InovanceH5USerial = 31,
+        //[Description("汇川H5U系列串口驱动")]
+        //InovanceH5USerial = 31,
 
-        [Description("汇川Easy系列串口驱动")]
-        InovanceEasySerial = 32,
+        //[Description("汇川Easy系列串口驱动")]
+        //InovanceEasySerial = 32,
 
-        [Description("汇川AM系列串口驱动")]
-        InovanceAMSerial = 33,
+        //[Description("汇川AM系列串口驱动")]
+        //InovanceAMSerial = 33,
 
-        [Description("台达以太网驱动")]
-        DeltaTcpNet = 40,
+        //[Description("台达以太网驱动")]
+        //DeltaTcpNet = 40,
 
-        [Description("台达DVP系列以太网驱动")]
-        DeltaDvpNet = 41,
+        //[Description("台达DVP系列以太网驱动")]
+        //DeltaDvpNet = 41,
 
-        [Description("台达AS系列以太网驱动")]
-        DeltaASNet = 42,
+        //[Description("台达AS系列以太网驱动")]
+        //DeltaASNet = 42,
 
-        [Description("台达DVP系列串口驱动")]
-        DeltaDvpSerial = 43,
+        //[Description("台达DVP系列串口驱动")]
+        //DeltaDvpSerial = 43,
 
-        [Description("台达AS系列串口驱动")]
-        DeltaASSerial = 44,
+        //[Description("台达AS系列串口驱动")]
+        //DeltaASSerial = 44,
 
         #endregion
 

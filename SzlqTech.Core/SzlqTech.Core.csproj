@@ -13,4 +13,8 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SzlqTech.Common\SzlqTech.Common.csproj" />
+  </ItemGroup>
+
 </Project>

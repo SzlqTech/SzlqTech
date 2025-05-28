@@ -1,21 +1,28 @@
 ﻿
-using SzlqTech.Common.EnumType;
+using CommunityToolkit.Mvvm.ComponentModel;
 using SzlqTech.Entity;
 
 namespace SqlqTech.SharedView.Vo
 {
-    public class MachineSettingVo:BaseVo
-    {     
-        public int MachineModel { get; set; }
+    public partial class MachineSettingVo:BaseVo
+    {
+        [ObservableProperty]
+        public int machineModel;
 
 
-        public MachineModel MachineModelEnum;
+        // public MachineModel MachineModelEnum;
+        [ObservableProperty]
+        public string portKey;
 
-        public string PortKey;
+        [ObservableProperty]
+        public string portName;
 
-        
-        public string PortName { get; set; } = null!;
-       
-        public string? Description { get; set; }
+        [ObservableProperty]
+        public string? description;
+
+        [ObservableProperty]
+        public string selectedMachineType;
+
+
     }
 }

@@ -16,10 +16,10 @@ namespace SzlqTech.ViewMdoels
         public bool isRememberMe;
 
         [ObservableProperty]
-        public string userName;
+        public string userName="sa";
 
         [ObservableProperty]
-        public string password;
+        public string password="123456";
 
         [RelayCommand]
         public async Task Login()
