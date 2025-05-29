@@ -14,6 +14,7 @@ namespace SzlqTech.Services.Mapper
             CreateMap<MachineDetail, MachineDetailVo>().ForMember(dest => dest.ScanCycleValue, opt => opt.MapFrom(src => src.ScanCycle))           
                 .ForMember(dest=>dest.IsEnableScan,opt=>opt.MapFrom(src=>src.StatusEnable))
                 .ReverseMap();
+            CreateMap<ScannerSetting, ScannerSettingVo>().ReverseMap();
         }
     }
 }

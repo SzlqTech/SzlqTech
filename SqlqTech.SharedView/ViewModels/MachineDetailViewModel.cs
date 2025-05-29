@@ -76,7 +76,7 @@ namespace SqlqTech.SharedView.ViewModels
             List<MachineDetail> list = mapper.Map<List<MachineDetail>>(MachineDetailVos);     
            
             
-            await machineDetailService.SaveOrUpdateAsync(list);
+            await machineDetailService.SaveOrUpdateBatchAsync(list);
         }
 
         public bool Valid()

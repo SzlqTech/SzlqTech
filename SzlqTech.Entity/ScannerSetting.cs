@@ -13,17 +13,11 @@ namespace SzlqTech.Entity
         [SugarColumn(ColumnName = "scanner_type", ColumnDescription = "设备类型")]
         public int ScannerType { get; set; }
 
+  
+        [SugarColumn(ColumnName = "port_key", ColumnDescription = "端口键")]
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Description("端口键")]
-        [SugarColumn(IsIgnore = true)]
-        public string PortKey
-        {
-            set => Code = value;
-            get => Code;
-        }
+        public string PortKey {  get; set; }
+       
 
         /// <summary>
         /// 端口名称
@@ -67,6 +61,10 @@ namespace SzlqTech.Entity
         // set => _enable = value;
         // get => _enable;
         // }
+
+        [SugarColumn(ColumnName = "is_enable", ColumnDescription = "是否启用")]
+        public bool IsEnable { get; set; }
+
 
         [SugarColumn(ColumnName = "attr0", IsNullable = true)]
         public string? Attr0 { get; set; }

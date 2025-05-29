@@ -30,6 +30,11 @@
                     md:ButtonAssist.CornerRadius="5"
                     Command="{Binding SaveCommand}"
                     Content="保存设置" />
+                <Button
+                    Margin="5,0,5,0"
+                    md:ButtonAssist.CornerRadius="5"
+                    Command="{Binding DeleteCommand}"
+                    Content="删除设置" />
             </StackPanel>
         </DockPanel>
         <DataGrid
@@ -37,16 +42,42 @@
             Margin="10,0,10,10"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
-            CanUserSortColumns="False">
+            CanUserSortColumns="False"
+            IsReadOnly="False"
+            ItemsSource="{Binding ScannerSettingVos}"
+            SelectedItem="{Binding SelectedScannerSettingVo}"
+            Style="{StaticResource MaterialDesignDataGrid}">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn
                     x:Name="cboxScanner"
                     Width="*"
-                    Header="型号" />
-                <DataGridTextColumn Width="*" Header="端口键" />
-                <DataGridTextColumn Width="*" Header="端口名称" />
-                <DataGridTextColumn Width="*" Header="端口描述" />
-                <DataGridCheckBoxColumn Width="*" Header="启用设备" />
+                    Header="型号"
+                    SelectedValueBinding="{Binding ScannerTypeName}" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding PortKey}"
+                    Header="端口键" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding PortName}"
+                    Header="端口名称" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Description}"
+                    Header="端口描述" />
+                <DataGridCheckBoxColumn
+                    Width="*"
+                    Binding="{Binding IsEnable}"
+                    Header="启用设备">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="10,0,0,0" />
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+
+                </DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

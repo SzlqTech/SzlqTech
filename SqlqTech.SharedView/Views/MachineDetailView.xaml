@@ -48,24 +48,55 @@
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Address}"
-                    Header="变量地址" />
+                    Header="变量地址">
+                    <DataGridTextColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridComboBoxColumn
                     x:Name="dataType"
                     Width="*"
                     Header="数据类型"
-                    SelectedValueBinding="{Binding DataTypeName}" />
+                    SelectedValueBinding="{Binding DataTypeName}">
+                    <DataGridComboBoxColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridComboBoxColumn.CellStyle>
+                </DataGridComboBoxColumn>
 
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Description}"
-                    Header="描述" />
-                <DataGridTemplateColumn Width="0.4*" Header="是否扫描">
+                    Header="描述">
+                    <DataGridTextColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridCheckBoxColumn
+                    Width="0.4*"
+                    Binding="{Binding IsEnableScan}"
+                    Header="是否扫描">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="10,0,0,0" />
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+
+                </DataGridCheckBoxColumn>
+                <!--<DataGridTemplateColumn Width="0.4*" Header="是否扫描">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox x:Name="enableScan" IsChecked="{Binding IsEnableScan}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
                 <DataGridTemplateColumn
                     Width="*"
                     md:DataGridAssist.ColumnHeaderPadding="0"

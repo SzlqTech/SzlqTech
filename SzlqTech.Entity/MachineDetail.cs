@@ -97,5 +97,11 @@ namespace SzlqTech.Entity
 
         [SugarColumn(IsIgnore = true)]
         public string? MachineCode { get; set; }
+
+        [SugarColumn(ColumnName = "is_enable_scan",
+           IsNullable = false,
+           ColumnDescription = "是否启用扫描")]
+        public bool IsEnableScan { get; set; }
+        
     }
 }

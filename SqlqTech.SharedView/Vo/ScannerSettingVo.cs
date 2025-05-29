@@ -12,6 +12,9 @@ namespace SqlqTech.SharedView.Vo
         [ObservableProperty]
         public int scannerType;
 
+        [ObservableProperty]
+        public string scannerTypeName;
+
 
         /// <summary>
         /// 端口键
@@ -31,6 +34,9 @@ namespace SqlqTech.SharedView.Vo
         /// </summary>
         [ObservableProperty]
         public string? description;
+
+        [ObservableProperty]
+        public bool isEnable;
 
         /// <summary>
         /// 波特率
@@ -52,6 +58,7 @@ namespace SqlqTech.SharedView.Vo
 
         [ObservableProperty]
         public ScannerType scannerModel;
+
 
         [ObservableProperty]
         public string? attr0;
