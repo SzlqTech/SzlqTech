@@ -45,18 +45,22 @@ namespace SqlqTech.SharedView.ViewModels
         {
             if (Valid())
             {
-                foreach (var item in ScannerSettingVos)
+                await SetBusyAsync(async () =>
                 {
-                    ScannerType type = default(ScannerType).GetValueByName(item.ScannerTypeName,true);
-                    item.ScannerModel = type;
-                    item.ScannerType=(short)type;
-                    if (item.Id == 0)
+                    foreach (var item in ScannerSettingVos)
                     {
-                        item.Id = SnowFlakeNew.LongId;
+                        ScannerType type = default(ScannerType).GetValueByName(item.ScannerTypeName, true);
+                        item.ScannerModel = type;
+                        item.ScannerType = (short)type;
+                        if (item.Id == 0)
+                        {
+                            item.Id = SnowFlakeNew.LongId;
+                        }
                     }
-                }
-                List<ScannerSetting> scannerSettings = mapper.Map<List<ScannerSetting>>(ScannerSettingVos);
-                await scannerSettingService.SaveOrUpdateBatchAsync(scannerSettings);
+                    List<ScannerSetting> scannerSettings = mapper.Map<List<ScannerSetting>>(ScannerSettingVos);
+                    await scannerSettingService.SaveOrUpdateBatchAsync(scannerSettings);
+                    SendMessage("保存成功");
+                });             
             }
         }
 
@@ -76,6 +80,7 @@ namespace SqlqTech.SharedView.ViewModels
                 scannerSettingService.Remove(o=>o.Id==SelectedScannerSettingVo.Id);
             }
             ScannerSettingVos.Remove(SelectedScannerSettingVo);
+            SendMessage("删除成功");
         }
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)

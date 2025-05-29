@@ -1,14 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Prism.Events;
 using Prism.Regions;
 
 using System.Collections.ObjectModel;
 
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Events;
 using SzlqTech.Core.Models;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
-
+using SzlqTech.Core.Events;
 using SzlqTech.Services.Sessions;
 
 namespace SzlqTech.ViewMdoels
@@ -16,18 +18,27 @@ namespace SzlqTech.ViewMdoels
     public partial class MainViewModel : NavigationViewModel, IConfigureService
     {
         private readonly IRegionManager regionManager;
+        private readonly IEventAggregator aggregator;
+
         public NavigationService NavigationService { get; set; }
 
-        public MainViewModel(IRegionManager regionManager, NavigationService navigationService)
+        public MainViewModel(IRegionManager regionManager, NavigationService navigationService,IEventAggregator aggregator)
         {
             this.regionManager = regionManager;
             NavigationService = navigationService;
+            this.aggregator = aggregator;
+            aggregator.ResgiterBusyAsyncMessage(arg =>
+            {
+                IsOpen = arg.IsOpen;
+            }, "Main");
         }
 
         [ObservableProperty]
         public ObservableCollection<NavigationItem> navigationItems;
 
-      
+        [ObservableProperty]
+        public bool isOpen;
+
 
         [RelayCommand]
         public void Navigate(NavigationItem item)

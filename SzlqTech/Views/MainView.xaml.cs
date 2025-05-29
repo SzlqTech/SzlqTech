@@ -1,4 +1,5 @@
 ﻿using Dm.parser;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Themes.Controls;
 using SzlqTech.ViewMdoels;
@@ -25,7 +27,7 @@ namespace SzlqTech.Views
     {
         private readonly IAppStartService appStartService;
 
-        public MainView(IAppStartService appStartService)
+        public MainView(IAppStartService appStartService, IEventAggregator aggregator)
         {
             InitializeComponent();
             this.appStartService = appStartService;
@@ -42,6 +44,12 @@ namespace SzlqTech.Views
             BtnMin.Click += BtnMin_Click;
             BtnMax.Click += BtnMax_Click;
             BtnClose.Click += BtnClose_Click;
+
+            //注册提示消息
+            aggregator.ResgiterSnackBarMessage(arg =>
+            {
+                Snackbar.MessageQueue?.Enqueue(arg.Message);
+            });
         }
 
 

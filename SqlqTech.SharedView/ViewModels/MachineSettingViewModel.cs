@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
@@ -23,7 +24,8 @@ namespace SqlqTech.SharedView.ViewModels
 
         private readonly IMapper mapper;
 
-        public MachineSettingViewModel(IMachineSettingService settingService,IMapper mapper, NavigationService navigationService)
+        public MachineSettingViewModel(IMachineSettingService settingService,IMapper mapper, 
+            NavigationService navigationService)
         {
             Title = "机器列表";
             SettingService = settingService;
@@ -47,18 +49,22 @@ namespace SqlqTech.SharedView.ViewModels
         }
 
         [RelayCommand]
-        public void Save()
+        public async Task Save()
         {
             if (Valid())
             {
-                foreach (var item in MachineSettingVos)
+                await SetBusyAsync(async () =>
                 {
-                    MachineModel model = default(MachineModel).GetValueByName(item.SelectedMachineType,true);
-                    item.MachineModel = (short)model;
-                }
-                List<MachineSetting> list=mapper.Map<List<MachineSetting>>(MachineSettingVos);
-                list.ForEach(o => o.Id = SnowFlakeNew.LongId);
-                SettingService.SaveOrUpdateBatchAsync(list);
+                    foreach (var item in MachineSettingVos)
+                    {
+                        MachineModel model = default(MachineModel).GetValueByName(item.SelectedMachineType, true);
+                        item.MachineModel = (short)model;
+                    }
+                    List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);
+                    list.ForEach(o => o.Id = SnowFlakeNew.LongId);
+                    await SettingService.SaveOrUpdateBatchAsync(list);
+                    SendMessage("保存成功");
+                });           
             }
         }
 
@@ -70,13 +76,22 @@ namespace SqlqTech.SharedView.ViewModels
                 NavigationParameters para = new NavigationParameters();
                 para.Add("Para", vo);
                 NavigationService.Navigate(AppViews.MachineDetail, para);
+               
             }
         }
 
         [RelayCommand]
         public void Delete(MachineSettingVo vo)
         {
-
+            if (vo != null)
+            {
+                if (SettingService.Exist(o => o.Id == vo.Id))
+                {
+                    SettingService.Remove(o => o.Id == vo.Id);
+                }
+                MachineSettingVos.Remove(vo);
+                SendMessage("删除成功");
+            }
         }
 
         public bool Valid()

@@ -23,7 +23,17 @@
         <converter:MenuImageConverter x:Key="menuConverter" />
         <converter:ByteToImageConverter x:Key="bytesToImageConverter" />
     </Window.Resources>
-    <md:DialogHost Identifier="{x:Static const:AppSharedConsts.RootIdentifier}">
+    <md:DialogHost Identifier="{x:Static const:AppSharedConsts.RootIdentifier}" IsOpen="{Binding IsOpen}">
+        <md:DialogHost.DialogContent>
+            <StackPanel>
+                <ProgressBar
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    IsIndeterminate="True"
+                    Style="{StaticResource MaterialDesignCircularProgressBar}" />
+            </StackPanel>
+        </md:DialogHost.DialogContent>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="GridLeftMenu" Width="230" />
@@ -329,6 +339,10 @@
                         Style="{StaticResource MaterialDesignFlatButton}" />
                 </StackPanel>
 
+                <md:Snackbar
+                    x:Name="Snackbar"
+                    Panel.ZIndex="1"
+                    MessageQueue="{md:MessageQueue}" />
                 <!--  选项卡  -->
                 <controls:TabControl
                     Grid.Row="1"

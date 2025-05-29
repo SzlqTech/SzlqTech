@@ -53,30 +53,34 @@ namespace SqlqTech.SharedView.ViewModels
               await  machineDetailService.RemoveAsync(o=>o.Id==SelectedMachineDetailVo.Id);
             }
             MachineDetailVos.Remove(SelectedMachineDetailVo);
+            SendMessage("删除成功");
         }
 
         [RelayCommand]
         public async Task Save()
         {
             Valid();
-            foreach (var item in MachineDetailVos)
+            await SetBusyAsync(async () =>
             {
-                if (item.Id == 0)
+                foreach (var item in MachineDetailVos)
                 {
-                    item.Id = SnowFlakeNew.LongId;
+                    if (item.Id == 0)
+                    {
+                        item.Id = SnowFlakeNew.LongId;
+                    }
+                    if (item.MachineId == 0)
+                    {
+                        item.MachineId = CurrMachineSettingVo.Id;
+                    }
+
+                    var data = default(DataType).GetValueByName(item.DataTypeName, true);
+                    item.DataType = (short)data;
                 }
-                if (item.MachineId == 0)
-                {
-                    item.MachineId = CurrMachineSettingVo.Id;
-                }
-                
-                var data = default(DataType).GetValueByName(item.DataTypeName,true);
-                item.DataType = (short)data;
-            }
-            List<MachineDetail> list = mapper.Map<List<MachineDetail>>(MachineDetailVos);     
-           
-            
-            await machineDetailService.SaveOrUpdateBatchAsync(list);
+                List<MachineDetail> list = mapper.Map<List<MachineDetail>>(MachineDetailVos);
+                await machineDetailService.SaveOrUpdateBatchAsync(list);
+                SendMessage("保存成功");
+            });
+          
         }
 
         public bool Valid()
