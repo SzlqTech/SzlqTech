@@ -33,6 +33,7 @@
     <None Remove="Assets\Images\menus\PLC.png" />
     <None Remove="Assets\Images\menus\property.png" />
     <None Remove="Assets\Images\menus\role.png" />
+    <None Remove="Assets\Images\menus\scanner.png" />
     <None Remove="Assets\Images\menus\setting.png" />
     <None Remove="Assets\Images\menus\tenant.png" />
     <None Remove="Assets\Images\menus\time.png" />
@@ -85,6 +86,7 @@
 	  <Resource Include="Assets\Images\menus\PLC.png" />
 	  <Resource Include="Assets\Images\menus\property.png" />
 	  <Resource Include="Assets\Images\menus\role.png" />
+	  <Resource Include="Assets\Images\menus\scanner.png" />
 	  <Resource Include="Assets\Images\menus\setting.png" />
 	  <Resource Include="Assets\Images\menus\tenant.png" />
 	  <Resource Include="Assets\Images\menus\time.png" />

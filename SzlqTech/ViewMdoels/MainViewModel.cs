@@ -39,9 +39,11 @@ namespace SzlqTech.ViewMdoels
         public void InitConfig()
         {
             NavigationItems = new ObservableCollection<NavigationItem>();
-            NavigationItems.Add(new NavigationItem("dashboard", "系统设置", "", "", new ObservableCollection<NavigationItem>()
+            NavigationItems.Add(new NavigationItem("dashboard", "配置管理", "", "", new ObservableCollection<NavigationItem>()
             {
-                new NavigationItem("PLC", "机器配置", AppViews.MachineSetting, ""),           
+                new NavigationItem("PLC", "机器配置", AppViews.MachineSetting, ""),
+                new NavigationItem("scanner", "扫描配置", AppViews.ScannerSetting, ""),
+                
             }));
 
         }

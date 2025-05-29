@@ -21,8 +21,10 @@ namespace SzlqTech.Core.Consts
         public const string Setting = "SettingsView";
 
         //公共页面
-        public const string MachineSetting = "MachineSettingView";
+        public const string MachineSetting ="MachineSettingView";
 
         public const string MachineDetail= "MachineDetailView";
+
+        public const string ScannerSetting = "ScannerSettingView";
     }
 }

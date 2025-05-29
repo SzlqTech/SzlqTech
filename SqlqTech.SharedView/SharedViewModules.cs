@@ -17,6 +17,7 @@ namespace SqlqTech.SharedView
         {
             service.RegisterForNavigation<MachineSettingView, MachineSettingViewModel>();       
             service.RegisterForNavigation<MachineDetailView, MachineDetailViewModel>();
+            service.RegisterForNavigation<ScannerSettingView, ScannerSettingViewModel>();
         }
     }
 }
