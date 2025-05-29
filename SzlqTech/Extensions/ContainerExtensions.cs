@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Core.Services.Session;
+using SzlqTech.Equipment;
 using SzlqTech.IRepository;
 using SzlqTech.IService;
 using SzlqTech.Repository;
@@ -43,6 +44,10 @@ namespace SzlqTech.Extensions
             });
             container.RegisterInstance<IMapper>(config.CreateMapper());
             container.Register<NavigationService>();
+
+            //注册设备服务
+            container.Register<IExecutingScanner, ExecutingScanner>();
+            container.Register<IExecutingMachine, ExecutingMachine>();
         }
     }
 }

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SzlqTech.Common\SzlqTech.Common.csproj" />
+    <ProjectReference Include="..\SzlqTech.Equipment\SzlqTech.Equipment.csproj" />
   </ItemGroup>
 
 </Project>
