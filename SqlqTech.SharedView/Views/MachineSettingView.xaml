@@ -12,7 +12,7 @@
     Background="{DynamicResource MaterialDesignCardBackground}"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <md:BundledTheme
@@ -30,10 +30,10 @@
 
         </ResourceDictionary>
 
-        <!--  Create list of enumeration values  -->
+        --><!--  Create list of enumeration values  --><!--
 
 
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

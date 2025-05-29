@@ -42,6 +42,7 @@
             CanUserSortColumns="False"
             IsReadOnly="False"
             ItemsSource="{Binding MachineDetailVos}"
+            SelectedItem="{Binding SelectedMachineDetailVo}"
             Style="{StaticResource MaterialDesignDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn

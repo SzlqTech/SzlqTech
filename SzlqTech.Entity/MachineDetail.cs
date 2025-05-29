@@ -45,6 +45,15 @@ namespace SzlqTech.Entity
         public int DataType { get; set; }
 
         /// <summary>
+        /// 数据类型
+        /// </summary>
+        [Description("数据类型")]
+        [SugarColumn(ColumnName = "data_type_name",
+            IsNullable = false,
+            ColumnDescription = "数据类型名称")]
+        public string DataTypeName { get; set; }
+
+        /// <summary>
         /// 数据类型枚举
         /// </summary>
         [SugarColumn(IsIgnore = true)]
