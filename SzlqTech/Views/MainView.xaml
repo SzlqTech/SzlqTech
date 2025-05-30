@@ -6,11 +6,12 @@
     xmlns:controls="clr-namespace:SzlqTech.Themes.Controls"
     xmlns:converter="clr-namespace:SzlqTech.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:local="clr-namespace:SzlqTech.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     Title="MainView"
     Width="1600"
     Height="900"
@@ -307,6 +308,53 @@
                         </ToggleButton.Content>
                     </ToggleButton>-->
 
+                    <ComboBox Width="100" SelectedIndex="{Binding LangIndex}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Center"
+                                    Source="/Assets/Images/zh.png" />
+                                <TextBlock
+                                    Margin="10,0"
+                                    VerticalAlignment="Center"
+                                    Text="中文" />
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Center"
+                                    Source="/Assets/Images/us.png" />
+                                <TextBlock
+                                    Margin="10,0"
+                                    VerticalAlignment="Center"
+                                    Text="English" />
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    VerticalAlignment="Center"
+                                    Source="/Assets/Images/th.png" />
+                                <TextBlock
+                                    Margin="10,0"
+                                    VerticalAlignment="Center"
+                                    Text="ภาษาไทย" />
+                            </StackPanel>
+                        </ComboBoxItem>
+
+                    </ComboBox>
                     <ToggleButton
                         x:Name="toggleShowPanel"
                         Margin="5"
@@ -321,9 +369,6 @@
                             <TextBlock Margin="5,0" Text="{Binding appService.UserNameAndSurname}" />
                         </StackPanel>
                     </ToggleButton>
-
-
-                    <TextBlock Text="{loc:Loc Title}"/>
 
                     <Button
                         x:Name="BtnMin"

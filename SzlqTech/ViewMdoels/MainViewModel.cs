@@ -12,6 +12,8 @@ using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.Events;
 using SzlqTech.Services.Sessions;
+using SzlqTech.Localization;
+using System.Globalization;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -39,6 +41,9 @@ namespace SzlqTech.ViewMdoels
         [ObservableProperty]
         public bool isOpen;
 
+        [ObservableProperty]
+        public int langIndex;
+
 
         [RelayCommand]
         public void Navigate(NavigationItem item)
@@ -47,13 +52,46 @@ namespace SzlqTech.ViewMdoels
             NavigationService.Navigate(item.PageViewName);
         }
 
+        [RelayCommand]
+        public void SelectionChanged()
+        {
+            if (LangIndex >= 0)
+            {
+                switch (LangIndex)
+                {
+                    case 0:
+                    {
+                        LocalizationService.CurrentCulture = new CultureInfo("zh-CN");
+                        InitConfig();
+                        break;
+                    }
+                        
+                    case 1:
+                    {
+                        LocalizationService.CurrentCulture = new CultureInfo("en-US");
+                        InitConfig();
+                        break;
+                    }
+                       
+                    case 2:
+                    {
+                        LocalizationService.CurrentCulture = new CultureInfo("th-TH");
+                        InitConfig();
+                        break;
+                    }
+                      
+                }
+            }
+        }
+
         public void InitConfig()
         {
+          
             NavigationItems = new ObservableCollection<NavigationItem>();
-            NavigationItems.Add(new NavigationItem("dashboard", "配置管理", "", "", new ObservableCollection<NavigationItem>()
+            NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
             {
-                new NavigationItem("PLC", "机器配置", AppViews.MachineSetting, ""),
-                new NavigationItem("scanner", "扫描配置", AppViews.ScannerSetting, ""),
+                new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
+                new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
                 
             }));
 

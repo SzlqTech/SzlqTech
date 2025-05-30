@@ -43,6 +43,9 @@
     <None Remove="Assets\Images\menus\visual.png" />
     <None Remove="Assets\Images\message.png" />
     <None Remove="Assets\Images\notification.png" />
+    <None Remove="Assets\Images\th.png" />
+    <None Remove="Assets\Images\us.png" />
+    <None Remove="Assets\Images\zh.png" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -97,6 +100,9 @@
 	  <Resource Include="Assets\Images\menus\visual.png" />
 	  <Resource Include="Assets\Images\message.png" />
 	  <Resource Include="Assets\Images\notification.png" />
+	  <Resource Include="Assets\Images\th.png" />
+	  <Resource Include="Assets\Images\us.png" />
+	  <Resource Include="Assets\Images\zh.png" />
 	</ItemGroup>
 
 </Project>
