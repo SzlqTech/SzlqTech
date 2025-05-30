@@ -355,6 +355,7 @@
                         </ComboBoxItem>
 
                     </ComboBox>
+                    <TextBlock Text="{loc:Loc Title}" VerticalAlignment="Center"/>
                     <ToggleButton
                         x:Name="toggleShowPanel"
                         Margin="5"

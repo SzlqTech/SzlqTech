@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:SqlqTech.SharedView.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+     xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     d:DesignHeight="800"
     d:DesignWidth="1280"
     Background="{DynamicResource MaterialDesignCardBackground}"
@@ -50,7 +51,7 @@
                 <DataGridComboBoxColumn
                     x:Name="cboxPLC"
                     Width="*"
-                    Header="PLC类型"
+                    Header="{loc:Loc Type}"
                     SelectedItemBinding="{Binding SelectedMachineType}">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style BasedOn="{StaticResource MaterialDesignComboBox}" TargetType="ComboBox">
@@ -66,7 +67,7 @@
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding PortName}"
-                    Header="PLC地址">
+                    Header="{loc:Loc Address}">
                     <DataGridTextColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                             <Setter Property="VerticalAlignment" Value="Center" />
@@ -78,14 +79,14 @@
                     Width="*"
                     md:TextFieldAssist.TextBoxIsMultiLine="True"
                     Binding="{Binding Description}"
-                    Header="PLC说明">
+                    Header="{loc:Loc Description}">
                     <DataGridTextColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn Width="*" Header="操作">
+                <DataGridTemplateColumn Width="*" Header="{loc:Loc Operation}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
