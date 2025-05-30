@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:app="clr-namespace:SzlqTech.I18n;assembly=SzlqTech.I18n"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     Title="MainView"
     Width="1600"
     Height="900"
@@ -322,7 +322,8 @@
                         </StackPanel>
                     </ToggleButton>
 
-                    <TextBlock Text="{Binding Title, Source={x:Static app:LanguageManager.Instance}}"  Width="100"/>
+
+                    <TextBlock Text="{loc:Loc Title}"/>
 
                     <Button
                         x:Name="BtnMin"

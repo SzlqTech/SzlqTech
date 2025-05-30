@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ConfigManagement" xml:space="preserve">
-    <value>การจัดการการกำหนดค่า</value>
-  </data>
-  <data name="MachineManagement" xml:space="preserve">
-    <value>การกำหนดค่าเครื่อง</value>
-  </data>
-  <data name="ScanManagement" xml:space="preserve">
-    <value>การกำหนดค่าการสแกน</value>
-  </data>
   <data name="Title" xml:space="preserve">
     <value>การจัดการการกำหนดค่า</value>
   </data>
