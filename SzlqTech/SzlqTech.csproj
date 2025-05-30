@@ -57,6 +57,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\SqlqTech.SharedView\SqlqTech.SharedView.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Core\SzlqTech.Core.csproj" />
+	  <ProjectReference Include="..\SzlqTech.I18n\SzlqTech.I18n.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Repository\SzlqTech.Repository.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Service\SzlqTech.Service.csproj" />
 	</ItemGroup>
