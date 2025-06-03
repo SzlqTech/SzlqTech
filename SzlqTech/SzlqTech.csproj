@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Assets\Images\back.png" />
     <None Remove="Assets\Images\logo.ico" />
+    <None Remove="Assets\Images\Logo_SZLQ.ico" />
     <None Remove="Assets\Images\menus\accounts.png" />
     <None Remove="Assets\Images\menus\addr.png" />
     <None Remove="Assets\Images\menus\auditlog.png" />
@@ -71,6 +72,7 @@
 	<ItemGroup>
 	  <Resource Include="Assets\Images\back.png" />
 	  <Resource Include="Assets\Images\logo.ico" />
+	  <Resource Include="Assets\Images\Logo_SZLQ.ico" />
 	  <Resource Include="Assets\Images\menus\accounts.png" />
 	  <Resource Include="Assets\Images\menus\addr.png" />
 	  <Resource Include="Assets\Images\menus\auditlog.png" />

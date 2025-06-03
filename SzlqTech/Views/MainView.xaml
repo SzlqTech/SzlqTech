@@ -61,7 +61,7 @@
                                 Width="20"
                                 Height="20"
                                 VerticalAlignment="Center"
-                                Source="/Assets/Images/logo.ico" />
+                                Source="/Assets/Images/Logo_SZLQ.ico" />
                             <TextBlock
                                 Margin="5,0"
                                 VerticalAlignment="Center"

@@ -21,7 +21,7 @@
             <bar:TaskbarIcon
                 x:Key="taskBar"
                 DoubleClickCommand="{Binding ShowViewCommand}"
-                IconSource="/Assets/Images/logo.ico">
+                IconSource="/Assets/Images/Logo_SZLQ.ico">
                 <bar:TaskbarIcon.DataContext>
                     <viewmodels:TaskBarViewModel />
                 </bar:TaskbarIcon.DataContext>
@@ -32,7 +32,7 @@
                                 <Image
                                     Width="20"
                                     Height="20"
-                                    Source="/Assets/Images/logout.ico" />
+                                    Source="/Assets/Images/Logo_SZLQ.ico" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
