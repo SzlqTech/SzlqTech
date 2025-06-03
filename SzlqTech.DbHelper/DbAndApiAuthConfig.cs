@@ -15,7 +15,15 @@ namespace SzlqTech.DbHelper
             {
                 if (config == null)
                 {
-                    config = BinHelper.Load<DbAndApiAuthConfig>();
+                    //config = BinHelper.Load<DbAndApiAuthConfig>();
+                    // 读取配置文件中的键值对
+                    config = new DbAndApiAuthConfig();
+                    string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+                    DbAndApiAuthConfig.config.DbConnectionString = connectionString;
+                    Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    DbAndApiAuthConfig.config.Username= configuration.AppSettings.Settings["UserName"].Value??string.Empty;
+                    DbAndApiAuthConfig.config.Password = configuration.AppSettings.Settings["Password"].Value ?? string.Empty;
+                    DbAndApiAuthConfig.config.New =bool.Parse(configuration.AppSettings.Settings["New"].Value??"false");
                 }
 
                 return config ?? (config = new DbAndApiAuthConfig());
@@ -33,7 +41,11 @@ namespace SzlqTech.DbHelper
 
         public bool New { get; set; }
 
-        public string DbConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+
+        public string DbConnectionString { get; set; }
+        // public string DbConnectionString { get; set; } = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+
+
 
 
         public static void LoadNewConfig()

@@ -60,9 +60,12 @@ namespace SqlqTech.SharedView.ViewModels
                     {
                         MachineModel model = default(MachineModel).GetValueByName(item.SelectedMachineType, true);
                         item.MachineModel = (short)model;
+                        if (item.Id == 0)
+                        {
+                            item.Id = SnowFlakeNew.LongId;
+                        }
                     }
-                    List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);
-                    list.ForEach(o => o.Id = SnowFlakeNew.LongId);
+                    List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);                
                     await SettingService.SaveOrUpdateBatchAsync(list);
                     SendSuccessMsg();
                 });           
