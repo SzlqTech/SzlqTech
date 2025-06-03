@@ -102,8 +102,7 @@
                                                 <Image
                                                     Width="20"
                                                     Height="20"
-                                                    Source="{Binding Icon, Converter={StaticResource menuConverter}}"
-                                                    ToolTip="{Binding Title}" />
+                                                    Source="{Binding Icon, Converter={StaticResource menuConverter}}" />
                                                 <TextBlock
                                                     Margin="10,0"
                                                     VerticalAlignment="Center"
@@ -117,11 +116,12 @@
                                                     <DataTemplate>
                                                         <RadioButton
                                                             Height="35"
-                                                            Cursor="Hand"
                                                             Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.NavigateCommand}"
                                                             CommandParameter="{Binding .}"
+                                                            Cursor="Hand"
                                                             GroupName="Menu"
-                                                            IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                            IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           >
                                                             <RadioButton.Template>
                                                                 <ControlTemplate TargetType="RadioButton">
                                                                     <Grid Background="Transparent">
@@ -145,8 +145,7 @@
                                                                             Width="20"
                                                                             Height="20"
                                                                             Margin="10,0"
-                                                                            Source="{Binding Icon, Converter={StaticResource menuConverter}}"
-                                                                            ToolTip="{Binding Title}" />
+                                                                            Source="{Binding Icon, Converter={StaticResource menuConverter}}" />
 
                                                                         <TextBlock
                                                                             Grid.Column="1"
@@ -376,18 +375,21 @@
                         x:Name="BtnMin"
                         VerticalAlignment="Center"
                         Content="{md:PackIcon Kind=Minimize}"
-                        Style="{StaticResource MaterialDesignFlatButton}" />
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="{loc:Loc Min}" />
                     <Button
                         x:Name="BtnMax"
                         Margin="5,0"
                         VerticalAlignment="Center"
                         Content="{md:PackIcon Kind=WindowMaximize}"
-                        Style="{StaticResource MaterialDesignFlatButton}" />
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="{loc:Loc Max}" />
                     <Button
                         x:Name="BtnClose"
                         VerticalAlignment="Center"
                         Content="{md:PackIcon Kind=Close}"
-                        Style="{StaticResource MaterialDesignFlatButton}" />
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="{loc:Loc Close}" />
                 </StackPanel>
 
                 <md:Snackbar

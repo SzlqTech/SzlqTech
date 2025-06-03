@@ -22,7 +22,7 @@
                     Margin="0,0,10,0"
                     VerticalAlignment="Center"
                     Text="{loc:Loc LangSelected}" />
-                <TextBlock Text=":" VerticalAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center" Text=":" />
                 <ComboBox Width="100" SelectedIndex="{Binding LangIndex}">
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">

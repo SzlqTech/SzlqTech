@@ -207,4 +207,13 @@
   <data name="LangSelected" xml:space="preserve">
     <value>เลือกภาษา</value>
   </data>
+  <data name="Min" xml:space="preserve">
+    <value>ย่อ</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>ขยายใหญ่สุด</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
 </root>

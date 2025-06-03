@@ -9,8 +9,8 @@
     d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
-    <Grid >
-        <TextBlock Text="InnoLightTraceView" FontSize="30"/>
-        <TextBlock Text="text" FontSize="30"/>
+    <Grid>
+        <TextBlock FontSize="30" Text="InnoLightTraceView" />
+        <TextBlock FontSize="30" Text="text" />
     </Grid>
 </UserControl>

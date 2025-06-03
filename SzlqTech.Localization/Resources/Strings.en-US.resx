@@ -207,4 +207,13 @@
   <data name="LangSelected" xml:space="preserve">
     <value>Choose a language</value>
   </data>
+  <data name="Min" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>
