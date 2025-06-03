@@ -64,7 +64,7 @@ namespace SqlqTech.SharedView.ViewModels
                     List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);
                     list.ForEach(o => o.Id = SnowFlakeNew.LongId);
                     await SettingService.SaveOrUpdateBatchAsync(list);
-                    SendMessage("保存成功");
+                    SendSuccessMsg();
                 });           
             }
         }
@@ -91,7 +91,7 @@ namespace SqlqTech.SharedView.ViewModels
                     SettingService.Remove(o => o.Id == vo.Id);
                 }
                 MachineSettingVos.Remove(vo);
-                SendMessage("删除成功");
+                SendDeleteSuccessMsg();
             }
         }
 

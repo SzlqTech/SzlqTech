@@ -23,6 +23,7 @@ namespace SzlqTech.Views
         public LoginView()
         {
             InitializeComponent();
+            btnClose.Click += (s, e) => { Environment.Exit(0); };
         }
     }
 }

@@ -117,6 +117,7 @@
                                                     <DataTemplate>
                                                         <RadioButton
                                                             Height="35"
+                                                            Cursor="Hand"
                                                             Command="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.NavigateCommand}"
                                                             CommandParameter="{Binding .}"
                                                             GroupName="Menu"
@@ -308,7 +309,7 @@
                         </ToggleButton.Content>
                     </ToggleButton>-->
 
-                    <ComboBox Width="100" SelectedIndex="{Binding LangIndex}">
+                    <!--<ComboBox Width="100" SelectedIndex="{Binding LangIndex}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
@@ -355,7 +356,7 @@
                         </ComboBoxItem>
 
                     </ComboBox>
-                    <TextBlock Text="{loc:Loc Title}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{loc:Loc Title}" VerticalAlignment="Center"/>-->
                     <ToggleButton
                         x:Name="toggleShowPanel"
                         Margin="5"

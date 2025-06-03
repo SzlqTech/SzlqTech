@@ -12,7 +12,7 @@ namespace SqlqTech.SharedView.ViewModels
     {
         public SysConfigViewModel()
         {
-            Title = LocalizationService.GetString(AppLocalizations.SysConfig); ;
+            Title = LocalizationService.GetString(AppLocalizations.SysConfig); 
         }
 
         [ObservableProperty]
@@ -29,6 +29,7 @@ namespace SqlqTech.SharedView.ViewModels
             config.AppSettings.Settings["lang"].Value = CurrLangName;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
+            SendSuccessMsg();
         }
 
         public void GetLangIndex(string name)

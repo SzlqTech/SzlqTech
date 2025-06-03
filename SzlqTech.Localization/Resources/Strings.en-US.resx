@@ -150,4 +150,52 @@
   <data name="MachineDetail" xml:space="preserve">
     <value>Details  of machine list</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ScanEquipment" xml:space="preserve">
+    <value>Scanning Device</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="LoginIn" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginOut" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="RememberPassword" xml:space="preserve">
+    <value>Remember Password</value>
+  </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>Forget Password</value>
+  </data>
+  <data name="SuccessMsg" xml:space="preserve">
+    <value>Save successfully</value>
+  </data>
+  <data name="ErrorMsg" xml:space="preserve">
+    <value>Save failed</value>
+  </data>
+  <data name="DeleteSuccessMsg" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="DeleteErrorMsg" xml:space="preserve">
+    <value>Delete failed</value>
+  </data>
 </root>

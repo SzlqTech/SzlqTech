@@ -55,7 +55,7 @@ namespace SqlqTech.SharedView.ViewModels
               await  machineDetailService.RemoveAsync(o=>o.Id==SelectedMachineDetailVo.Id);
             }
             MachineDetailVos.Remove(SelectedMachineDetailVo);
-            SendMessage("删除成功");
+            SendDeleteSuccessMsg();
         }
 
         [RelayCommand]
@@ -80,7 +80,7 @@ namespace SqlqTech.SharedView.ViewModels
                 }
                 List<MachineDetail> list = mapper.Map<List<MachineDetail>>(MachineDetailVos);
                 await machineDetailService.SaveOrUpdateBatchAsync(list);
-                SendMessage("保存成功");
+                SendSuccessMsg();
             });
           
         }
