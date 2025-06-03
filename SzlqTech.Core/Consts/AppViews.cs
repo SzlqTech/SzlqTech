@@ -28,5 +28,7 @@ namespace SzlqTech.Core.Consts
         public const string ScannerSetting = "ScannerSettingView";
 
         public const string SysConfig = "SysConfigView";
+
+        public const string InnoLight = "InnoLightTraceView";
     }
 }

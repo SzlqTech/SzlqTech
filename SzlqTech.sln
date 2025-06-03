@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.SqlTest", "SzlqTec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.Localization", "SzlqTech.Localization\SzlqTech.Localization.csproj", "{8A6F35A0-511B-4184-97AD-0383D2DE5994}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzlqTech.Core.WorkFlow", "SzlqTech.Core.WorkFlow\SzlqTech.Core.WorkFlow.csproj", "{8DDBD04C-5AD3-42FE-8519-F4B437B1A0E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{8A6F35A0-511B-4184-97AD-0383D2DE5994}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A6F35A0-511B-4184-97AD-0383D2DE5994}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A6F35A0-511B-4184-97AD-0383D2DE5994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDBD04C-5AD3-42FE-8519-F4B437B1A0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDBD04C-5AD3-42FE-8519-F4B437B1A0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDBD04C-5AD3-42FE-8519-F4B437B1A0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDBD04C-5AD3-42FE-8519-F4B437B1A0E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,9 +114,9 @@ Global
 		{61BCA932-0168-4AC7-9627-D689EC9CB627} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_PrefixTranslations = False
-		SolutionGuid = {47E3B269-D03B-48BB-858B-A76D5F48A3F7}
-		RESX_NeutralResourcesLanguage = zh-Hans
 		RESX_SaveFilesImmediatelyUponChange = False
+		RESX_NeutralResourcesLanguage = zh-Hans
+		SolutionGuid = {47E3B269-D03B-48BB-858B-A76D5F48A3F7}
+		RESX_PrefixTranslations = False
 	EndGlobalSection
 EndGlobal

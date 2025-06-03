@@ -49,6 +49,11 @@ namespace SzlqTech.Core.Consts
         public const string RememberPassword = "RememberPassword";
 
         public const string ForgetPassword = "ForgetPassword";
+
+        public const string WorkFlow = "WorkFlow";
+
+        public const string InnoLight = "InnoLight";
+
         #endregion
 
         #region Message

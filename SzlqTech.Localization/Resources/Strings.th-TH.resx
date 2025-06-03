@@ -198,4 +198,10 @@
   <data name="DeleteErrorMsg" xml:space="preserve">
     <value>การลบล้มเหลว</value>
   </data>
+  <data name="WorkFlow" xml:space="preserve">
+    <value>กระบวนการทำงาน</value>
+  </data>
+  <data name="InnoLight" xml:space="preserve">
+    <value>เขาเป็นนักวิทยาศาสตร์</value>
+  </data>
 </root>

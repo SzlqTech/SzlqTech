@@ -198,4 +198,10 @@
   <data name="DeleteErrorMsg" xml:space="preserve">
     <value>Delete failed</value>
   </data>
+  <data name="WorkFlow" xml:space="preserve">
+    <value>Work process</value>
+  </data>
+  <data name="InnoLight" xml:space="preserve">
+    <value>Inno Light</value>
+  </data>
 </root>

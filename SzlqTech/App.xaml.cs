@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Threading;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.App;
+using SzlqTech.Core.WorkFlow;
 using SzlqTech.Extensions;
 using SzlqTech.Localization;
 using SzlqTech.Services.Sessions;
@@ -46,6 +47,7 @@ namespace SzlqTech
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<SharedViewModules>();
+            moduleCatalog.AddModule<WorkFlowModule>();
         }
 
         protected override  void OnInitialized()

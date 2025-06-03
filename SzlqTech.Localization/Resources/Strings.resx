@@ -178,4 +178,10 @@
   <data name="DeleteErrorMsg" xml:space="preserve">
     <value>删除失败</value>
   </data>
+  <data name="WorkFlow" xml:space="preserve">
+    <value>工作流程</value>
+  </data>
+  <data name="InnoLight" xml:space="preserve">
+    <value>苏州旭创</value>
+  </data>
 </root>

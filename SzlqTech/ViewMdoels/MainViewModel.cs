@@ -95,6 +95,10 @@ namespace SzlqTech.ViewMdoels
                 new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
 
             }));
+            NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
+            {
+                new NavigationItem("light",LocalizationService.GetString(AppLocalizations.InnoLight),AppViews.InnoLight,"")
+            }));
 
         }
 
