@@ -11,5 +11,6 @@
     mc:Ignorable="d">
     <Grid >
         <TextBlock Text="InnoLightTraceView" FontSize="30"/>
+        <TextBlock Text="text" FontSize="30"/>
     </Grid>
 </UserControl>
