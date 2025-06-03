@@ -92,7 +92,8 @@ namespace SzlqTech.ViewMdoels
             {
                 new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
                 new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
-                
+                new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
+
             }));
 
         }

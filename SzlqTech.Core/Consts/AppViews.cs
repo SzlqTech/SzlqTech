@@ -26,5 +26,7 @@ namespace SzlqTech.Core.Consts
         public const string MachineDetail= "MachineDetailView";
 
         public const string ScannerSetting = "ScannerSettingView";
+
+        public const string SysConfig = "SysConfigView";
     }
 }

@@ -7,9 +7,11 @@ using SqlqTech.SharedView.Vo;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
+using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
 using SzlqTech.IService;
+using SzlqTech.Localization;
 
 namespace SqlqTech.SharedView.ViewModels
 {
@@ -20,7 +22,7 @@ namespace SqlqTech.SharedView.ViewModels
 
         public ScannerSettingViewModel(IScannerSettingService scannerSettingService,IMapper mapper)
         {
-            Title = "扫描配置";
+            Title = LocalizationService.GetString(AppLocalizations.ScanManagement); ;     
             ScannerSettingVos = new ObservableCollection<ScannerSettingVo>();
             this.scannerSettingService = scannerSettingService;
             this.mapper = mapper;

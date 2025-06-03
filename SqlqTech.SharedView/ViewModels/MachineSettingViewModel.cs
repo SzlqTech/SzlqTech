@@ -14,6 +14,7 @@ using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
 using SzlqTech.IService;
+using SzlqTech.Localization;
 
 namespace SqlqTech.SharedView.ViewModels
 {
@@ -27,7 +28,7 @@ namespace SqlqTech.SharedView.ViewModels
         public MachineSettingViewModel(IMachineSettingService settingService,IMapper mapper, 
             NavigationService navigationService)
         {
-            Title = "机器列表";
+            Title = LocalizationService.GetString(AppLocalizations.MachineManagement); ;    
             SettingService = settingService;
             this.mapper = mapper;
             NavigationService = navigationService;

@@ -8,6 +8,8 @@ namespace SzlqTech.Core.Consts
 
         public const string MachineManagement = "MachineManagement";
 
+        public const string MachineDetail = "MachineDetail";
+
         public const string ScanManagement = "ScanManagement";
 
         public const string Type = "Type";
@@ -17,5 +19,9 @@ namespace SzlqTech.Core.Consts
         public const string Description= "Description";
 
         public const string Operation= "Operation";
+
+        public const string SysConfig = "SysConfig";
+
+        public const string Save = "Save";
     }
 }

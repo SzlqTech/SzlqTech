@@ -141,4 +141,13 @@
   <data name="Operation" xml:space="preserve">
     <value>操作</value>
   </data>
+  <data name="SysConfig" xml:space="preserve">
+    <value>系统设置</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="MachineDetail" xml:space="preserve">
+    <value>机器列表详情</value>
+  </data>
 </root>

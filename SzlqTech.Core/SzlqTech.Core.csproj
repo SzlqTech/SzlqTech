@@ -18,4 +18,10 @@
     <ProjectReference Include="..\SzlqTech.Equipment\SzlqTech.Equipment.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Assets\Images\th.png" />
+    <Resource Include="Assets\Images\us.png" />
+    <Resource Include="Assets\Images\zh.png" />
+  </ItemGroup>
+
 </Project>

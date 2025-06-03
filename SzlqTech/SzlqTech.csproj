@@ -35,6 +35,7 @@
     <None Remove="Assets\Images\menus\role.png" />
     <None Remove="Assets\Images\menus\scanner.png" />
     <None Remove="Assets\Images\menus\setting.png" />
+    <None Remove="Assets\Images\menus\sysConfig.png" />
     <None Remove="Assets\Images\menus\tenant.png" />
     <None Remove="Assets\Images\menus\time.png" />
     <None Remove="Assets\Images\menus\tree.png" />
@@ -92,6 +93,7 @@
 	  <Resource Include="Assets\Images\menus\role.png" />
 	  <Resource Include="Assets\Images\menus\scanner.png" />
 	  <Resource Include="Assets\Images\menus\setting.png" />
+	  <Resource Include="Assets\Images\menus\sysConfig.png" />
 	  <Resource Include="Assets\Images\menus\tenant.png" />
 	  <Resource Include="Assets\Images\menus\time.png" />
 	  <Resource Include="Assets\Images\menus\tree.png" />

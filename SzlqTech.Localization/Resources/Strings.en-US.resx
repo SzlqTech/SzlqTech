@@ -141,4 +141,13 @@
   <data name="Operation" xml:space="preserve">
     <value>Operation</value>
   </data>
+  <data name="SysConfig" xml:space="preserve">
+    <value>System Config</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MachineDetail" xml:space="preserve">
+    <value>Details  of machine list</value>
+  </data>
 </root>

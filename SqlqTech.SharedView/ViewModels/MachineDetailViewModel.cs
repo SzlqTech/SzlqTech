@@ -8,9 +8,11 @@ using SqlqTech.SharedView.Vo;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
+using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
 using SzlqTech.IService;
+using SzlqTech.Localization;
 
 namespace SqlqTech.SharedView.ViewModels
 {
@@ -21,7 +23,7 @@ namespace SqlqTech.SharedView.ViewModels
 
         public MachineDetailViewModel(IMachineDetailService machineDetailService,IMapper mapper)
         {
-            Title = "机器列表详情";
+            Title = LocalizationService.GetString(AppLocalizations.MachineDetail); ;     
             MachineDetailVos = new ObservableCollection<MachineDetailVo>();
             this.machineDetailService = machineDetailService;
             this.mapper = mapper;

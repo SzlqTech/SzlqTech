@@ -141,4 +141,13 @@
   <data name="Operation" xml:space="preserve">
     <value>การกระทำ</value>
   </data>
+  <data name="SysConfig" xml:space="preserve">
+    <value>ตั้งค่าระบบ</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="MachineDetail" xml:space="preserve">
+    <value>รายละเอียดรายการเครื่อง</value>
+  </data>
 </root>

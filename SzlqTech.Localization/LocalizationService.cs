@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Configuration;
+using System.Globalization;
 using System.Resources;
 
 namespace SzlqTech.Localization
@@ -11,10 +12,20 @@ namespace SzlqTech.Localization
 
         public static event EventHandler LanguageChanged;
 
+       
+
         private static CultureInfo _currentCulture = CultureInfo.CurrentCulture;
+
+        //_currentCulture
         public static CultureInfo CurrentCulture
         {
-            get => _currentCulture;
+            get
+            {
+                var CurrLangName = ConfigurationManager.AppSettings["lang"] ?? "zh-CN";
+                if(_currentCulture.IetfLanguageTag!=CurrLangName)
+                 _currentCulture =new CultureInfo(CurrLangName);
+                return _currentCulture;
+            }
             set
             {
                 if (_currentCulture.Equals(value)) return;
@@ -25,6 +36,7 @@ namespace SzlqTech.Localization
 
         public static string GetString(string key, params object[] args)
         {
+         
             var value = _resourceManager.GetString(key, CurrentCulture);
             if (args != null && args.Length > 0)
             {
