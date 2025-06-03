@@ -204,4 +204,7 @@
   <data name="InnoLight" xml:space="preserve">
     <value>เขาเป็นนักวิทยาศาสตร์</value>
   </data>
+  <data name="LangSelected" xml:space="preserve">
+    <value>เลือกภาษา</value>
+  </data>
 </root>

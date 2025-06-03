@@ -184,4 +184,7 @@
   <data name="InnoLight" xml:space="preserve">
     <value>苏州旭创</value>
   </data>
+  <data name="LangSelected" xml:space="preserve">
+    <value>选择语言</value>
+  </data>
 </root>

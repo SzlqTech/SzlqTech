@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Prism.Regions;
 using System.Configuration;
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Events;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Localization;
 
@@ -30,6 +31,7 @@ namespace SqlqTech.SharedView.ViewModels
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
             SendSuccessMsg();
+            aggregator.SendUpdateLocalizationModel(true);
         }
 
         public void GetLangIndex(string name)

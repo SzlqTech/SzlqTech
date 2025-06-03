@@ -33,6 +33,14 @@ namespace SzlqTech.ViewMdoels
             {
                 IsOpen = arg.IsOpen;
             }, "Main");
+
+            aggregator.ResgiterUpdateLocalizationModel(arg =>
+            {
+                if(arg.IsUpdate)
+                {
+                    InitConfig();
+                }
+            });
         }
 
         [ObservableProperty]

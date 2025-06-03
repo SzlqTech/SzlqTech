@@ -62,5 +62,35 @@ namespace SzlqTech.Core.Events
                 Message= message
             });
         }
+
+        /// <summary>
+        /// 更新多语言
+        /// </summary>
+        /// <param name="aggregator"></param>
+        /// <param name="isUpdate"></param>
+        /// <param name="filterName"></param>
+        public static void SendUpdateLocalizationModel(this IEventAggregator aggregator, bool isUpdate, string filterName = "Main")
+        {
+            aggregator.GetEvent<LocalizationEvent>().Publish(new LocalizationModel()
+            {
+                IsUpdate = isUpdate,
+                Filter = filterName,
+            });
+        }
+
+        /// <summary>
+        /// 注册多语言提示消息 
+        /// </summary>
+        /// <param name="aggregator"></param>
+        /// <param name="action"></param>
+        public static void ResgiterUpdateLocalizationModel(this IEventAggregator aggregator,
+            Action<LocalizationModel> action, string filterName = "Main")
+        {
+            aggregator.GetEvent<LocalizationEvent>().Subscribe(action,
+                ThreadOption.PublisherThread, true, (m) =>
+                {
+                    return m.Filter.Equals(filterName);
+                });
+        }
     }
 }
