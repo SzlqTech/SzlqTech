@@ -10,10 +10,11 @@ using SzlqTech.Core.Events;
 using SzlqTech.Core.Models;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
-using SzlqTech.Core.Events;
 using SzlqTech.Services.Sessions;
 using SzlqTech.Localization;
 using System.Globalization;
+using NLog;
+using SzlqTech.Common.Nlogs;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -23,6 +24,8 @@ namespace SzlqTech.ViewMdoels
         private readonly IEventAggregator aggregator;
 
         public NavigationService NavigationService { get; set; }
+
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public MainViewModel(IRegionManager regionManager, NavigationService navigationService,IEventAggregator aggregator)
         {
@@ -113,6 +116,8 @@ namespace SzlqTech.ViewMdoels
         public void Configure()
         {
             InitConfig();
+            logger.InfoHandler("启动成功");
+            logger.ErrorHandler("启动失败");
         }
     }
 }
