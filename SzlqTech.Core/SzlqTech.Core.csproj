@@ -11,6 +11,7 @@
     <None Remove="Assets\Images\error.png" />
     <None Remove="Assets\Images\Info.png" />
     <None Remove="Assets\Images\light.png" />
+    <None Remove="Assets\Images\start.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,7 @@
     <Resource Include="Assets\Images\error.png" />
     <Resource Include="Assets\Images\Info.png" />
     <Resource Include="Assets\Images\light.png" />
+    <Resource Include="Assets\Images\start.png" />
     <Resource Include="Assets\Images\th.png" />
     <Resource Include="Assets\Images\us.png" />
     <Resource Include="Assets\Images\zh.png" />

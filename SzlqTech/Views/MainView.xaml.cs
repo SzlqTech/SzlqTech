@@ -26,12 +26,13 @@ namespace SzlqTech.Views
     public partial class MainView : Window
     {
         private readonly IAppStartService appStartService;
+        private readonly IEventAggregator aggregator;
 
         public MainView(IAppStartService appStartService, IEventAggregator aggregator)
         {
             InitializeComponent();
             this.appStartService = appStartService;
-
+            this.aggregator = aggregator;
             HeaderBorder.MouseDown += (s, e) =>
             {
                 if (e.ClickCount == 2) SetWindowState();
@@ -56,7 +57,8 @@ namespace SzlqTech.Views
         private  void BtnClose_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             //if (await dialog.Question(Local.Localize("AreYouSure")))
-                appStartService.Exit();
+            appStartService.Exit();
+           
         }
 
         private void BtnMax_Click(object sender, System.Windows.RoutedEventArgs e)

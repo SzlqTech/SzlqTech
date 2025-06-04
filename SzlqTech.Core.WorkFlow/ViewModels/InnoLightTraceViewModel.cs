@@ -1,15 +1,19 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Prism.Regions;
 using Prism.Services.Dialogs;
+using System.Collections.ObjectModel;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
+using SzlqTech.Core.WorkFlow.Vos;
 using SzlqTech.Localization;
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
 {
     public partial class InnoLightTraceViewModel:NavigationViewModel
     {
-        private readonly IHostDialogService dialog;
+       private readonly IHostDialogService dialog;
 
         public InnoLightTraceViewModel(IHostDialogService dialog)
         {
@@ -17,16 +21,27 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             this.dialog = dialog;
         }
 
-        //[RelayCommand]
-        //public async Task Test()
-        //{
-        //    DialogParameters para=new DialogParameters();
-        //    para.Add(AppSharedConsts.Parameter, "当前物料缺失");
-        //    var dialogResult = await dialog.ShowDialogAsync(AppViews.ErrorMessageView, para);
-        //    if (dialogResult.Result == ButtonResult.OK)
-        //    {
 
-        //    }
-        //}
+        [ObservableProperty]
+        public ObservableCollection<MachineLinkVo> machineLinks;
+
+        public override Task OnNavigatedToAsync(NavigationContext navigationContext = null)
+        {
+            MachineLinks = new ObservableCollection<MachineLinkVo>()
+            {
+                new MachineLinkVo(){Name="OE Tray上料",IsLink=false},
+                new MachineLinkVo(){Name="载具换盘",IsLink=false},
+                new MachineLinkVo(){Name="清洁+拔防尘塞",IsLink=false},
+                new MachineLinkVo(){Name="OE点胶",IsLink=false},
+                new MachineLinkVo(){Name="housing 上料",IsLink=true},
+                new MachineLinkVo(){Name="点胶合装",IsLink=false},
+                new MachineLinkVo(){Name="拧螺丝",IsLink=false},
+                new MachineLinkVo(){Name="升降回流",IsLink=false},
+                new MachineLinkVo(){Name="检测",IsLink=false},
+                new MachineLinkVo(){Name="烤盘上下料",IsLink=false},             
+            };
+
+            return Task.CompletedTask;
+        }
     }
 }

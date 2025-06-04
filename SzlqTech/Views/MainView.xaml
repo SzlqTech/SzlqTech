@@ -120,8 +120,7 @@
                                                             CommandParameter="{Binding .}"
                                                             Cursor="Hand"
                                                             GroupName="Menu"
-                                                            IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                           >
+                                                            IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                             <RadioButton.Template>
                                                                 <ControlTemplate TargetType="RadioButton">
                                                                     <Grid Background="Transparent">

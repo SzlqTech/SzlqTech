@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Core.Events;
 
 namespace SzlqTech.Core.WorkFlow.Views
 {
@@ -20,9 +22,12 @@ namespace SzlqTech.Core.WorkFlow.Views
     /// </summary>
     public partial class InnoLightTraceView : UserControl
     {
-        public InnoLightTraceView()
+        private readonly IEventAggregator aggregator;
+
+        public InnoLightTraceView(IEventAggregator aggregator)
         {
             InitializeComponent();
+            this.aggregator = aggregator;   
         }
     }
 }

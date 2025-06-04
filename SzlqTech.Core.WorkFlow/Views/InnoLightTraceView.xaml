@@ -2,30 +2,93 @@
     x:Class="SzlqTech.Core.WorkFlow.Views.InnoLightTraceView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:SzlqTech.Core.WorkFlow.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:local="clr-namespace:SzlqTech.Core.WorkFlow.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <converter:LinkToImageConverter x:Key="linkToImage" />
+
+    </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <!--<Button Content="测试" Command="{Binding TestCommand}" HorizontalAlignment="Right"/>-->
-        <TabControl Grid.Row="1" Style="{StaticResource MaterialDesignTabControl}" HorizontalContentAlignment="Left">
-            <TabItem Header="OE Tray上料"/>
-            <TabItem Header="载具换盘"/>
-            <TabItem Header="清洁+拔防尘塞"/>
-            <TabItem Header="OE点胶"/>
-            <TabItem Header="housing 上料"/>
-            <TabItem Header="点胶合装"/>
-            <TabItem Header="拧螺丝"/>
-            <TabItem Header="升降回流"/>
-            <TabItem Header="检测"/>
-            <TabItem Header="烤盘上下料"/>
-        </TabControl>
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button
+                Width="120"
+                Height="40"
+                Margin="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderThickness="1">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="20" Source="/SzlqTech.Core.WorkFlow;component/Assets/start.png" />
+                        <TextBlock Margin="5,0" Text="{loc:Loc Start}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TabControl
+                    x:Name="tabControl"
+                    Grid.Row="1"
+                    HorizontalContentAlignment="Left"
+                    Style="{StaticResource MaterialDesignTabControl}">
+                    <TabItem Header="OE Tray上料" />
+                    <TabItem Header="载具换盘" />
+                    <TabItem Header="清洁+拔防尘塞" />
+                    <TabItem Header="OE点胶" />
+                    <TabItem Header="housing 上料" />
+                    <TabItem Header="点胶合装" />
+                    <TabItem Header="拧螺丝" />
+                    <TabItem Header="升降回流" />
+                    <TabItem Header="检测" />
+                    <TabItem Header="烤盘上下料" />
+                </TabControl>
+                <ItemsControl
+                    Grid.Column="1"
+                    Margin="5"
+                    ItemsSource="{Binding MachineLinks}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
+                                <Image
+                                    Name="image"
+                                    Width="20"
+                                    Source="{Binding IsLink, Converter={StaticResource linkToImage}}" />
+                                <TextBlock
+                                    Margin="5"
+                                    Text="{Binding Name}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+            </Grid>
+
+        </Grid>
+
+
     </Grid>
 </UserControl>

@@ -56,8 +56,8 @@ namespace SzlqTech
         {
             if (System.Windows.Application.Current is IAppTaskBar appTaskBar)
                 appTaskBar.Dispose();
-
-            Environment.Exit(0);
+            Application.Current.Shutdown(0);
+            //Environment.Exit(0);
         }
 
         public void Logout()

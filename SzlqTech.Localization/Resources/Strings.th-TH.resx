@@ -222,4 +222,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>ยกเลิก</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>เริ่มได้</value>
+  </data>
 </root>

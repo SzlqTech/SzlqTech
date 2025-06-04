@@ -202,4 +202,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>启动</value>
+  </data>
 </root>

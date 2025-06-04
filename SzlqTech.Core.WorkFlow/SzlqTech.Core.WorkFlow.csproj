@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -6,6 +6,12 @@
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\darkLight.png" />
+    <None Remove="Assets\light.png" />
+    <None Remove="Assets\start.png" />
+  </ItemGroup>
 
 	<ItemGroup>
 		
@@ -22,5 +28,11 @@
 		<PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
 		<PackageReference Include="NLog" Version="5.4.0" />
 		<PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Assets\darkLight.png" />
+	  <Resource Include="Assets\light.png" />
+	  <Resource Include="Assets\start.png" />
 	</ItemGroup>
 </Project>
