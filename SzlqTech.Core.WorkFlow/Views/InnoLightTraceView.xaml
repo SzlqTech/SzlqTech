@@ -10,7 +10,17 @@
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
     <Grid>
-        <TextBlock FontSize="30" Text="InnoLightTraceView" />
-        <TextBlock FontSize="30" Text="text" />
+        <TabControl Style="{StaticResource MaterialDesignTabControl}" HorizontalContentAlignment="Left">
+            <TabItem Header="OE Tray上料"/>
+            <TabItem Header="载具换盘"/>
+            <TabItem Header="清洁+拔防尘塞"/>
+            <TabItem Header="OE点胶"/>
+            <TabItem Header="housing 上料"/>
+            <TabItem Header="点胶合装"/>
+            <TabItem Header="拧螺丝"/>
+            <TabItem Header="升降回流"/>
+            <TabItem Header="检测"/>
+            <TabItem Header="烤盘上下料"/>
+        </TabControl>
     </Grid>
 </UserControl>
