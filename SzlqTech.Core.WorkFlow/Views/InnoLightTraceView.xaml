@@ -47,9 +47,24 @@
                 <TabControl
                     x:Name="tabControl"
                     Grid.Row="1"
+                    Margin="10"
                     HorizontalContentAlignment="Left"
                     Style="{StaticResource MaterialDesignTabControl}">
-                    <TabItem Header="OE Tray上料" />
+                    <TabItem Header="OE Tray上料">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
                     <TabItem Header="载具换盘" />
                     <TabItem Header="清洁+拔防尘塞" />
                     <TabItem Header="OE点胶" />
@@ -71,7 +86,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
+                            <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
                                 <Image
                                     Name="image"
                                     Width="20"

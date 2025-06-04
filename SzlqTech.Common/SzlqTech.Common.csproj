@@ -10,6 +10,7 @@
     <PackageReference Include="Masuit.Tools.Core" Version="2025.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.4.0" />
+    <PackageReference Include="NPOI" Version="2.7.3" />
   </ItemGroup>
 
 </Project>

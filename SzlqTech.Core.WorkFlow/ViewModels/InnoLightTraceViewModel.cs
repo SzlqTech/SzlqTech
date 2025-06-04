@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Bogus;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Prism.Regions;
 using Prism.Services.Dialogs;
@@ -21,9 +22,31 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             this.dialog = dialog;
         }
 
-
         [ObservableProperty]
         public ObservableCollection<MachineLinkVo> machineLinks;
+
+
+        #region OE Tray上料
+
+        [ObservableProperty]
+        public ObservableCollection<TrayLoadingGoodsVo> trayLoadingGoods;
+
+        #endregion
+
+        public void Init()
+        {
+            TrayLoadingGoods=new ObservableCollection<TrayLoadingGoodsVo>();
+
+            //模拟采集数据
+           
+        }
+
+        public void GetData()
+        {
+            //var trayGoods =new Faker<TrayLoadingGoodsVo>()
+            //                .RuleFor(o=>o.NewId,Guid.NewGuid);
+        }
+
 
         public override Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
@@ -40,7 +63,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 new MachineLinkVo(){Name="检测",IsLink=false},
                 new MachineLinkVo(){Name="烤盘上下料",IsLink=false},             
             };
-
+            Init();
             return Task.CompletedTask;
         }
     }
