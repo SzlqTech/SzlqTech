@@ -10,7 +10,12 @@
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
     <Grid>
-        <TabControl Style="{StaticResource MaterialDesignTabControl}" HorizontalContentAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--<Button Content="测试" Command="{Binding TestCommand}" HorizontalAlignment="Right"/>-->
+        <TabControl Grid.Row="1" Style="{StaticResource MaterialDesignTabControl}" HorizontalContentAlignment="Left">
             <TabItem Header="OE Tray上料"/>
             <TabItem Header="载具换盘"/>
             <TabItem Header="清洁+拔防尘塞"/>

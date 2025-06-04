@@ -38,5 +38,7 @@ namespace SzlqTech.Core.Consts
         /// 初始化页的唯一会话标识
         /// </summary>
         public const string SplashScreenIdentifier = "SplashScreen";
+
+        public const string Parameter = "para";
     }
 }

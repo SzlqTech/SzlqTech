@@ -5,15 +5,14 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Services.Dialogs;
 using SqlqTech.SharedView;
-using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using SzlqTech.Core;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Core.WorkFlow;
 using SzlqTech.Extensions;
-using SzlqTech.Localization;
 using SzlqTech.Services.Sessions;
 using SzlqTech.ViewMdoels;
 using SzlqTech.Views;
@@ -48,6 +47,7 @@ namespace SzlqTech
         {
             moduleCatalog.AddModule<SharedViewModules>();
             moduleCatalog.AddModule<WorkFlowModule>();
+            moduleCatalog.AddModule<SzlqTechCoreModule>();
         }
 
         protected override  void OnInitialized()

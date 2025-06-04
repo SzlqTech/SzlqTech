@@ -216,4 +216,10 @@
   <data name="Close" xml:space="preserve">
     <value>ปิด</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>ยืนยัน</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
 </root>

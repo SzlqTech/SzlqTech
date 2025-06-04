@@ -30,5 +30,9 @@ namespace SzlqTech.Core.Consts
         public const string SysConfig = "SysConfigView";
 
         public const string InnoLight = "InnoLightTraceView";
+
+        public const string InfoMessageView = "InfoMessageView";
+
+        public const string ErrorMessageView = "ErrorMessageView";
     }
 }
