@@ -3,11 +3,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Masuit.Tools;
 using Masuit.Tools.Systems;
+using NLog;
 using Prism.Regions;
 using SqlqTech.SharedView.Vo;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
+using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
@@ -20,6 +22,7 @@ namespace SqlqTech.SharedView.ViewModels
     {
         private readonly IMachineDetailService machineDetailService;
         private readonly IMapper mapper;
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public MachineDetailViewModel(IMachineDetailService machineDetailService,IMapper mapper)
         {
@@ -64,23 +67,31 @@ namespace SqlqTech.SharedView.ViewModels
             Valid();
             await SetBusyAsync(async () =>
             {
-                foreach (var item in MachineDetailVos)
+                try
                 {
-                    if (item.Id == 0)
+                    foreach (var item in MachineDetailVos)
                     {
-                        item.Id = SnowFlakeNew.LongId;
-                    }
-                    if (item.MachineId == 0)
-                    {
-                        item.MachineId = CurrMachineSettingVo.Id;
-                    }
+                        if (item.Id == 0)
+                        {
+                            item.Id = SnowFlakeNew.LongId;
+                        }
+                        if (item.MachineId == 0)
+                        {
+                            item.MachineId = CurrMachineSettingVo.Id;
+                        }
 
-                    var data = default(DataType).GetValueByName(item.DataTypeName, true);
-                    item.DataType = (short)data;
+                        var data = default(DataType).GetValueByName(item.DataTypeName, true);
+                        item.DataType = (short)data;
+                    }
+                    List<MachineDetail> list = mapper.Map<List<MachineDetail>>(MachineDetailVos);
+                    await machineDetailService.SaveOrUpdateBatchAsync(list);
+                    SendSuccessMsg();
                 }
-                List<MachineDetail> list = mapper.Map<List<MachineDetail>>(MachineDetailVos);
-                await machineDetailService.SaveOrUpdateBatchAsync(list);
-                SendSuccessMsg();
+                catch (Exception ex)
+                {
+                    SendErrorMsg();
+                    logger.ErrorHandler($"机器详情保存失败，失败原因:[{ex.Message}]");
+                }
             });
           
         }

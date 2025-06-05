@@ -225,4 +225,16 @@
   <data name="Start" xml:space="preserve">
     <value>เริ่มได้</value>
   </data>
+  <data name="Product" xml:space="preserve">
+    <value>ผลิตภัณฑ์</value>
+  </data>
+  <data name="ProductManagement" xml:space="preserve">
+    <value>การจัดการผลิตภัณฑ์</value>
+  </data>
+  <data name="ProductCode" xml:space="preserve">
+    <value>รหัสสินค้า</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>ชื่อผลิตภัณฑ์</value>
+  </data>
 </root>

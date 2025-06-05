@@ -51,5 +51,8 @@ namespace SzlqTech.Entity
 
         [ObservableProperty]
         public long id;
+
+        [ObservableProperty]
+        public string? description;
     }
 }

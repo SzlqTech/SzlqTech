@@ -34,5 +34,7 @@ namespace SzlqTech.Core.Consts
         public const string InfoMessageView = "InfoMessageView";
 
         public const string ErrorMessageView = "ErrorMessageView";
+
+        public const string ProductView = "ProductView";
     }
 }

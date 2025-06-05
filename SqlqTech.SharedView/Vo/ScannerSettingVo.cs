@@ -29,12 +29,6 @@ namespace SqlqTech.SharedView.Vo
         [ObservableProperty]
         public string portName;
 
-        /// <summary>
-        /// 端口描述
-        /// </summary>
-        [ObservableProperty]
-        public string? description;
-
         [ObservableProperty]
         public bool isEnable;
 

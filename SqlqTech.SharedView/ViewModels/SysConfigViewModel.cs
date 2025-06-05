@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NLog;
 using Prism.Regions;
 using System.Configuration;
+using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.ViewModels;
@@ -11,6 +13,7 @@ namespace SqlqTech.SharedView.ViewModels
 {
     public partial class SysConfigViewModel:NavigationViewModel
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public SysConfigViewModel()
         {
             Title = LocalizationService.GetString(AppLocalizations.SysConfig); 
@@ -32,6 +35,9 @@ namespace SqlqTech.SharedView.ViewModels
             ConfigurationManager.RefreshSection("appSettings");
             SendSuccessMsg();
             aggregator.SendUpdateLocalizationModel(true);
+            logger.InfoHandler($"保存语言[{CurrLangName}]成功");
+
+
         }
 
         public void GetLangIndex(string name)

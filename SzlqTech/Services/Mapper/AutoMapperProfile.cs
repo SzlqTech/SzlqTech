@@ -15,6 +15,7 @@ namespace SzlqTech.Services.Mapper
                 .ForMember(dest=>dest.IsEnableScan,opt=>opt.MapFrom(src=>src.StatusEnable))
                 .ReverseMap();
             CreateMap<ScannerSetting, ScannerSettingVo>().ReverseMap();
+            CreateMap<Product,ProductVo>().ReverseMap();
         }
     }
 }

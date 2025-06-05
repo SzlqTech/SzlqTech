@@ -54,6 +54,12 @@ namespace SzlqTech.Core.Consts
 
         public const string InnoLight = "InnoLight";
 
+        public const string Product = "Product";
+
+        public const string ProductManagement = "ProductManagement";
+
+
+
         #endregion
 
         #region Message

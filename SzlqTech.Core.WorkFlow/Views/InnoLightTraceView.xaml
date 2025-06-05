@@ -65,15 +65,141 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
-                    <TabItem Header="载具换盘" />
-                    <TabItem Header="清洁+拔防尘塞" />
-                    <TabItem Header="OE点胶" />
-                    <TabItem Header="housing 上料" />
-                    <TabItem Header="点胶合装" />
-                    <TabItem Header="拧螺丝" />
-                    <TabItem Header="升降回流" />
-                    <TabItem Header="检测" />
-                    <TabItem Header="烤盘上下料" />
+                    <TabItem Header="载具换盘">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="清洁+拔防尘塞">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="OE点胶">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="housing 上料">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="点胶合装">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="拧螺丝">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="升降回流">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="检测">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="烤盘上下料">
+                        <DataGrid
+                            Margin="5"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserSortColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="产品条码" />
+                                <DataGridTextColumn Width="*" Header="SN" />
+                                <DataGridTextColumn Width="*" Header="入站时间" />
+                                <DataGridTextColumn Width="*" Header="出站时间" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
                 </TabControl>
                 <ItemsControl
                     Grid.Column="1"

@@ -286,6 +286,42 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 产品 的本地化字符串。
+        /// </summary>
+        public static string Product {
+            get {
+                return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 产品代码 的本地化字符串。
+        /// </summary>
+        public static string ProductCode {
+            get {
+                return ResourceManager.GetString("ProductCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 产品管理 的本地化字符串。
+        /// </summary>
+        public static string ProductManagement {
+            get {
+                return ResourceManager.GetString("ProductManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 产品名称 的本地化字符串。
+        /// </summary>
+        public static string ProductName {
+            get {
+                return ResourceManager.GetString("ProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 记住密码 的本地化字符串。
         /// </summary>
         public static string RememberPassword {

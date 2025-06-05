@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Masuit.Tools.Systems;
+using NLog;
 using Prism.Regions;
 using SqlqTech.SharedView.Vo;
 using SqlSugar;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
+using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
@@ -25,10 +27,12 @@ namespace SqlqTech.SharedView.ViewModels
 
         private readonly IMapper mapper;
 
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         public MachineSettingViewModel(IMachineSettingService settingService,IMapper mapper, 
             NavigationService navigationService)
         {
-            Title = LocalizationService.GetString(AppLocalizations.MachineManagement); ;    
+            Title = LocalizationService.GetString(AppLocalizations.MachineManagement);    
             SettingService = settingService;
             this.mapper = mapper;
             NavigationService = navigationService;
@@ -56,18 +60,26 @@ namespace SqlqTech.SharedView.ViewModels
             {
                 await SetBusyAsync(async () =>
                 {
-                    foreach (var item in MachineSettingVos)
+                    try
                     {
-                        MachineModel model = default(MachineModel).GetValueByName(item.SelectedMachineType, true);
-                        item.MachineModel = (short)model;
-                        if (item.Id == 0)
+                        foreach (var item in MachineSettingVos)
                         {
-                            item.Id = SnowFlakeNew.LongId;
+                            MachineModel model = default(MachineModel).GetValueByName(item.SelectedMachineType, true);
+                            item.MachineModel = (short)model;
+                            if (item.Id == 0)
+                            {
+                                item.Id = SnowFlakeNew.LongId;
+                            }
                         }
+                        List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);
+                        await SettingService.SaveOrUpdateBatchAsync(list);
+                        SendSuccessMsg();
                     }
-                    List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);                
-                    await SettingService.SaveOrUpdateBatchAsync(list);
-                    SendSuccessMsg();
+                    catch (Exception ex)
+                    {
+                        SendErrorMsg();
+                        logger.ErrorHandler($"机器设置保存失败，失败原因:[{ex.Message}]");
+                    }
                 });           
             }
         }
@@ -101,8 +113,9 @@ namespace SqlqTech.SharedView.ViewModels
         public bool Valid()
         {
             if (MachineSettingVos==null|| MachineSettingVos.Count==0) return false;
-            if (MachineSettingVos.Any(o => o.SelectedMachineType == null)) return false;
+            if (MachineSettingVos.Any(o => o.SelectedMachineType == null)) return false;         
             if (MachineSettingVos.Any(o=>string.IsNullOrEmpty(o.PortName)||!o.PortName.Contains("."))) return false;
+            if(MachineSettingVos.GroupBy(o=>o.PortName).Any(g=>g.Count()>1)) return false;
             if (MachineSettingVos.Any(o => string.IsNullOrEmpty(o.Description))) return false;
             return true;
         }

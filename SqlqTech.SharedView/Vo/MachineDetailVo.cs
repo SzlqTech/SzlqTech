@@ -29,12 +29,6 @@ namespace SqlqTech.SharedView.Vo
 
 
         /// <summary>
-        /// 描述
-        /// </summary>
-        [ObservableProperty]
-        public string? description;
-
-        /// <summary>
         /// 数据类型
         /// </summary>
         [ObservableProperty]

@@ -56,7 +56,7 @@ namespace SzlqTech.Core.ViewModels
             try
             {
                 await func();
-            }
+            }       
             finally
             {
                 IsBusy = false;

@@ -2,9 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Prism.Events;
 using Prism.Regions;
-
 using System.Collections.ObjectModel;
-
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.Models;
@@ -14,7 +12,6 @@ using SzlqTech.Services.Sessions;
 using SzlqTech.Localization;
 using System.Globalization;
 using NLog;
-using SzlqTech.Common.Nlogs;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -104,6 +101,7 @@ namespace SzlqTech.ViewMdoels
                 new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
                 new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
                 new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
+                new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
 
             }));
             NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()

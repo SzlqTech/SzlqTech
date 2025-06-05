@@ -225,4 +225,16 @@
   <data name="Start" xml:space="preserve">
     <value>启动</value>
   </data>
+  <data name="Product" xml:space="preserve">
+    <value>产品</value>
+  </data>
+  <data name="ProductManagement" xml:space="preserve">
+    <value>产品管理</value>
+  </data>
+  <data name="ProductCode" xml:space="preserve">
+    <value>产品代码</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>产品名称</value>
+  </data>
 </root>

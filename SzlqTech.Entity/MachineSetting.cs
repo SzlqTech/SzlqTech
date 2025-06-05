@@ -36,8 +36,6 @@ namespace SzlqTech.Entity
         [SugarColumn(ColumnName = "port_name", ColumnDescription = "端口名称", Length = 50)]
         public string PortName { get; set; } = null!;
 
-        [Description("端口描述")]
-        [SugarColumn(ColumnName = "description", ColumnDescription = "端口描述", IsNullable = true)]
-        public string? Description { get; set; }
+      
     }
 }

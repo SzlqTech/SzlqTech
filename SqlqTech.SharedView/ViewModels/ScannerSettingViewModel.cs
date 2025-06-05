@@ -2,11 +2,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Masuit.Tools.Systems;
+using NLog;
 using Prism.Regions;
 using SqlqTech.SharedView.Vo;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
+using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
@@ -19,6 +21,7 @@ namespace SqlqTech.SharedView.ViewModels
     {
         private readonly IScannerSettingService scannerSettingService;
         private readonly IMapper mapper;
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public ScannerSettingViewModel(IScannerSettingService scannerSettingService,IMapper mapper)
         {
@@ -68,6 +71,7 @@ namespace SqlqTech.SharedView.ViewModels
                     catch (Exception ex)
                     {
                         SendErrorMsg();
+                        logger.ErrorHandler($"保存扫描设备失败,失败原因:[{ex.Message}]");
                     }
                     finally
                     {
@@ -80,7 +84,8 @@ namespace SqlqTech.SharedView.ViewModels
         public bool Valid()
         {
             if(ScannerSettingVos.Any(o=>string.IsNullOrEmpty(o.ScannerTypeName))) return false;
-            if(ScannerSettingVos.Any(o=>string.IsNullOrEmpty(o.PortKey)||!o.PortKey.Contains("."))) return false;     
+            if(ScannerSettingVos.Any(o=>string.IsNullOrEmpty(o.PortKey)||!o.PortKey.Contains("."))) return false;
+            if(ScannerSettingVos.GroupBy(o=>o.PortKey).Any(g=>g.Count()>1)) return false;
             return true;
         }
 

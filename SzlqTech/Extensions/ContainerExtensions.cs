@@ -22,6 +22,7 @@ namespace SzlqTech.Extensions
             container.Register<IMachineSettingRepository, MachineSettingRepository>();
             container.Register<IMachineDetailRepository, MachineDetailRepository>();
             container.Register<IScannerSettingRepository,ScannerSettingRepository>();
+            container.Register<IProductRepository, ProductRepository>();
         }
 
         public static void AddDbService(this IContainerRegistry container)
@@ -30,6 +31,7 @@ namespace SzlqTech.Extensions
             container.Register<IMachineSettingService, MachineSettingServiceImpl>();
             container.Register<IMachineDetailService,MachineDetailServiceImpl>();
             container.Register<IScannerSettingService, ScannerSettingServiceImpl>();
+            container.Register<IProductService, ProductServiceImpl>();
         } 
         #endregion
 

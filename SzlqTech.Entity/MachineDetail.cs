@@ -29,11 +29,7 @@ namespace SzlqTech.Entity
 
 
         /// <summary>
-        /// 描述
-        /// </summary>
-        [Description("描述")]
-        [SugarColumn(ColumnName = "description", ColumnDescription = "描述", IsNullable = true)]
-        public string? Description { get; set; }
+      
 
         /// <summary>
         /// 数据类型

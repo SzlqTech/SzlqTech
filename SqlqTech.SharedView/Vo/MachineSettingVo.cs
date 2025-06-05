@@ -17,8 +17,6 @@ namespace SqlqTech.SharedView.Vo
         [ObservableProperty]
         public string portName;
 
-        [ObservableProperty]
-        public string? description;
 
         [ObservableProperty]
         public string selectedMachineType;
