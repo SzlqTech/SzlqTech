@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SzlqTech.Entity;
 
-namespace SqlqTech.SharedView.Vo
+namespace SqlqTech.Core.Vo
 {
     public partial class ProductVo:BaseVo
     {

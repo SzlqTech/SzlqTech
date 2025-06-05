@@ -36,5 +36,7 @@ namespace SzlqTech.Core.Consts
         public const string ErrorMessageView = "ErrorMessageView";
 
         public const string ProductView = "ProductView";
+
+        public const string InnoLightDataRecordView = "InnoLightDataRecord";
     }
 }

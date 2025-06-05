@@ -5,8 +5,42 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SzlqTech.Core.WorkFlow.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="450"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     d:DesignWidth="800"
+    Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <TextBox
+                MinWidth="200"
+                MinHeight="35"
+                Margin="0,0,10,0"
+                md:HintAssist.Hint="{loc:Loc DataQueryHintText}" />
+            <Button MinWidth="100" Content="{loc:Loc DataQuery}" />
+        </StackPanel>
+        <DataGrid
+            Grid.Row="1"
+            Margin="5"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserSortColumns="False"
+            IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="产品条码" />
+                <DataGridTextColumn Width="*" Header="SN" />
+                <DataGridTextColumn Width="*" Header="入站时间" />
+                <DataGridTextColumn Width="*" Header="出站时间" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </UserControl>

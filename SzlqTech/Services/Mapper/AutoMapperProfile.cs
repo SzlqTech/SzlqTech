@@ -1,6 +1,7 @@
 ﻿
 
 using AutoMapper;
+using SqlqTech.Core.Vo;
 using SqlqTech.SharedView.Vo;
 using SzlqTech.Entity;
 

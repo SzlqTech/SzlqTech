@@ -58,7 +58,7 @@ namespace SzlqTech.Core.Consts
 
         public const string ProductManagement = "ProductManagement";
 
-
+        public const string DataQuery = "DataQuery";
 
         #endregion
 

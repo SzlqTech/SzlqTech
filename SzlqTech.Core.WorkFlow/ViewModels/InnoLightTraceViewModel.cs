@@ -1,13 +1,14 @@
-﻿using Bogus;
+﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Prism.Regions;
-using Prism.Services.Dialogs;
+using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.WorkFlow.Vos;
+using SzlqTech.Entity;
+using SzlqTech.IService;
 using SzlqTech.Localization;
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
@@ -15,15 +16,25 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
     public partial class InnoLightTraceViewModel:NavigationViewModel
     {
        private readonly IHostDialogService dialog;
+        private readonly IProductService productService;
+        private readonly IMapper mapper;
 
-        public InnoLightTraceViewModel(IHostDialogService dialog)
+        public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,IMapper mapper)
         {
             Title = LocalizationService.GetString(AppLocalizations.InnoLight);
             this.dialog = dialog;
+            this.productService = productService;
+            this.mapper = mapper;
         }
 
         [ObservableProperty]
         public ObservableCollection<MachineLinkVo> machineLinks;
+
+        [ObservableProperty]
+        public ObservableCollection<ProductVo> productVos;
+
+        [ObservableProperty]
+        public ProductVo selectedProductVo;
 
 
         #region OE Tray上料
@@ -48,7 +59,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         }
 
 
-        public override Task OnNavigatedToAsync(NavigationContext navigationContext = null)
+        public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
             MachineLinks = new ObservableCollection<MachineLinkVo>()
             {
@@ -63,8 +74,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 new MachineLinkVo(){Name="检测",IsLink=false},
                 new MachineLinkVo(){Name="烤盘上下料",IsLink=false},             
             };
+            ProductVos=new ObservableCollection<ProductVo>();
+            List<Product> products =await productService.ListAsync();
+            if(products != null && products.Count > 0)
+            {
+                List<ProductVo> productsVo = mapper.Map<List<ProductVo>>(products);
+                ProductVos.AddRange(productsVo);
+            }
             Init();
-            return Task.CompletedTask;
+            
         }
     }
 }

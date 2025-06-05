@@ -106,7 +106,9 @@ namespace SzlqTech.ViewMdoels
             }));
             NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
             {
-                new NavigationItem("light",LocalizationService.GetString(AppLocalizations.InnoLight),AppViews.InnoLight,"")
+                new NavigationItem("light",LocalizationService.GetString(AppLocalizations.InnoLight),AppViews.InnoLight,""),
+                new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+
             }));
 
         }

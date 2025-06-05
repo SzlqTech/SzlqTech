@@ -115,6 +115,24 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 数据查询 的本地化字符串。
+        /// </summary>
+        public static string DataQuery {
+            get {
+                return ResourceManager.GetString("DataQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请输入产品二维码 的本地化字符串。
+        /// </summary>
+        public static string DataQueryHintText {
+            get {
+                return ResourceManager.GetString("DataQueryHintText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除 的本地化字符串。
         /// </summary>
         public static string Delete {

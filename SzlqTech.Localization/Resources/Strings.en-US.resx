@@ -237,4 +237,10 @@
   <data name="ProductName" xml:space="preserve">
     <value>Product Name</value>
   </data>
+  <data name="DataQuery" xml:space="preserve">
+    <value>Data Query</value>
+  </data>
+  <data name="DataQueryHintText" xml:space="preserve">
+    <value>Please enter the product QR code</value>
+  </data>
 </root>

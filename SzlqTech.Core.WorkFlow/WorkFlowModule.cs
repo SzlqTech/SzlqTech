@@ -16,6 +16,7 @@ namespace SzlqTech.Core.WorkFlow
         public void RegisterTypes(IContainerRegistry service)
         {
             service.RegisterForNavigation<InnoLightTraceView, InnoLightTraceViewModel>();
+            service.RegisterForNavigation<InnoLightDataRecord, InnoLightDataRecordViewModel>();
         }
     }
 }

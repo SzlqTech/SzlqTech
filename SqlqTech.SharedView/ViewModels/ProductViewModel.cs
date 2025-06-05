@@ -5,7 +5,9 @@ using Masuit.Tools;
 using Masuit.Tools.Systems;
 using NLog;
 using Prism.Regions;
-using SqlqTech.SharedView.Vo;
+
+using SqlqTech.Core.Vo;
+
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using SzlqTech.Common.Nlogs;
@@ -40,7 +42,8 @@ namespace SqlqTech.SharedView.ViewModels
         [RelayCommand]
         public void Add()
         {
-            ProductVos.Add(new ProductVo() {  });
+            
+            ProductVos.Add(new ProductVo() { });
         }
 
         [RelayCommand]

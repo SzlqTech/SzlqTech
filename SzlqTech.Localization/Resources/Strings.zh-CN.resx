@@ -237,4 +237,10 @@
   <data name="ProductName" xml:space="preserve">
     <value>产品名称</value>
   </data>
+  <data name="DataQuery" xml:space="preserve">
+    <value>数据查询</value>
+  </data>
+  <data name="DataQueryHintText" xml:space="preserve">
+    <value>请输入产品二维码</value>
+  </data>
 </root>

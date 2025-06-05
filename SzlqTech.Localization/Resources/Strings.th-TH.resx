@@ -237,4 +237,10 @@
   <data name="ProductName" xml:space="preserve">
     <value>ชื่อผลิตภัณฑ์</value>
   </data>
+  <data name="DataQuery" xml:space="preserve">
+    <value>ค้นหาข้อมูล</value>
+  </data>
+  <data name="DataQueryHintText" xml:space="preserve">
+    <value>โปรดป้อนรหัสสินค้า</value>
+  </data>
 </root>
