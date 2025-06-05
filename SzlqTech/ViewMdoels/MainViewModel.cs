@@ -115,9 +115,7 @@ namespace SzlqTech.ViewMdoels
 
         public void Configure()
         {
-            InitConfig();
-            logger.InfoHandler("启动成功");
-            logger.ErrorHandler("启动失败");
+            InitConfig();       
         }
     }
 }

@@ -53,7 +53,8 @@ namespace SzlqTech
         protected override  void OnInitialized()
         {
             Initialization();
-            Configure();
+            //Configure();
+            InitNlog();
             var appStart = ContainerLocator.Container.Resolve<IAppStartService>();         
             appStart.CreateShell();
             var dialog = Container.Resolve<IDialogService>();
@@ -89,7 +90,7 @@ namespace SzlqTech
         {
             var config = new NLog.Config.LoggingConfiguration();
 
-            // Targets where to log to: File and Console
+            //Targets where to log to: File and Console
             string path = AppDomain.CurrentDomain.BaseDirectory + "\\" + "Log" + "\\" + DateTime.Now.ToString("yyyyMMdd");
             if (!Directory.Exists(path))
             {
@@ -105,6 +106,54 @@ namespace SzlqTech
             // Apply config
             NLog.LogManager.Configuration = config;
         }
+
+        private void InitNlog()
+        {
+            var config = new NLog.Config.LoggingConfiguration();
+
+            // 获取应用程序目录
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string logFolder = Path.Combine(basePath, "Log", DateTime.Now.ToString("yyyyMMdd"));
+
+            // 确保日志目录存在
+            if (!Directory.Exists(logFolder))
+            {
+                Directory.CreateDirectory(logFolder);
+            }
+
+            // 创建Info日志的目标文件
+            var infoLogFile = new NLog.Targets.FileTarget("infoLogFile")
+            {
+                FileName = Path.Combine(logFolder, "info_log.txt"),
+                // 只记录Info级别的日志
+                Layout = "${longdate} ${uppercase:${level}} ${message} ${exception:format=tostring}"
+            };
+
+            // 创建Error日志的目标文件
+            var errorLogFile = new NLog.Targets.FileTarget("errorLogFile")
+            {
+                FileName = Path.Combine(logFolder, "error_log.txt"),
+                // 记录Error及以上级别的日志
+                Layout = "${longdate} ${uppercase:${level}} ${message} ${exception:format=tostring}"
+            };
+
+            // 创建控制台目标
+            var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
+
+            // 添加规则：Info级别日志到info_log.txt
+            config.AddRule(LogLevel.Info, LogLevel.Info, infoLogFile);
+
+            // 添加规则：Error及以上级别日志到error_log.txt
+            config.AddRule(LogLevel.Error, LogLevel.Fatal, errorLogFile);
+
+            // 添加规则：Info及以上级别日志到控制台
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
+
+            // 应用配置
+            NLog.LogManager.Configuration = config;
+
+        }
+
 
         /// <summary>
         /// 注册事件
