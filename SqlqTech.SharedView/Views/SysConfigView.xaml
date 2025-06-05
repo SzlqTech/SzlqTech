@@ -23,7 +23,7 @@
                     VerticalAlignment="Center"
                     Text="{loc:Loc LangSelected}" />
                 <TextBlock VerticalAlignment="Center" Text=":" />
-                <ComboBox Width="100" SelectedIndex="{Binding LangIndex}">
+                <ComboBox Width="150" SelectedIndex="{Binding LangIndex}">
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <Image
@@ -67,6 +67,15 @@
 
                 </ComboBox>
             </StackPanel>
+
+            <StackPanel Margin="0,10,10,0" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">
+                    <Run Text="默认导航界面" />
+                    <Run Text=":" />
+                </TextBlock>
+                <ComboBox MinWidth="132" VerticalAlignment="Center"/>
+            </StackPanel>
+
 
             <Button
                 Margin="0,10,0,0"

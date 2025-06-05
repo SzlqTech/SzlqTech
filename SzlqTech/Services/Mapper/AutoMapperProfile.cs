@@ -3,6 +3,7 @@
 using AutoMapper;
 using SqlqTech.Core.Vo;
 using SqlqTech.SharedView.Vo;
+using SzlqTech.Core.Vos;
 using SzlqTech.Entity;
 
 namespace SzlqTech.Services.Mapper
@@ -17,6 +18,7 @@ namespace SzlqTech.Services.Mapper
                 .ReverseMap();
             CreateMap<ScannerSetting, ScannerSettingVo>().ReverseMap();
             CreateMap<Product,ProductVo>().ReverseMap();
+            CreateMap<QrCode,QrCodeVo>().ReverseMap();
         }
     }
 }
