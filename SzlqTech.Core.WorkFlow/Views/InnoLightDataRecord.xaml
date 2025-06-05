@@ -36,10 +36,11 @@
             CanUserSortColumns="False"
             IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="产品条码" />
+                <DataGridTextColumn Width="*" Header="{loc:Loc ProductQrCode}" />
                 <DataGridTextColumn Width="*" Header="SN" />
-                <DataGridTextColumn Width="*" Header="入站时间" />
-                <DataGridTextColumn Width="*" Header="出站时间" />
+                <DataGridTextColumn Width="*" Header="{loc:Loc StationName}" />
+                <DataGridTextColumn Width="*" Header="{loc:Loc EnterDate}" />
+                <DataGridTextColumn Width="*" Header="{loc:Loc LeaveDate}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

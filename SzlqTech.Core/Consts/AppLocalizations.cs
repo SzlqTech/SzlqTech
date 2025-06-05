@@ -60,6 +60,8 @@ namespace SzlqTech.Core.Consts
 
         public const string DataQuery = "DataQuery";
 
+        public const string DataCollection = "DataCollection";
+
         #endregion
 
         #region Message

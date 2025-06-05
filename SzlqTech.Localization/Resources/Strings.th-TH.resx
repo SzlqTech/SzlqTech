@@ -243,4 +243,22 @@
   <data name="DataQueryHintText" xml:space="preserve">
     <value>โปรดป้อนรหัสสินค้า</value>
   </data>
+  <data name="ProductQrCode" xml:space="preserve">
+    <value>ขนาดรองเท้าผลิตภัณฑ์</value>
+  </data>
+  <data name="EnterDate" xml:space="preserve">
+    <value>เวลาของสถานี</value>
+  </data>
+  <data name="LeaveDate" xml:space="preserve">
+    <value>เวลาออก</value>
+  </data>
+  <data name="Station" xml:space="preserve">
+    <value>สถานีงาน</value>
+  </data>
+  <data name="StationName" xml:space="preserve">
+    <value>ชื่อสถานีงาน</value>
+  </data>
+  <data name="DataCollection" xml:space="preserve">
+    <value>การเก็บข้อมูล</value>
+  </data>
 </root>

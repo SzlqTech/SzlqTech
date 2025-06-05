@@ -115,6 +115,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 数据采集 的本地化字符串。
+        /// </summary>
+        public static string DataCollection {
+            get {
+                return ResourceManager.GetString("DataCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 数据查询 的本地化字符串。
         /// </summary>
         public static string DataQuery {
@@ -187,6 +196,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 入站时间 的本地化字符串。
+        /// </summary>
+        public static string EnterDate {
+            get {
+                return ResourceManager.GetString("EnterDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 保存失败 的本地化字符串。
         /// </summary>
         public static string ErrorMsg {
@@ -219,6 +237,15 @@ namespace SzlqTech.Localization.Resources {
         public static string LangSelected {
             get {
                 return ResourceManager.GetString("LangSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 出站时间 的本地化字符串。
+        /// </summary>
+        public static string LeaveDate {
+            get {
+                return ResourceManager.GetString("LeaveDate", resourceCulture);
             }
         }
         
@@ -340,6 +367,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 产品二维码 的本地化字符串。
+        /// </summary>
+        public static string ProductQrCode {
+            get {
+                return ResourceManager.GetString("ProductQrCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 记住密码 的本地化字符串。
         /// </summary>
         public static string RememberPassword {
@@ -381,6 +417,24 @@ namespace SzlqTech.Localization.Resources {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 工站 的本地化字符串。
+        /// </summary>
+        public static string Station {
+            get {
+                return ResourceManager.GetString("Station", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 工站名称 的本地化字符串。
+        /// </summary>
+        public static string StationName {
+            get {
+                return ResourceManager.GetString("StationName", resourceCulture);
             }
         }
         

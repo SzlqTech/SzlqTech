@@ -223,4 +223,22 @@
   <data name="DataQueryHintText" xml:space="preserve">
     <value>请输入产品二维码</value>
   </data>
+  <data name="ProductQrCode" xml:space="preserve">
+    <value>产品二维码</value>
+  </data>
+  <data name="EnterDate" xml:space="preserve">
+    <value>入站时间</value>
+  </data>
+  <data name="LeaveDate" xml:space="preserve">
+    <value>出站时间</value>
+  </data>
+  <data name="Station" xml:space="preserve">
+    <value>工站</value>
+  </data>
+  <data name="StationName" xml:space="preserve">
+    <value>工站名称</value>
+  </data>
+  <data name="DataCollection" xml:space="preserve">
+    <value>数据采集</value>
+  </data>
 </root>

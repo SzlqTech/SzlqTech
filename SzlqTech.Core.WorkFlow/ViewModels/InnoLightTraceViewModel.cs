@@ -21,7 +21,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,IMapper mapper)
         {
-            Title = LocalizationService.GetString(AppLocalizations.InnoLight);
+            Title = LocalizationService.GetString(AppLocalizations.DataCollection);
             this.dialog = dialog;
             this.productService = productService;
             this.mapper = mapper;

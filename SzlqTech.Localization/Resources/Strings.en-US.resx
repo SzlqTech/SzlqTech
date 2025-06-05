@@ -243,4 +243,22 @@
   <data name="DataQueryHintText" xml:space="preserve">
     <value>Please enter the product QR code</value>
   </data>
+  <data name="ProductQrCode" xml:space="preserve">
+    <value>Product Qr Code</value>
+  </data>
+  <data name="EnterDate" xml:space="preserve">
+    <value>Entry Date</value>
+  </data>
+  <data name="LeaveDate" xml:space="preserve">
+    <value>Exit Date</value>
+  </data>
+  <data name="Station" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="StationName" xml:space="preserve">
+    <value>Station Name</value>
+  </data>
+  <data name="DataCollection" xml:space="preserve">
+    <value>Data Collection</value>
+  </data>
 </root>
