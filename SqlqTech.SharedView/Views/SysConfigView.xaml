@@ -69,10 +69,12 @@
             </StackPanel>
 
             <StackPanel Margin="0,10,10,0" Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center">
-                    <Run Text="默认导航界面" />
+                <!--<TextBlock VerticalAlignment="Center">
+                    <Run Text="{loc:Loc DefaultNavigateView}" />
                     <Run Text=":" />
-                </TextBlock>
+                </TextBlock>-->
+                <TextBlock Text="{loc:Loc DefaultNavigateView}" VerticalAlignment="Center"/>
+                <TextBlock Text=":" VerticalAlignment="Center" Margin="0 0 5 0"/>
                 <ComboBox
                     MinWidth="132"
                     VerticalAlignment="Center"

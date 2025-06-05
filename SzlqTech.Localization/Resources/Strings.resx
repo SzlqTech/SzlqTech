@@ -241,4 +241,7 @@
   <data name="DataCollection" xml:space="preserve">
     <value>数据采集</value>
   </data>
+  <data name="DefaultNavigateView" xml:space="preserve">
+    <value>默认导航页面</value>
+  </data>
 </root>

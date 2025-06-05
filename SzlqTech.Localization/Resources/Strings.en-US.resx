@@ -261,4 +261,7 @@
   <data name="DataCollection" xml:space="preserve">
     <value>Data Collection</value>
   </data>
+  <data name="DefaultNavigateView" xml:space="preserve">
+    <value>Default Navigation Page</value>
+  </data>
 </root>

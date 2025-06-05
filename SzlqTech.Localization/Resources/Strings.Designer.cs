@@ -142,6 +142,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 默认导航页面 的本地化字符串。
+        /// </summary>
+        public static string DefaultNavigateView {
+            get {
+                return ResourceManager.GetString("DefaultNavigateView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除 的本地化字符串。
         /// </summary>
         public static string Delete {

@@ -78,7 +78,7 @@ namespace SqlqTech.SharedView.ViewModels
             {
                 new NavigationView(){Value=AppViews.MachineSetting,Name=LocalizationService.GetString(AppLocalizations.MachineManagement)},
                 new NavigationView(){Value=AppViews.ScannerSetting,Name=LocalizationService.GetString(AppLocalizations.ScanManagement)},
-                new NavigationView(){Value=AppViews.SysConfig,Name=LocalizationService.GetString(AppLocalizations.ConfigManagement)},
+                new NavigationView(){Value=AppViews.SysConfig,Name=LocalizationService.GetString(AppLocalizations.SysConfig)},
                 new NavigationView(){Value=AppViews.ProductView,Name=LocalizationService.GetString(AppLocalizations.ProductManagement)},
                 new NavigationView(){Value=AppViews.InnoLight,Name=LocalizationService.GetString(AppLocalizations.DataCollection)},
                 new NavigationView(){Value=AppViews.InnoLightDataRecordView,Name=LocalizationService.GetString(AppLocalizations.DataQuery)},

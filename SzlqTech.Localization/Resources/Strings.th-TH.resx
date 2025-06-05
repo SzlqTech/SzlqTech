@@ -261,4 +261,7 @@
   <data name="DataCollection" xml:space="preserve">
     <value>การเก็บข้อมูล</value>
   </data>
+  <data name="DefaultNavigateView" xml:space="preserve">
+    <value>หน้านำทางปริยาย</value>
+  </data>
 </root>
