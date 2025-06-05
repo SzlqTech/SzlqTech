@@ -73,7 +73,13 @@
                     <Run Text="默认导航界面" />
                     <Run Text=":" />
                 </TextBlock>
-                <ComboBox MinWidth="132" VerticalAlignment="Center"/>
+                <ComboBox
+                    MinWidth="132"
+                    VerticalAlignment="Center"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding NavViews}"
+                    SelectedItem="{Binding SelectedNavView}"
+                    SelectedValuePath="Value" />
             </StackPanel>
 
 

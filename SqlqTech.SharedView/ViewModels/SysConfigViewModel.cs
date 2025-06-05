@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ImTools;
 using NLog;
 using Prism.Regions;
+using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Reflection.Metadata.Ecma335;
 using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
@@ -25,12 +28,19 @@ namespace SqlqTech.SharedView.ViewModels
         [ObservableProperty]
         public string currLangName;
 
+        [ObservableProperty]
+        public ObservableCollection<NavigationView> navViews;
+
+        [ObservableProperty]
+        public NavigationView selectedNavView;
+
         [RelayCommand]
         public void Save()
         {
             GetLangNameByIndex();
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["lang"].Value = CurrLangName;
+            config.AppSettings.Settings["View"].Value = SelectedNavView.Value;          
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
             SendSuccessMsg();
@@ -64,9 +74,28 @@ namespace SqlqTech.SharedView.ViewModels
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
             CurrLangName = ConfigurationManager.AppSettings["lang"]??"zh-CN";
+            NavViews = new ObservableCollection<NavigationView>()
+            {
+                new NavigationView(){Value=AppViews.MachineSetting,Name=LocalizationService.GetString(AppLocalizations.MachineManagement)},
+                new NavigationView(){Value=AppViews.ScannerSetting,Name=LocalizationService.GetString(AppLocalizations.ScanManagement)},
+                new NavigationView(){Value=AppViews.SysConfig,Name=LocalizationService.GetString(AppLocalizations.ConfigManagement)},
+                new NavigationView(){Value=AppViews.ProductView,Name=LocalizationService.GetString(AppLocalizations.ProductManagement)},
+                new NavigationView(){Value=AppViews.InnoLight,Name=LocalizationService.GetString(AppLocalizations.DataCollection)},
+                new NavigationView(){Value=AppViews.InnoLightDataRecordView,Name=LocalizationService.GetString(AppLocalizations.DataQuery)},
+            };
+            var viewName= ConfigurationManager.AppSettings["View"] ?? AppViews.InnoLight;
+            var view = NavViews.FindFirst(s=>s.Value==viewName);
+            SelectedNavView = view;
             GetLangIndex(CurrLangName);
             await Task.CompletedTask;
         }
 
+    }
+
+    public class NavigationView
+    {
+        public string Value { get; set; }
+
+        public string Name { get; set; }
     }
 }

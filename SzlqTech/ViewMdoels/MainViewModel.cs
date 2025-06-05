@@ -12,6 +12,9 @@ using SzlqTech.Services.Sessions;
 using SzlqTech.Localization;
 using System.Globalization;
 using NLog;
+using ImTools;
+using SqlSugar;
+using System.Configuration;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -96,6 +99,12 @@ namespace SzlqTech.ViewMdoels
         {
           
             NavigationItems = new ObservableCollection<NavigationItem>();
+            NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
+            {
+                new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
+                new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+
+            }));
             NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
             {
                 new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
@@ -104,18 +113,24 @@ namespace SzlqTech.ViewMdoels
                 new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
 
             }));
-            NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
-            {
-                new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
-                new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
-
-            }));
-
         }
 
         public void Configure()
         {
-            InitConfig();       
+            InitConfig();
+            var viewName = ConfigurationManager.AppSettings["View"] ;
+            if (viewName == null) return;
+            for (int i = 0;i< NavigationItems.Count;i++)
+            {
+                var items = NavigationItems[i].Items.FindFirst(s => s.PageViewName == viewName);
+                if (items != null)
+                {
+                    NavigationItems[i].IsExpanded = true;
+                    items.IsSelected = true;
+                    Navigate(items);
+                }
+            }
+          
         }
     }
 }

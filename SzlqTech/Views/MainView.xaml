@@ -94,6 +94,7 @@
                                 <ContentControl>
                                     <Expander
                                         Padding="0"
+                                        IsExpanded="{Binding IsExpanded}"
                                         md:ExpanderAssist.HorizontalHeaderPadding="0 10"
                                         Background="Transparent"
                                         Style="{DynamicResource MaterialDesignExpander}">

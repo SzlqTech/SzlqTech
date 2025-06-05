@@ -51,6 +51,8 @@ namespace SzlqTech.Core.Models
         /// </summary>
         public string RequiredPermissionName { get; set; }
 
+        public bool isExpanded;
+
         /// <summary>
         /// 导航菜单列表
         /// </summary>
@@ -64,6 +66,12 @@ namespace SzlqTech.Core.Models
         {
             get { return isSelected; }
             set { isSelected = value; RaisePropertyChanged(); }
+        }
+
+        public bool IsExpanded
+        {
+            get { return isExpanded; }
+            set { isExpanded = value; RaisePropertyChanged(); }
         }
     }
 }
