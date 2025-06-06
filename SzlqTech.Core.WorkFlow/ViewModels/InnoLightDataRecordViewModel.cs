@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Prism.Regions;
 using System.Collections.ObjectModel;
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Services.Datapage;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.Vos;
 using SzlqTech.Entity;
@@ -16,14 +17,21 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
     {
         private readonly IQrCodeService qrCodeService;
         private readonly IMapper mapper;
+        private readonly IDataPagerService dataPagerService;
 
-        public InnoLightDataRecordViewModel(IQrCodeService qrCodeService,IMapper mapper)
+        public InnoLightDataRecordViewModel(IQrCodeService qrCodeService,IMapper mapper,IDataPagerService dataPagerService)
         {
             Title = LocalizationService.GetString(AppLocalizations.DataQuery);
             this.qrCodeService = qrCodeService;
             this.mapper = mapper;
+            this.dataPagerService = dataPagerService;
+            dataPagerService.OnPageIndexChangedEventhandler += DataPagerService_OnPageIndexChangedEventhandler;
         }
 
+        private void DataPagerService_OnPageIndexChangedEventhandler(object sender, PageIndexChangedEventArgs e)
+        {
+           
+        }
 
         [ObservableProperty]
         public ObservableCollection<QrCodeVo> qrCodes;

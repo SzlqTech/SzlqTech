@@ -9,6 +9,11 @@ namespace SzlqTech.Core.Consts
         public static int DefaultPageSize = 20;
 
         /// <summary>
+        /// 最大页大小
+        /// </summary>
+        public const int MaxPageSize = 1000;
+
+        /// <summary>
         /// 默认的查找等待时间
         /// </summary>
         public static int DefaultSearchDelayMilliseconds = 1000;
