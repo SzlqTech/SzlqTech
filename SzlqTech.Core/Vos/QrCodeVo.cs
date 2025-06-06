@@ -45,5 +45,11 @@ namespace SzlqTech.Core.Vos
         /// </summary>
         [ObservableProperty]
         public string leaveDate;
+
+        /// <summary>
+        /// 检测结果
+        /// </summary>
+        [ObservableProperty]
+        public bool res;
     }
 }

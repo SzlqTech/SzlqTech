@@ -1,19 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Prism.Regions;
+using System.Collections.ObjectModel;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
+using SzlqTech.Core.Vos;
+using SzlqTech.Entity;
+using SzlqTech.IService;
 using SzlqTech.Localization;
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
 {
-    public class InnoLightDataRecordViewModel: NavigationViewModel
+    public partial class InnoLightDataRecordViewModel: NavigationViewModel
     {
-        public InnoLightDataRecordViewModel()
+        private readonly IQrCodeService qrCodeService;
+        private readonly IMapper mapper;
+
+        public InnoLightDataRecordViewModel(IQrCodeService qrCodeService,IMapper mapper)
         {
             Title = LocalizationService.GetString(AppLocalizations.DataQuery);
+            this.qrCodeService = qrCodeService;
+            this.mapper = mapper;
+        }
+
+
+        [ObservableProperty]
+        public ObservableCollection<QrCodeVo> qrCodes;
+      
+
+        [RelayCommand]
+        public void Search(string str)
+        {
+            var codes= QrCodes.ToList().FindAll(o=>o.Code==str);
+            if (codes == null) return;
+            QrCodes.Clear();
+            QrCodes.AddRange(codes);
+        }
+
+
+        public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
+        {
+            QrCodes = new ObservableCollection<QrCodeVo>();
+            List<QrCode> qrCodes =await qrCodeService.ListAsync();
+            if (qrCodes == null || qrCodes.Count == 0) return;
+            List<QrCodeVo> vos=mapper.Map<List<QrCodeVo>>(qrCodes);
+            QrCodes.AddRange(vos);
         }
     }
 }
