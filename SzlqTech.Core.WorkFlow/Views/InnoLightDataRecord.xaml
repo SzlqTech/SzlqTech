@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="450"
+    xmlns:controls="clr-namespace:SzlqTech.Core.Themes.Controls;assembly=SzlqTech.Core"
     d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
@@ -15,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <StackPanel
             Margin="10"
@@ -55,5 +57,6 @@
                 <DataGridTextColumn Width="*" Header="{loc:Loc LeaveDate}" />
             </DataGrid.Columns>
         </DataGrid>
+        <controls:DataPager Grid.Row="2"/>
     </Grid>
 </UserControl>

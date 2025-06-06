@@ -2,6 +2,7 @@
 using Prism.Modularity;
 using SzlqTech.Core.Account.ViewModels;
 using SzlqTech.Core.Account.Views;
+using SzlqTech.Core.Services.Datapage;
 
 
 namespace SzlqTech.Core
@@ -17,6 +18,7 @@ namespace SzlqTech.Core
         {
             containerRegistry.RegisterForNavigation<InfoMessageView, InfoMessageViewModel>();
             containerRegistry.RegisterForNavigation<ErrorMessageView, ErrorMessageViewModel>();
+            containerRegistry.Register<IDataPagerService, DataPagerService>();
         }
     }
 }
