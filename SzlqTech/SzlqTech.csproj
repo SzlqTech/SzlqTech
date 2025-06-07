@@ -68,6 +68,7 @@
 	  <ProjectReference Include="..\SzlqTech.Core.WorkFlow\SzlqTech.Core.WorkFlow.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Core\SzlqTech.Core.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Localization\SzlqTech.Localization.csproj" />
+	  <ProjectReference Include="..\SzlqTech.Permission\SzlqTech.Permission.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Repository\SzlqTech.Repository.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Service\SzlqTech.Service.csproj" />
 	</ItemGroup>

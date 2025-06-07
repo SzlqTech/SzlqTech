@@ -2,5 +2,9 @@
     <ResourceDictionary.MergedDictionaries>
 
         <ResourceDictionary Source="pack://application:,,,/SzlqTech.Core;component/Themes/DataPager.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SzlqTech.Core;component/Themes/ButtonStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SzlqTech.Core;component/Themes/DataGridStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SzlqTech.Core;component/Themes/TextBlockStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SzlqTech.Core;component/Themes/TextBoxStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

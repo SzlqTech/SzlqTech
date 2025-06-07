@@ -98,6 +98,7 @@ namespace SzlqTech.ViewMdoels
         public void InitConfig()
         {
           
+
             NavigationItems = new ObservableCollection<NavigationItem>();
             NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
             {
@@ -111,7 +112,7 @@ namespace SzlqTech.ViewMdoels
                 new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
                 new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
                 new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
-
+                
             }));
         }
 

@@ -13,6 +13,7 @@ using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Core.WorkFlow;
 using SzlqTech.Extensions;
+using SzlqTech.Permission;
 using SzlqTech.Services.Sessions;
 using SzlqTech.ViewMdoels;
 using SzlqTech.Views;
@@ -48,6 +49,7 @@ namespace SzlqTech
             moduleCatalog.AddModule<SharedViewModules>();
             moduleCatalog.AddModule<WorkFlowModule>();
             moduleCatalog.AddModule<SzlqTechCoreModule>();
+            moduleCatalog.AddModule<PermissionModule>();
         }
 
         protected override  void OnInitialized()
