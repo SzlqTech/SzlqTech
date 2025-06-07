@@ -11,5 +11,29 @@ namespace SzlqTech.Service
         public SysUserServiceImpl(ISysUserRepository baseRepository) : base(baseRepository)
         {
         }
+        public List<SysUser> ListByCondition(string? code = null, string? name = null)
+        {
+            return BaseRepository.SelectListByCondition(code, name);
+        }
+
+        public bool UpdatePasswordByUsername(string username, string password)
+        {
+            return SqlHelper.RetBool(BaseRepository.UpdatePasswordByUsername(username, password));
+        }
+
+        public List<SysUser> ListEnable()
+        {
+            return BaseRepository.SelectListEnable();
+        }
+
+        public List<SysUser> ListExceptRoot()
+        {
+            return BaseRepository.SelectListExceptRoot();
+        }
+
+        public SysUser ListByUsername(string username)
+        {
+            return BaseRepository.SelectFirstByUsername(username);
+        }
     }
 }
