@@ -21,6 +21,11 @@ namespace SzlqTech.Common.Views
         {
         }
 
+        public ViewAttribute(string text,string title, string parent, string Icon)
+           : this(text,title, EntryType.Menu, parent, parent, 0, Icon, null, true)
+        {
+        }
+
         public ViewAttribute(string text, string parent, string Icon)
             : this(text, EntryType.Menu, parent, parent, 0, Icon, null, true)
         {
@@ -78,7 +83,29 @@ namespace SzlqTech.Common.Views
             this.Status = status;
         }
 
+        public ViewAttribute(string title,string text, EntryType entryType, string? parent, string? root, int ordinal,
+            string? description, string? toolTip, bool status)
+        {
+            this.Text = text;
+            this.Title = title;
+            this.EntryType = entryType;
+            this.Parent = parent;
+            this.Root = root;
+            this.Ordinal = ordinal;
+            this.Description = description;
+            this.ToolTip = toolTip;
+            this.Status = status;
+        }
+
+        /// <summary>
+        /// 导航页面
+        /// </summary>
         public string Text { get; }
+
+        /// <summary>
+        /// 标题名称
+        /// </summary>
+        public string Title { get; set; }
 
         public string? TextEN { get; set; }
 

@@ -23,6 +23,11 @@ namespace SzlqTech.Core.Models
             Items = items;
         }
 
+        public NavigationItem(string title)
+        {
+            Title = title;
+        }
+
         private bool isSelected;
         private ObservableCollection<NavigationItem> items;
 

@@ -28,8 +28,11 @@ namespace SzlqTech.Entity
         /// 标题
         /// </summary>
      
-        [SugarColumn(ColumnName = "text", IsNullable = true, ColumnDescription = "标题")]
+        [SugarColumn(ColumnName = "text", IsNullable = true, ColumnDescription = "导航页面")]
         public string? Text { set; get; }
+
+        [SugarColumn(ColumnName = "title", IsNullable = true, ColumnDescription = "标题")]
+        public string? Title { set; get; }
 
         [SugarColumn(ColumnName = "text_en", IsNullable = true, ColumnDescription = "英文标题")]
         public string? TextEN { get; set; }
@@ -101,11 +104,14 @@ namespace SzlqTech.Entity
         [SugarColumn(ColumnName = "icon", ColumnDescription = "图标", IsNullable = true)]
         public string? Icon { get; set; }
 
+        [SugarColumn(ColumnName = "role_id", ColumnDescription = "角色Id", IsNullable = true)]
+        public long RoleId { get; set; }
+
 
         // [SugarColumn(ColumnName = "icon")]
         // public byte[]? Icon { get; set; }
 
-      
+
         [SugarColumn(IsIgnore = true)]
         public string? ParentText { get; set; }
 

@@ -12,12 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Common.Views;
+using SzlqTech.Core.Consts;
 
 namespace SqlqTech.SharedView.Views
 {
     /// <summary>
     /// ProductView.xaml 的交互逻辑
     /// </summary>
+    [View(AppViews.ProductView, AppLocalizations.ProductManagement, AppLocalizations.ConfigManagement, "product", Ordinal = 0)]
     public partial class ProductView : UserControl
     {
         public ProductView()

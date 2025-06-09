@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Ioc;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
@@ -78,7 +79,7 @@ namespace SzlqTech.Permission.ViewModels
 
         [RelayCommand]
 
-        private void Save()
+        private async Task Save()
         {
             List<SysRoleMenuVo> list = new List<SysRoleMenuVo>();
             SysRole sysRole = sysRoleService.GetByCode(CurrSysRole.Code);
@@ -86,58 +87,33 @@ namespace SzlqTech.Permission.ViewModels
             {
                 SendMessage("未查询到当前用户");
                 return;
-            }
+            }     
+            List< SysMenu> menuList= new List<SysMenu>();
             foreach (var menu in MenuNodes)
             {
-                if (menu.IsSelected)
+                var parentNode= sysMenuService.GetFirstOrDefault(s => s.Text == menu.Title);
+                if (parentNode == null)
                 {
-                    SysMenu rootMenu = sysMenuService.GetFirstOrDefault(s => s.Text == menu.Title);
-                    if (rootMenu == null)
-                    {
-                        break;
-                    }
-                    SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo()
-                    {
-
-                        Id = SnowFlake.NewLongId,
-                        RoleId = sysRole.Id,
-                        MenuId = rootMenu.Id,
-                        Status = 1,
-                        CreateTime = DateTime.Now,
-                        UpdateTime = DateTime.Now,
-                    };
-                    list.Add(sysRoleMenuVo);
+                    break;
                 }
-                foreach (var menuItem in menu.MenuNodeItems)
+                parentNode.RoleId=sysRole.Id;
+                foreach (var node in menu.MenuNodeItems)
                 {
-                    if (menuItem.IsSelected)
+                    if (node.IsSelected)
                     {
-                        SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo()
-                        {
-                            Id = SnowFlake.NewLongId,
-                            RoleId = sysRole.Id,
-                            MenuId = menuItem.Id,
-                            Status = 1,
-                            CreateTime = DateTime.Now,
-                            UpdateTime = DateTime.Now,
-                        };
-                        list.Add(sysRoleMenuVo);
+                        SysMenu sysMenu = sysMenuService.GetFirstOrDefault(s => s.Text == node.Text);
+                        sysMenu.RoleId = sysRole.Id;
+                        menuList.Add(sysMenu);
                     }
-                }
+                    else
+                    {
+                        SysMenu sysMenu = sysMenuService.GetFirstOrDefault(s => s.Text == node.Text);
+                        sysMenu.RoleId = 0;
+                        menuList.Add(sysMenu);
+                    }
+                } 
             }
-            if (list.Count > 0)
-            {
-                List<SysRoleMenu> roleMenus = mapper.Map<List<SysRoleMenu>>(list);
-                if (roleMenus != null)
-                {
-                    foreach (var roleMenu in roleMenus)
-                    {
-                        //删除重复的roleId绑定数据
-                        sysRoleMenuService.Remove(s => s.RoleId == roleMenu.RoleId);
-                    }
-                    sysRoleMenuService.Save(roleMenus);
-                }
-            }
+            await sysMenuService.SaveOrUpdateBatchAsync(menuList);   
             SendMessage("菜单权限分配成功");
         }
 

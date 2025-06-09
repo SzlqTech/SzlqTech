@@ -15,6 +15,10 @@ using NLog;
 using ImTools;
 using SqlSugar;
 using System.Configuration;
+using SzlqTech.IService;
+using System.Windows.Forms;
+using SzlqTech.Entity;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -22,16 +26,29 @@ namespace SzlqTech.ViewMdoels
     {
         private readonly IRegionManager regionManager;
         private readonly IEventAggregator aggregator;
+        private readonly ISysMenuService sysMenuService;
+        private readonly ISysUserService sysUserService;
+        private readonly ISysUserDetailService sysUserDetailService;
+        private readonly ISysRoleService sysRoleService;
+        private readonly ISysRoleMenuService sysRoleMenuService;
 
         public NavigationService NavigationService { get; set; }
 
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public MainViewModel(IRegionManager regionManager, NavigationService navigationService,IEventAggregator aggregator)
+        public MainViewModel(IRegionManager regionManager, NavigationService navigationService,IEventAggregator aggregator,
+            ISysMenuService sysMenuService,
+            ISysUserService sysUserService, ISysUserDetailService sysUserDetailService,
+            ISysRoleService sysRoleService, ISysRoleMenuService sysRoleMenuService)
         {
             this.regionManager = regionManager;
             NavigationService = navigationService;
             this.aggregator = aggregator;
+            this.sysMenuService = sysMenuService;
+            this.sysUserService = sysUserService;
+            this.sysUserDetailService = sysUserDetailService;
+            this.sysRoleService = sysRoleService;
+            this.sysRoleMenuService = sysRoleMenuService;
             aggregator.ResgiterBusyAsyncMessage(arg =>
             {
                 IsOpen = arg.IsOpen;
@@ -112,39 +129,64 @@ namespace SzlqTech.ViewMdoels
             }
             else
             {
-                NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
-                {
-                    new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
-                    new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+                //NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
+                //{
+                //    new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
+                //    new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
 
-                }));
-                NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
-                {
-                    new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
-                    new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
-                    new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
-                    new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
+                //}));
+                //NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
+                //{
+                //    new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
+                //    new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
+                //    new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
+                //    new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
 
-                }));
+                //}));
+
+                LoadNavigationItems();
             }
 
+        }
 
-            //NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
-            //    {
-            //        new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
-            //        new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+        public void LoadNavigationItems()
+        {
+           
+            //根据用户名获取角色
+            var user=sysUserService.GetFirstOrDefault(s=>s.Username== AppCurrContext.UserName);
+            if (user == null)
+            {
+                return;
+            }
+            var role = sysRoleService.GetFirstOrDefault(s=>s.Id==user.RoleId);
+            if (role == null)
+            {
+                return;
+            }         
+            //根据Role-Menu获取Menu的菜单
+            
+            var menuList= sysMenuService.List(s=>s.RoleId == role.Id);
+           
 
-            //    }));
-            //NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
-            //    {
-            //        new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
-            //        new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
-            //        new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
-            //        new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
+            List<SysMenu> parentMenu = menuList.FindAll(s=>s.EntryType==0);
+            foreach (var menu in parentMenu)
+            {
+                //主节点
+                //根据主节点查询子节点
+                List<SysMenu> childrenMenus = menuList.FindAll(s => s.EntryType != 0 && s.ParentId == menu.Id);
+                if (childrenMenus == null || childrenMenus.Count == 0) return;
+                NavigationItem treeNodes = new NavigationItem(menu.Text);
+                List<NavigationItem> treeNodeList = new List<NavigationItem>();
+                foreach (var child in childrenMenus)
+                {               
+                    NavigationItem nodeItem = new NavigationItem(child.Icon, LocalizationService.GetString(child.Text), child.View, "");
+                    treeNodeList.Add(nodeItem);
+                }
 
-            //    }));
-
-
+                ObservableCollection<NavigationItem> navigationItems = new ObservableCollection<NavigationItem>();
+                navigationItems.AddRange(treeNodeList);
+                NavigationItems.Add(new NavigationItem("", menu.Text, "", "", navigationItems));
+            }
         }
 
         public void Configure()

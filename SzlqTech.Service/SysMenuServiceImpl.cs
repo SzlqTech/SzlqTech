@@ -46,6 +46,7 @@ namespace SzlqTech.Service
                 string rootText = viewAttribute.Root;
                 string rootENText = viewAttribute.RootEN;
                 string rootZHText = viewAttribute.RootZH;
+                
 
                 if (string.IsNullOrEmpty(parentText) || string.IsNullOrEmpty(rootText))
                 {
@@ -56,6 +57,7 @@ namespace SzlqTech.Service
                 {
                     Id = SnowFlake.NewLongId,
                     Text = viewAttribute.Text,
+                    Title = viewAttribute.Title,
                     TextEN = viewAttribute.TextEN,
                     TextZH = viewAttribute.TextZH,
                     EntryType = viewAttribute.EntryType,
@@ -84,6 +86,7 @@ namespace SzlqTech.Service
                         Id = SnowFlake.NewLongId,
                         EntryType = EntryType.Catalog,
                         Text = parentText,
+                        Title = parentText,
                         TextEN = parentENText,
                         TextZH = parentZHText,
                         Ordinal = 0,
@@ -112,7 +115,7 @@ namespace SzlqTech.Service
 
                 sysMenus.Add(sysMenu);
 
-                // PropertyInfo[] properties = viewType.GetProperties(BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public);
+                PropertyInfo[] properties = viewType.GetProperties(BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public);
                 MethodInfo[] methodInfos = viewType.GetMethods(BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public);
 
                 foreach (MethodInfo methodInfo in methodInfos)
@@ -127,6 +130,7 @@ namespace SzlqTech.Service
                             ParentId = sysMenu.Id,
                             RootId = sysMenu.RootId,
                             Text = funcAttribute.Text,
+
                             TextEN = funcAttribute.TextEN,
                             TextZH = funcAttribute.TextZH,
                             EntryType = funcAttribute.EntryType,
@@ -139,7 +143,7 @@ namespace SzlqTech.Service
                             CreateTime = DateTime.Now,
                             CreateUser = UserContext.UserId,
                             Remark = funcAttribute.Description,
-                            
+
                         };
 
                         sysMenus.Add(funcMenu);

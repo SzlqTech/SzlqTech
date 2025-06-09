@@ -90,10 +90,10 @@
                                     Command="{Binding DataContext.IsSelectedCommand, RelativeSource={RelativeSource AncestorType=TreeView, Mode=FindAncestor}}"
                                     CommandParameter="{Binding}"
                                     IsChecked="{Binding IsSelected}" />
-                                <md:PackIcon
+                                <!--<md:PackIcon
                                     Margin="5,0,5,0"
                                     VerticalAlignment="Center"
-                                    Kind="{Binding Icon}" />
+                                    Kind="{Binding Icon}" />-->
                                 <TextBlock
                                     Margin="3,2"
                                     Style="{StaticResource NavigateTextBlock}"

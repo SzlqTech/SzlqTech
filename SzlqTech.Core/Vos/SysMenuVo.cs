@@ -10,6 +10,9 @@ namespace SzlqTech.Core.Vos
         private string text;
 
         [ObservableProperty]
+        private string title;
+
+        [ObservableProperty]
         private string view;
 
 
@@ -52,7 +55,11 @@ namespace SzlqTech.Core.Vos
         [ObservableProperty]
         private int ordinal;
 
-       
+        [ObservableProperty]
+        public long roleId;
+
+
+
 
     }
 }

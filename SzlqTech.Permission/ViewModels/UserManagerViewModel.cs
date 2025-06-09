@@ -54,7 +54,8 @@ namespace SzlqTech.Permission.ViewModels
                     {
                         item.Id = SnowFlake.NewLongId;
                         item.PassWord = HashHelper.CreateMD5(item.DisPlayPassword);
-                        item.RoleId = item.SelectedRoleVo.Id;              
+                        item.RoleId = item.SelectedRoleVo.Id;      
+                        
                     }
                 }
                 List<SysUser> sysUsers = mapper.Map<List<SysUser>>(UserVos);

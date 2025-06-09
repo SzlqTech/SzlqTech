@@ -8,17 +8,16 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using SzlqTech.Common.EnumType;
+using SzlqTech.Common.Views;
+using SzlqTech.Core.Consts;
 
 namespace SqlqTech.SharedView.Views
 {
     /// <summary>
     /// MachineSettingView.xaml 的交互逻辑
     /// </summary>
+    [View(AppViews.MachineSetting, AppLocalizations.MachineManagement, AppLocalizations.ConfigManagement, "plc", Ordinal = 0)]
     public partial class MachineSettingView : UserControl
     {
         public MachineSettingView()
