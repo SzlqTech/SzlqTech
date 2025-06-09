@@ -273,4 +273,7 @@
   <data name="MenuImport" xml:space="preserve">
     <value>Menu Import</value>
   </data>
+  <data name="MenuAssign" xml:space="preserve">
+    <value>Menu Assign</value>
+  </data>
 </root>

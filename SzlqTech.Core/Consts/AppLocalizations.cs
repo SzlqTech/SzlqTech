@@ -70,6 +70,8 @@ namespace SzlqTech.Core.Consts
 
         public const string MenuImport = "MenuImport";
 
+        public const string MenuAssign = "MenuAssign";
+
         #endregion
 
         #region Message

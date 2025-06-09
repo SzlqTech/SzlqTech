@@ -22,6 +22,7 @@ namespace SzlqTech.Services.Mapper
             CreateMap<SysUser,SysUserVo>().ReverseMap();
             CreateMap<SysRole, SysRoleVo>().ReverseMap();
             CreateMap<SysMenu, SysMenuVo>().ReverseMap();
+            CreateMap<SysRoleMenuVo, SysRoleMenu>().ReverseMap();
         }
     }
 }

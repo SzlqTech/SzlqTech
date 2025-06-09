@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NPOI.SS.Formula.Functions;
 using Prism.Regions;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.Vos;
 using SzlqTech.Entity;
@@ -18,16 +20,20 @@ namespace SzlqTech.Permission.ViewModels
 
         private readonly IMapper mapper; 
         private readonly ISysRoleService sysRoleService;
+        public NavigationService NavigationService { get; }
 
-        public RoleManagerViewModel(IMapper mapper, ISysRoleService sysRoleService)
+        public RoleManagerViewModel(IMapper mapper, ISysRoleService sysRoleService, NavigationService navigationService)
         {
             Title=  LocalizationService.GetString(AppLocalizations.RoleManager);
             this.mapper = mapper;    
             this.sysRoleService = sysRoleService;
+            NavigationService = navigationService;
         }
 
         [ObservableProperty]
         public ObservableCollection<SysRoleVo> roleVos;
+
+       
 
         [RelayCommand]
         public void Add()
@@ -65,6 +71,14 @@ namespace SzlqTech.Permission.ViewModels
                 }
             }
             RoleVos.Remove(sysRoleVo);
+        }
+
+        [RelayCommand]
+        public void MenuAssign(SysRoleVo sysRoleVo)
+        {
+            NavigationParameters para=new NavigationParameters();
+            para.Add(AppSharedConsts.Parameter, sysRoleVo);
+            NavigationService.Navigate(AppViews.MenuAssignView,para);
         }
 
         public bool Valid()

@@ -4,10 +4,12 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using Prism.Ioc;
 using System.Collections.ObjectModel;
+using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.Vos;
 using SzlqTech.Entity;
 using SzlqTech.IService;
+using SzlqTech.Localization;
 
 namespace SzlqTech.Permission.ViewModels
 {
@@ -19,7 +21,7 @@ namespace SzlqTech.Permission.ViewModels
 
         public MenuImportViewModel(IContainerProvider provider, ISysMenuService sysMenuService, IMapper mapper) 
         {
-           
+            Title = LocalizationService.GetString(AppLocalizations.MenuImport);
             this.sysMenuService = sysMenuService;
             this.mapper = mapper;
             ImportMenus = new ObservableCollection<SysMenuVo>();
