@@ -18,10 +18,13 @@ namespace SzlqTech.Entity
         [SugarColumn(ColumnName = "password", Length = 50, ColumnDescription = "密码")]
         public string Password { get; set; } = null!;
 
+        // public string disPlayPassword;
+        [SugarColumn(ColumnName = "display_password", Length = 50, ColumnDescription = "显示密码")]
+        public string DisPlayPassword { get; set; } = null!;
         /// <summary>
         /// 姓名
         /// </summary>
-       
+
         [SugarColumn(ColumnName = "person_name", Length = 50, IsNullable = true, ColumnDescription = "姓名")]
         public string? PersonName { get; set; }
 

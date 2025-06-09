@@ -38,5 +38,9 @@ namespace SzlqTech.Core.Consts
         public const string ProductView = "ProductView";
 
         public const string InnoLightDataRecordView = "InnoLightDataRecord";
+
+        public const string UserManagerView= "UserManagerView";
+
+        public const string RoleManagerView = "RoleManagerView";
     }
 }

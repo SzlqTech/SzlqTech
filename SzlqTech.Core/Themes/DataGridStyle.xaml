@@ -10,7 +10,14 @@
         <Setter Property="Margin" Value="10,5" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="CanUserAddRows" Value="False" />
-        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="FontSize" Value="14" />
     </Style>
+
+    <Style x:Key="TextBlockCenter"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
+        
+    </Style>
+
 </ResourceDictionary>

@@ -27,7 +27,7 @@
                         md:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource baseTextBox}" />
                 </StackPanel>
-                <StackPanel Margin="30,10" Orientation="Horizontal">
+                <!--<StackPanel Margin="30,10" Orientation="Horizontal">
                     <Button
                         Command="{Binding ExcuteCommand}"
                         CommandParameter="Search"
@@ -43,7 +43,8 @@
                         </Button.Content>
                     </Button>
 
-                    <Button
+                -->
+                <!--<Button
                         Command="{Binding ExcuteCommand}"
                         CommandParameter="Clear"
                         Style="{StaticResource lightButton}">
@@ -56,31 +57,16 @@
                                 <TextBlock Text="清空" />
                             </StackPanel>
                         </Button.Content>
-                    </Button>
-                </StackPanel>
+                    </Button>-->
+                <!--
+                </StackPanel>-->
             </StackPanel>
             <StackPanel
                 Margin="0,10"
                 DockPanel.Dock="Top"
                 Orientation="Horizontal">
-                <Button
-                    Command="{Binding ExcuteCommand}"
-                    CommandParameter="DataLoad"
-                    Style="{StaticResource darkButton}">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center"
-                                Kind="Refresh" />
-                            <TextBlock Text="刷新" />
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
-                <Button
-                    Command="{Binding ExcuteCommand}"
-                    CommandParameter="New"
-                    Style="{StaticResource darkButton}">
+
+                <Button Command="{Binding AddCommand}" Style="{StaticResource darkButton}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon
@@ -92,18 +78,18 @@
                     </Button.Content>
                 </Button>
 
-                <Button Style="{StaticResource darkButton}">
+                <Button Command="{Binding SaveCommand}" Style="{StaticResource darkButton}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
-                                Kind="ClearBox" />
-                            <TextBlock Text="删除" />
+                                Kind="ContentSave" />
+                            <TextBlock Text="保存" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button
+                <!--<Button
                     Command="{Binding ExcuteCommand}"
                     CommandParameter="MenuAssign"
                     Style="{StaticResource darkButton}">
@@ -116,61 +102,35 @@
                             <TextBlock Text="菜单分配" />
                         </StackPanel>
                     </Button.Content>
-                </Button>
-                <Button
-                    Command="{Binding ExcuteCommand}"
-                    CommandParameter="TableManager"
-                    Style="{StaticResource darkButton}">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center"
-                                Kind="Table" />
-                            <TextBlock Text="表格配置" />
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
+                </Button>-->
             </StackPanel>
-            <DataGrid
-                ItemsSource="{Binding Roles}"
-                SelectedItem="{Binding SelectedRole}"
-                Style="{StaticResource baseDataGrid}">
+            <DataGrid ItemsSource="{Binding RoleVos}" Style="{StaticResource baseDataGrid}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Code}"
                         Header="角色代码">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
+                       
                     </DataGridTextColumn>
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Name}"
                         Header="角色名称">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     <DataGridTemplateColumn Width="*" Header="操作">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Margin="10,0,10,0"
-                                            Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid, Mode=FindAncestor}}"
-                                            CommandParameter="{Binding}"
-                                            Content="编辑" />
-                                        <Button
+                                        <!--<Button
                                             Margin="10,0,10,0"
                                             Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid, Mode=FindAncestor}}"
+                                            CommandParameter="{Binding}"
+                                            Content="删除" />-->
+                                        <Button
+                                            Margin="0,0,5,0"
+                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.DetailCommand}"
                                             CommandParameter="{Binding}"
                                             Content="删除" />
                                     </StackPanel>

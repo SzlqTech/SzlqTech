@@ -1,6 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style x:Key="baseButton" TargetType="Button">
         <Setter Property="Width" Value="120" />
         <Setter Property="Margin" Value="10" />
@@ -8,9 +9,9 @@
     </Style>
 
     <Style
-    x:Key="lightButton"
-    BasedOn="{StaticResource MaterialDesignFlatLightBgButton}"
-    TargetType="Button">
+        x:Key="lightButton"
+        BasedOn="{StaticResource MaterialDesignFlatLightBgButton}"
+        TargetType="Button">
         <Setter Property="Width" Value="120" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="10" />
@@ -20,9 +21,9 @@
     </Style>
 
     <Style
-    x:Key="darkButton"
-    BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
-    TargetType="Button">
+        x:Key="darkButton"
+        BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
+        TargetType="Button">
         <Setter Property="Width" Value="120" />
         <Setter Property="Margin" Value="10" />
         <Setter Property="Height" Value="40" />
@@ -32,9 +33,9 @@
     </Style>
 
     <Style
-    x:Key="ZoomButton"
-    BasedOn="{StaticResource MaterialDesignFlatLightBgButton}"
-    TargetType="Button">
+        x:Key="ZoomButton"
+        BasedOn="{StaticResource MaterialDesignFlatLightBgButton}"
+        TargetType="Button">
         <Setter Property="Width" Value="120" />
         <Setter Property="Margin" Value="10" />
         <Setter Property="Cursor" Value="Hand" />
@@ -50,13 +51,13 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                            Storyboard.TargetProperty="RenderTransform.ScaleX"
-                            To="1.05"
-                            Duration="0:0:0.2" />
+                                Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                To="1.05"
+                                Duration="0:0:0.2" />
                             <DoubleAnimation
-                            Storyboard.TargetProperty="RenderTransform.ScaleY"
-                            To="1.05"
-                            Duration="0:0:0.2" />
+                                Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                To="1.05"
+                                Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -67,13 +68,13 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                            Storyboard.TargetProperty="RenderTransform.ScaleX"
-                            To="1"
-                            Duration="0:0:0.2" />
+                                Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                To="1"
+                                Duration="0:0:0.2" />
                             <DoubleAnimation
-                            Storyboard.TargetProperty="RenderTransform.ScaleY"
-                            To="1"
-                            Duration="0:0:0.2" />
+                                Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                To="1"
+                                Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -82,9 +83,9 @@
     </Style>
 
     <Style
-    x:Key="IconButton"
-    BasedOn="{StaticResource MaterialDesignFlatButton}"
-    TargetType="Button">
+        x:Key="IconButton"
+        BasedOn="{StaticResource MaterialDesignFlatButton}"
+        TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -102,10 +103,10 @@
                             <md:PackIcon VerticalAlignment="Center" Kind="{TemplateBinding Property=Tag}" />
                             <!--  Text  -->
                             <TextBlock
-                            Grid.Column="1"
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            Text="{TemplateBinding Content}" />
+                                Grid.Column="1"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                Text="{TemplateBinding Content}" />
                         </Grid>
                     </Grid>
                 </ControlTemplate>

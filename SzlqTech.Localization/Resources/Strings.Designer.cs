@@ -394,6 +394,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 角色管理 的本地化字符串。
+        /// </summary>
+        public static string RoleManager {
+            get {
+                return ResourceManager.GetString("RoleManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 保存 的本地化字符串。
         /// </summary>
         public static string Save {
@@ -480,6 +489,15 @@ namespace SzlqTech.Localization.Resources {
         public static string Type {
             get {
                 return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户管理 的本地化字符串。
+        /// </summary>
+        public static string UserManager {
+            get {
+                return ResourceManager.GetString("UserManager", resourceCulture);
             }
         }
         

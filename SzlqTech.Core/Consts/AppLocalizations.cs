@@ -1,5 +1,7 @@
 ﻿
 
+using System.Web;
+
 namespace SzlqTech.Core.Consts
 {
     public class AppLocalizations
@@ -61,6 +63,10 @@ namespace SzlqTech.Core.Consts
         public const string DataQuery = "DataQuery";
 
         public const string DataCollection = "DataCollection";
+
+        public const string UserManager="UserManager";
+
+        public const string RoleManager="RoleManager";
 
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Xaml.Behaviors.Media;
 using SzlqTech.Entity;
 
 namespace SzlqTech.Core.Vos
@@ -7,27 +8,42 @@ namespace SzlqTech.Core.Vos
     public partial class SysUserVo : BaseVo
     {
         [ObservableProperty]
-        private string userName;
+        public string userName;
 
 
         [ObservableProperty]
-        private string passWord;
+        public string passWord;
+
+        [ObservableProperty]
+        public string disPlayPassword;
 
 
         [ObservableProperty]
-        private string confirmPassWord;
+        public string confirmPassWord;
 
 
         [ObservableProperty]
-        private bool isRemember;
+        public bool isRemember;
 
 
 
         [ObservableProperty]
-        private string code;
+        public string code;
 
-       
+        [ObservableProperty]
+        public string roleCode;
+
+        [ObservableProperty]
+        public string roleName;
 
 
+        [ObservableProperty]
+        public long roleId;
+
+        [ObservableProperty]
+        public SysRoleVo? selectedRoleVo;
+
+        [ObservableProperty]
+        public string selectedRoleCode;
     }
 }

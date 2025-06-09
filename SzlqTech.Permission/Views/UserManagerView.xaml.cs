@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Core.Vos;
+using SzlqTech.Entity;
+using SzlqTech.IService;
 
 namespace SzlqTech.Permission.Views
 {
@@ -20,9 +24,15 @@ namespace SzlqTech.Permission.Views
     /// </summary>
     public partial class UserManagerView : UserControl
     {
-        public UserManagerView()
+        public UserManagerView(IMapper mapper,ISysRoleService sysRoleService)
         {
             InitializeComponent();
+            List<SysRole> roles = sysRoleService.List();
+            if (roles != null)
+            {
+                List<SysRoleVo> sysRoles = mapper.Map<List<SysRoleVo>>(roles);
+                cbox.ItemsSource = sysRoles;
+            }
         }
     }
 }

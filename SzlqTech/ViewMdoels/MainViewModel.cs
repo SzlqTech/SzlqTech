@@ -100,20 +100,51 @@ namespace SzlqTech.ViewMdoels
           
 
             NavigationItems = new ObservableCollection<NavigationItem>();
-            NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
+            if (AppCurrContext.UserName.ToLower() == "sa")
             {
-                new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
-                new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+                NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
+                {
+                    new NavigationItem("user", LocalizationService.GetString(AppLocalizations.UserManager), AppViews.UserManagerView, ""),
+                    new NavigationItem("role", LocalizationService.GetString(AppLocalizations.RoleManager), AppViews.RoleManagerView, ""),
 
-            }));
-            NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
+
+                }));
+            }
+            else
             {
-                new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
-                new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
-                new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
-                new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
-                
-            }));
+                NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
+                {
+                    new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
+                    new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+
+                }));
+                NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
+                {
+                    new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
+                    new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
+                    new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
+                    new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
+
+                }));
+            }
+
+
+            //NavigationItems.Add(new NavigationItem("workFlow", LocalizationService.GetString(AppLocalizations.WorkFlow), "", "", new ObservableCollection<NavigationItem>()
+            //    {
+            //        new NavigationItem("dataCollection",LocalizationService.GetString(AppLocalizations.DataCollection),AppViews.InnoLight,""),
+            //        new NavigationItem("dataQuery",LocalizationService.GetString(AppLocalizations.DataQuery),AppViews.InnoLightDataRecordView,"")
+
+            //    }));
+            //NavigationItems.Add(new NavigationItem("dashboard", LocalizationService.GetString(AppLocalizations.ConfigManagement), "", "", new ObservableCollection<NavigationItem>()
+            //    {
+            //        new NavigationItem("PLC", LocalizationService.GetString(AppLocalizations.MachineManagement), AppViews.MachineSetting, ""),
+            //        new NavigationItem("scanner", LocalizationService.GetString(AppLocalizations.ScanManagement), AppViews.ScannerSetting, ""),
+            //        new NavigationItem("sysConfig", LocalizationService.GetString(AppLocalizations.SysConfig), AppViews.SysConfig, ""),
+            //        new NavigationItem("product", LocalizationService.GetString(AppLocalizations.ProductManagement), AppViews.ProductView, ""),
+
+            //    }));
+
+
         }
 
         public void Configure()
