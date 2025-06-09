@@ -21,6 +21,7 @@ namespace SzlqTech.Services.Mapper
             CreateMap<QrCode,QrCodeVo>().ReverseMap();
             CreateMap<SysUser,SysUserVo>().ReverseMap();
             CreateMap<SysRole, SysRoleVo>().ReverseMap();
+            CreateMap<SysMenu, SysMenuVo>().ReverseMap();
         }
     }
 }

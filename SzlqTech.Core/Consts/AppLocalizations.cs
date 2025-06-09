@@ -68,6 +68,8 @@ namespace SzlqTech.Core.Consts
 
         public const string RoleManager="RoleManager";
 
+        public const string MenuImport = "MenuImport";
+
         #endregion
 
         #region Message

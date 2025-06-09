@@ -28,6 +28,7 @@
     <None Remove="Assets\Images\menus\loginattempts.png" />
     <None Remove="Assets\Images\menus\logout.png" />
     <None Remove="Assets\Images\menus\manageuser.png" />
+    <None Remove="Assets\Images\menus\menu.png" />
     <None Remove="Assets\Images\menus\mysettings.png" />
     <None Remove="Assets\Images\menus\organization.png" />
     <None Remove="Assets\Images\menus\password.png" />
@@ -94,6 +95,7 @@
 	  <Resource Include="Assets\Images\menus\loginattempts.png" />
 	  <Resource Include="Assets\Images\menus\logout.png" />
 	  <Resource Include="Assets\Images\menus\manageuser.png" />
+	  <Resource Include="Assets\Images\menus\menu.png" />
 	  <Resource Include="Assets\Images\menus\mysettings.png" />
 	  <Resource Include="Assets\Images\menus\organization.png" />
 	  <Resource Include="Assets\Images\menus\password.png" />

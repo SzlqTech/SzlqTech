@@ -270,4 +270,7 @@
   <data name="RoleManager" xml:space="preserve">
     <value>Role Management</value>
   </data>
+  <data name="MenuImport" xml:space="preserve">
+    <value>Menu Import</value>
+  </data>
 </root>

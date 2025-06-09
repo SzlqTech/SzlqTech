@@ -16,6 +16,7 @@ namespace SzlqTech.Permission
         {
             containerRegistry.RegisterForNavigation<UserManagerView, UserManagerViewModel>();
             containerRegistry.RegisterForNavigation<RoleManagerView, RoleManagerViewModel>();
+            containerRegistry.RegisterForNavigation<MenuImportView, MenuImportViewModel>();
         }
     }
 }

@@ -17,12 +17,12 @@ using SzlqTech.Common.Views;
 namespace SzlqTech.Permission.Views
 {
     /// <summary>
-    /// RoleManagerView.xaml 的交互逻辑
+    /// MenuImportView.xaml 的交互逻辑
     /// </summary>
-    [View("角色管理", "系统管理", "BookOpenBlankVariant", Ordinal = 0)]
-    public partial class RoleManagerView : UserControl
+    [View("菜单导入", "系统管理", "BookOpenBlankVariant", Ordinal = 0)]
+    public partial class MenuImportView : UserControl
     {
-        public RoleManagerView()
+        public MenuImportView()
         {
             InitializeComponent();
         }

@@ -106,7 +106,7 @@ namespace SzlqTech.ViewMdoels
                 {
                     new NavigationItem("user", LocalizationService.GetString(AppLocalizations.UserManager), AppViews.UserManagerView, ""),
                     new NavigationItem("role", LocalizationService.GetString(AppLocalizations.RoleManager), AppViews.RoleManagerView, ""),
-
+                    new NavigationItem("menu", LocalizationService.GetString(AppLocalizations.MenuImport), AppViews.MenuImportView, ""),
 
                 }));
             }

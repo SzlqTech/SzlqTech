@@ -1,0 +1,87 @@
+﻿<UserControl
+    x:Class="SzlqTech.Permission.Views.MenuImportView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SzlqTech.Permission.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="{DynamicResource MaterialDesignCardBackground}"
+    mc:Ignorable="d">
+    <Grid>
+        <DockPanel Margin="10" LastChildFill="True">
+
+            <StackPanel
+                Margin="0,10"
+                DockPanel.Dock="Top"
+                Orientation="Horizontal">
+
+                <Button Margin="10,0" Command="{Binding ImportCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon
+                                Margin="0,0,10,0"
+                                VerticalAlignment="Center"
+                                Kind="Import" />
+                            <TextBlock Text="导入" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding SaveCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon
+                                Margin="0,0,10,0"
+                                VerticalAlignment="Center"
+                                Kind="ContentSave" />
+                            <TextBlock Text="保存" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+            </StackPanel>
+
+            <FrameworkElement x:Name="DataContextProxy" DataContext="{Binding}" />
+            <DataGrid ItemsSource="{Binding ImportMenus}" Style="{StaticResource baseDataGrid}">
+                <DataGrid.Columns>
+                    <!--  by default a DataGridCheckBoxColumn will have the MaterialDesignDataGridCheckBoxColumnStyle and MaterialDesignDataGridCheckBoxColumnEditingStyle applied. See DataGridAssist.ApplyMaterialDesignColumnStyles attached property  -->
+                    <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridCheckBoxColumn.Header>
+                            <Border Background="Transparent">
+                                <CheckBox IsChecked="{Binding DataContext.IsAllItems1Selected, Source={x:Reference DataContextProxy}}" />
+                            </Border>
+                        </DataGridCheckBoxColumn.Header>
+
+                        <DataGridCheckBoxColumn.HeaderStyle>
+                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridCheckBoxColumn.HeaderStyle>
+                    </DataGridCheckBoxColumn>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Text}"
+                        Header="标题" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Assembly}"
+                        Header="程序集" />
+                    <DataGridTextColumn
+                        Width="1.5*"
+                        Binding="{Binding Url}"
+                        Header="路径" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding View}"
+                        Header="页面名称" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding CreateTime}"
+                        Header="创建时间" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>

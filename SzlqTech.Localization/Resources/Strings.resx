@@ -250,4 +250,7 @@
   <data name="RoleManager" xml:space="preserve">
     <value>角色管理</value>
   </data>
+  <data name="MenuImport" xml:space="preserve">
+    <value>菜单导入</value>
+  </data>
 </root>

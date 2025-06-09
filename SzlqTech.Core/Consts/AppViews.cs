@@ -42,5 +42,7 @@ namespace SzlqTech.Core.Consts
         public const string UserManagerView= "UserManagerView";
 
         public const string RoleManagerView = "RoleManagerView";
+
+        public const string MenuImportView = "MenuImportView";
     }
 }

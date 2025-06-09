@@ -270,4 +270,7 @@
   <data name="RoleManager" xml:space="preserve">
     <value>การจัดการตัวละคร</value>
   </data>
+  <data name="MenuImport" xml:space="preserve">
+    <value>นำเข้าเมนู</value>
+  </data>
 </root>
