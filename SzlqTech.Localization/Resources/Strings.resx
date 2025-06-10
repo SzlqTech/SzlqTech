@@ -256,4 +256,7 @@
   <data name="MenuAssign" xml:space="preserve">
     <value>菜单分配</value>
   </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>登录错误，请重新输入用户名或密码</value>
+  </data>
 </root>

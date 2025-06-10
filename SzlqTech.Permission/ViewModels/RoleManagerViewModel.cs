@@ -55,6 +55,7 @@ namespace SzlqTech.Permission.ViewModels
                 }
                 List<SysRole> sysRoles = mapper.Map<List<SysRole>>(RoleVos);
                 await sysRoleService.SaveOrUpdateBatchAsync(sysRoles);
+                SendMessage("角色保存成功");
             }
 
         }

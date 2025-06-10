@@ -44,9 +44,9 @@ namespace SzlqTech.Core.ViewModels
         }
 
 
-        public void SendMessage(string msg)
+        public void SendMessage(string msg,string filterName = "Main")
         {
-            aggregator.SendSnackBarMessage(msg);
+            aggregator.SendSnackBarMessage(msg, filterName);
         }
 
         public virtual async Task SetBusyAsync(Func<Task> func, string loadingMessage = null)

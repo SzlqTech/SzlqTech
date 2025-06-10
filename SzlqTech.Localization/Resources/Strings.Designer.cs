@@ -259,6 +259,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 登录错误，请重新输入用户名或密码 的本地化字符串。
+        /// </summary>
+        public static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 登录 的本地化字符串。
         /// </summary>
         public static string LoginIn {
@@ -300,6 +309,24 @@ namespace SzlqTech.Localization.Resources {
         public static string Max {
             get {
                 return ResourceManager.GetString("Max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 菜单分配 的本地化字符串。
+        /// </summary>
+        public static string MenuAssign {
+            get {
+                return ResourceManager.GetString("MenuAssign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 菜单导入 的本地化字符串。
+        /// </summary>
+        public static string MenuImport {
+            get {
+                return ResourceManager.GetString("MenuImport", resourceCulture);
             }
         }
         

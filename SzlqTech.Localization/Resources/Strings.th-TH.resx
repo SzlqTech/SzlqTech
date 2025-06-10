@@ -276,4 +276,7 @@
   <data name="MenuAssign" xml:space="preserve">
     <value>การจัดเรียงเมนู</value>
   </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>เกิดข้อผิดพลาดในการล็อกอินโปรดป้อนชื่อผู้ใช้ หรือรหัสผ่านใหม่อีกครั้ง</value>
+  </data>
 </root>

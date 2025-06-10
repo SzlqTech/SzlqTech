@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Core.Events;
 
 namespace SzlqTech.Views
 {
@@ -20,10 +22,16 @@ namespace SzlqTech.Views
     /// </summary>
     public partial class LoginView : UserControl
     {
-        public LoginView()
+        public LoginView(IEventAggregator aggregator)
         {
             InitializeComponent();
             btnClose.Click += (s, e) => { Environment.Exit(0); };
+           
+            //注册提示消息
+            aggregator.ResgiterSnackBarMessage(arg =>
+            {
+                Snackbar.MessageQueue?.Enqueue(arg.Message);
+            },"Login");
         }
     }
 }

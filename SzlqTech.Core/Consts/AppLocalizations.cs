@@ -72,6 +72,8 @@ namespace SzlqTech.Core.Consts
 
         public const string MenuAssign = "MenuAssign";
 
+        public const string LoginError = "LoginError";
+
         #endregion
 
         #region Message

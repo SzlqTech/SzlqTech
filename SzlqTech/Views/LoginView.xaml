@@ -5,18 +5,18 @@
     xmlns:const="clr-namespace:SzlqTech.Core.Consts;assembly=SzlqTech.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:local="clr-namespace:SzlqTech.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     Width="940"
-    Height="550"  
+    Height="550"
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
-           
+
             <Setter Property="SizeToContent" Value="WidthAndHeight" />
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
@@ -57,19 +57,24 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Margin="5"
-                ToolTip="{loc:Loc LoginOut}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Background="Transparent"
                 BorderThickness="0"
                 Content="{md:PackIcon Kind=Close}"
                 FontSize="24"
-                Foreground="Black" />
+                Foreground="Black"
+                ToolTip="{loc:Loc LoginOut}" />
 
             <Image
                 Grid.Row="1"
                 Margin="50"
                 Source="/Assets/Images/back.png" />
+            <md:Snackbar
+                x:Name="Snackbar"
+                Grid.ColumnSpan="2"
+                Panel.ZIndex="1"
+                MessageQueue="{md:MessageQueue}" />
             <DockPanel
                 Grid.Row="1"
                 Grid.Column="1"

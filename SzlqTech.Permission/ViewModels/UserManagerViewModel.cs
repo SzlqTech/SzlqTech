@@ -59,7 +59,8 @@ namespace SzlqTech.Permission.ViewModels
                 }
                 List<SysUser> sysUsers = mapper.Map<List<SysUser>>(UserVos);
                 await sysUserService.SaveOrUpdateBatchAsync(sysUsers);
-           }
+                SendMessage("用户保存成功");
+            }
            
         }
 
