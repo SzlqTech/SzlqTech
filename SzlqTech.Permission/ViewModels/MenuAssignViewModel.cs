@@ -97,6 +97,7 @@ namespace SzlqTech.Permission.ViewModels
                     break;
                 }
                 parentNode.RoleId=sysRole.Id;
+                menuList.Add(parentNode);
                 foreach (var node in menu.MenuNodeItems)
                 {
                     if (node.IsSelected)

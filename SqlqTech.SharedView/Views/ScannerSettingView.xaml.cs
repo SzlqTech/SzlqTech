@@ -9,7 +9,7 @@ namespace SqlqTech.SharedView.Views
     /// <summary>
     /// ScannerSettingView.xaml 的交互逻辑
     /// </summary>
-    [View(AppViews.ScannerSetting, AppLocalizations.ScanManagement, AppLocalizations.ConfigManagement, "scanner", Ordinal = 0)]
+    [View(AppViews.ScannerSetting, AppLocalizations.ScanManagement, AppLocalizations.ConfigManagement, "scanner", "dashboard", Ordinal = 0)]
     public partial class ScannerSettingView : UserControl
     {
         public ScannerSettingView()

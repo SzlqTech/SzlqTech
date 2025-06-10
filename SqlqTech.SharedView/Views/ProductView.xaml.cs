@@ -20,7 +20,7 @@ namespace SqlqTech.SharedView.Views
     /// <summary>
     /// ProductView.xaml 的交互逻辑
     /// </summary>
-    [View(AppViews.ProductView, AppLocalizations.ProductManagement, AppLocalizations.ConfigManagement, "product", Ordinal = 0)]
+    [View(AppViews.ProductView, AppLocalizations.ProductManagement, AppLocalizations.ConfigManagement, "product", "dashboard", Ordinal = 0)]
     public partial class ProductView : UserControl
     {
         public ProductView()

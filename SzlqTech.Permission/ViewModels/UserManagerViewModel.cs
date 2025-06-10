@@ -53,10 +53,9 @@ namespace SzlqTech.Permission.ViewModels
                     if (item.Id == 0)
                     {
                         item.Id = SnowFlake.NewLongId;
-                        item.PassWord = HashHelper.CreateMD5(item.DisPlayPassword);
-                        item.RoleId = item.SelectedRoleVo.Id;      
-                        
+                        item.PassWord = HashHelper.CreateMD5(item.DisPlayPassword); 
                     }
+                    item.RoleId = item.SelectedRoleVo.Id;
                 }
                 List<SysUser> sysUsers = mapper.Map<List<SysUser>>(UserVos);
                 await sysUserService.SaveOrUpdateBatchAsync(sysUsers);

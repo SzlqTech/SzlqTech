@@ -17,7 +17,7 @@ namespace SqlqTech.SharedView.Views
     /// <summary>
     /// MachineSettingView.xaml 的交互逻辑
     /// </summary>
-    [View(AppViews.MachineSetting, AppLocalizations.MachineManagement, AppLocalizations.ConfigManagement, "plc", Ordinal = 0)]
+    [View(AppViews.MachineSetting, AppLocalizations.MachineManagement, AppLocalizations.ConfigManagement, "plc","dashboard", Ordinal = 0)]
     public partial class MachineSettingView : UserControl
     {
         public MachineSettingView()

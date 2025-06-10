@@ -26,6 +26,11 @@ namespace SzlqTech.Common.Views
         {
         }
 
+        public ViewAttribute(string text, string title, string parent, string Icon,string parentIcon)
+         : this(text, title, EntryType.Menu, parent, parent, 0, Icon,parentIcon, null, true)
+        {
+        }
+
         public ViewAttribute(string text, string parent, string Icon)
             : this(text, EntryType.Menu, parent, parent, 0, Icon, null, true)
         {
@@ -97,6 +102,21 @@ namespace SzlqTech.Common.Views
             this.Status = status;
         }
 
+        public ViewAttribute(string title, string text, EntryType entryType, string? parent, string? root, int ordinal,
+            string? description,string parentIcon, string? toolTip, bool status)
+        {
+            this.Text = text;
+            this.Title = title;
+            this.EntryType = entryType;
+            this.Parent = parent;
+            this.Root = root;
+            this.Ordinal = ordinal;
+            this.Description = description;
+            this.ToolTip = toolTip;
+            this.Status = status;
+            this.ParentIcon = parentIcon;
+        }
+
         /// <summary>
         /// 导航页面
         /// </summary>
@@ -129,6 +149,8 @@ namespace SzlqTech.Common.Views
         public int Ordinal { get; set; }
 
         public string? Description { get; set; }
+
+        public string ? ParentIcon { get; set; }
 
         public string? ToolTip { get; set; }
 

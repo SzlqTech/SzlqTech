@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using SzlqTech.Common.Views;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.Datapage;
 using SzlqTech.Core.ViewModels;
@@ -13,6 +14,7 @@ using SzlqTech.Localization;
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
 {
+    [View(AppViews.InnoLightDataRecordView, AppLocalizations.DataQuery, AppLocalizations.WorkFlow, "dataQuery", "workFlow", Ordinal = 0)]
     public partial class InnoLightDataRecordViewModel: NavigationViewModel
     {
         private readonly IQrCodeService qrCodeService;

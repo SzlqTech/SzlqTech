@@ -106,8 +106,9 @@ namespace SzlqTech.Entity
 
         [SugarColumn(ColumnName = "role_id", ColumnDescription = "角色Id", IsNullable = true)]
         public long RoleId { get; set; }
-
-
+        //parent_icon
+        [SugarColumn(ColumnName = "parent_icon", ColumnDescription = "父Icon", IsNullable = true)]
+        public string? ParentIcon { get; set; }
         // [SugarColumn(ColumnName = "icon")]
         // public byte[]? Icon { get; set; }
 

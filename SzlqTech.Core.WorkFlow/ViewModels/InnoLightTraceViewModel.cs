@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
+using SzlqTech.Common.Views;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
@@ -13,6 +14,7 @@ using SzlqTech.Localization;
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
 {
+    [View(AppViews.InnoLight, AppLocalizations.DataCollection, AppLocalizations.WorkFlow, "dataCollection", "workFlow", Ordinal = 0)]
     public partial class InnoLightTraceViewModel:NavigationViewModel
     {
        private readonly IHostDialogService dialog;

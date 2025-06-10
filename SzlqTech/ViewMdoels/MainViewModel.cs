@@ -144,6 +144,7 @@ namespace SzlqTech.ViewMdoels
 
                 //}));
 
+                //动态配置页面
                 LoadNavigationItems();
             }
 
@@ -185,7 +186,7 @@ namespace SzlqTech.ViewMdoels
 
                 ObservableCollection<NavigationItem> navigationItems = new ObservableCollection<NavigationItem>();
                 navigationItems.AddRange(treeNodeList);
-                NavigationItems.Add(new NavigationItem("", menu.Text, "", "", navigationItems));
+                NavigationItems.Add(new NavigationItem(menu.ParentIcon, LocalizationService.GetString(menu.Text), "", "", navigationItems));
             }
         }
 

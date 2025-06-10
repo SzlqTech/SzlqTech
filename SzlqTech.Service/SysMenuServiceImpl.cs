@@ -46,7 +46,8 @@ namespace SzlqTech.Service
                 string rootText = viewAttribute.Root;
                 string rootENText = viewAttribute.RootEN;
                 string rootZHText = viewAttribute.RootZH;
-                
+                string parentIcon = viewAttribute.ParentIcon;
+
 
                 if (string.IsNullOrEmpty(parentText) || string.IsNullOrEmpty(rootText))
                 {
@@ -93,8 +94,8 @@ namespace SzlqTech.Service
                         RootText = parentText,
                         CreateTime = DateTime.Now,
                         CreateUser = UserContext.UserId,
-                        Remark = viewAttribute.Description,
-                        
+                        //Remark = viewAttribute.Description,
+                        ParentIcon = parentIcon
                     };
                     parentMenu.RootId = parentMenu.Id;
 

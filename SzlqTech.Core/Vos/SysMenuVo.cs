@@ -58,6 +58,9 @@ namespace SzlqTech.Core.Vos
         [ObservableProperty]
         public long roleId;
 
+        [ObservableProperty]
+        public string parentIcon;
+
 
 
 
