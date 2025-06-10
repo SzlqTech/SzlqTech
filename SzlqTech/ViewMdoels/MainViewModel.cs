@@ -13,12 +13,9 @@ using SzlqTech.Localization;
 using System.Globalization;
 using NLog;
 using ImTools;
-using SqlSugar;
 using System.Configuration;
 using SzlqTech.IService;
-using System.Windows.Forms;
 using SzlqTech.Entity;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -150,26 +147,27 @@ namespace SzlqTech.ViewMdoels
 
         }
 
+       
+
         public void LoadNavigationItems()
         {
-           
-            //根据用户名获取角色
-            var user=sysUserService.GetFirstOrDefault(s=>s.Username== AppCurrContext.UserName);
-            if (user == null)
-            {
-                return;
-            }
-            var role = sysRoleService.GetFirstOrDefault(s=>s.Id==user.RoleId);
-            if (role == null)
-            {
-                return;
-            }         
+            //根据用户名查询角色管理权限
+            var user = sysUserService.GetFirstOrDefault(s=>s.Username==AppCurrContext.UserName);
+            if (user == null) return;     
+          
+            List<SysRoleMenu> list = sysRoleMenuService.List(s => s.RoleId == user.RoleId);
             //根据Role-Menu获取Menu的菜单
-            
-            var menuList= sysMenuService.List(s=>s.RoleId == role.Id);
-           
+            List<SysMenu> menuList = new List<SysMenu>();
+            foreach (var item in list)
+            {
+                SysMenu menu = sysMenuService.GetById(item.MenuId);
+                if (menu != null)
+                {
+                    menuList.Add(menu);
+                }
+            }
 
-            List<SysMenu> parentMenu = menuList.FindAll(s=>s.EntryType==0);
+            List<SysMenu> parentMenu = menuList.FindAll(s => s.EntryType == 0);
             foreach (var menu in parentMenu)
             {
                 //主节点
@@ -179,7 +177,7 @@ namespace SzlqTech.ViewMdoels
                 NavigationItem treeNodes = new NavigationItem(menu.Text);
                 List<NavigationItem> treeNodeList = new List<NavigationItem>();
                 foreach (var child in childrenMenus)
-                {               
+                {
                     NavigationItem nodeItem = new NavigationItem(child.Icon, LocalizationService.GetString(child.Text), child.View, "");
                     treeNodeList.Add(nodeItem);
                 }

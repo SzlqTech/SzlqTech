@@ -35,7 +35,7 @@ namespace SzlqTech.Permission.ViewModels
             this.mapper = mapper;
             this.sysMenuService = sysMenuService;
             this.sysRoleMenuService = sysRoleMenuService;
-            DataLoad();
+           
             IsSelectedAllCommand = new DelegateCommand<MenuNodesVo>(IsSelectedAll);
             IsSelectedCommand = new DelegateCommand<MenuNodeItem>(IsSelected);
            
@@ -87,41 +87,62 @@ namespace SzlqTech.Permission.ViewModels
             {
                 SendMessage("未查询到当前用户");
                 return;
-            }     
-            List< SysMenu> menuList= new List<SysMenu>();
+            }
             foreach (var menu in MenuNodes)
             {
-                var parentNode= sysMenuService.GetFirstOrDefault(s => s.Text == menu.Title);
-                if (parentNode == null)
+                if (menu.IsSelected)
                 {
-                    break;
+                    SysMenu rootMenu = sysMenuService.GetFirstOrDefault(s => s.Text == menu.Title);
+                    if (rootMenu == null)
+                    {
+                        break;
+                    }
+                    SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo()
+                    {
+
+                        Id = SnowFlake.NewLongId,
+                        RoleId = sysRole.Id,
+                        MenuId = rootMenu.Id,
+                        Status = 1,
+                        CreateTime = DateTime.Now,
+                        UpdateTime = DateTime.Now,
+                    };
+                    list.Add(sysRoleMenuVo);
                 }
-                parentNode.RoleId=sysRole.Id;
-                menuList.Add(parentNode);
-                foreach (var node in menu.MenuNodeItems)
+                foreach (var menuItem in menu.MenuNodeItems)
                 {
-                    if (node.IsSelected)
+                    if (menuItem.IsSelected)
                     {
-                        SysMenu sysMenu = sysMenuService.GetFirstOrDefault(s => s.Text == node.Text);
-                        sysMenu.RoleId = sysRole.Id;
-                        menuList.Add(sysMenu);
+                        SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo()
+                        {
+                            Id = SnowFlake.NewLongId,
+                            RoleId = sysRole.Id,
+                            MenuId = menuItem.Id,
+                            Status = 1,
+                            CreateTime = DateTime.Now,
+                            UpdateTime = DateTime.Now,
+                        };
+                        list.Add(sysRoleMenuVo);
                     }
-                    else
-                    {
-                        SysMenu sysMenu = sysMenuService.GetFirstOrDefault(s => s.Text == node.Text);
-                        sysMenu.RoleId = 0;
-                        menuList.Add(sysMenu);
-                    }
-                } 
+                }
             }
-            await sysMenuService.SaveOrUpdateBatchAsync(menuList);   
+            if (list.Count > 0)
+            {
+                List<SysRoleMenu> roleMenus = mapper.Map<List<SysRoleMenu>>(list);
+                if (roleMenus != null)
+                {
+                    foreach (var roleMenu in roleMenus)
+                    {
+                        //删除重复的roleId绑定数据
+                        sysRoleMenuService.Remove(s => s.RoleId == roleMenu.RoleId);
+                    }
+                    sysRoleMenuService.Save(roleMenus);
+                }
+            }
             SendMessage("菜单权限分配成功");
         }
 
-        private void New()
-        {
-            DataLoad();
-        }
+      
 
         private void IsSelected(MenuNodeItem vo)
         {
@@ -168,7 +189,7 @@ namespace SzlqTech.Permission.ViewModels
             List<SysMenu> parentList = sysMenuService.List(s => s.EntryType == 0);
             if (parentList == null) return;
             foreach (var item in parentList)
-            {
+            {           
                 MenuNodesVo treeNodes = new MenuNodesVo(item.Text);
                 List<SysMenu> menus = sysMenuService.List(s => s.ParentId == item.Id);
                 if (menus == null) return;
@@ -176,13 +197,18 @@ namespace SzlqTech.Permission.ViewModels
                 foreach (var menu in menus)
                 {
                     MenuNodeItem treeNodeItem = new MenuNodeItem(menu.Text, menu.View, item.Text, menu.Icon, menu.Id);
+                    var sysRoleMenu = sysRoleMenuService.GetFirstOrDefault(s => s.MenuId == item.Id&&s.RoleId==CurrSysRole.id);
+                    if (sysRoleMenu != null) treeNodeItem.IsSelected = true;
                     list.Add(treeNodeItem);
                 }
                 MenuNodesVo node = new MenuNodesVo(item.Text, list.ToArray());
+                //加载已经分配好的节点
+                if(list.Where(o=>o.IsSelected).Count()==node.MenuNodeItems.Count) node.IsSelectedAll = true;    
                 MenuNodes.Add(node);
             }
-
         }
+
+        
         #endregion
 
         #region  command
@@ -208,8 +234,10 @@ namespace SzlqTech.Permission.ViewModels
             if (navigationContext.Parameters.ContainsKey(AppSharedConsts.Parameter))
             {
                 CurrSysRole = navigationContext.Parameters.GetValue<SysRoleVo>(AppSharedConsts.Parameter);
-            }
-                await Task.CompletedTask;
+                DataLoad();
+            }         
+            
+            await Task.CompletedTask;
         }
 
     }

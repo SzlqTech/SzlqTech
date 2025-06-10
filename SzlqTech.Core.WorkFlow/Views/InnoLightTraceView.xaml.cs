@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Common.Views;
+using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 
 namespace SzlqTech.Core.WorkFlow.Views
@@ -20,6 +22,7 @@ namespace SzlqTech.Core.WorkFlow.Views
     /// <summary>
     /// InnoLightTraceView.xaml 的交互逻辑
     /// </summary>
+    [View(AppViews.InnoLight, AppLocalizations.DataCollection, AppLocalizations.WorkFlow, "dataCollection", "workFlow", Ordinal = 0)]
     public partial class InnoLightTraceView : UserControl
     {
         private readonly IEventAggregator aggregator;

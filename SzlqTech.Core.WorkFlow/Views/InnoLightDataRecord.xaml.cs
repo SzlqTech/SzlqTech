@@ -12,12 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.Common.Views;
+using SzlqTech.Core.Consts;
 
 namespace SzlqTech.Core.WorkFlow.Views
 {
     /// <summary>
     /// InnoLightDataRecord.xaml 的交互逻辑
     /// </summary>
+    [View(AppViews.InnoLightDataRecordView, AppLocalizations.DataQuery, AppLocalizations.WorkFlow, "dataQuery", "workFlow", Ordinal = 0)]
     public partial class InnoLightDataRecord : UserControl
     {
         public InnoLightDataRecord()
