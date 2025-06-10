@@ -36,7 +36,7 @@ namespace SzlqTech.DbHelper
 
         public string Key { get; set; }
 
-        public DbType DbType { get; set; } = DbType.SqlServer;
+        public DbType DbType { get; set; } = DbType.MySql;
 
 
         public bool New { get; set; }
