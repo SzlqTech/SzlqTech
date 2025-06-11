@@ -25,5 +25,11 @@ namespace SzlqTech.Entity
 
         [SugarColumn(ColumnName = "leave_date", IsNullable = true, ColumnDescription = "离开工站时间")]
         public string LeaveDate { get; set; }
+
+        [SugarColumn(ColumnName = "parent_code", IsNullable = true, ColumnDescription = "父编码")]
+        public string ParentCode { get; set; }
+
+        [SugarColumn(ColumnName = "root_code", IsNullable = true, ColumnDescription = "根编码")]
+        public string RootCode { get; set; }
     }
 }
