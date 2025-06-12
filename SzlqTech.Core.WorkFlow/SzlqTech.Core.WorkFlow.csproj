@@ -11,6 +11,7 @@
     <None Remove="Assets\darkLight.png" />
     <None Remove="Assets\light.png" />
     <None Remove="Assets\start.png" />
+    <None Remove="Assets\stop.png" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -35,5 +36,6 @@
 	  <Resource Include="Assets\darkLight.png" />
 	  <Resource Include="Assets\light.png" />
 	  <Resource Include="Assets\start.png" />
+	  <Resource Include="Assets\stop.png" />
 	</ItemGroup>
 </Project>

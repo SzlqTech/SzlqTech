@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using Prism.Ioc;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Core.Services.Session;
+using SzlqTech.Core.WorkFlow.AutoMapper;
 using SzlqTech.Equipment;
 using SzlqTech.IRepository;
 using SzlqTech.IService;
@@ -67,6 +68,7 @@ namespace SzlqTech.Extensions
             var config = new MapperConfiguration(config =>
             {
                 config.AddProfile(new AutoMapperProfile());
+                config.AddProfile(new InnoTraceProfile());
             });
             container.RegisterInstance<IMapper>(config.CreateMapper());
             container.Register<NavigationService>();

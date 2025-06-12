@@ -279,4 +279,40 @@
   <data name="LoginError" xml:space="preserve">
     <value>เกิดข้อผิดพลาดในการล็อกอินโปรดป้อนชื่อผู้ใช้ หรือรหัสผ่านใหม่อีกครั้ง</value>
   </data>
+  <data name="Stop" xml:space="preserve">
+    <value>หยุด</value>
+  </data>
+  <data name="StartSuccess" xml:space="preserve">
+    <value>เริ่มการทำงาน</value>
+  </data>
+  <data name="StopSuccess" xml:space="preserve">
+    <value>หยุดการทำงาน</value>
+  </data>
+  <data name="StartError" xml:space="preserve">
+    <value>ล้มเหลวในการเริ่มต้น</value>
+  </data>
+  <data name="StopError" xml:space="preserve">
+    <value>หยุดการทำงานล้มเหลว</value>
+  </data>
+  <data name="ProudctSelectedNull" xml:space="preserve">
+    <value>ผลิตภัณฑ์ว่า งโปรดเลือกผลิตภัณฑ์</value>
+  </data>
+  <data name="PleaseRestorSystem" xml:space="preserve">
+    <value>กรุณาเริ่มซอฟต์แวร์ใหม่</value>
+  </data>
+  <data name="PortKey" xml:space="preserve">
+    <value>กุญแจพิเศษ</value>
+  </data>
+  <data name="DataType" xml:space="preserve">
+    <value>ชนิดข้อมูล</value>
+  </data>
+  <data name="EnableScan" xml:space="preserve">
+    <value>เปิดใช้การสแกน</value>
+  </data>
+  <data name="EnableHeartbeatKey" xml:space="preserve">
+    <value>เปิดการใช้งานปุ่มหัวใจ</value>
+  </data>
+  <data name="ScannCycle" xml:space="preserve">
+    <value>วงจรการสแกน(ms)</value>
+  </data>
 </root>

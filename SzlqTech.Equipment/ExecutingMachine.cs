@@ -7,6 +7,7 @@ using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Common.MultiThreads;
+using SzlqTech.Common.Nlogs;
 using SzlqTech.Equipment.Machine;
 using SzlqTech.IService;
 
@@ -31,6 +32,16 @@ namespace SzlqTech.Equipment
         private readonly IMachineDetailService machineDetailService;
 
         /// <summary>
+        /// 心跳扫描数据列表
+        /// </summary>
+        private List<PLCData> HeartbeatScanDatas=new List<PLCData>();
+
+        /// <summary>
+        /// 心跳键
+        /// </summary>
+        private const string HeartbeatKey = "Heartbeat";
+
+        /// <summary>
         /// 网口TCP设备字典
         /// </summary>
         public Dictionary<string, NetworkDeviceBase> TCPDeviceDictionary { get; } = new Dictionary<string, NetworkDeviceBase>();
@@ -49,7 +60,14 @@ namespace SzlqTech.Equipment
         /// <summary>
         /// 信号锁
         /// </summary>
-        protected virtual SemaphoreQueue MachineLock { get; set; } = new SemaphoreQueue(1, 1); 
+        protected virtual SemaphoreQueue MachineLock { get; set; } = new SemaphoreQueue(1, 1);
+
+        /// <summary>
+        /// 是否开启设备
+        /// </summary>
+        private bool IsOpen = false;
+
+        private Task? HeartbeatTask = null;
         #endregion
 
         public ExecutingMachine(IMachineSettingService machineSettingService,IMachineDetailService machineDetailService)
@@ -139,26 +157,46 @@ namespace SzlqTech.Equipment
         /// </summary>
         public void OpenMachine()
         {
-            foreach (var pair in TCPDeviceDictionary)
+            try
             {
-                var tcpDevice = pair.Value;
-                tcpDevice.ConnectTimeOut = 1000;
-                tcpDevice.ConnectServer().EnsureSuccess($"[{pair.Key}]连接网口");
-                string code = pair.Key;
-                var machineSetting = machineSettingService.GetByCode(code)!;
-                var machineDetails = machineDetailService.List(m =>
-                    m.MachineId == machineSetting.Id);
-                foreach (var machineDetail in machineDetails)
+                foreach (var pair in TCPDeviceDictionary)
                 {
-                    if (machineDetail.ScanStatus == SettingStatus.Enable)
+                    var tcpDevice = pair.Value;
+                    tcpDevice.ConnectTimeOut = 1000;
+                    tcpDevice.ConnectServer().EnsureSuccess($"[{pair.Key}]连接网口");
+                    string code = pair.Key;
+                    var machineSetting = machineSettingService.GetByCode(code)!;
+                    var machineDetails = machineDetailService.List(m =>
+                        m.MachineId == machineSetting.Id);
+                    foreach (var machineDetail in machineDetails)
                     {
-                        PLCScanDictionary.AddToStartScan(machineDetail.PortKey, tcpDevice, machineDetail.Address,
-                            machineDetail.DataTypeEnum, machineDetail.ScanCycle);
-                    }
+                        if (machineDetail.IsEnableHeartbeat)
+                        {
+                            var plcData = new PLCData(machineDetail.PortKey, tcpDevice, machineDetail.Address,
+                                machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType);
+                            
+                            HeartbeatScanDatas.Add(plcData);
+                        }
+                        else
+                        {
+                            if (machineDetail.ScanStatus == SettingStatus.Enable)
+                            {
+                                PLCScanDictionary.AddToStartScan(machineDetail.PortKey, tcpDevice, machineDetail.Address,
+                                    machineDetail.DataTypeEnum, machineDetail.ScanCycle);
+                            }
 
-                    PLCDictionary.Add(machineDetail.PortKey, tcpDevice, machineDetail.Address,
-                        machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType);
+                            PLCDictionary.Add(machineDetail.PortKey, tcpDevice, machineDetail.Address,
+                                machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType);
+                        }
+
+                    }
                 }
+                IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorHandler($"打开机器失败:[{ex.Message}]");
+                IsOpen = false;
             }
         }
 
@@ -179,8 +217,31 @@ namespace SzlqTech.Equipment
         /// </summary>
         public void StartMachine()
         {
-
+            //发送心跳
+             HeartbeatTask=Task.Factory.StartNew(ExcuteHeartbeat,TaskCreationOptions.LongRunning);
         }
+
+        public void ExcuteHeartbeat()
+        {
+            while (IsOpen)
+            {       
+                Parallel.ForEach(HeartbeatScanDatas, item =>
+                {
+                    try
+                    {
+                        item.SendPositiveSignal();
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.ErrorHandler(ex.Message);
+                    }
+                });
+                Thread.Sleep(100);
+            }
+           
+        }
+
+    
         #endregion
 
         #region 停止设备顺序
@@ -189,7 +250,8 @@ namespace SzlqTech.Equipment
         /// </summary>
         public void StopMachine()
         {
-
+            IsOpen = false;
+            HeartbeatTask?.Wait();
         }
 
         /// <summary>

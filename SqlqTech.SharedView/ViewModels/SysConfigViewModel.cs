@@ -50,8 +50,8 @@ namespace SqlqTech.SharedView.ViewModels
             config.AppSettings.Settings["lang"].Value = CurrLangName;
             config.AppSettings.Settings["View"].Value = SelectedNavView.Value;          
             config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
-            SendSuccessMsg();
+            ConfigurationManager.RefreshSection("appSettings");   
+            SendMessage(LocalizationService.GetString(AppLocalizations.SuccessMsg) +","+ LocalizationService.GetString(AppLocalizations.PleaseRestorSystem));
             aggregator.SendUpdateLocalizationModel(true);
             logger.InfoHandler($"保存语言[{CurrLangName}]成功");
 

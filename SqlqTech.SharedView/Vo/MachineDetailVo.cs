@@ -78,5 +78,8 @@ namespace SqlqTech.SharedView.Vo
 
         [ObservableProperty]
         public string? machineCode;
+
+        [ObservableProperty]
+        public bool isEnableHeartbeat;
     }
 }

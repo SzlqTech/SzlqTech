@@ -1,12 +1,16 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Prism.Events;
+using Prism.Ioc;
 using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
-using SzlqTech.Common.Views;
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
+using SzlqTech.Core.WorkFlow.Extensions;
 using SzlqTech.Core.WorkFlow.Vos;
 using SzlqTech.Entity;
 using SzlqTech.IService;
@@ -17,9 +21,11 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
    
     public partial class InnoLightTraceViewModel:NavigationViewModel
     {
-       private readonly IHostDialogService dialog;
+        private readonly IHostDialogService dialog;
         private readonly IProductService productService;
         private readonly IMapper mapper;
+        private InnoLightWorkflow workflow;
+        private readonly IEventAggregator aggregator;
 
         public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,IMapper mapper)
         {
@@ -27,7 +33,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             this.dialog = dialog;
             this.productService = productService;
             this.mapper = mapper;
+            workflow = ContainerLocator.Container.Resolve<InnoLightWorkflow>();
+            aggregator = ContainerLocator.Container.Resolve<IEventAggregator>();
+            aggregator.ResgiterMachineDataModel(OnMachineDataReceived, "InnoLightTraceViewModel");
         }
+
+        
+
+        [ObservableProperty]
+        public string startContent = LocalizationService.GetString(AppLocalizations.Start);
 
         [ObservableProperty]
         public ObservableCollection<MachineLinkVo> machineLinks;
@@ -39,6 +53,43 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         public ProductVo selectedProductVo;
 
 
+        [RelayCommand]
+        public async Task Start()
+        {
+            if (Valid())
+            {
+                var result = false;
+                await SetBusyAsync(async () =>
+                {
+                    result = await workflow.WaitDataActionResultAsync(workflow.StartExecute);
+                });
+                if (result) SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
+                else SendMessage(LocalizationService.GetString(AppLocalizations.StopError));
+            }         
+        }
+
+        public bool Valid()
+        {
+            if (SelectedProductVo == null)
+            {
+                SendMessage(LocalizationService.GetString(AppLocalizations.ProudctSelectedNull));
+                return false;
+            }
+            return true;
+        }
+
+        [RelayCommand]
+        public async Task Stop()
+        {
+            var result = false;
+            await SetBusyAsync(async () =>
+            {
+                result = await workflow.WaitDataActionResultAsync(workflow.StopExecute);
+            });
+            if (result) SendMessage(LocalizationService.GetString(AppLocalizations.StopSuccess));
+            else SendMessage(LocalizationService.GetString(AppLocalizations.StopError));
+        }
+
         #region OE Tray上料
 
         [ObservableProperty]
@@ -46,19 +97,18 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         #endregion
 
-        public void Init()
-        {
-            TrayLoadingGoods=new ObservableCollection<TrayLoadingGoodsVo>();
 
-            //模拟采集数据
-           
+        #region IO
+
+        private void OnMachineDataReceived(MachineDataModel model)
+        {
+            switch (model.MachineData.PortKey)
+            {
+                case "": break;
+            }
         }
 
-        public void GetData()
-        {
-            //var trayGoods =new Faker<TrayLoadingGoodsVo>()
-            //                .RuleFor(o=>o.NewId,Guid.NewGuid);
-        }
+        #endregion
 
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
@@ -82,9 +132,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             {
                 List<ProductVo> productsVo = mapper.Map<List<ProductVo>>(products);
                 ProductVos.AddRange(productsVo);
-            }
-            Init();
-            
+            }       
         }
     }
 }

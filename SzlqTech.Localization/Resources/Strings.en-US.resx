@@ -279,4 +279,40 @@
   <data name="LoginError" xml:space="preserve">
     <value>Login error. Please re-enter the username or password</value>
   </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="StartSuccess" xml:space="preserve">
+    <value>Startup successful</value>
+  </data>
+  <data name="StopSuccess" xml:space="preserve">
+    <value>Stop successfully</value>
+  </data>
+  <data name="StartError" xml:space="preserve">
+    <value>Startup failure</value>
+  </data>
+  <data name="StopError" xml:space="preserve">
+    <value>Stop failure</value>
+  </data>
+  <data name="ProudctSelectedNull" xml:space="preserve">
+    <value>The product is empty. Please select the product</value>
+  </data>
+  <data name="PleaseRestorSystem" xml:space="preserve">
+    <value>Please restart the software</value>
+  </data>
+  <data name="PortKey" xml:space="preserve">
+    <value>PortKey</value>
+  </data>
+  <data name="DataType" xml:space="preserve">
+    <value>Data type</value>
+  </data>
+  <data name="EnableScan" xml:space="preserve">
+    <value>Enable scanning</value>
+  </data>
+  <data name="EnableHeartbeatKey" xml:space="preserve">
+    <value>Enable the heartbeat key</value>
+  </data>
+  <data name="ScannCycle" xml:space="preserve">
+    <value>Scanning cycle(ms)</value>
+  </data>
 </root>

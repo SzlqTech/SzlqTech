@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:SzlqTech.Core.Converters;assembly=SzlqTech.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:local="clr-namespace:SqlqTech.SharedView.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -23,16 +24,16 @@
             <Button
                 Margin="10"
                 Command="{Binding AddCommand}"
-                Content="添加" />
+                Content="{loc:Loc Add}" />
             <Button
                 Margin="10"
                 Command="{Binding DeleteCommand}"
-                Content="删除" />
+                Content="{loc:Loc Delete}" />
 
             <Button
                 Margin="10"
                 Command="{Binding SaveCommand}"
-                Content="保存" />
+                Content="{loc:Loc Save}" />
         </StackPanel>
         <DataGrid
             Grid.Row="1"
@@ -48,7 +49,17 @@
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Address}"
-                    Header="变量地址">
+                    Header="{loc:Loc Address}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding PortKey}"
+                    Header="{loc:Loc PortKey}">
                     <DataGridTextColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                             <Setter Property="VerticalAlignment" Value="Center" />
@@ -58,7 +69,7 @@
                 <DataGridComboBoxColumn
                     x:Name="dataType"
                     Width="*"
-                    Header="数据类型"
+                    Header="{loc:Loc DataType}"
                     SelectedValueBinding="{Binding DataTypeName}">
                     <DataGridComboBoxColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
@@ -70,7 +81,7 @@
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Description}"
-                    Header="描述">
+                    Header="{loc:Loc Description}">
                     <DataGridTextColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                             <Setter Property="VerticalAlignment" Value="Center" />
@@ -78,9 +89,9 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridCheckBoxColumn
-                    Width="0.4*"
+                    Width="0.5*"
                     Binding="{Binding IsEnableScan}"
-                    Header="是否扫描">
+                    Header="{loc:Loc EnableScan}">
                     <DataGridCheckBoxColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                             <Setter Property="VerticalAlignment" Value="Center" />
@@ -90,17 +101,22 @@
                     </DataGridCheckBoxColumn.CellStyle>
 
                 </DataGridCheckBoxColumn>
-                <!--<DataGridTemplateColumn Width="0.4*" Header="是否扫描">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox x:Name="enableScan" IsChecked="{Binding IsEnableScan}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                <DataGridCheckBoxColumn
+                    Width="0.5*"
+                    Binding="{Binding IsEnableHeartbeat}"
+                    Header="{loc:Loc EnableHeartbeatKey}">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="10,0,0,0" />
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
                 <DataGridTemplateColumn
                     Width="*"
                     md:DataGridAssist.ColumnHeaderPadding="0"
-                    Header="扫描周期(ms)">
+                    Header="{loc:Loc ScannCycle}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox SelectedIndex="{Binding ScanCycle}">

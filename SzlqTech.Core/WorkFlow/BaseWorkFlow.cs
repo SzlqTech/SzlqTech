@@ -93,7 +93,7 @@ namespace SzlqTech.Core.WorkFlow
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExecutingMachine_DataReceived(object? sender, TEventArgs<MachineData> e)
+        public  void ExecutingMachine_DataReceived(object? sender, TEventArgs<MachineData> e)
         {
             OnExecutingMachineDataReceived(e.Data);
         }
@@ -103,7 +103,7 @@ namespace SzlqTech.Core.WorkFlow
         /// 可重写的设备数据接收处理方法
         /// </summary>
         /// <param name="data"></param>
-        protected virtual void OnExecutingMachineDataReceived(MachineData data)
+        public virtual void OnExecutingMachineDataReceived(MachineData data)
         {
 
         }
@@ -164,27 +164,41 @@ namespace SzlqTech.Core.WorkFlow
         /// <returns></returns>
         protected virtual void OnScannerDataReceivedAsync(ScanData scanData)
         {
-            switch (scanData.CodeLevel)
-            {
-                //case HandPackLevel:
-                //    OnHandScannerModeReceivedAsync(scanData);
-                //    break;
-                //case PCSPackLevel:
-                //    OnPCSScannerDataReceivedAsync(scanData);
-                //    break;
-                //case MIDPackLevel:
-                //    OnMIDScannerDataReceivedAsync(scanData);
-                //    break;
-                //case CTNPackLevel:
-                //    OnCTNScannerDataReceivedAsync(scanData);
-                //    break;
-                //case PLTPackLevel:
-                //    OnPLTScannerDataReceivedAsync(scanData);
-                //    break;
-                //default:
-                //    throw new ArgumentException("编码层级配置错误");
-            }
+            //switch (scanData.CodeLevel)
+            //{
+            //    ba
+            //}
         } 
         #endregion
+
+        public async Task WaitDataActionAsync(Action action,string? Message=null)
+        {
+            try
+            {
+                await Task.Run(action);
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorHandler($"系统等待异常:{ex.Message}");
+            }
+            finally
+            {
+
+            }
+        }
+
+        public async Task<bool> WaitDataActionResultAsync(Action action, string? Message = null)
+        {
+            try
+            {
+                await Task.Run(action);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorHandler($"系统等待异常:{ex.Message}");
+                return false;
+            }      
+        }
     }
 }

@@ -74,6 +74,21 @@ namespace SzlqTech.Core.Consts
 
         public const string LoginError = "LoginError";
 
+        public const string Start="Start";
+
+        public const string Stop = "Stop";
+
+        public const string StartSuccess = "StartSuccess";
+
+        public const string StopSuccess = "StopSuccess";    
+
+        public const string StartError = "StartError";
+
+        public const string StopError = "StopError";    
+
+        public const string ProudctSelectedNull= "ProudctSelectedNull";
+
+        public const string PleaseRestorSystem="PleaseRestorSystem";
         #endregion
 
         #region Message

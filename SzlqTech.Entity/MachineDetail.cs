@@ -14,12 +14,11 @@ namespace SzlqTech.Entity
         /// 端口键
         /// </summary>
         [Description("端口键")]
-        [SugarColumn(IsIgnore = true)]
-        public string PortKey
-        {
-            get => Code;
-            set => Code = value;
-        }
+        [SugarColumn(ColumnName = "portKey",
+            IsNullable = false,
+            ColumnDescription = "地址键")]
+        public string PortKey { get; set; }
+       
 
         [Description("变量地址")]
         [SugarColumn(ColumnName = "address",
@@ -98,6 +97,11 @@ namespace SzlqTech.Entity
            IsNullable = false,
            ColumnDescription = "是否启用扫描")]
         public bool IsEnableScan { get; set; }
-        
+
+        [SugarColumn(ColumnName = "is_enable_heartbeat",
+          IsNullable = false,
+          ColumnDescription = "是否启用心跳键")]
+        public bool IsEnableHeartbeat { get; set; }
+
     }
 }

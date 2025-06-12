@@ -142,6 +142,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 数据类型 的本地化字符串。
+        /// </summary>
+        public static string DataType {
+            get {
+                return ResourceManager.GetString("DataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 默认导航页面 的本地化字符串。
         /// </summary>
         public static string DefaultNavigateView {
@@ -201,6 +210,24 @@ namespace SzlqTech.Localization.Resources {
         public static string Enable {
             get {
                 return ResourceManager.GetString("Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用心跳键 的本地化字符串。
+        /// </summary>
+        public static string EnableHeartbeatKey {
+            get {
+                return ResourceManager.GetString("EnableHeartbeatKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用扫描 的本地化字符串。
+        /// </summary>
+        public static string EnableScan {
+            get {
+                return ResourceManager.GetString("EnableScan", resourceCulture);
             }
         }
         
@@ -367,6 +394,24 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 请重新启动软件 的本地化字符串。
+        /// </summary>
+        public static string PleaseRestorSystem {
+            get {
+                return ResourceManager.GetString("PleaseRestorSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 端口键 的本地化字符串。
+        /// </summary>
+        public static string PortKey {
+            get {
+                return ResourceManager.GetString("PortKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 产品 的本地化字符串。
         /// </summary>
         public static string Product {
@@ -408,6 +453,15 @@ namespace SzlqTech.Localization.Resources {
         public static string ProductQrCode {
             get {
                 return ResourceManager.GetString("ProductQrCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 产品为空，请选择产品 的本地化字符串。
+        /// </summary>
+        public static string ProudctSelectedNull {
+            get {
+                return ResourceManager.GetString("ProudctSelectedNull", resourceCulture);
             }
         }
         
@@ -457,11 +511,38 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 扫描周期(ms) 的本地化字符串。
+        /// </summary>
+        public static string ScannCycle {
+            get {
+                return ResourceManager.GetString("ScannCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 启动 的本地化字符串。
         /// </summary>
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动失败 的本地化字符串。
+        /// </summary>
+        public static string StartError {
+            get {
+                return ResourceManager.GetString("StartError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动成功 的本地化字符串。
+        /// </summary>
+        public static string StartSuccess {
+            get {
+                return ResourceManager.GetString("StartSuccess", resourceCulture);
             }
         }
         
@@ -480,6 +561,33 @@ namespace SzlqTech.Localization.Resources {
         public static string StationName {
             get {
                 return ResourceManager.GetString("StationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 停止 的本地化字符串。
+        /// </summary>
+        public static string Stop {
+            get {
+                return ResourceManager.GetString("Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 停止失败 的本地化字符串。
+        /// </summary>
+        public static string StopError {
+            get {
+                return ResourceManager.GetString("StopError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 停止成功 的本地化字符串。
+        /// </summary>
+        public static string StopSuccess {
+            get {
+                return ResourceManager.GetString("StopSuccess", resourceCulture);
             }
         }
         
