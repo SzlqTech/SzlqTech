@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Masuit.Tools;
-using Masuit.Tools.Systems;
 using NLog;
 using Prism.Regions;
 using SqlqTech.SharedView.Vo;
@@ -73,7 +72,7 @@ namespace SqlqTech.SharedView.ViewModels
                     {
                         if (item.Id == 0)
                         {
-                            item.Id = SnowFlakeNew.LongId;
+                            item.Id = SnowFlake.NewLongId;
                         }
                         if (item.MachineId == 0)
                         {

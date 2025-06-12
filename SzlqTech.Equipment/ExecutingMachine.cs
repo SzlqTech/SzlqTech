@@ -1,5 +1,6 @@
 ﻿using HslCommunication.Core.Net;
 using HslCommunication.ModBus;
+using HslCommunication.Profinet.Beckhoff;
 using HslCommunication.Profinet.Inovance;
 using HslCommunication.Profinet.Siemens;
 using NLog;
@@ -109,7 +110,7 @@ namespace SzlqTech.Equipment
         {
             TCPDeviceDictionary.Clear();
 
-            var machineSettings = machineSettingService.List(o => o.StatusEnable);
+            var machineSettings = machineSettingService.List(o => o.IsEnable);
             if (machineSettings.Count == 0)
             {
                 throw new EquipmentException("沒有使能的PLC");
@@ -126,6 +127,10 @@ namespace SzlqTech.Equipment
                     case MachineModel.SiemensS1200:
                         var s1200 = new SiemensS7Net(SiemensPLCS.S1200, machineSetting.PortKey);
                         TCPDeviceDictionary.Add(machineSetting.PortKey, s1200);
+                        break;
+                    case MachineModel.SiemensS1500:
+                        var s1500 = new SiemensS7Net(SiemensPLCS.S1500, machineSetting.PortKey);
+                        TCPDeviceDictionary.Add(machineSetting.PortKey, s1500);
                         break;
 
                     case MachineModel.InovanceAMNet:
@@ -145,6 +150,14 @@ namespace SzlqTech.Equipment
                     case MachineModel.ModbusTcp:
                         var modbusTcp = new ModbusTcpNet(machineSetting.PortKey);
                         TCPDeviceDictionary.Add(machineSetting.PortKey, modbusTcp);
+                        break;
+                    case MachineModel.BeckoffAds2:
+                        var beckoff2Tcp = new BeckhoffAdsNet(machineSetting.PortKey,801);
+                        TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff2Tcp);
+                        break;
+                    case MachineModel.BeckoffAds3:
+                        var beckoff3Tcp = new BeckhoffAdsNet(machineSetting.PortKey, 851);
+                        TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff3Tcp);
                         break;
                     default:
                         throw new NotImplementedException("暂未支持");
@@ -223,17 +236,19 @@ namespace SzlqTech.Equipment
 
         public void ExcuteHeartbeat()
         {
+            logger.InfoHandler("开始执行心跳扫描任务");
             while (IsOpen)
             {       
                 Parallel.ForEach(HeartbeatScanDatas, item =>
                 {
                     try
                     {
-                        item.SendPositiveSignal();
+                        item.SendHeartbeatPositiveSignal(50);
                     }
                     catch (Exception ex)
                     {
                         logger.ErrorHandler(ex.Message);
+                        logger.InfoHandler("执行心跳扫描任务错误");
                     }
                 });
                 Thread.Sleep(100);
@@ -252,6 +267,7 @@ namespace SzlqTech.Equipment
         {
             IsOpen = false;
             HeartbeatTask?.Wait();
+            logger.InfoHandler("停止执行心跳扫描任务");
         }
 
         /// <summary>

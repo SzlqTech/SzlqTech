@@ -61,7 +61,7 @@
                     Margin="10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Background="Transparent"
+                    
                     BorderThickness="1"
                     Command="{Binding StopCommand}">
                     <Button.Content>

@@ -82,6 +82,14 @@
                     </DataGridTextColumn.CellStyle>
 
                 </DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="{loc:Loc Enable}" Width="0.5*" Binding="{Binding IsEnable}" >
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="10 0"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
                 <DataGridTextColumn
                     Width="*"
                     md:TextFieldAssist.TextBoxIsMultiLine="True"

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Masuit.Tools.Systems;
 using NLog;
 using Prism.Regions;
 using SqlqTech.SharedView.Vo;
@@ -11,7 +10,6 @@ using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
-using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
@@ -68,7 +66,7 @@ namespace SqlqTech.SharedView.ViewModels
                             item.MachineModel = (short)model;
                             if (item.Id == 0)
                             {
-                                item.Id = SnowFlakeNew.LongId;
+                                item.Id = SnowFlake.NewLongId;
                             }
                         }
                         List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);

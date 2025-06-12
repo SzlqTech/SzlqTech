@@ -337,6 +337,36 @@ namespace SzlqTech.Equipment.Machine
             return operateResult.IsSuccess;
         }
 
+        public static bool SendHeartbeatPositiveSignal(this PLCData item, int signalTime = 10, bool failThrowEx = true)
+        {
+            if (item.DataType != DataType.Bool)
+            {
+                throw new ArgumentException("当前写入的数据类型与配置的不一致");
+            }
+
+            var operateResult = item.PLC.Write(item.Address, true).Then(() =>
+            {
+                Thread.Sleep(signalTime);
+                var or = item.PLC.Write(item.Address, false);
+                Thread.Sleep(signalTime);
+                return or;
+            });
+            if (!operateResult.IsSuccess)
+            {
+                string writeFailMessage = $"PLC发送信号失败, 地址为[{item.Address}]";
+                if (failThrowEx)
+                {
+                    //throw new EquipmentException(writeFailMessage);
+                }
+                else
+                {
+                    Logger.Error(writeFailMessage);
+                }
+            }
+            //Logger.Info($"地址为[{item.Address}]$发送时间为[{signalTime}]的正脉冲");
+            return operateResult.IsSuccess;
+        }
+
         public static async Task SendPositiveSignalAsync(this PLCData item, int signalTime = 10)
         {
             if (item.DataType != DataType.Bool)

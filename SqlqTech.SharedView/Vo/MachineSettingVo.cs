@@ -21,6 +21,9 @@ namespace SqlqTech.SharedView.Vo
         [ObservableProperty]
         public string selectedMachineType;
 
+        [ObservableProperty]
+        public bool isEnable;
+
 
     }
 }

@@ -2,14 +2,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Masuit.Tools;
-using Masuit.Tools.Systems;
 using NLog;
 using Prism.Regions;
-
 using SqlqTech.Core.Vo;
-
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
+using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
@@ -59,7 +57,7 @@ namespace SqlqTech.SharedView.ViewModels
                         {
                             if (item.Id == 0)
                             {
-                                item.Id = SnowFlake.LongId;
+                                item.Id = SnowFlake.NewLongId;
                             }
                         }
                         List<Product> products = mapper.Map<List<Product>>(ProductVos);
