@@ -20,7 +20,7 @@ namespace SzlqTech.Core.WorkFlow.Views
     /// <summary>
     /// InnoLightDataRecord.xaml 的交互逻辑
     /// </summary>
-    [View(AppViews.InnoLightDataRecordView, AppLocalizations.DataQuery, AppLocalizations.WorkFlow, "dataQuery", "workFlow", Ordinal = 0)]
+    [View(AppViews.InnoLightDataRecordView, AppLocalizations.DataQuery, AppLocalizations.WorkFlow, "dataQuery", "workFlow", Ordinal = 1)]
     public partial class InnoLightDataRecord : UserControl
     {
         public InnoLightDataRecord()

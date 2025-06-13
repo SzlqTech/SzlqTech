@@ -50,7 +50,7 @@
                 ItemsSource="{Binding UserVos}"
                 Style="{StaticResource baseDataGrid}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn
+                    <DataGridTextColumn              
                         Width="*"
                         Binding="{Binding UserName}"
                         Header="名称">
@@ -71,16 +71,19 @@
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding DisPlayPassword}"
-                        Header="密码">
-                        <DataGridTextColumn.CellStyle>
-                            <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
+                    <DataGridTemplateColumn  Header="密码" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <PasswordBox                                               
+                                    md:PasswordBoxAssist.Password="{Binding DisPlayPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    md:TextFieldAssist.HasClearButton="True"
+                                    DockPanel.Dock="Top"
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignPasswordBox}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridComboBoxColumn
                         x:Name="cbox"
                         Width="*"

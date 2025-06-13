@@ -84,6 +84,7 @@ namespace SzlqTech.Core.WorkFlow
         {
             ExecutingMachine.OpenMachine();
             ExecutingMachine.RegisterMachineEvent();
+            ExecutingMachine.DataReceived -= ExecutingMachine_DataReceived;
             ExecutingMachine.DataReceived += ExecutingMachine_DataReceived;
             ExecutingMachine.StartMachine();
         }
@@ -128,6 +129,7 @@ namespace SzlqTech.Core.WorkFlow
         {
             foreach (IScanner scanner in ExecutingScanner.ScannerList)
             {
+                scanner.DataReceived -= Scanner_DataReceived;
                 scanner.DataReceived += Scanner_DataReceived;
                 scanner.Open();
             }
@@ -211,6 +213,54 @@ namespace SzlqTech.Core.WorkFlow
                 return false;
             }      
         }
+
+        #region 多任务加锁
+
+        /// <summary>
+        /// 数据库多线程任务操作加锁
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public virtual async Task WaitUpdateLockAsync(Func<Task> task)
+        {
+            await UpdateLock.WaitAsync();
+            try
+            {
+                await task();
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorHandler($"更新锁异常:{ex.Message}");
+            }
+            finally
+            {
+                UpdateLock.Release();
+            }
+        }
+
+        /// <summary>
+        /// 数据库多线程任务操作加锁
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public virtual async Task WaitUpdateActionAsync(Action action)
+        {
+            await UpdateLock.WaitAsync();
+            try
+            {
+                await Task.Run(action);
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorHandler($"更新锁异常:{ex.Message}");
+            }
+            finally
+            {
+                UpdateLock.Release();
+            }
+        }
+
+        #endregion
 
 
     }

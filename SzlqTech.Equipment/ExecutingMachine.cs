@@ -1,6 +1,5 @@
 ﻿using HslCommunication.Core.Net;
 using HslCommunication.ModBus;
-using HslCommunication.Profinet.Beckhoff;
 using HslCommunication.Profinet.Inovance;
 using HslCommunication.Profinet.Siemens;
 using NLog;
@@ -165,14 +164,14 @@ namespace SzlqTech.Equipment
                         var modbusTcp = new ModbusTcpNet(machineSetting.PortKey);
                         TCPDeviceDictionary.Add(machineSetting.PortKey, modbusTcp);
                         break;
-                    case MachineModel.BeckoffAds2:
-                        var beckoff2Tcp = new BeckhoffAdsNet(machineSetting.PortKey,801);
-                        TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff2Tcp);
-                        break;
-                    case MachineModel.BeckoffAds3:
-                        var beckoff3Tcp = new BeckhoffAdsNet(machineSetting.PortKey, 851);
-                        TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff3Tcp);
-                        break;
+                    //case MachineModel.BeckoffAds2:
+                    //    var beckoff2Tcp = new BeckhoffAdsNet(machineSetting.PortKey,801);
+                    //    TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff2Tcp);
+                    //    break;
+                    //case MachineModel.BeckoffAds3:
+                    //    var beckoff3Tcp = new BeckhoffAdsNet(machineSetting.PortKey, 851);
+                    //    TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff3Tcp);
+                    //    break;
                     default:
                         throw new NotImplementedException("暂未支持");
                 }
@@ -192,7 +191,11 @@ namespace SzlqTech.Equipment
                     var tcpDevice = pair.Value;
                     tcpDevice.ConnectTimeOut = 1000;
                     var operateResult = tcpDevice.ConnectServer().EnsureSuccess($"[{pair.Key}]连接网口");
-                    if (!operateResult.IsSuccess) continue;
+                    if (!operateResult.IsSuccess)
+                    {
+                        logger.ErrorHandler($"[{pair.Key}]连接网口失败: {operateResult.Message}");
+                        continue;
+                    }
                     string code = pair.Key;
                     var machineSetting = machineSettingService.GetByCode(code)!;
                     var machineDetails = machineDetailService.List(m =>
@@ -296,6 +299,9 @@ namespace SzlqTech.Equipment
             {
                 IsOpen = false;
                 HeartbeatTask?.Wait();
+                //更新PLC链接状态
+                HeartbeatScanDatas.ForEach(item => item.OperateResult.IsSuccess = false);
+                RaisePLCDataReceived(HeartbeatScanDatas);
                 logger.InfoHandler("停止执行心跳扫描任务");
             }
             

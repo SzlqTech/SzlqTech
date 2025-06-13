@@ -6,7 +6,6 @@ using Prism.Ioc;
 using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
@@ -69,6 +68,30 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         [ObservableProperty]
         public ProductVo selectedProductVo;
+
+        #region PLC读取数据端口键
+
+        public string FirstReadSignalKey = "FirstReadSignal";
+
+        public string SecondReadSignalKey = "SecondReadSignal";
+
+        public string ThirdReadSignalKey = "ThirdReadSignal";
+
+        public string FourthReadSignalKey = "FourthReadSignal";
+
+        public string FifthReadSignalKey = "FifthReadSignal";
+
+        public string SixthReadSignalKey = "SixthReadSignal";
+
+        public string SeventhReadSignalKey = "SeventhReadSignal";
+
+        public string EighthReadSignalKey = "EighthReadSignal";
+
+        public string NinthReadSignalKey = "NinthReadSignal";
+
+        public string TenthReadSignalKey = "TenthReadSignal";
+
+        #endregion
 
 
         [RelayCommand]

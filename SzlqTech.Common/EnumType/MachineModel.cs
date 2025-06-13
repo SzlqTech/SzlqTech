@@ -38,11 +38,11 @@ namespace SzlqTech.Common.EnumType
         [Description("汇川AM系列以太网驱动")]
         InovanceAMNet = 23,
 
-        [Description("倍福Twincat2系列以太网驱动")]
-        BeckoffAds2 =24,
+        //[Description("倍福Twincat2系列以太网驱动")]
+        //BeckoffAds2 =24,
 
-        [Description("倍福Twincat3系列以太网驱动")]
-        BeckoffAds3 = 25
+        //[Description("倍福Twincat3系列以太网驱动")]
+        //BeckoffAds3 = 25
 
         //[Description("汇川H3U系列串口驱动")]
         //InovanceH3USerial = 30,
