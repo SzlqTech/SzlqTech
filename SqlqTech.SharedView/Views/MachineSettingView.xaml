@@ -73,7 +73,7 @@
                 </DataGridComboBoxColumn>
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding PortName}"
+                    Binding="{Binding PortKey}"
                     Header="{loc:Loc Address}">
                     <DataGridTextColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">

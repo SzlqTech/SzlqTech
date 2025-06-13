@@ -11,6 +11,11 @@ namespace SzlqTech.Equipment
         event EventHandler<TEventArgs<MachineData>>? DataReceived;
 
         /// <summary>
+        /// plcz状态接受事件
+        /// </summary>
+        event EventHandler<TEventArgs<PLCData>>? PLCDataReceived;
+
+        /// <summary>
         /// 注册设备事件
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>

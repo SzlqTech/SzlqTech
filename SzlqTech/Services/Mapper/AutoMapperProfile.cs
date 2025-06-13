@@ -12,7 +12,8 @@ namespace SzlqTech.Services.Mapper
    {
         public AutoMapperProfile()
         {
-            CreateMap<MachineSetting, MachineSettingVo>().ReverseMap();
+            CreateMap<MachineSetting, MachineSettingVo>().ForMember(dest => dest.PortKey, opt => opt.MapFrom(src => src.Code))
+                .ForMember(dest=>dest.PortKey,opt=>opt.MapFrom(src=>src.PortKey)).ReverseMap();
             CreateMap<MachineDetail, MachineDetailVo>().ForMember(dest => dest.ScanCycleValue, opt => opt.MapFrom(src => src.ScanCycle))           
                 .ForMember(dest=>dest.IsEnableScan,opt=>opt.MapFrom(src=>src.StatusEnable))
                 .ReverseMap();

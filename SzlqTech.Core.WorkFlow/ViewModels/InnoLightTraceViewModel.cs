@@ -6,6 +6,8 @@ using Prism.Ioc;
 using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using SzlqTech.Common.Extensions;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
@@ -13,6 +15,7 @@ using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.WorkFlow.Extensions;
 using SzlqTech.Core.WorkFlow.Vos;
 using SzlqTech.Entity;
+using SzlqTech.Equipment.Machine;
 using SzlqTech.IService;
 using SzlqTech.Localization;
 
@@ -24,21 +27,28 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         private readonly IHostDialogService dialog;
         private readonly IProductService productService;
         private readonly IMapper mapper;
+        private readonly IMachineSettingService machineSettingService;
         private InnoLightWorkflow workflow;
         private readonly IEventAggregator aggregator;
 
-        public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,IMapper mapper)
+        public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,IMapper mapper,IMachineSettingService machineSettingService)
         {
             Title = LocalizationService.GetString(AppLocalizations.DataCollection);
             this.dialog = dialog;
             this.productService = productService;
             this.mapper = mapper;
+            this.machineSettingService = machineSettingService;
             workflow = ContainerLocator.Container.Resolve<InnoLightWorkflow>();
+            workflow.PLCDataReceived -= OnMachineDataReceived;
+            workflow.PLCDataReceived += OnMachineDataReceived;
             aggregator = ContainerLocator.Container.Resolve<IEventAggregator>();
             aggregator.ResgiterMachineDataModel(OnMachineDataReceived, "InnoLightTraceViewModel");
         }
 
-        
+        private void OnMachineDataReceived(object? sender, TEventArgs<PLCData> e)
+        {
+            
+        }
 
         [ObservableProperty]
         public string startContent = LocalizationService.GetString(AppLocalizations.Start);
@@ -64,7 +74,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                     result = await workflow.WaitDataActionResultAsync(workflow.StartExecute);
                 });
                 if (result) SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
-                else SendMessage(LocalizationService.GetString(AppLocalizations.StopError));
+                else SendMessage(LocalizationService.GetString(AppLocalizations.StartError));
             }         
         }
 
@@ -110,6 +120,16 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         #endregion
 
+
+        public async Task Init()
+        {
+            List<MachineSetting> machineSettings =await machineSettingService.ListAsync(o=>o.IsEnable);
+            if (machineSettings == null || machineSettings.Count == 0) return;
+            foreach (var item in machineSettings)
+            {
+
+            }
+        }
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {

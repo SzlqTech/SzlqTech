@@ -1,4 +1,5 @@
 ﻿using Prism.Events;
+using SzlqTech.Equipment.Machine;
 
 
 namespace SzlqTech.Core.Events
@@ -30,7 +31,7 @@ namespace SzlqTech.Core.Events
             aggregator.GetEvent<BusyAsyncEvent>().Publish(new BusyAsyncModel()
             {
                 Filter = filterName,
-                IsOpen= message.IsOpen
+                IsOpen = message.IsOpen
             });
         }
 
@@ -59,7 +60,7 @@ namespace SzlqTech.Core.Events
             aggregator.GetEvent<SnackBarMessageEvent>().Publish(new SnackBarModel()
             {
                 Filter = filterName,
-                Message= message
+                Message = message
             });
         }
 
@@ -92,5 +93,6 @@ namespace SzlqTech.Core.Events
                     return m.Filter.Equals(filterName);
                 });
         }
+      
     }
 }

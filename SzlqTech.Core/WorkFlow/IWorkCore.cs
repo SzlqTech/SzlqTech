@@ -6,11 +6,13 @@ namespace SzlqTech.Core.WorkFlow
         /// <summary>
         /// 启动流程
         /// </summary>
-        void StartExecute();
+        bool StartExecute();
+
+      
 
         /// <summary>
         /// 停止流程
         /// </summary>
-        void StopExecute();
+        bool StopExecute();
     }
 }

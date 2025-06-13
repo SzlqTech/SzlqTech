@@ -24,14 +24,18 @@ namespace SzlqTech.Entity
         }
 
        
-        [SugarColumn(IsIgnore = true)]
-        public string PortKey
-        {
-            get => Code;
-            set => Code = value;
-        }
+        //[SugarColumn(IsIgnore = true)]
+        //public string PortKey
+        //{
+        //    get => Code;
+        //    set => Code = value;
+        //}
 
-       
+        [Description("端口键")]
+        [SugarColumn(ColumnName = "port_key", ColumnDescription = "端口键", Length = 50)]
+        public string PortKey { get; set; }
+
+
         [Description("端口名称")]
         [SugarColumn(ColumnName = "port_name", ColumnDescription = "端口名称", Length = 50)]
         public string PortName { get; set; } = null!;

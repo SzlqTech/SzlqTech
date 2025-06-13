@@ -25,25 +25,33 @@ namespace SzlqTech.Core.WorkFlow
             this.ExecutingScanner = ExecutingScanner;
         }
 
-        public void StartExecute()
+        public bool StartExecute()
         {
+            bool result = false;
             try
             {
                 ExecutingScanner.GetScanners();
                 ExecutingMachine.GetMachines();
                 StartScanners();
                 StartMachine();
+                result = true;
+                return result;
             }
             catch (Exception ex)
             {
                 logger.ErrorHandler(ex, $"程序异常即将停止, {ex.Message}");
                 StopExecute();
-                return;
+                return  false;
+            }
+            finally
+            {
+                 
             }
         }
 
-        public void StopExecute()
+        public bool StopExecute()
         {
+            bool result = false;
             try
             {
                 
@@ -53,11 +61,14 @@ namespace SzlqTech.Core.WorkFlow
                 UpdateLock.Wait();
                 //停止扫描设备
                 StopScanners();
-              
+                result= true;
+                return result;
+
             }
             catch (Exception ex)
             {
                 logger.ErrorHandler(ex, "停止发生异常,原因：" + ex.Message);
+                return  false;
             }
             finally
             {
@@ -187,12 +198,12 @@ namespace SzlqTech.Core.WorkFlow
             }
         }
 
-        public async Task<bool> WaitDataActionResultAsync(Action action, string? Message = null)
+        public async Task<bool> WaitDataActionResultAsync(Func<bool> action, string? Message = null)
         {
             try
             {
-                await Task.Run(action);
-                return true;
+                var res=  await Task.Run(action);
+                return res;
             }
             catch (Exception ex)
             {
@@ -200,5 +211,7 @@ namespace SzlqTech.Core.WorkFlow
                 return false;
             }      
         }
+
+
     }
 }

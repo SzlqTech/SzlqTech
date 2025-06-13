@@ -1,5 +1,6 @@
 ﻿
 
+using HslCommunication;
 using HslCommunication.Core;
 using SzlqTech.Common.EnumType;
 
@@ -16,6 +17,16 @@ namespace SzlqTech.Equipment.Machine
             Address = address;
             DataType = dataType;
             DecimalPointShiftType = decimalPointShiftType;
+        }
+
+        public PLCData(string portKey, IReadWriteDevice plc, string address, DataType dataType, DecimalPointShiftType decimalPointShiftType, OperateResult operateResult)
+        {
+            PortKey = portKey;
+            PLC = plc;
+            Address = address;
+            DataType = dataType;
+            DecimalPointShiftType = decimalPointShiftType;
+            OperateResult = operateResult;
         }
 
         // public PLCScanItem(string portKey, string address, Type dataType, dynamic data)
@@ -44,5 +55,7 @@ namespace SzlqTech.Equipment.Machine
         public DataType DataType { get; set; }
 
         public DecimalPointShiftType DecimalPointShiftType { get; set; }
+
+        public OperateResult OperateResult { get; set; } 
     }
 }

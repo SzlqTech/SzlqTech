@@ -80,6 +80,9 @@ namespace SzlqTech.Equipment
 
         #region 数据接受事件
         public event EventHandler<TEventArgs<MachineData>>? DataReceived;
+
+
+        public event EventHandler<TEventArgs<PLCData>>? PLCDataReceived;
         /// <summary>
         /// 引发设备数据接收事件
         /// </summary>
@@ -88,6 +91,11 @@ namespace SzlqTech.Equipment
         {
             DataReceived?.Invoke(this, new TEventArgs<MachineData>(data));
         } 
+
+        public void RaisePLCDataReceived(PLCData data)
+        {
+            PLCDataReceived?.Invoke(this, new TEventArgs<PLCData>(data));
+        }
         #endregion
 
         #region 设备启动顺序
@@ -144,9 +152,15 @@ namespace SzlqTech.Equipment
                         break;
 
                     case MachineModel.InovanceH3UNet:
-                        var h3u = new InovanceTcpNet(InovanceSeries.H5U, machineSetting.PortKey);
+                        var h3u = new InovanceTcpNet(InovanceSeries.H3U, machineSetting.PortKey);
                         TCPDeviceDictionary.Add(machineSetting.PortKey, h3u);
                         break;
+
+                    case MachineModel.InovanceH5UNet:
+                        var h5u = new InovanceTcpNet(InovanceSeries.H5U, machineSetting.PortKey);
+                        TCPDeviceDictionary.Add(machineSetting.PortKey, h5u);
+                        break;
+
                     case MachineModel.ModbusTcp:
                         var modbusTcp = new ModbusTcpNet(machineSetting.PortKey);
                         TCPDeviceDictionary.Add(machineSetting.PortKey, modbusTcp);
@@ -170,13 +184,15 @@ namespace SzlqTech.Equipment
         /// </summary>
         public void OpenMachine()
         {
+            HeartbeatScanDatas.Clear();
             try
             {
                 foreach (var pair in TCPDeviceDictionary)
                 {
                     var tcpDevice = pair.Value;
                     tcpDevice.ConnectTimeOut = 1000;
-                    tcpDevice.ConnectServer().EnsureSuccess($"[{pair.Key}]连接网口");
+                    var operateResult = tcpDevice.ConnectServer().EnsureSuccess($"[{pair.Key}]连接网口");
+                    if (!operateResult.IsSuccess) continue;
                     string code = pair.Key;
                     var machineSetting = machineSettingService.GetByCode(code)!;
                     var machineDetails = machineDetailService.List(m =>
@@ -186,7 +202,7 @@ namespace SzlqTech.Equipment
                         if (machineDetail.IsEnableHeartbeat)
                         {
                             var plcData = new PLCData(machineDetail.PortKey, tcpDevice, machineDetail.Address,
-                                machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType);
+                                machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType, operateResult);
                             
                             HeartbeatScanDatas.Add(plcData);
                         }
@@ -204,12 +220,22 @@ namespace SzlqTech.Equipment
 
                     }
                 }
-                IsOpen = true;
+                //IsOpen = true;
             }
             catch (Exception ex)
             {
                 logger.ErrorHandler($"打开机器失败:[{ex.Message}]");
-                IsOpen = false;
+                //IsOpen = false;
+            }
+            finally
+            {
+                //只有一个plc链接成功就可以算开启成功
+                if (HeartbeatScanDatas.Count > 0) IsOpen = true;
+                else
+                {
+                    IsOpen = false;
+                    throw new EquipmentException("没有可用的PLC设备，请检查网络连接或PLC配置。");
+                }
             }
         }
 
@@ -243,7 +269,8 @@ namespace SzlqTech.Equipment
                 {
                     try
                     {
-                        item.SendHeartbeatPositiveSignal(50);
+                        if(item.OperateResult.IsSuccess)
+                            item.SendHeartbeatPositiveSignal(50);
                     }
                     catch (Exception ex)
                     {
@@ -265,9 +292,13 @@ namespace SzlqTech.Equipment
         /// </summary>
         public void StopMachine()
         {
-            IsOpen = false;
-            HeartbeatTask?.Wait();
-            logger.InfoHandler("停止执行心跳扫描任务");
+            if (IsOpen)
+            {
+                IsOpen = false;
+                HeartbeatTask?.Wait();
+                logger.InfoHandler("停止执行心跳扫描任务");
+            }
+            
         }
 
         /// <summary>
@@ -288,6 +319,7 @@ namespace SzlqTech.Equipment
         {
             PLCScanDictionary.ClearToStopScan();
             PLCDictionary.Clear();
+            HeartbeatScanDatas.Clear();
             foreach (var pair in TCPDeviceDictionary)
             {
                 var tcpDevice = pair.Value;
