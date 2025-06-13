@@ -70,8 +70,9 @@ namespace SqlqTech.SharedView.ViewModels
                             }
                         }
                         List<MachineSetting> list = mapper.Map<List<MachineSetting>>(MachineSettingVos);
-                        await SettingService.SaveOrUpdateBatchAsync(list);
-                        SendSuccessMsg();
+                        if(await SettingService.SaveOrUpdateBatchAsync(list))
+                         SendSuccessMsg();
+                        else SendErrorMsg();
                     }
                     catch (Exception ex)
                     {
@@ -112,7 +113,7 @@ namespace SqlqTech.SharedView.ViewModels
         {
             if (MachineSettingVos==null|| MachineSettingVos.Count==0) return false;
             if (MachineSettingVos.Any(o => o.SelectedMachineType == null)) return false;         
-            if (MachineSettingVos.Any(o=>string.IsNullOrEmpty(o.PortKey)||!o.PortName.Contains("."))) return false;
+            if (MachineSettingVos.Any(o=>string.IsNullOrEmpty(o.PortKey)||!o.PortKey.Contains("."))) return false;
             if(MachineSettingVos.GroupBy(o=>o.PortKey).Any(g=>g.Count()>1)) return false;
             if (MachineSettingVos.Any(o => string.IsNullOrEmpty(o.Description))) return false;
             return true;

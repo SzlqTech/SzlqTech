@@ -13,7 +13,7 @@ namespace SzlqTech.Equipment
         /// <summary>
         /// plcz状态接受事件
         /// </summary>
-        event EventHandler<TEventArgs<PLCData>>? PLCDataReceived;
+        event EventHandler<TEventArgs<List<MachineLinkData>>>? PLCDataReceived;
 
         /// <summary>
         /// 注册设备事件

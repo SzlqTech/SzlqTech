@@ -35,7 +35,7 @@ namespace SzlqTech.Equipment
         /// <summary>
         /// 心跳扫描数据列表
         /// </summary>
-        private List<PLCData> HeartbeatScanDatas=new List<PLCData>();
+        private List<MachineLinkData> HeartbeatScanDatas=new List<MachineLinkData>();
 
         /// <summary>
         /// 心跳键
@@ -82,7 +82,7 @@ namespace SzlqTech.Equipment
         public event EventHandler<TEventArgs<MachineData>>? DataReceived;
 
 
-        public event EventHandler<TEventArgs<PLCData>>? PLCDataReceived;
+        public event EventHandler<TEventArgs<List<MachineLinkData>>>? PLCDataReceived;
         /// <summary>
         /// 引发设备数据接收事件
         /// </summary>
@@ -92,9 +92,9 @@ namespace SzlqTech.Equipment
             DataReceived?.Invoke(this, new TEventArgs<MachineData>(data));
         } 
 
-        public void RaisePLCDataReceived(PLCData data)
+        public void RaisePLCDataReceived(List<MachineLinkData> data)
         {
-            PLCDataReceived?.Invoke(this, new TEventArgs<PLCData>(data));
+            PLCDataReceived?.Invoke(this, new TEventArgs<List<MachineLinkData>>(data));
         }
         #endregion
 
@@ -201,9 +201,9 @@ namespace SzlqTech.Equipment
                     {
                         if (machineDetail.IsEnableHeartbeat)
                         {
-                            var plcData = new PLCData(machineDetail.PortKey, tcpDevice, machineDetail.Address,
+                            var plcData = new MachineLinkData(machineDetail.PortKey, tcpDevice, machineDetail.Address,
                                 machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType, operateResult);
-                            
+                            plcData.PLCPortKey = code;
                             HeartbeatScanDatas.Add(plcData);
                         }
                         else
@@ -219,16 +219,15 @@ namespace SzlqTech.Equipment
                         }
 
                     }
-                }
-                //IsOpen = true;
+                }         
             }
             catch (Exception ex)
             {
-                logger.ErrorHandler($"打开机器失败:[{ex.Message}]");
-                //IsOpen = false;
+                logger.ErrorHandler($"打开机器失败:[{ex.Message}]");          
             }
             finally
-            {
+            {           
+                RaisePLCDataReceived(HeartbeatScanDatas);
                 //只有一个plc链接成功就可以算开启成功
                 if (HeartbeatScanDatas.Count > 0) IsOpen = true;
                 else
@@ -247,6 +246,7 @@ namespace SzlqTech.Equipment
         {
             foreach (var plcScanData in PLCScanDictionary.PLCScanDict.Select(pair => pair.Value))
             {
+                plcScanData.DataReceived -= PLCScanData_DataReceived;
                 plcScanData.DataReceived += PLCScanData_DataReceived;
             }
         }
@@ -278,7 +278,7 @@ namespace SzlqTech.Equipment
                         logger.InfoHandler("执行心跳扫描任务错误");
                     }
                 });
-                Thread.Sleep(100);
+                Thread.Sleep(500);
             }
            
         }

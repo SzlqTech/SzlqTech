@@ -14,7 +14,7 @@ namespace SzlqTech.Core.WorkFlow
     {
         private readonly IExecutingMachine executingMachine;
         private IEventAggregator aggregator;
-        public event EventHandler<TEventArgs<PLCData>>? PLCDataReceived;
+        public event EventHandler<TEventArgs<List<MachineLinkData>>>? PLCDataReceived;
 
         public InnoLightWorkflow(IExecutingMachine ExecutingMachine, IExecutingScanner ExecutingScanner) : base(ExecutingMachine, ExecutingScanner)
         {
@@ -24,15 +24,15 @@ namespace SzlqTech.Core.WorkFlow
             executingMachine.PLCDataReceived += ExecutingMachine_PLCDataReceived;
         }
 
-        private void ExecutingMachine_PLCDataReceived(object? sender, Common.Extensions.TEventArgs<PLCData> e)
+        private void ExecutingMachine_PLCDataReceived(object? sender, Common.Extensions.TEventArgs<List<MachineLinkData>> e)
         {
             if(e.Data == null) return;  
             RaisePLCDataReceived(e.Data);
         }
 
-        public void RaisePLCDataReceived(PLCData data)
+        public void RaisePLCDataReceived(List<MachineLinkData> data)
         {
-            PLCDataReceived?.Invoke(this, new Common.Extensions.TEventArgs<PLCData>(data));
+            PLCDataReceived?.Invoke(this, new Common.Extensions.TEventArgs<List<MachineLinkData>>(data));
         }
 
         public override void OnExecutingMachineDataReceived(MachineData data)

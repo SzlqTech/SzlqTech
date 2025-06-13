@@ -45,9 +45,17 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             aggregator.ResgiterMachineDataModel(OnMachineDataReceived, "InnoLightTraceViewModel");
         }
 
-        private void OnMachineDataReceived(object? sender, TEventArgs<PLCData> e)
+        private void OnMachineDataReceived(object? sender, TEventArgs<List<MachineLinkData>> e)
         {
-            
+            if(e.Data == null || e.Data.Count == 0) return;
+            foreach (var item in e.Data)
+            {
+                var model= MachineLinks.FirstOrDefault(o => o.PortKey == item.PLCPortKey);
+                if (model != null)
+                {
+                   model.IsLink = item.OperateResult.IsSuccess;
+                }
+            }
         }
 
         [ObservableProperty]
@@ -125,28 +133,36 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         {
             List<MachineSetting> machineSettings =await machineSettingService.ListAsync(o=>o.IsEnable);
             if (machineSettings == null || machineSettings.Count == 0) return;
+            MachineLinks = new ObservableCollection<MachineLinkVo>();
             foreach (var item in machineSettings)
             {
-
+                MachineLinkVo vo= new MachineLinkVo()
+                {
+                    Name = item.Description??string.Empty,
+                    PortKey= item.PortKey,
+                    IsLink = false
+                };
+                MachineLinks.Add(vo);
             }
         }
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
-            MachineLinks = new ObservableCollection<MachineLinkVo>()
-            {
-                new MachineLinkVo(){Name="OE Tray上料",IsLink=false},
-                new MachineLinkVo(){Name="载具换盘",IsLink=false},
-                new MachineLinkVo(){Name="清洁+拔防尘塞",IsLink=false},
-                new MachineLinkVo(){Name="OE点胶",IsLink=false},
-                new MachineLinkVo(){Name="housing 上料",IsLink=true},
-                new MachineLinkVo(){Name="点胶合装",IsLink=false},
-                new MachineLinkVo(){Name="拧螺丝",IsLink=false},
-                new MachineLinkVo(){Name="升降回流",IsLink=false},
-                new MachineLinkVo(){Name="检测",IsLink=false},
-                new MachineLinkVo(){Name="烤盘上下料",IsLink=false},             
-            };
-            ProductVos=new ObservableCollection<ProductVo>();
+            //MachineLinks = new ObservableCollection<MachineLinkVo>()
+            //{
+            //    new MachineLinkVo(){Name="OE Tray上料",IsLink=false},
+            //    new MachineLinkVo(){Name="载具换盘",IsLink=false},
+            //    new MachineLinkVo(){Name="清洁+拔防尘塞",IsLink=false},
+            //    new MachineLinkVo(){Name="OE点胶",IsLink=false},
+            //    new MachineLinkVo(){Name="housing 上料",IsLink=true},
+            //    new MachineLinkVo(){Name="点胶合装",IsLink=false},
+            //    new MachineLinkVo(){Name="拧螺丝",IsLink=false},
+            //    new MachineLinkVo(){Name="升降回流",IsLink=false},
+            //    new MachineLinkVo(){Name="检测",IsLink=false},
+            //    new MachineLinkVo(){Name="烤盘上下料",IsLink=false},             
+            //};
+            await Init();
+            ProductVos =new ObservableCollection<ProductVo>();
             List<Product> products =await productService.ListAsync();
             if(products != null && products.Count > 0)
             {
