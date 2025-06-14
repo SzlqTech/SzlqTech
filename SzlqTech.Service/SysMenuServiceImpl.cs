@@ -14,8 +14,11 @@ namespace SzlqTech.Service
 {
     public class SysMenuServiceImpl : BaseAuditableServiceImpl<ISysMenuRepository, SysMenu>, ISysMenuService
     {
+        private readonly ISysMenuRepository menuRepository;
+
         public SysMenuServiceImpl(ISysMenuRepository baseRepository) : base(baseRepository)
         {
+            this.menuRepository = baseRepository;
         }
 
         public List<SysMenu> GetLoginMenuList()
@@ -56,7 +59,7 @@ namespace SzlqTech.Service
                 }
                 SysMenu sysMenu = new SysMenu
                 {
-                    Id = SnowFlake.NewLongId,
+                    //Id = SnowFlake.NewLongId,
                     Text = viewAttribute.Text,
                     Title = viewAttribute.Title,
                     TextEN = viewAttribute.TextEN,
@@ -73,7 +76,16 @@ namespace SzlqTech.Service
                     Icon=viewAttribute.Description
                     
                 };
-
+                var menu = menuRepository.SelectFirstByText(sysMenu.Text);
+                if (menu!=null)
+                {
+                    sysMenu.Id = menu.Id;
+                }
+                else
+                {
+                    sysMenu.Id = SnowFlake.NewLongId;
+                }
+                   
                 SysMenu parentMenu = BaseRepository.SelectFirstByText(parentText);
                 if (parentMenu == null)
                 {
@@ -151,10 +163,10 @@ namespace SzlqTech.Service
                     }
                 }
             }
-            foreach (SysMenu menu in sysMenus)
-            {
-                BaseRepository.Delete(s => s.Text == menu.Text);
-            }
+            //foreach (SysMenu menu in sysMenus)
+            //{
+            //    BaseRepository.Delete(s => s.Text == menu.Text);
+            //}
             return sysMenus;
         }
 

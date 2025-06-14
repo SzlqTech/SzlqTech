@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using Prism.Ioc;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using SzlqTech.Common.Exceptions;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Core.Vos;
@@ -64,12 +66,13 @@ namespace SzlqTech.Permission.ViewModels
         }
 
         [RelayCommand]
-        private void Save()
+        private async Task Save()
         {
             List<SysMenuVo> list = ImportMenus.ToList().FindAll(s => s.IsSelected == true);
+            //List<SysMenuVo> list = ImportMenus.ToList();
             list.ForEach(s => s.UpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            List<SysMenu> menus = mapper.Map<List<SysMenu>>(list);
-            sysMenuService.SaveBatchNotExist(menus);
+            List<SysMenu> menus = mapper.Map<List<SysMenu>>(list);   
+            await sysMenuService.SaveOrUpdateBatchAsync(menus);
             SendMessage("菜单导入成功");
 
         }
