@@ -315,4 +315,28 @@
   <data name="ScannCycle" xml:space="preserve">
     <value>วงจรการสแกน(ms)</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>รหัส</value>
+  </data>
+  <data name="RoleSelection" xml:space="preserve">
+    <value>การเลือก</value>
+  </data>
+  <data name="ImportMenu" xml:space="preserve">
+    <value>นำเข้าเมนู</value>
+  </data>
+  <data name="Assembly" xml:space="preserve">
+    <value>ชุดโปรแกรม</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>เส้นทาง</value>
+  </data>
+  <data name="PageName" xml:space="preserve">
+    <value>ชื่อหน้า</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>เวลา ที่สร้าง</value>
+  </data>
+  <data name="ChartView" xml:space="preserve">
+    <value>สดงแผนภูมิ</value>
+  </data>
 </root>

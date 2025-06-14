@@ -79,6 +79,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 程序集 的本地化字符串。
+        /// </summary>
+        public static string Assembly {
+            get {
+                return ResourceManager.GetString("Assembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 取消 的本地化字符串。
         /// </summary>
         public static string Cancel {
@@ -88,11 +97,29 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 图表展示 的本地化字符串。
+        /// </summary>
+        public static string ChartView {
+            get {
+                return ResourceManager.GetString("ChartView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关闭 的本地化字符串。
         /// </summary>
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 代码 的本地化字符串。
+        /// </summary>
+        public static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
             }
         }
         
@@ -111,6 +138,15 @@ namespace SzlqTech.Localization.Resources {
         public static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建时间 的本地化字符串。
+        /// </summary>
+        public static string CreateDate {
+            get {
+                return ResourceManager.GetString("CreateDate", resourceCulture);
             }
         }
         
@@ -259,6 +295,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 导入菜单 的本地化字符串。
+        /// </summary>
+        public static string ImportMenu {
+            get {
+                return ResourceManager.GetString("ImportMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 苏州旭创 的本地化字符串。
         /// </summary>
         public static string InnoLight {
@@ -385,11 +430,29 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 页面名称 的本地化字符串。
+        /// </summary>
+        public static string PageName {
+            get {
+                return ResourceManager.GetString("PageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 密码 的本地化字符串。
         /// </summary>
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 路径 的本地化字符串。
+        /// </summary>
+        public static string Path {
+            get {
+                return ResourceManager.GetString("Path", resourceCulture);
             }
         }
         
@@ -480,6 +543,15 @@ namespace SzlqTech.Localization.Resources {
         public static string RoleManager {
             get {
                 return ResourceManager.GetString("RoleManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 角色选择 的本地化字符串。
+        /// </summary>
+        public static string RoleSelection {
+            get {
+                return ResourceManager.GetString("RoleSelection", resourceCulture);
             }
         }
         

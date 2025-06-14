@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:SzlqTech.Permission.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignCardBackground}"
@@ -25,7 +26,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="Import" />
-                            <TextBlock Text="导入" />
+                            <TextBlock Text="{loc:Loc ImportMenu}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -36,7 +37,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="ContentSave" />
-                            <TextBlock Text="保存" />
+                            <TextBlock Text="{loc:Loc Save}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -63,23 +64,23 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Text}"
-                        Header="标题" />
+                        Header="{loc:Loc Title}" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Assembly}"
-                        Header="程序集" />
+                        Header="{loc:Loc Assembly}" />
                     <DataGridTextColumn
                         Width="1.5*"
                         Binding="{Binding Url}"
-                        Header="路径" />
+                        Header="{loc:Loc Path}" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding View}"
-                        Header="页面名称" />
+                        Header="{loc:Loc PageName}" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding CreateTime}"
-                        Header="创建时间" />
+                        Header="{loc:Loc CreateDate}" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

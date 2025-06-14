@@ -18,6 +18,7 @@ namespace SzlqTech.Core.WorkFlow
             service.RegisterForNavigation<InnoLightTraceView, InnoLightTraceViewModel>();
             service.RegisterForNavigation<InnoLightDataRecord, InnoLightDataRecordViewModel>();
             service.Register<InnoLightWorkflow>();
+            service.RegisterForNavigation<InnoLightChartView, InnoLightChartViewModel>();
         }
     }
 }

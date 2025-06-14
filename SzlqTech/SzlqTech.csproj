@@ -16,6 +16,7 @@
     <None Remove="Assets\Images\menus\accounts.png" />
     <None Remove="Assets\Images\menus\addr.png" />
     <None Remove="Assets\Images\menus\auditlog.png" />
+    <None Remove="Assets\Images\menus\chart.png" />
     <None Remove="Assets\Images\menus\dashboard.png" />
     <None Remove="Assets\Images\menus\dataCollection.png" />
     <None Remove="Assets\Images\menus\dataQuery.png" />
@@ -87,6 +88,7 @@
 	  <Resource Include="Assets\Images\menus\accounts.png" />
 	  <Resource Include="Assets\Images\menus\addr.png" />
 	  <Resource Include="Assets\Images\menus\auditlog.png" />
+	  <Resource Include="Assets\Images\menus\chart.png" />
 	  <Resource Include="Assets\Images\menus\dashboard.png" />
 	  <Resource Include="Assets\Images\menus\dataCollection.png" />
 	  <Resource Include="Assets\Images\menus\dataQuery.png" />

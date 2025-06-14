@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:vo="clr-namespace:SzlqTech.Core.Vos;assembly=SzlqTech.Core"
-    MinWidth="700"
+    MinWidth="900"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     MinHeight="1200"
     Background="{DynamicResource MaterialDesignCardBackground}">
     <Grid>
@@ -30,7 +31,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="ContentSave" />
-                            <TextBlock Text="保存" />
+                            <TextBlock Text="{loc:Loc Save}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -46,7 +47,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="ClearBox" />
-                            <TextBlock Text="删除" />
+                            <TextBlock Text="{loc:Loc Delete}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>

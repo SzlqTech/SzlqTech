@@ -295,4 +295,28 @@
   <data name="ScannCycle" xml:space="preserve">
     <value>扫描周期(ms)</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>代码</value>
+  </data>
+  <data name="RoleSelection" xml:space="preserve">
+    <value>角色选择</value>
+  </data>
+  <data name="ImportMenu" xml:space="preserve">
+    <value>导入菜单</value>
+  </data>
+  <data name="Assembly" xml:space="preserve">
+    <value>程序集</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>路径</value>
+  </data>
+  <data name="PageName" xml:space="preserve">
+    <value>页面名称</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="ChartView" xml:space="preserve">
+    <value>图表展示</value>
+  </data>
 </root>

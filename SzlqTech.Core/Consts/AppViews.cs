@@ -46,5 +46,7 @@ namespace SzlqTech.Core.Consts
         public const string MenuImportView = "MenuImportView";
 
         public const string MenuAssignView = "MenuAssignView";
+
+        public const string InnoLightChartView = "InnoLightChartView";
     }
 }

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SzlqTech.Permission.Views"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="800"
@@ -13,7 +14,7 @@
     <Grid>
         <DockPanel Margin="10" LastChildFill="True">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <StackPanel Margin="10" Orientation="Horizontal">
+                <!--<StackPanel Margin="10" Orientation="Horizontal">
                     <TextBlock Style="{StaticResource BaseTextBlock}" Text="编码" />
                     <TextBox
                         md:HintAssist.Hint="请输入编码"
@@ -26,7 +27,7 @@
                         md:HintAssist.Hint="请输入用户名"
                         md:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource baseTextBox}" />
-                </StackPanel>
+                </StackPanel>-->
                 <!--<StackPanel Margin="30,10" Orientation="Horizontal">
                     <Button
                         Command="{Binding ExcuteCommand}"
@@ -73,7 +74,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="Add" />
-                            <TextBlock Text="新建" />
+                            <TextBlock Text="{loc:Loc Add}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -85,7 +86,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="ContentSave" />
-                            <TextBlock Text="保存" />
+                            <TextBlock Text="{loc:Loc Save}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -110,12 +111,12 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Code}"
-                        Header="角色代码" />
+                        Header="{loc:Loc Code}" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Name}"
-                        Header="角色名称" />
-                    <DataGridTemplateColumn Width="*" Header="操作">
+                        Header="{loc:Loc Name}" />
+                    <DataGridTemplateColumn Width="*" Header="{loc:Loc Operation}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -124,12 +125,12 @@
                                             Margin="10,0,10,0"
                                             Command="{Binding DataContext.MenuAssignCommand, RelativeSource={RelativeSource AncestorType=DataGrid, Mode=FindAncestor}}"
                                             CommandParameter="{Binding}"
-                                            Content="菜单分配" />
+                                            Content="{loc:Loc MenuAssign}" />
                                         <Button
                                             Margin="0,0,5,0"
                                             Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.DetailCommand}"
                                             CommandParameter="{Binding}"
-                                            Content="删除" />
+                                            Content="{loc:Loc Delete}" />
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

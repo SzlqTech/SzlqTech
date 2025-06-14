@@ -94,9 +94,9 @@
                                 <ContentControl>
                                     <Expander
                                         Padding="0"
-                                        IsExpanded="{Binding IsExpanded}"
                                         md:ExpanderAssist.HorizontalHeaderPadding="0 10"
                                         Background="Transparent"
+                                        IsExpanded="{Binding IsExpanded}"
                                         Style="{DynamicResource MaterialDesignExpander}">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">

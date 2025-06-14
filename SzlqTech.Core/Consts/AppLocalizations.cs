@@ -89,6 +89,8 @@ namespace SzlqTech.Core.Consts
         public const string ProudctSelectedNull= "ProudctSelectedNull";
 
         public const string PleaseRestorSystem="PleaseRestorSystem";
+
+        public const string ChartView = "ChartView";
         #endregion
 
         #region Message

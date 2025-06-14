@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SzlqTech.Permission.Views"
+    xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="800"
@@ -28,7 +29,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="Add" />
-                            <TextBlock Text="新建" />
+                            <TextBlock Text="{loc:Loc Add}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -40,7 +41,7 @@
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Kind="ContentSave" />
-                            <TextBlock Text="保存" />
+                            <TextBlock Text="{loc:Loc Save}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -53,7 +54,7 @@
                     <DataGridTextColumn              
                         Width="*"
                         Binding="{Binding UserName}"
-                        Header="名称">
+                        Header="{loc:Loc Name}">
                         <DataGridTextColumn.CellStyle>
                             <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -64,14 +65,14 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Code}"
-                        Header="代码">
+                        Header="{loc:Loc Code}">
                         <DataGridTextColumn.CellStyle>
                             <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                                 <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn  Header="密码" Width="*">
+                    <DataGridTemplateColumn  Header="{loc:Loc Password}" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <PasswordBox                                               
@@ -88,7 +89,7 @@
                         x:Name="cbox"
                         Width="*"
                         DisplayMemberPath="Name"
-                        Header="角色选择"
+                        Header="{loc:Loc RoleSelection}"
                         SelectedItemBinding="{Binding SelectedRoleVo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         SelectedValueBinding="{Binding SelectedRoleCode}"
                         SelectedValuePath="Code">
@@ -98,14 +99,14 @@
                             </Style>
                         </DataGridComboBoxColumn.CellStyle>
                     </DataGridComboBoxColumn>
-                    <DataGridTemplateColumn Width="*" Header="操作">
+                    <DataGridTemplateColumn Width="*" Header="{loc:Loc Operation}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button
                                         Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                         CommandParameter="{Binding}"
-                                        Content="删除" />
+                                        Content="{loc:Loc Delete}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

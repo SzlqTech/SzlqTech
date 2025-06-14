@@ -315,4 +315,28 @@
   <data name="ScannCycle" xml:space="preserve">
     <value>Scanning cycle(ms)</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="RoleSelection" xml:space="preserve">
+    <value>Role Selection</value>
+  </data>
+  <data name="ImportMenu" xml:space="preserve">
+    <value>Import Menu</value>
+  </data>
+  <data name="Assembly" xml:space="preserve">
+    <value>Assembly</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="PageName" xml:space="preserve">
+    <value>Page Name</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="ChartView" xml:space="preserve">
+    <value>Chart View</value>
+  </data>
 </root>
