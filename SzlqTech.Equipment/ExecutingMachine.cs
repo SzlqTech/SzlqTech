@@ -351,5 +351,86 @@ namespace SzlqTech.Equipment
                 RaiseDataReceived(data);
             }
         }
+
+
+        #region 同步读写值
+
+        public bool ReadBoolValue(string key)
+        {
+            return PLCDictionary.Get(key).ReadBool();
+        }
+
+        public short ReadInt16Value(string key)
+        {
+            return PLCDictionary.Get(key).ReadInt16();
+        }
+
+        public int ReadInt32Value(string key)
+        {
+            return PLCDictionary.Get(key).ReadInt32();
+        }
+
+        public float ReadFloatValue(string key)
+        {
+            return PLCDictionary.Get(key).ReadFloat();
+        }
+
+        public double ReadDoubleValue(string key)
+        {
+            return PLCDictionary.Get(key).ReadDouble();
+        }
+
+        public string ReadStringValue(string key)
+        {
+            return PLCDictionary.Get(key).ReadString();
+        }
+
+
+        public bool WriteValue(string key, object value)
+        {
+           return  PLCDictionary.Get(key).Write(value);
+        }
+
+
+        #endregion
+
+        #region 异步读写数据
+
+        public async Task<bool> ReadBoolValueAsync(string key)
+        {
+            return await PLCDictionary.Get(key).ReadBoolAsync();
+        }
+
+        public async Task<short> ReadInt16ValueAsync(string key)
+        {
+            return await PLCDictionary.Get(key).ReadInt16Async();
+        }
+
+        public async Task<int> ReadInt32ValueAsync(string key)
+        {
+            return await PLCDictionary.Get(key).ReadInt32Async();
+        }
+
+        public async Task<float> ReadFloatValueAsync(string key)
+        {
+            return await PLCDictionary.Get(key).ReadFloatAsync();
+        }
+
+        public async Task<double> ReadDoubleValueAsync(string key)
+        {
+            return await PLCDictionary.Get(key).ReadDoubleAsync();
+        }
+
+        public async Task<string> ReadStringValueAsync(string key)
+        {
+            return await PLCDictionary.Get(key).ReadStringAsync();
+        }
+
+        public async Task<bool> WriteValueAsync(string key, object value)
+        {
+            return await PLCDictionary.Get(key).WriteAsync(value);
+        }
+
+        #endregion
     }
 }

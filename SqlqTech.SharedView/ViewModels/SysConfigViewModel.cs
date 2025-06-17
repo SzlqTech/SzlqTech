@@ -12,6 +12,7 @@ using SzlqTech.Core.ViewModels;
 using SzlqTech.Localization;
 using SzlqTech.IService;
 using SzlqTech.Entity;
+using SzlqTech.Common.Helper;
 
 namespace SqlqTech.SharedView.ViewModels
 {
@@ -42,15 +43,16 @@ namespace SqlqTech.SharedView.ViewModels
         [ObservableProperty]
         public NavigationView selectedNavView;
 
+        [ObservableProperty]
+        public bool isEnableMachine = false;
+
         [RelayCommand]
         public void Save()
         {
             GetLangNameByIndex();
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["lang"].Value = CurrLangName;
-            config.AppSettings.Settings["View"].Value = SelectedNavView.Value;          
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");   
+            XmlConfigHelper.Save("lang", CurrLangName);
+            XmlConfigHelper.Save("View", SelectedNavView.Value);
+            XmlConfigHelper.Save("IsEnableMachine", IsEnableMachine.ToString());
             SendMessage(LocalizationService.GetString(AppLocalizations.SuccessMsg) +","+ LocalizationService.GetString(AppLocalizations.PleaseRestorSystem));
             aggregator.SendUpdateLocalizationModel(true);
             logger.InfoHandler($"保存语言[{CurrLangName}]成功");
@@ -81,18 +83,10 @@ namespace SqlqTech.SharedView.ViewModels
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
-            CurrLangName = ConfigurationManager.AppSettings["lang"]??"zh-CN";
-            //NavViews = new ObservableCollection<NavigationView>()
-            //{
-            //    new NavigationView(){Value=AppViews.MachineSetting,Name=LocalizationService.GetString(AppLocalizations.MachineManagement)},
-            //    new NavigationView(){Value=AppViews.ScannerSetting,Name=LocalizationService.GetString(AppLocalizations.ScanManagement)},
-            //    new NavigationView(){Value=AppViews.SysConfig,Name=LocalizationService.GetString(AppLocalizations.SysConfig)},
-            //    new NavigationView(){Value=AppViews.ProductView,Name=LocalizationService.GetString(AppLocalizations.ProductManagement)},
-            //    new NavigationView(){Value=AppViews.InnoLight,Name=LocalizationService.GetString(AppLocalizations.DataCollection)},
-            //    new NavigationView(){Value=AppViews.InnoLightDataRecordView,Name=LocalizationService.GetString(AppLocalizations.DataQuery)},
-            //};
+            CurrLangName = XmlConfigHelper.GetValue("lang")??"zh-CN";
+            IsEnableMachine = bool.Parse(XmlConfigHelper.GetValue("IsEnableMachine")??"false");
             await LoadViews();
-            var viewName= ConfigurationManager.AppSettings["View"] ?? AppViews.InnoLight;
+            var viewName = XmlConfigHelper.GetValue("View")?? AppViews.InnoLight;
             var view = NavViews.FindFirst(s=>s.Value==viewName);
             SelectedNavView = view;
             GetLangIndex(CurrLangName);

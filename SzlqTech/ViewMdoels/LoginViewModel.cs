@@ -38,10 +38,10 @@ namespace SzlqTech.ViewMdoels
 
         public void Init()
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var Username = configuration.AppSettings.Settings["UserName"].Value ?? string.Empty;
-            var Password = configuration.AppSettings.Settings["Password"].Value ?? string.Empty;
-            var isRemember = configuration.AppSettings.Settings["New"].Value ?? "false";
+
+            var Username = XmlConfigHelper.GetValue("UserName"); 
+            var Password = XmlConfigHelper.GetValue("Password"); 
+            var isRemember = XmlConfigHelper.GetValue("New"); 
             if (bool.Parse(isRemember))
             {
                 this.UserName = Username;
@@ -93,12 +93,9 @@ namespace SzlqTech.ViewMdoels
 
         public void SaveConfig()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["UserName"].Value = UserName;
-            config.AppSettings.Settings["Password"].Value = Password;
-            config.AppSettings.Settings["New"].Value = IsRememberMe.ToString();
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
+            XmlConfigHelper.Save("UserName", UserName);
+            XmlConfigHelper.Save("Password", Password);
+            XmlConfigHelper.Save("New", IsRememberMe.ToString());        
         }
     }
 }

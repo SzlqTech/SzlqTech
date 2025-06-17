@@ -263,5 +263,78 @@ namespace SzlqTech.Core.WorkFlow
         #endregion
 
 
+        #region 读写PLC数据
+        public virtual bool ReadBoolValue(string key)
+        {
+            return ExecutingMachine.ReadBoolValue(key);
+        }
+
+        public virtual short ReadInt16Value(string key)
+        {
+            return ExecutingMachine.ReadInt16Value(key);
+        }
+
+        public virtual int ReadInt32Value(string key)
+        {
+            return ExecutingMachine.ReadInt32Value(key);
+        }
+
+        public virtual float ReadFloatValue(string key)
+        {
+            return ExecutingMachine.ReadFloatValue(key);
+        }
+
+        public virtual double ReadDoubleValue(string key)
+        {
+            return ExecutingMachine.ReadDoubleValue(key);
+        }
+
+        public virtual string ReadStringValue(string key)
+        {
+            return ExecutingMachine.ReadStringValue(key);
+        }
+
+        public virtual bool WriteValue(string key, object value)
+        {
+            return ExecutingMachine.WriteValue(key,value);
+        }
+
+        public virtual async Task<bool> ReadBoolValueAsync(string key)
+        {
+            return await ExecutingMachine.ReadBoolValueAsync(key);
+        }
+
+        public virtual async Task<short> ReadInt16ValueAsync(string key)
+        {
+            return await ExecutingMachine.ReadInt16ValueAsync(key);
+        }
+
+        public virtual async Task<int> ReadInt32ValueAsync(string key)
+        {
+            return await ExecutingMachine.ReadInt32ValueAsync(key);
+        }
+
+        public virtual async Task<float> ReadFloatValueAsync(string key)
+        {
+            return await ExecutingMachine.ReadFloatValueAsync(key);
+        }
+
+        public virtual async Task<double> ReadDoubleValueAsync(string key)
+        {
+            return await ExecutingMachine.ReadDoubleValueAsync(key);
+        }
+
+        public virtual async Task<string> ReadStringValueAsync(string key)
+        {
+            return await ExecutingMachine.ReadStringValueAsync(key);
+        }
+
+        public virtual async Task<bool> WriteValueAsync(string key, object value)
+        {
+           return await ExecutingMachine.WriteValueAsync(key, value);
+        }
+
+        #endregion
+
     }
 }

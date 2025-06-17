@@ -7,6 +7,7 @@ using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
 using SzlqTech.Common.Extensions;
+using SzlqTech.Common.Helper;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
@@ -69,6 +70,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         [ObservableProperty]
         public ProductVo selectedProductVo;
 
+        public bool IsEnableMachine = false;
+
         #region PLC读取数据端口键
 
         public string FirstReadSignalKey = "FirstReadSignal";
@@ -91,6 +94,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         public string TenthReadSignalKey = "TenthReadSignal";
 
+        public string ProductSignalKey = "ProductKey";
+
         #endregion
 
 
@@ -100,12 +105,26 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             if (Valid())
             {
                 var result = false;
-                await SetBusyAsync(async () =>
+                if (IsEnableMachine)
                 {
-                    result = await workflow.WaitDataActionResultAsync(workflow.StartExecute);
-                });
-                if (result) SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
-                else SendMessage(LocalizationService.GetString(AppLocalizations.StartError));
+                    await SetBusyAsync(async () =>
+                    {
+                        result = await workflow.WaitDataActionResultAsync(workflow.StartExecute);
+                    });
+                    if (result) 
+                    {
+                        //启动成功发送产品号
+                        SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
+                        await workflow.WriteValueAsync(ProductSignalKey, SelectedProductVo.ProductCode);
+
+                    } 
+                    else SendMessage(LocalizationService.GetString(AppLocalizations.StartError));
+                }
+                else
+                {
+                    SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
+                }
+                
             }         
         }
 
@@ -123,12 +142,20 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         public async Task Stop()
         {
             var result = false;
-            await SetBusyAsync(async () =>
+            if (IsEnableMachine)
             {
-                result = await workflow.WaitDataActionResultAsync(workflow.StopExecute);
-            });
-            if (result) SendMessage(LocalizationService.GetString(AppLocalizations.StopSuccess));
-            else SendMessage(LocalizationService.GetString(AppLocalizations.StopError));
+                await SetBusyAsync(async () =>
+                {
+                    result = await workflow.WaitDataActionResultAsync(workflow.StopExecute);
+                });
+                if (result) SendMessage(LocalizationService.GetString(AppLocalizations.StopSuccess));
+                else SendMessage(LocalizationService.GetString(AppLocalizations.StopError));
+            }
+            else
+            {
+                SendMessage(LocalizationService.GetString(AppLocalizations.StopSuccess));
+            }
+           
         }
 
         #region OE Tray上料
@@ -170,24 +197,12 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         }
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
-        {
-            //MachineLinks = new ObservableCollection<MachineLinkVo>()
-            //{
-            //    new MachineLinkVo(){Name="OE Tray上料",IsLink=false},
-            //    new MachineLinkVo(){Name="载具换盘",IsLink=false},
-            //    new MachineLinkVo(){Name="清洁+拔防尘塞",IsLink=false},
-            //    new MachineLinkVo(){Name="OE点胶",IsLink=false},
-            //    new MachineLinkVo(){Name="housing 上料",IsLink=true},
-            //    new MachineLinkVo(){Name="点胶合装",IsLink=false},
-            //    new MachineLinkVo(){Name="拧螺丝",IsLink=false},
-            //    new MachineLinkVo(){Name="升降回流",IsLink=false},
-            //    new MachineLinkVo(){Name="检测",IsLink=false},
-            //    new MachineLinkVo(){Name="烤盘上下料",IsLink=false},             
-            //};
+        {      
             await Init();
             ProductVos =new ObservableCollection<ProductVo>();
             List<Product> products =await productService.ListAsync();
-            if(products != null && products.Count > 0)
+            IsEnableMachine =bool.TryParse(XmlConfigHelper.GetValue("IsEnableMachine").ToLower(),out bool res);
+            if (products != null && products.Count > 0)
             {
                 List<ProductVo> productsVo = mapper.Map<List<ProductVo>>(products);
                 ProductVos.AddRange(productsVo);

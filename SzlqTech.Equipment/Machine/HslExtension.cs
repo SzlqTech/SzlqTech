@@ -3,6 +3,7 @@ using HslCommunication;
 using NLog;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
+using SzlqTech.Common.Nlogs;
 
 namespace SzlqTech.Equipment.Machine
 {
@@ -14,7 +15,7 @@ namespace SzlqTech.Equipment.Machine
         {
             if (!operateResult.IsSuccess)
             {
-                //Logger.ErrorHandler($"PLC操作失败, {operateResult.ToMessageShowString()}");
+                Logger.ErrorHandler($"PLC操作失败, {operateResult.ToMessageShowString()}");
             }
             return operateResult;
         }
@@ -32,7 +33,7 @@ namespace SzlqTech.Equipment.Machine
         {
             if (!operateResult.IsSuccess)
             {
-                //Logger.ErrorHandler($"PLC操作失败, {operateResult.ToMessageShowString()}");
+                Logger.ErrorHandler($"PLC操作失败, {operateResult.ToMessageShowString()}");
             }
             return operateResult;
         }
@@ -41,7 +42,7 @@ namespace SzlqTech.Equipment.Machine
         {
             if (!operateResult.IsSuccess)
             {
-                //Logger.ErrorHandler($"PLC操作失败, 错误编码: [{operateResult.ErrorCode}], 信息: {operateResult.Message}");
+                Logger.ErrorHandler($"PLC操作失败, 错误编码: [{operateResult.ErrorCode}], 信息: {operateResult.Message}");
             }
             return operateResult.IsSuccess;
         }
@@ -50,7 +51,7 @@ namespace SzlqTech.Equipment.Machine
         {
             if (!operateResult.IsSuccess)
             {
-                //Logger.ErrorHandler($"PLC操作失败, {operateResult.ToMessageShowString()}");
+                Logger.ErrorHandler($"PLC操作失败, {operateResult.ToMessageShowString()}");
             }
             return operateResult.Content;
         }
@@ -77,7 +78,7 @@ namespace SzlqTech.Equipment.Machine
         {
             if (!operateResult.IsSuccess)
             {
-                //throw new EquipmentException($"机器PLC控制器{operate}操作失败, {operateResult.ToMessageShowString()}");
+                throw new EquipmentException($"机器PLC控制器{operate}操作失败, {operateResult.ToMessageShowString()}");
             }
             return operateResult;
         }
@@ -86,7 +87,7 @@ namespace SzlqTech.Equipment.Machine
         {
             if (!operateResult.IsSuccess)
             {
-                //throw new EquipmentException($"机器PLC控制器{operate}操作失败, {operateResult.ToMessageShowString()}");
+                throw new EquipmentException($"机器PLC控制器{operate}操作失败, {operateResult.ToMessageShowString()}");
             }
             return operateResult;
         }
@@ -107,7 +108,7 @@ namespace SzlqTech.Equipment.Machine
 
             if (_failCount > 2)
             {
-                //throw new EquipmentException($"PLC超过连续2次失败, {operateResult.ToMessageShowString()}");
+                throw new EquipmentException($"PLC超过连续2次失败, {operateResult.ToMessageShowString()}");
             }
             return operateResult;
         }
@@ -210,6 +211,7 @@ namespace SzlqTech.Equipment.Machine
             }
             return operateResult.IsSuccess;
         }
+
 
         public static async Task<bool> WriteAsync(this PLCData item, dynamic data, bool failThrowEx = true)
         {
@@ -356,14 +358,14 @@ namespace SzlqTech.Equipment.Machine
                 string writeFailMessage = $"PLC发送信号失败, 地址为[{item.Address}]";
                 if (failThrowEx)
                 {
-                    //throw new EquipmentException(writeFailMessage);
+                    throw new EquipmentException(writeFailMessage);
                 }
                 else
                 {
                     Logger.Error(writeFailMessage);
                 }
             }
-            //Logger.Info($"地址为[{item.Address}]$发送时间为[{signalTime}]的正脉冲");
+            Logger.Info($"地址为[{item.Address}]$发送时间为[{signalTime}]的正脉冲");
             return operateResult.IsSuccess;
         }
 
@@ -422,32 +424,32 @@ namespace SzlqTech.Equipment.Machine
             Logger.Debug($"地址为[{item.Address}]$延时[{delayTime}]发送时间为[{signalTime}]的正脉冲");
         }
 
-        // public static async Task<bool> SendPositiveSignalAsync(this PLCItem item, int signalTime = 100, bool failThrowEx = true)
-        // {
-        //     if (item.DataType != DataType.Bool)
-        //     {
-        //         throw new ArgumentException("当前写入的数据类型与配置的不一致");
-        //     }
-        //     var operateResult = (await item.PLC.WriteAsync(item.Address, true)).Then(() =>
-        //     {
-        //         Thread.Sleep(signalTime);
-        //         return item.PLC.Write(item.Address, false);
-        //     });
-        //     if (!operateResult.IsSuccess)
-        //     {
-        //         string writeFailMessage = $"PLC发送信号失败, 地址为[{item.Address}]";
-        //         if (failThrowEx)
-        //         {
-        //             throw new EquipmentException(writeFailMessage);
-        //         }
-        //         else
-        //         {
-        //             Logger.Error(writeFailMessage);
-        //         }
-        //     }
-        //
-        //     return operateResult.IsSuccess;
-        // }
+        //public static async Task<bool> SendPositiveSignalAsync(this PLCItem item, int signalTime = 100, bool failThrowEx = true)
+        //{
+        //    if (item.DataType != DataType.Bool)
+        //    {
+        //        throw new ArgumentException("当前写入的数据类型与配置的不一致");
+        //    }
+        //    var operateResult = (await item.PLC.WriteAsync(item.Address, true)).Then(() =>
+        //    {
+        //        Thread.Sleep(signalTime);
+        //        return item.PLC.Write(item.Address, false);
+        //    });
+        //    if (!operateResult.IsSuccess)
+        //    {
+        //        string writeFailMessage = $"PLC发送信号失败, 地址为[{item.Address}]";
+        //        if (failThrowEx)
+        //        {
+        //            throw new EquipmentException(writeFailMessage);
+        //        }
+        //        else
+        //        {
+        //            Logger.Error(writeFailMessage);
+        //        }
+        //    }
+
+        //    return operateResult.IsSuccess;
+        //}
 
         public static bool Wait(this PLCData item, dynamic data, int readInterval = 100, int waitTimeout = 5000, bool failThrowEx = false)
         {
@@ -508,6 +510,127 @@ namespace SzlqTech.Equipment.Machine
             }
             Logger.Debug($"地址为[{item.Address}]写入值$[{data}]");
             return operateResult.IsSuccess;
+        }
+
+
+        public static object Read(this PLCData item)
+        {
+          
+            var data = new object();
+            string dataTypeMessage = "当前等待的数据类型与配置的不一致";
+            switch (item.DataType)
+            {
+                case DataType.Bool:
+                    if (item.DataType is not DataType.Bool) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    data = item.ReadBool();
+                    break;
+                case DataType.Int16:
+                    if (item.DataType is not DataType.Int16) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    data = item.ReadInt16();
+                    break;
+
+                case DataType.Int32:
+                    if (item.DataType is not DataType.Int32) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    data = item.ReadInt32();
+                    break;
+                case DataType.Float:
+                    if (item.DataType is not DataType.Float) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    data = item.ReadFloat();
+                    break;
+                case DataType.Double:
+                    if (item.DataType is not DataType.Double) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    data = item.ReadDouble();
+                    break;
+                case DataType.String:
+                    if (item.DataType is not DataType.String) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    data = item.ReadString();
+                    break;
+
+                default:
+                    throw new ArgumentException("数据类型配置错误");
+            }
+            return data;
+        }
+
+        public static async Task<object> ReadAsync(this PLCData item)
+        {
+
+            var data = new object();
+            string dataTypeMessage = "当前等待的数据类型与配置的不一致";
+            switch (item.DataType)
+            {
+                case DataType.Bool:
+                    if (item.DataType is not DataType.Bool) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    try
+                    {
+                        data = await item.ReadBoolAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorHandler(ex.Message);
+                    }
+                    break;
+                case DataType.Int16:
+                    if (item.DataType is not DataType.Int16) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    try
+                    {
+                        data = await item.ReadInt16Async();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorHandler(ex.Message);
+                    }
+                    break;
+
+                case DataType.Int32:
+                    if (item.DataType is not DataType.Int32) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    try
+                    {
+                        data = await item.ReadInt32Async();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorHandler(ex.Message);
+                    }
+                    break;
+                case DataType.Float:
+                    if (item.DataType is not DataType.Float) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    try
+                    {
+                        data = await item.ReadFloatAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorHandler(ex.Message);
+                    }
+                    break;
+                case DataType.Double:
+                    if (item.DataType is not DataType.Double) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    try
+                    {
+                        data = await item.ReadDoubleAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorHandler(ex.Message);
+                    }
+                    break;
+                case DataType.String:
+                    if (item.DataType is not DataType.String) throw new ArgumentException($"{dataTypeMessage}, 地址是[{item.Address}]");
+                    try
+                    {
+                        data = await item.ReadStringAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorHandler(ex.Message);
+                    }
+                    break;
+
+                default:
+                    throw new ArgumentException("数据类型配置错误");
+            }
+            return data;
         }
 
         public static async Task<bool> WaitAsync(this PLCData item, dynamic data, int readInterval = 100, int waitTimeout = 5000, bool failThrowEx = false)
@@ -673,6 +796,15 @@ namespace SzlqTech.Equipment.Machine
             return item.PLC.ReadDouble(item.Address).EnsureReadOperateResult(item.Address, failThrowEx);
         }
 
+        public static string ReadString(this PLCData item,ushort length=60, bool failThrowEx = true)
+        {
+            if (item.DataType != DataType.Double)
+            {
+                throw new ArgumentException(ReadArgumentExceptionMessage);
+            }
+            return item.PLC.ReadString(item.Address, length).EnsureReadOperateResult(item.Address, failThrowEx);
+        }
+
         #endregion Read Sync
 
         #region Read Async
@@ -756,6 +888,15 @@ namespace SzlqTech.Equipment.Machine
                 throw new ArgumentException(ReadArgumentExceptionMessage);
             }
             return (await item.PLC.ReadDoubleAsync(item.Address)).EnsureReadOperateResult(item.Address, failThrowEx);
+        }
+
+        public static async Task<string> ReadStringAsync(this PLCData item, ushort length = 60, bool failThrowEx = true)
+        {
+            if (item.DataType != DataType.String)
+            {
+                throw new ArgumentException(ReadArgumentExceptionMessage);
+            }
+            return (await item.PLC.ReadStringAsync(item.Address,length)).EnsureReadOperateResult(item.Address, failThrowEx);
         }
 
         #endregion Read Async

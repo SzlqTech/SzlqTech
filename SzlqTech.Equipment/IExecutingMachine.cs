@@ -1,4 +1,5 @@
-﻿using SzlqTech.Common.Extensions;
+﻿using NPOI.SS.Formula.Functions;
+using SzlqTech.Common.Extensions;
 using SzlqTech.Equipment.Machine;
 
 namespace SzlqTech.Equipment
@@ -59,5 +60,39 @@ namespace SzlqTech.Equipment
         void StopMachine();
 
         bool MainMachineExecute();
+
+
+        #region 同步读取数据
+        bool ReadBoolValue(string key);
+
+        Int16 ReadInt16Value(string key);
+
+        Int32 ReadInt32Value(string key);
+
+        float ReadFloatValue(string key);
+
+        Double ReadDoubleValue(string key);
+
+        string ReadStringValue(string key);
+
+        bool WriteValue(string key, object value);
+        #endregion
+
+        #region 异步读写数据
+        Task<bool> ReadBoolValueAsync(string key);
+
+        Task<Int16> ReadInt16ValueAsync(string key);
+
+        Task<Int32> ReadInt32ValueAsync(string key);
+
+        Task<float> ReadFloatValueAsync(string key);
+
+        Task<Double> ReadDoubleValueAsync(string key);
+
+        Task<string> ReadStringValueAsync(string key);
+
+        Task<bool> WriteValueAsync(string key, object value);
+        #endregion
+
     }
 }

@@ -16,6 +16,8 @@ using ImTools;
 using System.Configuration;
 using SzlqTech.IService;
 using SzlqTech.Entity;
+using NPOI.OpenXml4Net.Util;
+using SzlqTech.Common.Helper;
 
 namespace SzlqTech.ViewMdoels
 {
@@ -191,7 +193,7 @@ namespace SzlqTech.ViewMdoels
         public void Configure()
         {
             InitConfig();
-            var viewName= XmlConfigHelper.GetValue(AppCurrContext.UserName);        
+            var viewName= XmlConfigHelper.GetValue("View");        
             if (viewName == null) return;
             for (int i = 0;i< NavigationItems.Count;i++)
             {
