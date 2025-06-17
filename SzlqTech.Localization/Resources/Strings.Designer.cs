@@ -313,6 +313,24 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 启用登录 的本地化字符串。
+        /// </summary>
+        public static string IsEnableLogin {
+            get {
+                return ResourceManager.GetString("IsEnableLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用PLC 的本地化字符串。
+        /// </summary>
+        public static string IsEnableMachine {
+            get {
+                return ResourceManager.GetString("IsEnableMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 选择语言 的本地化字符串。
         /// </summary>
         public static string LangSelected {

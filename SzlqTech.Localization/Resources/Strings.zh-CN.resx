@@ -339,4 +339,10 @@
   <data name="ChartView" xml:space="preserve">
     <value>图表展示</value>
   </data>
+  <data name="IsEnableMachine" xml:space="preserve">
+    <value>启用PLC</value>
+  </data>
+  <data name="IsEnableLogin" xml:space="preserve">
+    <value>启用登录</value>
+  </data>
 </root>

@@ -339,4 +339,10 @@
   <data name="ChartView" xml:space="preserve">
     <value>สดงแผนภูมิ</value>
   </data>
+  <data name="IsEnableMachine" xml:space="preserve">
+    <value>เปิดใช้งาน PLC</value>
+  </data>
+  <data name="IsEnableLogin" xml:space="preserve">
+    <value>เปิดใช้การล็อกอิน</value>
+  </data>
 </root>

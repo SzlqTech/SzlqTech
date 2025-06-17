@@ -8,6 +8,7 @@ using SqlqTech.SharedView;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using SzlqTech.Common.Helper;
 using SzlqTech.Core;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.App;
@@ -17,6 +18,7 @@ using SzlqTech.Permission;
 using SzlqTech.Services.Sessions;
 using SzlqTech.ViewMdoels;
 using SzlqTech.Views;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
 namespace SzlqTech
@@ -60,19 +62,33 @@ namespace SzlqTech
             var appStart = ContainerLocator.Container.Resolve<IAppStartService>();         
             appStart.CreateShell();
             var dialog = Container.Resolve<IDialogService>();
-            dialog.ShowDialog(AppViews.Login, callback =>
+            var IsEnableLogin = bool.Parse(XmlConfigHelper.GetValue("IsEnableLogin") ?? "true");
+            if (IsEnableLogin)
             {
-                if (callback.Result != ButtonResult.OK)
+                dialog.ShowDialog(AppViews.Login, callback =>
                 {
-                    Environment.Exit(0);
-                    return;
-                }
+                    if (callback.Result != ButtonResult.OK)
+                    {
+                        Environment.Exit(0);
+                        return;
+                    }
+                    var service = App.Current.MainWindow.DataContext as IConfigureService;
+                    if (service != null)
+                    {
+                        service.Configure();
+                    }
+                });
+            }
+            else
+            {
+                AppCurrContext.UserName = XmlConfigHelper.GetValue("Username") ??"sa"; 
                 var service = App.Current.MainWindow.DataContext as IConfigureService;
                 if (service != null)
                 {
                     service.Configure();
                 }
-            });
+            }
+
             base.OnInitialized();
         }
 

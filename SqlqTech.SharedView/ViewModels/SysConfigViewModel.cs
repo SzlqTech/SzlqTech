@@ -46,12 +46,16 @@ namespace SqlqTech.SharedView.ViewModels
         [ObservableProperty]
         public bool isEnableMachine = false;
 
+        [ObservableProperty]
+        public bool isEnableLogin = true;
+
         [RelayCommand]
         public void Save()
         {
             GetLangNameByIndex();
             XmlConfigHelper.Save("lang", CurrLangName);
-            XmlConfigHelper.Save("View", SelectedNavView.Value);
+            XmlConfigHelper.Save("lang", CurrLangName);
+            XmlConfigHelper.Save("IsEnableLogin", IsEnableLogin.ToString().ToLower());
             XmlConfigHelper.Save("IsEnableMachine", IsEnableMachine.ToString());
             SendMessage(LocalizationService.GetString(AppLocalizations.SuccessMsg) +","+ LocalizationService.GetString(AppLocalizations.PleaseRestorSystem));
             aggregator.SendUpdateLocalizationModel(true);
@@ -88,6 +92,7 @@ namespace SqlqTech.SharedView.ViewModels
             await LoadViews();
             var viewName = XmlConfigHelper.GetValue("View")?? AppViews.InnoLight;
             var view = NavViews.FindFirst(s=>s.Value==viewName);
+            IsEnableLogin = bool.Parse(XmlConfigHelper.GetValue("IsEnableLogin")??"true");
             SelectedNavView = view;
             GetLangIndex(CurrLangName);
             await Task.CompletedTask;
