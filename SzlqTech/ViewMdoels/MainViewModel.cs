@@ -191,7 +191,7 @@ namespace SzlqTech.ViewMdoels
         public void Configure()
         {
             InitConfig();
-            var viewName = ConfigurationManager.AppSettings["View"] ;
+            var viewName= XmlConfigHelper.GetValue(AppCurrContext.UserName);        
             if (viewName == null) return;
             for (int i = 0;i< NavigationItems.Count;i++)
             {
