@@ -1373,5 +1373,15 @@ namespace SzlqTech.DbHelper
         {
             return (await GetDb().Ado.SqlQueryAsync<TResult>(sql, parameters)).FirstOrDefault();
         }
+
+        public async Task<List<T>> PageList(int pageNumber, int pageSize, RefAsync<int> total)
+        {
+            return await GetDb().Queryable<T>().ToPageListAsync(pageNumber, pageSize, total);
+        }
+
+
+        // RefAsync<int> total = 0;
+
+
     }
 }

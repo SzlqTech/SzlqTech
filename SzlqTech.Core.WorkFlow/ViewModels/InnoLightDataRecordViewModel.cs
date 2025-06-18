@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Prism.Regions;
-using System.Collections.ObjectModel;
-using SzlqTech.Common.Views;
+using SzlqTech.Common.Exceptions;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Services.Datapage;
 using SzlqTech.Core.ViewModels;
@@ -19,43 +17,74 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
     {
         private readonly IQrCodeService qrCodeService;
         private readonly IMapper mapper;
-        private readonly IDataPagerService dataPagerService;
+        public  IDataPagerService dataPager { get; set; }
 
         public InnoLightDataRecordViewModel(IQrCodeService qrCodeService,IMapper mapper,IDataPagerService dataPagerService)
         {
             Title = LocalizationService.GetString(AppLocalizations.DataQuery);
             this.qrCodeService = qrCodeService;
             this.mapper = mapper;
-            this.dataPagerService = dataPagerService;
-            dataPagerService.OnPageIndexChangedEventhandler += DataPagerService_OnPageIndexChangedEventhandler;
+            this.dataPager = dataPagerService;
+            dataPager.OnPageIndexChangedEventhandler -= DataPagerService_OnPageIndexChangedEventhandler;
+            dataPager.OnPageIndexChangedEventhandler += DataPagerService_OnPageIndexChangedEventhandler;
         }
 
-        private void DataPagerService_OnPageIndexChangedEventhandler(object sender, PageIndexChangedEventArgs e)
+        private async void DataPagerService_OnPageIndexChangedEventhandler(object sender, PageIndexChangedEventArgs e)
         {
+            await SetBusyAsync(async () =>
+            {
+                await dataPager.GetListAsync(qrCodeService, new QrCodeVo());
+            });
            
         }
-
-        [ObservableProperty]
-        public ObservableCollection<QrCodeVo> qrCodes;
-      
 
         [RelayCommand]
         public void Search(string str)
         {
-            var codes= QrCodes.ToList().FindAll(o=>o.Code==str);
-            if (codes == null) return;
-            QrCodes.Clear();
-            QrCodes.AddRange(codes);
+            var item = qrCodeService.GetFirstOrDefault(x=>x.Code==str);
+            if (item == null)
+            {
+                dataPager.GridModelList.Clear();
+                dataPager.Total = 0;
+            }
+            else
+            {
+                QrCodeVo vo=mapper.Map<QrCodeVo>(item);
+                dataPager.GridModelList.Clear();
+                dataPager.GridModelList.Add(vo);
+                dataPager.Total = 1;
+            }
+           
+        }
+
+        public async Task InitData()
+        {
+
+            List<QrCode> qrCodes = new List<QrCode>();
+            for (int i = 0; i < 30; i++)
+            {
+                QrCode code = new QrCode()
+                {
+                    ProductName= $"产品{i}",
+                    SN= i,
+                    Code = SnowFlake.NewId,
+                    Id = SnowFlake.NewLongId,
+                    Station = i,
+                    LeaveDate = DateTime.Now.AddMinutes(i).ToString("yyyy-MM-dd HH:mm:ss"),
+                    EnterDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                };
+                qrCodes.Add(code);
+            }
+            await qrCodeService.SaveBatchAsync(qrCodes);
         }
 
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
-            QrCodes = new ObservableCollection<QrCodeVo>();
-            List<QrCode> qrCodes =await qrCodeService.ListAsync();
-            if (qrCodes == null || qrCodes.Count == 0) return;
-            List<QrCodeVo> vos=mapper.Map<List<QrCodeVo>>(qrCodes);
-            QrCodes.AddRange(vos);
+            await SetBusyAsync(async () =>
+            {
+                await dataPager.GetListAsync(qrCodeService, new QrCodeVo());
+            });
         }
     }
 }

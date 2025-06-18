@@ -358,5 +358,8 @@ namespace SzlqTech.DbHelper
         Task<TResult> QueryFirstAsync<TResult>(string sql, object? parameters = null);
 
         Task<T> QueryFirstAsync(string sql, object? parameters = null);
+
+       
+        Task<List<T>> PageList(int pageNumber, int pageSize, RefAsync<int> total);
     }
 }

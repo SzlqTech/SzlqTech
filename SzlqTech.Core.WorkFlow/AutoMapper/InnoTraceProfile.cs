@@ -9,6 +9,8 @@ namespace SzlqTech.Core.WorkFlow.AutoMapper
         public InnoTraceProfile()
         {
             CreateMap<QrCode, TraceGoodsVo>().ReverseMap();
+         
+              
         }
     }
 }

@@ -655,5 +655,10 @@ namespace SzlqTech.DbHelper
         {
             return typeof(T);
         }
+
+        public async Task<List<T>> PageList(int pageNumber, int pageSize, SqlSugar.RefAsync<int> total)
+        {
+            return await BaseRepository.PageList(pageNumber,pageSize,total);
+        }
     }
 }

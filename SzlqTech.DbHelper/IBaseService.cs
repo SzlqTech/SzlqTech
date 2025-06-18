@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using SqlSugar;
+using System.Linq.Expressions;
 using SzlqTech.Entity;
 
 namespace SzlqTech.DbHelper
@@ -238,5 +239,7 @@ namespace SzlqTech.DbHelper
         Task<bool> BulkSaveOrUpdateAsync(List<T> entities);
 
         Type GetEntityType();
+
+        Task<List<T>> PageList(int pageNumber, int pageSize, RefAsync<int> total);
     }
 }

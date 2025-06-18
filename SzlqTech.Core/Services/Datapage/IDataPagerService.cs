@@ -1,5 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using System.Collections.ObjectModel;
+using SzlqTech.DbHelper;
+using SzlqTech.Entity;
 
 namespace SzlqTech.Core.Services.Datapage
 {
@@ -49,6 +51,11 @@ namespace SzlqTech.Core.Services.Datapage
         int NumericButtonCount { get; set; }
 
         /// <summary>
+        /// 总数量
+        /// </summary>
+        public int Total { get; set; }
+
+        /// <summary>
         /// 数据源
         /// </summary>
         ObservableCollection<object> GridModelList { get; set; }
@@ -58,7 +65,7 @@ namespace SzlqTech.Core.Services.Datapage
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>
-        Task SetList<T>(IPagedResult<T> pagedResult);
+        //Task SetList<T>(IPagedResult<T> pagedResult);
 
         /// <summary>
         /// 设置数据源(集合)
@@ -66,8 +73,12 @@ namespace SzlqTech.Core.Services.Datapage
         /// <typeparam name="T"></typeparam>
         /// <param name="listResult"></param>
         /// <returns></returns>
-        Task SetList<T>(IListResult<T> listResult);
+        //Task SetList<T>(IListResult<T> listResult);
 
+         Task GetListAsync<T,TV>(IBaseAuditableService<T> baseAuditableService,TV vo) where T : BaseAuditableEntity where TV:BaseVo;
+
+
+       
         /// <summary>
         /// 页面索引改变事件
         /// </summary>

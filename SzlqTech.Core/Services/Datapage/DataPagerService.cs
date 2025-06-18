@@ -1,15 +1,18 @@
 ﻿using Abp.Application.Services.Dto;
+using AutoMapper;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
-using AutoMapper;
+using System.Windows;
 using SzlqTech.Core.Consts;
+using SzlqTech.DbHelper;
+using SzlqTech.Entity;
 
 namespace SzlqTech.Core.Services.Datapage
 {
     /// <summary>
     /// 数据分页服务
     /// </summary>
-    public class DataPagerService : BindableBase, IDataPagerService
+    public class DataPagerService : BindableBase, IDataPagerService 
     {
         private readonly IMapper mapper;
 
@@ -22,7 +25,7 @@ namespace SzlqTech.Core.Services.Datapage
         }
 
         private object selectedItem;
-        private int pageIndex, pageCount, pageSize, numericButtonCount;
+        private int pageIndex, pageCount, pageSize, numericButtonCount,total;
         private ObservableCollection<object> gridModelList;
         public event PageIndexChangedEventhandler OnPageIndexChangedEventhandler;
 
@@ -61,6 +64,20 @@ namespace SzlqTech.Core.Services.Datapage
             set
             {
                 pageCount = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int Total
+        {
+            get { return total; }
+            set
+            {
+                total = value;
+                if (total == 0)
+                    PageCount = 1;
+                else
+                    PageCount = (int)Math.Ceiling(total / (double)PageSize);
                 RaisePropertyChanged();
             }
         }
@@ -119,5 +136,28 @@ namespace SzlqTech.Core.Services.Datapage
                 Items = listResult.Items
             });
         }
+
+      
+
+        public async Task GetListAsync<T, TV>(IBaseAuditableService<T> baseAuditableService, TV vo)
+            where T : BaseAuditableEntity
+            where TV : BaseVo
+        {
+               
+            List<T> list = await baseAuditableService.ListAsync();      
+            List<T> pageList =await baseAuditableService.PageList(PageIndex+1,PageSize, Total);        
+            List<TV> vos = mapper.Map<List<TV>>(pageList);
+            //加载效果
+            await Task.Delay(100);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Total = list.Count;
+                GridModelList.Clear();
+                GridModelList.AddRange(vos);
+            });
+          
+        }
+
+      
     }
 }

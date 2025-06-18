@@ -31,5 +31,8 @@ namespace SzlqTech.Entity
 
         [SugarColumn(ColumnName = "root_code", IsNullable = true, ColumnDescription = "根编码")]
         public string RootCode { get; set; }
+
+        [SugarColumn(ColumnName = "sn", IsNullable = true, ColumnDescription = "sn")]
+        public int SN { get; set; }
     }
 }
