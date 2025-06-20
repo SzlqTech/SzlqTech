@@ -268,6 +268,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 尾页 的本地化字符串。
+        /// </summary>
+        public static string EndPage {
+            get {
+                return ResourceManager.GetString("EndPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 入站时间 的本地化字符串。
         /// </summary>
         public static string EnterDate {
@@ -291,6 +300,15 @@ namespace SzlqTech.Localization.Resources {
         public static string ForgetPassword {
             get {
                 return ResourceManager.GetString("ForgetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 首页 的本地化字符串。
+        /// </summary>
+        public static string HomePage {
+            get {
+                return ResourceManager.GetString("HomePage", resourceCulture);
             }
         }
         
@@ -439,6 +457,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 下一页 的本地化字符串。
+        /// </summary>
+        public static string NextPage {
+            get {
+                return ResourceManager.GetString("NextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 操作 的本地化字符串。
         /// </summary>
         public static string Operation {
@@ -453,6 +480,15 @@ namespace SzlqTech.Localization.Resources {
         public static string PageName {
             get {
                 return ResourceManager.GetString("PageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 条/页 的本地化字符串。
+        /// </summary>
+        public static string PageUnit {
+            get {
+                return ResourceManager.GetString("PageUnit", resourceCulture);
             }
         }
         
@@ -489,6 +525,15 @@ namespace SzlqTech.Localization.Resources {
         public static string PortKey {
             get {
                 return ResourceManager.GetString("PortKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 前一页 的本地化字符串。
+        /// </summary>
+        public static string PreviousPage {
+            get {
+                return ResourceManager.GetString("PreviousPage", resourceCulture);
             }
         }
         
@@ -705,6 +750,15 @@ namespace SzlqTech.Localization.Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 总页数 的本地化字符串。
+        /// </summary>
+        public static string TotalPageName {
+            get {
+                return ResourceManager.GetString("TotalPageName", resourceCulture);
             }
         }
         

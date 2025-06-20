@@ -21,7 +21,7 @@
                                 Padding="5"
                                 FontFamily="Microsoft YaHei"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                                <ComboBoxItem>
+                                <!--<ComboBoxItem>
                                     <ComboBoxItem.Content>
                                         <TextBlock Text="10 条/页" />
                                     </ComboBoxItem.Content>
@@ -40,9 +40,9 @@
                                     <ComboBoxItem.Content>
                                         <TextBlock Text="100 条/页" />
                                     </ComboBoxItem.Content>
-                                </ComboBoxItem>
+                                </ComboBoxItem>-->
                             </ComboBox>
-                            <TextBlock VerticalAlignment="Center" Text="总页数：" />
+                            <TextBlock VerticalAlignment="Center"   x:Name="TotalPageName"/>
                             <TextBlock
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
@@ -53,30 +53,36 @@
                                 x:Name="HomePage"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                                Content="{DynamicResource HomePage}"
-                                FontFamily="/Assets/Fonts/#iconfont"
-                                FontSize="18"
+                                
+                                FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                             <Button
                                 x:Name="PreviousPage"
                                 Margin="5,0"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                                Content="{DynamicResource PreviousPage}"
-                                FontFamily="/Assets/Fonts/#iconfont"
+                               
+                                FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                             <ListBox
                                 x:Name="ItemsControl"
+                                Margin="0,4,0,4"
                                 VerticalAlignment="Center"
                                 SelectionMode="Single">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem">
                                         <Setter Property="Padding" Value="0" />
+                                        <Setter Property="Background" Value="{x:Null}" />
+                                        <Setter Property="Foreground" Value="{x:Null}" />
                                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ListBoxItem">
                                                     <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
                                                         <Border
                                                             x:Name="PART_Border"
                                                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
@@ -86,7 +92,7 @@
                                                     </Grid>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource MaterialDesignDarkSeparatorBackground}" />
+                                                            <Setter TargetName="PART_Border" Property="Background" Value="#409eff" />
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -103,32 +109,33 @@
                                     <DataTemplate>
                                         <Button
                                             Width="33"
+                                            Margin="2"
                                             Padding="0"
                                             md:ButtonAssist.CornerRadius="30"
                                             BorderBrush="Transparent"
                                             BorderThickness="0"
                                             Command="{Binding ClickCommand}"
                                             CommandParameter="{Binding}"
-                                            Content="{Binding Index}"
+                                            Content="{Binding Content}"
                                             Style="{StaticResource MaterialDesignFlatButton}" />
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
+
                             <Button
                                 x:Name="NextPage"
                                 Margin="5,0"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                                Content="{DynamicResource NextPage}"
-                                FontFamily="/Assets/Fonts/#iconfont"
+                               
+                                FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                             <Button
                                 x:Name="EndPage"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                                Content="{DynamicResource EndPage}"
-                                FontFamily="/Assets/Fonts/#iconfont"
-                                FontSize="18"
+                               
+                                FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                         </StackPanel>
                     </Grid>

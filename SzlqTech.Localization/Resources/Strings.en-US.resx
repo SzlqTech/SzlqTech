@@ -345,4 +345,22 @@
   <data name="IsEnableLogin" xml:space="preserve">
     <value>Enable Login</value>
   </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="EndPage" xml:space="preserve">
+    <value>End Page</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>Previous Page</value>
+  </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>Next Page</value>
+  </data>
+  <data name="PageUnit" xml:space="preserve">
+    <value>Article/page</value>
+  </data>
+  <data name="TotalPageName" xml:space="preserve">
+    <value>Total Pages</value>
+  </data>
 </root>

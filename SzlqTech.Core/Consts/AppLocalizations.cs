@@ -91,6 +91,18 @@ namespace SzlqTech.Core.Consts
         public const string PleaseRestorSystem="PleaseRestorSystem";
 
         public const string ChartView = "ChartView";
+
+        public const string HomePage="HomePage";
+
+        public const string EndPage = "EndPage";
+
+        public const string PreviousPage= "PreviousPage";
+
+        public const string NextPage = "NextPage";
+
+        public const string PageUnit = "PageUnit";
+
+        public const string TotalPageName = "TotalPageName";
         #endregion
 
         #region Message

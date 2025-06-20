@@ -39,8 +39,16 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         }
 
         [RelayCommand]
-        public void Search(string str)
+        public async Task Search(string str)
         {
+            if(string.IsNullOrEmpty(str))
+            {
+                await SetBusyAsync(async () =>
+                {
+                    await dataPager.GetListAsync(qrCodeService, new QrCodeVo());
+                });
+                return;
+            }
             var item = qrCodeService.GetFirstOrDefault(x=>x.Code==str);
             if (item == null)
             {
@@ -61,12 +69,12 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         {
 
             List<QrCode> qrCodes = new List<QrCode>();
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 100; i++)
             {
                 QrCode code = new QrCode()
                 {
-                    ProductName= $"产品{i}",
-                    SN= i,
+                    ProductName= $"产品{i+1}",
+                    SN= i+1,
                     Code = SnowFlake.NewId,
                     Id = SnowFlake.NewLongId,
                     Station = i,
@@ -81,8 +89,10 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
         {
+           
             await SetBusyAsync(async () =>
             {
+                //await InitData();
                 await dataPager.GetListAsync(qrCodeService, new QrCodeVo());
             });
         }

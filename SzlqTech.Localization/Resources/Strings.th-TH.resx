@@ -345,4 +345,22 @@
   <data name="IsEnableLogin" xml:space="preserve">
     <value>เปิดใช้การล็อกอิน</value>
   </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>หน้าแรก</value>
+  </data>
+  <data name="EndPage" xml:space="preserve">
+    <value>หน้าท้าย</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>หน้าก่อนหน้า</value>
+  </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>หน้าถัดไป</value>
+  </data>
+  <data name="PageUnit" xml:space="preserve">
+    <value>หน้ากระดาษ</value>
+  </data>
+  <data name="TotalPageName" xml:space="preserve">
+    <value>จำนวนหน้าทั้งหมด</value>
+  </data>
 </root>

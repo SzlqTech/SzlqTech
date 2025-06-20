@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using ImTools;
+using NPOI.SS.Formula.Functions;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -8,8 +10,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
+using SzlqTech.Core.Consts;
+using SzlqTech.Localization;
 
 namespace SzlqTech.Core.Themes.Controls
 {
@@ -23,6 +27,8 @@ namespace SzlqTech.Core.Themes.Controls
         private ListBox _listBoxButtonList;
         private ComboBox comboBoxPageSize;
         private int SelectedIndex;
+        private Border Border;
+        private static int TotalPageCount;
 
         /// <summary>
         /// 显示按钮数量
@@ -89,12 +95,21 @@ namespace SzlqTech.Core.Themes.Controls
                 _listBoxButtonList.ItemsSource = ButtonCollections;
             }
 
+           
             if (GetTemplateChild("COMBOX_PAGESIZE") is ComboBox comboBoxPageSize)
             {
                 this.comboBoxPageSize = comboBoxPageSize;
                 this.comboBoxPageSize.SelectedIndex = SelectedIndex;
                 this.comboBoxPageSize.SelectionChanged += ComboBoxPageSize_SelectionChanged;
+                string pageUnit = LocalizationService.GetString(AppLocalizations.PageUnit);
+                this.comboBoxPageSize.ItemsSource = new List<string> { "10"+pageUnit, "20" + pageUnit, "50" + pageUnit, "100" + pageUnit };
             }
+
+            if(GetTemplateChild("TotalPageName") is TextBlock textBlock)
+            {
+                textBlock.Text=LocalizationService.GetString(AppLocalizations.TotalPageName)+":";
+            }
+
 
             GetTemplateButtonByName("HomePage").Click += HomePage_Click;
             GetTemplateButtonByName("PreviousPage").Click += PreviousPage_Click;
@@ -153,7 +168,9 @@ namespace SzlqTech.Core.Themes.Controls
 
         private Button GetTemplateButtonByName(string Name)
         {
-            return GetTemplateChild(Name) as Button;
+            var button = GetTemplateChild(Name) as Button;
+            button.Content=LocalizationService.GetString(Name);
+            return button;
         }
 
         private static void NumericButtonCountChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -171,6 +188,8 @@ namespace SzlqTech.Core.Themes.Controls
                 });
                 return;
             }
+
+
 
             if (int.TryParse(e.NewValue.ToString(), out int buttonCount))
             {
@@ -221,19 +240,49 @@ namespace SzlqTech.Core.Themes.Controls
             if (int.TryParse(e.NewValue.ToString(), out int pageCount))
             {
                 int Count = 0;
-                if (dataPager.NumericButtonCount > pageCount)
-                    Count = pageCount;
-                else
-                    Count = dataPager.NumericButtonCount;
-
-                for (int i = 1; i < Count + 1; i++)
+                //if (dataPager.NumericButtonCount > pageCount)
+                //    Count = pageCount;
+                //else
+                //    Count = dataPager.NumericButtonCount;
+                Count = pageCount;
+                TotalPageCount = Count;
+                //起动省略号
+                if (TotalPageCount >= 11)
                 {
+                    for (int i = 1; i <= 9; i++)
+                    {
+                        dataPager.ButtonCollections.Add(new ButtonCommandModel
+                        {
+                            Index = i,
+                            Content=i.ToString(),
+                            ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                        });
+                    }
                     dataPager.ButtonCollections.Add(new ButtonCommandModel
                     {
-                        Index = i,
+                        Index = TotalPageCount-1,
+                        Content="......",                  
+                    });
+                    dataPager.ButtonCollections.Add(new ButtonCommandModel
+                    {
+                        Index = TotalPageCount,
+                        Content= TotalPageCount.ToString(),
                         ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
                     });
                 }
+                else
+                {
+                    for (int i = 1; i <= Count; i++)
+                    {
+                        dataPager.ButtonCollections.Add(new ButtonCommandModel
+                        {
+                            Index = i,
+                            Content= i.ToString(),
+                            ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                        });
+                    }
+                }
+              
             }
         }
 
@@ -241,6 +290,7 @@ namespace SzlqTech.Core.Themes.Controls
         {
             var dataPager = (DataPager)d;
             var newValue = (int)e.NewValue + 1;
+            var oldValue = (int)e.OldValue + 1;
 
             if (newValue == 1)
             {
@@ -251,11 +301,84 @@ namespace SzlqTech.Core.Themes.Controls
                 var item = dataPager.ButtonCollections.FirstOrDefault(t => t.Index.Equals(newValue));
                 if (item == null)
                     dataPager.RefreshButtonList(newValue - dataPager.NumericButtonCount + 1);
+            }     
+
+            if(TotalPageCount >= 11)
+            {
+                var buttons = new ObservableCollection<ButtonCommandModel>();
+                if (newValue >= 9&&newValue<TotalPageCount-6)
+                {
+                    buttons.Add(new ButtonCommandModel
+                    {
+                        Index = 1,
+                        Content = "1",
+                        ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                    });
+                    buttons.Add(new ButtonCommandModel
+                    {
+                        Index = 2,
+                        Content = "......",
+                        ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                    });
+                    for (int i = newValue-3; i <= newValue+3; i++)
+                    {
+                        buttons.Add(new ButtonCommandModel
+                        {
+                            Index = i,
+                            Content =i.ToString(),
+                            ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                        });
+                    }
+                    buttons.Add(new ButtonCommandModel
+                    {
+                        Index = buttons.LastOrDefault().Index+1,
+                        Content = "......",
+                        ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                    });
+                    buttons.Add(new ButtonCommandModel
+                    {
+                        Index = TotalPageCount,
+                        Content = TotalPageCount.ToString(),
+                        ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                    });
+
+                    dataPager.ButtonCollections.Clear();
+                    dataPager.ButtonCollections.AddRange(buttons);
+                }
+                else if (newValue == TotalPageCount - 6)
+                {
+                    buttons.Add(new ButtonCommandModel
+                    {
+                        Index = 1,
+                        Content = "1",
+                        ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                    });
+                    buttons.Add(new ButtonCommandModel
+                    {
+                        Index = 2,
+                        Content = "......",
+                        ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                    });
+                    for (int i = TotalPageCount - 8; i <= TotalPageCount; i++)
+                    {
+                        buttons.Add(new ButtonCommandModel
+                        {
+                            Index = i,
+                            Content = i.ToString(),
+                            ClickCommand = new DelegateCommand<ButtonCommandModel>(dataPager.ButtonIndexClick)
+                        });
+                    }
+
+                    dataPager.ButtonCollections.Clear();
+                    dataPager.ButtonCollections.AddRange(buttons);
+                }
+               
             }
-            var selectedItem = dataPager.ButtonCollections.FirstOrDefault(t => t.Index.Equals(newValue));
+            var selectedItem = dataPager.ButtonCollections.FirstOrDefault(t => t.Content.Equals(newValue.ToString()));
             if (selectedItem != null)
                 dataPager._listBoxButtonList.SelectedItem = selectedItem;
         }
+      
 
         private void ComboBoxPageSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -290,6 +413,13 @@ namespace SzlqTech.Core.Themes.Controls
             {
                 get { return index; }
                 set { index = value; RaisePropertyChanged(); }
+            }
+
+            private string? content;
+            public string? Content
+            {
+                get { return content; }
+                set { content = value; RaisePropertyChanged(); }
             }
 
             public DelegateCommand<ButtonCommandModel> ClickCommand { get; set; }

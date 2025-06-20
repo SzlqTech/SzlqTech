@@ -50,6 +50,12 @@
             CanUserAddRows="False"
             CanUserSortColumns="False"
             IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+                    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="{loc:Loc ProductQrCode}" Binding="{Binding ProductName}"/>
                 <DataGridTextColumn Width="*" Header="SN" Binding="{Binding Sn}"/>

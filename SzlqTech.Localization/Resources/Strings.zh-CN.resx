@@ -345,4 +345,22 @@
   <data name="IsEnableLogin" xml:space="preserve">
     <value>启用登录</value>
   </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>首页</value>
+  </data>
+  <data name="EndPage" xml:space="preserve">
+    <value>尾页</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>前一页</value>
+  </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="PageUnit" xml:space="preserve">
+    <value>条/页</value>
+  </data>
+  <data name="TotalPageName" xml:space="preserve">
+    <value>总页数</value>
+  </data>
 </root>
