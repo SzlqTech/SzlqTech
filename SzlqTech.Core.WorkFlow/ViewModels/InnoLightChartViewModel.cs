@@ -1,53 +1,71 @@
 ﻿
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
+using System.Dynamic;
+using System.Windows.Controls;
+using System.Windows.Data;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.ViewModels;
+using SzlqTech.Core.WorkFlow.Views;
 using SzlqTech.Localization;
 
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
 {
-    public class InnoLightChartViewModel:NavigationViewModel
+    public partial class InnoLightChartViewModel:NavigationViewModel
     {
         public InnoLightChartViewModel()
         {
             Title = LocalizationService.GetString(AppLocalizations.ChartView);
+            Init();
         }
 
-        public ISeries[] Series { get; set; } =
-    {
-        new ColumnSeries<double>
-        {
-            Name = "Mary",
-            Values = new double[] { 2, 5, 4 }
-        },
-        new ColumnSeries<double>
-        {
-            Name = "Ana",
-            Values = new double[] { 3, 1, 6 }
-        }
-    };
 
-        public Axis[] XAxes { get; set; } =
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> students;
+
+        public DataGrid dataGrid;
+
+        [RelayCommand]
+        public void WinLoaded(object sender)
         {
-        new Axis
-        {
-            Labels = new string[] { "Category 1", "Category 2", "Category 3" },
-            LabelsRotation = 0,
-            SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
-            SeparatorsAtCenter = false,
-            TicksPaint = new SolidColorPaint(new SKColor(35, 35, 35)),
-            TicksAtCenter = true,
-            // By default the axis tries to optimize the number of 
-            // labels to fit the available space, 
-            // when you need to force the axis to show all the labels then you must: 
-            ForceStepToMin = true,
-            MinStep = 1
+            if (sender != null)
+            {
+                var control = sender as InnoLightChartView;
+                if (control != null)
+                {
+                    this.dataGrid = control.dgTest;
+                }
+            }
+            if (Students == null || Students.Count < 1)
+            {
+                var parentName = new string[5] { "张", "王", "李", "赵", "刘" };
+                var province = new string[5] { "河南", "江苏", "河北", "湖北", "福建" };
+                //for (int i = 0; i < 20; i++)
+                //{
+                //    dynamic item = new ExpandoObject();
+                    
+                //    item.Id = i.ToString();
+                //    item.Name = parentName[(i % 5)] + i.ToString().PadLeft(2, 'A');
+                //    item.Age = 20 + (i % 5);
+                //    item.Gender = i % 2 == 0 ? "男" : "女";
+                //    item.Addr = province[(i % 5)];
+                //    this.Students.Add(item);
+                //}
+                //添加列
+                this.dataGrid.Columns.Add(new DataGridTextColumn() { Header = "学号", Binding = new Binding("Id") });
+                this.dataGrid.Columns.Add(new DataGridTextColumn() { Header = "姓名", Binding = new Binding("Name") });
+                this.dataGrid.Columns.Add(new DataGridTextColumn() { Header = "年龄", Binding = new Binding("Age") });
+                this.dataGrid.Columns.Add(new DataGridTextColumn() { Header = "性别", Binding = new Binding("Gender") });
+                this.dataGrid.Columns.Add(new DataGridTextColumn() { Header = "地址", Binding = new Binding("Addr") });
+            }
         }
-    };
+
+        private void Init()
+        {
+            Students = new ObservableCollection<ExpandoObject>();
+        }
+
     }
 }

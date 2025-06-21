@@ -45,30 +45,46 @@
         <DataGrid
             Grid.Row="1"
             Margin="5"
-            ItemsSource="{Binding dataPager.GridModelList}"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserSortColumns="False"
-            IsReadOnly="True">
+            IsReadOnly="True"
+            ItemsSource="{Binding dataPager.GridModelList}">
             <DataGrid.Resources>
                 <Style TargetType="ScrollViewer">
-                    <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
-                    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+                    <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
+                    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="{loc:Loc ProductQrCode}" Binding="{Binding ProductName}"/>
-                <DataGridTextColumn Width="*" Header="SN" Binding="{Binding Sn}"/>
-                <DataGridTextColumn Width="*" Header="{loc:Loc StationName}" Binding="{Binding StationName}"/>
-                <DataGridTextColumn Width="*" Header="{loc:Loc EnterDate}" Binding="{Binding EnterDate}"/>
-                <DataGridTextColumn Width="*" Header="{loc:Loc LeaveDate}" Binding="{Binding LeaveDate}"/>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding ProductName}"
+                    Header="{loc:Loc ProductQrCode}" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Sn}"
+                    Header="SN" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding StationName}"
+                    Header="{loc:Loc StationName}" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding EnterDate}"
+                    Header="{loc:Loc EnterDate}" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding LeaveDate}"
+                    Header="{loc:Loc LeaveDate}" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls:DataPager Grid.Row="2" 
-                            Margin="10"
-                            PageIndex="{Binding dataPager.PageIndex, Mode=TwoWay}"
-                            PageSize="{Binding dataPager.PageSize,Mode=TwoWay}"
-                            PageCount="{Binding dataPager.PageCount, Mode=TwoWay}"
-                            NumericButtonCount="{Binding dataPager.NumericButtonCount}" />
+        <controls:DataPager
+            Grid.Row="2"
+            Margin="10"
+            NumericButtonCount="{Binding dataPager.NumericButtonCount}"
+            PageCount="{Binding dataPager.PageCount, Mode=TwoWay}"
+            PageSize="{Binding dataPager.PageSize, Mode=TwoWay}"
+            PageIndex="{Binding dataPager.PageIndex, Mode=TwoWay}" />
     </Grid>
 </UserControl>

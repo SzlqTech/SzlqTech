@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Win32;
 using Prism.Ioc;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Core.Services.Session;
@@ -37,7 +36,8 @@ namespace SzlqTech.Extensions
             container.Register<ISysRoleRepository, SysRoleRepository>();
             container.Register<ISysUserRepository, SysUserRepository>();
             container.Register<ISysUserDetailRepository, SysUserDetailRepository>();
-          
+            container.Register<IMachineDataCollectRepostory, MachineDataCollectRepostory>();
+
         }
 
         public static void AddDbService(this IContainerRegistry container)
@@ -57,6 +57,7 @@ namespace SzlqTech.Extensions
             container.Register<ISysRoleService, SysRoleServiceImpl>();
             container.Register<ISysUserService, SysUserServiceImpl>();
             container.Register<ISysUserDetailService, SysUserDetailServiceImpl>();
+            container.Register<IMachineDataCollectService, MachineDataCollectServiceImpl>();
         } 
         #endregion
 

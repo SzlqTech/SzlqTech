@@ -51,6 +51,8 @@ namespace SqlqTech.SharedView.ViewModels
             MachineSettingVos.Add(vo);
         }
 
+       
+
         [RelayCommand]
         public async Task Save()
         {
@@ -92,6 +94,18 @@ namespace SqlqTech.SharedView.ViewModels
                 para.Add("Para", vo);
                 NavigationService.Navigate(AppViews.MachineDetail, para);
                
+            }
+        }
+
+        [RelayCommand]
+        public void DataCollect(MachineSettingVo vo)
+        {
+            if (vo != null)
+            {
+                NavigationParameters para = new NavigationParameters();
+                para.Add("Para", vo);
+                NavigationService.Navigate(AppViews.MachineDataCollect, para);
+
             }
         }
 

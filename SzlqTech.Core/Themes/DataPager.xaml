@@ -20,29 +20,8 @@
                                 Margin="10,0"
                                 Padding="5"
                                 FontFamily="Microsoft YaHei"
-                                Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                                <!--<ComboBoxItem>
-                                    <ComboBoxItem.Content>
-                                        <TextBlock Text="10 条/页" />
-                                    </ComboBoxItem.Content>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <ComboBoxItem.Content>
-                                        <TextBlock Text="20 条/页" />
-                                    </ComboBoxItem.Content>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <ComboBoxItem.Content>
-                                        <TextBlock Text="50 条/页" />
-                                    </ComboBoxItem.Content>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <ComboBoxItem.Content>
-                                        <TextBlock Text="100 条/页" />
-                                    </ComboBoxItem.Content>
-                                </ComboBoxItem>-->
-                            </ComboBox>
-                            <TextBlock VerticalAlignment="Center"   x:Name="TotalPageName"/>
+                                Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                            <TextBlock x:Name="TotalPageName" VerticalAlignment="Center" />
                             <TextBlock
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
@@ -53,7 +32,6 @@
                                 x:Name="HomePage"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                                
                                 FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                             <Button
@@ -61,7 +39,6 @@
                                 Margin="5,0"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                               
                                 FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                             <ListBox
@@ -127,14 +104,12 @@
                                 Margin="5,0"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                               
                                 FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                             <Button
                                 x:Name="EndPage"
                                 Padding="5,0"
                                 VerticalAlignment="Center"
-                               
                                 FontSize="12"
                                 Style="{StaticResource MaterialDesignFlatButton}" />
                         </StackPanel>

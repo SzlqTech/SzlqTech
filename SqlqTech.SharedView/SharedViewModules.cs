@@ -20,6 +20,7 @@ namespace SqlqTech.SharedView
             service.RegisterForNavigation<ScannerSettingView, ScannerSettingViewModel>();
             service.RegisterForNavigation<SysConfigView, SysConfigViewModel>();
             service.RegisterForNavigation<ProductView, ProductViewModel>();
+            service.RegisterForNavigation<MachineDataCollectView, MachineDataCollectViewModel>();
         }
     }
 }
