@@ -55,7 +55,7 @@
             <DataGrid.Columns>
                 <DataGridComboBoxColumn
                     x:Name="cboxPLC"
-                    Width="*"
+                    Width="0.8*"
                     Header="{loc:Loc Type}"
                     SelectedItemBinding="{Binding SelectedMachineType}">
                     <DataGridComboBoxColumn.ElementStyle>
@@ -70,7 +70,18 @@
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
                 <DataGridTextColumn
-                    Width="*"
+                    Width="0.8*"
+                    Binding="{Binding PortName}"
+                    Header="{loc:Loc Name}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Width="0.8*"
                     Binding="{Binding PortKey}"
                     Header="{loc:Loc Address}">
                     <DataGridTextColumn.CellStyle>
@@ -92,7 +103,7 @@
                     </DataGridCheckBoxColumn.CellStyle>
                 </DataGridCheckBoxColumn>
                 <DataGridTextColumn
-                    Width="*"
+                    Width="0.7*"
                     md:TextFieldAssist.TextBoxIsMultiLine="True"
                     Binding="{Binding Description}"
                     Header="{loc:Loc Description}">
@@ -128,5 +139,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+
     </Grid>
 </UserControl>

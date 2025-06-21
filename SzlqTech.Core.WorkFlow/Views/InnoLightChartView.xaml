@@ -5,24 +5,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SzlqTech.Core.WorkFlow.Views"
-    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+    
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Background="{DynamicResource MaterialDesignCardBackground}"
+ 
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding WinLoadedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <DataGrid
-        x:Name="dgTest"
-        AlternationCount="2"
-        AutoGenerateColumns="True"
-        CanUserAddRows="False"
-        CanUserDeleteRows="False"
-        ColumnWidth="*"
-        ItemsSource="{Binding Students}" />
+    <Grid>
+        <DataGrid
+            AlternatingRowBackground="AliceBlue"
+            AlternationCount="2"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            ColumnHeaderHeight="30"
+            ColumnWidth="*"
+            ItemsSource="{Binding Students}"
+            RowBackground="#ffffee"
+            RowHeight="25" />
+    </Grid>
 </UserControl>

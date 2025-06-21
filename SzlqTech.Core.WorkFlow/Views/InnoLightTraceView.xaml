@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:SzlqTech.Core.WorkFlow.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:loc="clr-namespace:SzlqTech.Localization;assembly=SzlqTech.Localization"
     xmlns:local="clr-namespace:SzlqTech.Core.WorkFlow.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,6 +13,11 @@
     d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Resources>
         <converter:LinkToImageConverter x:Key="linkToImage" />
 
@@ -61,7 +67,6 @@
                     Margin="10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    
                     BorderThickness="1"
                     Command="{Binding StopCommand}">
                     <Button.Content>
@@ -71,6 +76,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
+                <Button Command="{Binding AddCommand}" Content="添加" />
             </StackPanel>
 
             <Grid Grid.Row="1">
@@ -86,18 +92,16 @@
                     Style="{StaticResource MaterialDesignTabControl}">
                     <TabItem Header="OE Tray上料">
                         <DataGrid
+                            x:Name="OETrayGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding OETrayDataVos}" />
+
+                       
                     </TabItem>
                     <TabItem Header="载具换盘">
                         <DataGrid

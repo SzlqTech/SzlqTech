@@ -24,6 +24,6 @@ namespace SqlqTech.SharedView.Vo
         [ObservableProperty]
         public bool isEnable;
 
-
+      
     }
 }
