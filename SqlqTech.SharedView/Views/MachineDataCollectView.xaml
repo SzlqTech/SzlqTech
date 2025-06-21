@@ -8,9 +8,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     d:DesignHeight="450"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignCardBackground}"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -34,18 +40,39 @@
         <DataGrid
             Grid.Row="1"
             Margin="10,0,10,10"
+            x:Name="grid"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserSortColumns="False"
             IsReadOnly="False"
-            ItemsSource="{Binding MachineDetailVos}"
-            SelectedItem="{Binding SelectedMachineDetailVo}"
+            ItemsSource="{Binding MachineCollectDataVos}"
+            SelectedItem="{Binding SelectedMachineDateVo}"
             Style="{StaticResource MaterialDesignDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding HeaderTitle}"
-                    Header="标题">
+                    Binding="{Binding ZhHeaderTitle}"
+                    Header="中文标题">
+                    <DataGridTextColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding EnHeaderTitle}"
+                    Header="英文标题">
+                    <DataGridTextColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding TaiHeaderTitle}"
+                    Header="泰文标题">
                     <DataGridTextColumn.CellStyle>
                         <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                             <Setter Property="VerticalAlignment" Value="Center" />
@@ -62,16 +89,15 @@
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn
+              
+                <DataGridComboBoxColumn
+                    x:Name="cbox"
                     Width="*"
-                    Binding="{Binding Description}"
-                    Header="{loc:Loc Description}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                </DataGridTextColumn>
+                    Header="采集端口键"
+                    SelectedValuePath="PortKey"
+                    DisplayMemberPath="PortKey"
+                    SelectedValueBinding="{Binding PortKey}"
+                   />
                 <DataGridCheckBoxColumn
                     Width="*"
                     Binding="{Binding IsSysDate}"

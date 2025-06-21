@@ -17,7 +17,7 @@ namespace SzlqTech.Entity
         [SugarColumn(ColumnName = "update_time", IsNullable = true, ColumnDescription = "更新时间")]
         public DateTime? UpdateTime { get; set; }
 
-        [SugarColumn(ColumnName = "status", ColumnDescription = "业务状态")]
+        [SugarColumn(ColumnName = "status", IsNullable = true, ColumnDescription = "业务状态")]
         public virtual int Status { get; set; }
 
         [SugarColumn(IsIgnore = true)]
@@ -33,7 +33,7 @@ namespace SzlqTech.Entity
             }
         }
 
-        [SugarColumn(ColumnName = "deleted", ColumnDescription = "逻辑删除")]
+        [SugarColumn(ColumnName = "deleted", IsNullable = true, ColumnDescription = "逻辑删除")]
         public int Deleted { get; set; }
 
         [SugarColumn(ColumnName = "remark", IsNullable = true, ColumnDescription = "备注")]

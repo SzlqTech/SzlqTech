@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Prism.Ioc;
+using SqlqTech.SharedView.AutoMapper;
 using SzlqTech.Core.Services.App;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.WorkFlow.AutoMapper;
@@ -70,6 +71,7 @@ namespace SzlqTech.Extensions
             {
                 config.AddProfile(new AutoMapperProfile());
                 config.AddProfile(new InnoTraceProfile());
+                config.AddProfile(new SharedMapperProfile());
             });
             container.RegisterInstance<IMapper>(config.CreateMapper());
             container.Register<NavigationService>();

@@ -19,7 +19,14 @@ namespace SqlqTech.SharedView.Vo
 
 
         [ObservableProperty]
-        public string headerTitle;
+        public string zhHeaderTitle;
+
+
+        [ObservableProperty]
+        public string enHeaderTitle;
+
+        [ObservableProperty]
+        public string taiHeaderTitle;
 
         [ObservableProperty]
         public string bindingName;
@@ -30,5 +37,7 @@ namespace SqlqTech.SharedView.Vo
 
         [ObservableProperty]
         public bool isSysDate;
+
+        
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzlqTech.IService;
 
 namespace SqlqTech.SharedView.Views
 {
@@ -23,6 +24,7 @@ namespace SqlqTech.SharedView.Views
         public MachineDataCollectView()
         {
             InitializeComponent();
+          
         }
     }
 }
