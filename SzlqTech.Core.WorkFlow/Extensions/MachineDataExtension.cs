@@ -1,18 +1,12 @@
 ﻿using Prism.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SzlqTech.Core.Events;
-using SzlqTech.Equipment.Machine;
 
 namespace SzlqTech.Core.WorkFlow.Extensions
 {
     public static class MachineDataExtension
     {
         /// <summary>
-        /// 更新多语言
+        /// 更新MachineData
         /// </summary>
         /// <param name="aggregator"></param>
         /// <param name="isUpdate"></param>
@@ -27,7 +21,7 @@ namespace SzlqTech.Core.WorkFlow.Extensions
         }
 
         /// <summary>
-        /// 注册多语言提示消息 
+        /// 注册MachineData 
         /// </summary>
         /// <param name="aggregator"></param>
         /// <param name="action"></param>
@@ -35,6 +29,25 @@ namespace SzlqTech.Core.WorkFlow.Extensions
             Action<MachineDataModel> action, string filterName = "InnoLightTraceViewModel")
         {
             aggregator.GetEvent<MachineDataEvent>().Subscribe(action,
+                ThreadOption.PublisherThread, true, (m) =>
+                {
+                    return m.Filter.Equals(filterName);
+                });
+        }
+
+        public static void SendMachineStatusModel(this IEventAggregator aggregator, MachineStatusModel data, string filterName = "InnoLightTraceViewModel")
+        {
+            aggregator.GetEvent<MachineStatusEvent>().Publish(new MachineStatusModel()
+            {
+                IsOpen=data.IsOpen,
+                Filter = filterName,
+            });
+        }
+
+        public static void ResgiterMachineStatusModel(this IEventAggregator aggregator,
+           Action<MachineStatusModel> action, string filterName = "InnoLightTraceViewModel")
+        {
+            aggregator.GetEvent<MachineStatusEvent>().Subscribe(action,
                 ThreadOption.PublisherThread, true, (m) =>
                 {
                     return m.Filter.Equals(filterName);

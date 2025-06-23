@@ -16,6 +16,8 @@ namespace SzlqTech.Equipment
         /// </summary>
         event EventHandler<TEventArgs<List<MachineLinkData>>>? PLCDataReceived;
 
+        event EventHandler<TEventArgs<bool>>? MachineStatusReceived;
+
         /// <summary>
         /// 注册设备事件
         /// </summary>

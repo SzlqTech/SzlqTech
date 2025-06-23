@@ -3,6 +3,7 @@ using Castle.Windsor.Diagnostics;
 using Prism.Events;
 using Prism.Ioc;
 using SzlqTech.Common.Extensions;
+using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.WorkFlow.Extensions;
 using SzlqTech.Equipment;
@@ -15,6 +16,7 @@ namespace SzlqTech.Core.WorkFlow
         private readonly IExecutingMachine executingMachine;
         private IEventAggregator aggregator;
         public event EventHandler<TEventArgs<List<MachineLinkData>>>? PLCDataReceived;
+        public event EventHandler<TEventArgs<bool>>? MachineStatusRecevied;
 
         public InnoLightWorkflow(IExecutingMachine ExecutingMachine, IExecutingScanner ExecutingScanner) : base(ExecutingMachine, ExecutingScanner)
         {
@@ -22,6 +24,14 @@ namespace SzlqTech.Core.WorkFlow
             executingMachine = ExecutingMachine;
             executingMachine.PLCDataReceived -= ExecutingMachine_PLCDataReceived;
             executingMachine.PLCDataReceived += ExecutingMachine_PLCDataReceived;
+            executingMachine.MachineStatusReceived -= ExecutingMachine_MachineStatusReceived;
+            executingMachine.MachineStatusReceived += ExecutingMachine_MachineStatusReceived;
+        }
+
+        private void ExecutingMachine_MachineStatusReceived(object? sender, TEventArgs<bool> e)
+        {   
+            AppMachineContext.IsOpen = e.Data;
+            RaiseMachineStatusRecevied(e.Data);
         }
 
         private void ExecutingMachine_PLCDataReceived(object? sender, Common.Extensions.TEventArgs<List<MachineLinkData>> e)
@@ -34,6 +44,12 @@ namespace SzlqTech.Core.WorkFlow
         {
             PLCDataReceived?.Invoke(this, new Common.Extensions.TEventArgs<List<MachineLinkData>>(data));
         }
+
+        public void RaiseMachineStatusRecevied(bool isOpen)
+        {
+            MachineStatusRecevied?.Invoke(this, new TEventArgs<bool>(isOpen));
+        }
+        
 
         public override void OnExecutingMachineDataReceived(MachineData data)
         {

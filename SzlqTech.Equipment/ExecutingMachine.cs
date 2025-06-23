@@ -1,4 +1,5 @@
-﻿using HslCommunication.Core.Net;
+﻿using Dm;
+using HslCommunication.Core.Net;
 using HslCommunication.ModBus;
 using HslCommunication.Profinet.Inovance;
 using HslCommunication.Profinet.Siemens;
@@ -68,6 +69,7 @@ namespace SzlqTech.Equipment
         private bool IsOpen = false;
 
         private Task? HeartbeatTask = null;
+
         #endregion
 
         public ExecutingMachine(IMachineSettingService machineSettingService,IMachineDetailService machineDetailService)
@@ -80,8 +82,9 @@ namespace SzlqTech.Equipment
         #region 数据接受事件
         public event EventHandler<TEventArgs<MachineData>>? DataReceived;
 
-
         public event EventHandler<TEventArgs<List<MachineLinkData>>>? PLCDataReceived;
+
+        public event EventHandler<TEventArgs<bool>>? MachineStatusReceived;
         /// <summary>
         /// 引发设备数据接收事件
         /// </summary>
@@ -94,6 +97,11 @@ namespace SzlqTech.Equipment
         public void RaisePLCDataReceived(List<MachineLinkData> data)
         {
             PLCDataReceived?.Invoke(this, new TEventArgs<List<MachineLinkData>>(data));
+        }
+
+        public void RaiseMachineStatusReceived(bool isOpen)
+        {
+            MachineStatusReceived?.Invoke(this, new TEventArgs<bool>(isOpen));
         }
         #endregion
 
@@ -238,6 +246,7 @@ namespace SzlqTech.Equipment
                     IsOpen = false;
                     throw new EquipmentException("没有可用的PLC设备，请检查网络连接或PLC配置。");
                 }
+                RaiseMachineStatusReceived(IsOpen);
             }
         }
 

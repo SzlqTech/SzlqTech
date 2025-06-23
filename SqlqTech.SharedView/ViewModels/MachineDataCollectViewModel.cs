@@ -5,15 +5,11 @@ using NLog;
 using Prism.Regions;
 using SqlqTech.SharedView.Views;
 using SqlqTech.SharedView.Vo;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Nlogs;
+using SzlqTech.Core.Enums;
 using SzlqTech.Core.ViewModels;
 using SzlqTech.Entity;
 using SzlqTech.IService;
@@ -141,7 +137,8 @@ namespace SqlqTech.SharedView.ViewModels
                 List<MachineDetail> list = await machineDetailService.ListAsync(o => o.MachineId == CurrMachineSettingVo.Id);
                
                 MachineDetailVos = mapper.Map<List<MachineDetailVo>>(list);
-                MachineDetailVos.Add(new MachineDetailVo { MachineId=CurrMachineSettingVo.Id,PortKey="SysDate"});
+              
+                MachineDetailVos.Add(new MachineDetailVo { MachineId=CurrMachineSettingVo.Id,PortKey= DataCollectEnum .SysDate.ToString()});
                 if (cbox != null)
                 {
                     cbox.ItemsSource = MachineDetailVos;

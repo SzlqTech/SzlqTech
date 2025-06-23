@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SqlSugar;
+﻿using SqlSugar;
 using System.ComponentModel;
 
 namespace SzlqTech.Entity

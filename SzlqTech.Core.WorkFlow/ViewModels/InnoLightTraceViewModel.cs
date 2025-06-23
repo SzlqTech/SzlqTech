@@ -8,7 +8,6 @@ using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
 using System.Dynamic;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +15,7 @@ using SzlqTech.Common.Extensions;
 using SzlqTech.Common.Helper;
 using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
+using SzlqTech.Core.Enums;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
 using SzlqTech.Core.ViewModels;
@@ -53,10 +53,17 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             workflow = ContainerLocator.Container.Resolve<InnoLightWorkflow>();
             workflow.PLCDataReceived -= OnMachineDataReceived;
             workflow.PLCDataReceived += OnMachineDataReceived;
+            workflow.MachineStatusRecevied -= OnMachineStatusRecevied;
+            workflow.MachineStatusRecevied += OnMachineStatusRecevied;
             aggregator = ContainerLocator.Container.Resolve<IEventAggregator>();
             aggregator.ResgiterMachineDataModel(OnMachineDataReceived, "InnoLightTraceViewModel");
             this.OETrayDataVos = new ObservableCollection<ExpandoObject>();
+            IsOpen = false;
+        }
 
+        private void OnMachineStatusRecevied(object? sender, TEventArgs<bool> e)
+        {
+            IsOpen = e.Data;
         }
 
         private void OnMachineDataReceived(object? sender, TEventArgs<List<MachineLinkData>> e)
@@ -118,9 +125,19 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         public const string FirstMachineName= "OETray";
 
+        public const string SecondMachineName = "OETray1";
+
         #endregion
 
         #region 命令
+
+        [ObservableProperty]
+        
+        public bool isOpen;
+
+        public bool CanButtonExcute => !IsOpen;
+
+        public bool CanClose => IsOpen;
 
         [RelayCommand]
         public async Task Start()
@@ -164,6 +181,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         [RelayCommand]
         public async Task Stop()
         {
+            if (!IsOpen) return;
             var result = false;
             if (IsEnableMachine)
             {
@@ -262,6 +280,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                     Header = item.Title,
                     Binding = new Binding(item.BindingName)
                 };
+                //按单元格内容自适应
+                column.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                 grid?.Columns?.Add(column);
             }
         }
@@ -280,7 +300,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 {
                   foreach (var item in PLCDatas)
                     {
-                        if (item.PortKey == "SysDate") continue;                
+                        if (item.PortKey == DataCollectEnum.SysDate.ToString()) continue;                
                         dynamic? data = workflow.ReadData(item.PortKey);
                         if (data != null) item.Value = data;
                        
@@ -302,7 +322,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             foreach (var item in PLCDatas)
             {
                 var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
-                if (item.PortKey == "SysDate")
+                if (item.PortKey == DataCollectEnum.SysDate.ToString())
                 {
                     itemDict[item.BindingName] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 }
@@ -356,6 +376,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             switch (model.MachineData.PortKey)
             {
                 case FirstReadSignalKey: ReadData(model, FirstMachineName); break;
+                case SecondReadSignalKey: ReadData(model, SecondMachineName); break;
             }
         }
 
