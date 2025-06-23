@@ -139,7 +139,9 @@ namespace SqlqTech.SharedView.ViewModels
                 CurrMachineSettingVo = para;
                 List<MachineDataCollect> details = await machineDataCollectService.ListAsync(o => o.MachineId == CurrMachineSettingVo.Id);
                 List<MachineDetail> list = await machineDetailService.ListAsync(o => o.MachineId == CurrMachineSettingVo.Id);
-                MachineDetailVos= mapper.Map<List<MachineDetailVo>>(list);
+               
+                MachineDetailVos = mapper.Map<List<MachineDetailVo>>(list);
+                MachineDetailVos.Add(new MachineDetailVo { MachineId=CurrMachineSettingVo.Id,PortKey="SysDate"});
                 if (cbox != null)
                 {
                     cbox.ItemsSource = MachineDetailVos;

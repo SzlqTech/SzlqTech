@@ -1,22 +1,20 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MathNet.Numerics.Distributions;
-using NPOI.SS.Formula.Functions;
+using NLog;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Regions;
 using SqlqTech.Core.Vo;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Dynamic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Common.Helper;
+using SzlqTech.Common.Nlogs;
 using SzlqTech.Core.Consts;
 using SzlqTech.Core.Events;
 using SzlqTech.Core.Services.Session;
@@ -41,6 +39,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         private readonly IMachineDataCollectService machineDataCollectService;
         private InnoLightWorkflow workflow;
         private readonly IEventAggregator aggregator;
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,
             IMapper mapper,IMachineSettingService machineSettingService,IMachineDataCollectService machineDataCollectService)
@@ -89,31 +88,35 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         public bool IsEnableMachine = false; 
 
         public string CurrLanguage = XmlConfigHelper.GetValue("lang") ?? "zh-CN";
+
+        public Dictionary<string, List<PLCDataModel>> DicPLCDatas = new Dictionary<string, List<PLCDataModel>>();
         #endregion
 
         #region PLC读取数据端口键
 
-        public string FirstReadSignalKey = "FirstReadSignal";
+        public const string FirstReadSignalKey = "FirstReadSignal";
 
-        public string SecondReadSignalKey = "SecondReadSignal";
+        public const string SecondReadSignalKey = "SecondReadSignal";
 
-        public string ThirdReadSignalKey = "ThirdReadSignal";
+        public const string ThirdReadSignalKey = "ThirdReadSignal";
 
-        public string FourthReadSignalKey = "FourthReadSignal";
+        public const string FourthReadSignalKey = "FourthReadSignal";
 
-        public string FifthReadSignalKey = "FifthReadSignal";
+        public const string FifthReadSignalKey = "FifthReadSignal";
 
-        public string SixthReadSignalKey = "SixthReadSignal";
+        public const string SixthReadSignalKey = "SixthReadSignal";
 
-        public string SeventhReadSignalKey = "SeventhReadSignal";
+        public const string SeventhReadSignalKey = "SeventhReadSignal";
 
-        public string EighthReadSignalKey = "EighthReadSignal";
+        public const string EighthReadSignalKey = "EighthReadSignal";
 
-        public string NinthReadSignalKey = "NinthReadSignal";
+        public  const string NinthReadSignalKey = "NinthReadSignal";
 
-        public string TenthReadSignalKey = "TenthReadSignal";
+        public const string TenthReadSignalKey = "TenthReadSignal";
 
-        public string ProductSignalKey = "ProductKey";
+        public const string ProductSignalKey = "ProductKey";
+
+        public const string FirstMachineName= "OETray";
 
         #endregion
 
@@ -135,7 +138,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                     {
                         //启动成功发送产品号
                         SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
-                        await workflow.WriteValueAsync(ProductSignalKey, SelectedProductVo.ProductCode);
+                        await workflow.WriteValueAsync(ProductSignalKey,Convert.ToInt32(SelectedProductVo.ProductCode));
 
                     }
                     else SendMessage(LocalizationService.GetString(AppLocalizations.StartError));
@@ -178,28 +181,9 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         }
 
-        [RelayCommand]
-        public void Add()
-        {
-
-            for (int i = 0; i < 20; i++)
-            {
-                dynamic item = new ExpandoObject();
-
-                var itemDict = (IDictionary<string, object>)item; // 转换为字典接口
-
-                // 动态添加属性
-                itemDict["OKAmount"] = i.ToString();
-                itemDict["NGAmount"] = (i + 2).ToString();
-                itemDict["Code"] = SnowFlake.NewId;
-               
-                OETrayDataVos.Add(item);
-            }
-
-        }
 
         [RelayCommand]
-        public void Loaded(object sender)
+        public async Task Loaded(object sender)
         {
 
             if (sender != null)
@@ -210,31 +194,30 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                     this.dataGrid = control.OETrayGrid;
                 }
             }
-            InitTrayLoadingGoods();
+            await InitDataGrid();
 
         }
         #endregion
 
-        #region OE Tray上料
-
-       
-
-        [ObservableProperty]
-        public ObservableCollection<ExpandoObject> oETrayDataVos;
-
-        private DataGrid dataGrid;
-
-
-      
-
-        public void InitTrayLoadingGoods()
+        #region DataGrid相关
+        /// <summary>
+        /// 加载datagrid列
+        /// </summary>
+        public async Task InitDataGrid()
         {
-            var machine = machineSettingService.GetFirstOrDefault(o=>o.PortName== "OETray");
-            if (machine!=null)
+            DicPLCDatas.Clear();
+            var groupedResults = (machineSettingService.List(o => o.IsEnable))
+                                 .GroupBy(m => m.PortName)
+                                 .ToList();
+          
+            await Parallel.ForEachAsync(groupedResults, async (group, token) =>
             {
-                var dataCollections = machineDataCollectService.List(o=>o.MachineId==machine.Id);
-                if(OETrayDataVos==null|| OETrayDataVos.Count < 1)
+                List<PLCDataModel> PLCDatas = new List<PLCDataModel>();
+                var portName = group.Key;
+                var machine = (await machineSettingService.ListAsync(o => o.PortName == portName)).FirstOrDefault();
+                if (machine != null)
                 {
+                    var dataCollections = await machineDataCollectService.ListAsync(o => o.MachineId == machine.Id);
                     foreach (var item in dataCollections)
                     {
                         var title = string.Empty;
@@ -250,16 +233,121 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                         {
                             title = item.TaiHeaderTitle;
                         }
-                        this.dataGrid.Columns.Add(new DataGridTextColumn() { Header = title, Binding = new Binding(item.BindingName) });
+                        PLCDatas.Add(new PLCDataModel()
+                        {
+                            Title = title,
+                            PortKey = item.PortKey,
+                            BindingName = item.BindingName,
+                        });
                     }
+                    DicPLCDatas.Add(portName, PLCDatas);
+                }
+            });
+            InitDataGridColumns(FirstMachineName, dataGrid);
+        }
 
-                } 
-
+        /// <summary>
+        /// 初始化DataGrid列
+        /// </summary>
+        /// <param name="portName"></param>
+        /// <param name="grid"></param>
+        public void InitDataGridColumns(string portName, DataGrid grid)
+        {
+            grid.Columns?.Clear();
+            var plcDatas = GetPLCDatasByName(portName);
+            foreach (var item in plcDatas)
+            {
+                var column = new DataGridTextColumn
+                {
+                    Header = item.Title,
+                    Binding = new Binding(item.BindingName)
+                };
+                grid?.Columns?.Add(column);
             }
         }
 
+        /// <summary>
+        /// data读取
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="name">机器名称</param>
+        private void ReadData(MachineDataModel model, string name)
+        {
+            List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
+            if (model != null && model.MachineData.Data is bool value)
+            {
+                if (value)
+                {
+                  foreach (var item in PLCDatas)
+                    {
+                        if (item.PortKey == "SysDate") continue;                
+                        dynamic? data = workflow.ReadData(item.PortKey);
+                        if (data != null) item.Value = data;
+                       
+                    }     
+                    RreshDataGrid(name);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 刷新DataGrid数据
+        /// </summary>
+        /// <param name="name">机器名称</param>
+        private void RreshDataGrid(string name)
+        {
+            List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
+            dynamic obj = new ExpandoObject();
+            
+            foreach (var item in PLCDatas)
+            {
+                var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
+                if (item.PortKey == "SysDate")
+                {
+                    itemDict[item.BindingName] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                else if (item.Value != null)
+                {
+                    // 动态添加属性
+                    itemDict[item.BindingName] = item.Value;
+                }
+            }
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                OETrayDataVos.Add(obj);
+            });
+
+        }
+
+        /// <summary>
+        /// 获取PLC数据列表
+        /// </summary>
+        /// <param name="name">机器名称</param>
+        /// <returns></returns>
+        public List<PLCDataModel> GetPLCDatasByName(string name)
+        {
+            List<PLCDataModel> PLCDatas = new List<PLCDataModel>();
+            if (DicPLCDatas.TryGetValue(name, out List<PLCDataModel>? plcDataList))
+            {
+                // 成功获取到值，plcDataList 就是对应的 List<PLCDataModel>
+                PLCDatas = plcDataList;
+            }
+            else
+            {
+                logger.ErrorHandler($"Key:{name} 不存在！");
+            }
+            return PLCDatas;
+        }
         #endregion
 
+        #region OE Tray上料
+
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> oETrayDataVos;
+
+        private DataGrid dataGrid;
+       
+        #endregion
 
         #region IO
 
@@ -267,24 +355,29 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         {
             switch (model.MachineData.PortKey)
             {
-                case "": break;
+                case FirstReadSignalKey: ReadData(model, FirstMachineName); break;
             }
         }
 
         #endregion
 
+        #region 初始化数据
 
+        /// <summary>
+        /// 初始化PLC连接状态
+        /// </summary>
+        /// <returns></returns>
         public async Task Init()
         {
-            List<MachineSetting> machineSettings =await machineSettingService.ListAsync(o=>o.IsEnable);
+            List<MachineSetting> machineSettings = await machineSettingService.ListAsync(o => o.IsEnable);
             if (machineSettings == null || machineSettings.Count == 0) return;
             MachineLinks = new ObservableCollection<MachineLinkVo>();
             foreach (var item in machineSettings)
             {
-                MachineLinkVo vo= new MachineLinkVo()
+                MachineLinkVo vo = new MachineLinkVo()
                 {
-                    Name = item.Description??string.Empty,
-                    PortKey= item.PortKey,
+                    Name = item.Description ?? string.Empty,
+                    PortKey = item.PortKey,
                     IsLink = false
                 };
                 MachineLinks.Add(vo);
@@ -295,28 +388,22 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         {
             return true;
         }
-       
 
         public override async Task OnNavigatedToAsync(NavigationContext navigationContext = null)
-        {      
+        {
             await Init();
-            ProductVos =new ObservableCollection<ProductVo>();
-            //OETrayDataVos = new ObservableCollection<ExpandoObject>();
-            List<Product> products =await productService.ListAsync();
-            IsEnableMachine =bool.TryParse(XmlConfigHelper.GetValue("IsEnableMachine").ToLower(),out bool res);
+            ProductVos = new ObservableCollection<ProductVo>();       
+            List<Product> products = await productService.ListAsync();
+            IsEnableMachine = bool.TryParse(XmlConfigHelper.GetValue("IsEnableMachine").ToLower(), out bool res);
             if (products != null && products.Count > 0)
             {
                 List<ProductVo> productsVo = mapper.Map<List<ProductVo>>(products);
                 ProductVos.AddRange(productsVo);
             }
-            
-        }
+
+        } 
+        #endregion
     }
 
-    public class PLCDataModel
-    {
-        public string PortKey { get; set; }
-
-        public dynamic Value { get; set; }
-    }
+   
 }

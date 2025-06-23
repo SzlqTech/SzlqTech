@@ -76,7 +76,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Command="{Binding AddCommand}" Content="添加" />
+               
             </StackPanel>
 
             <Grid Grid.Row="1">

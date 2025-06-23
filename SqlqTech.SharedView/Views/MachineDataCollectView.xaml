@@ -98,7 +98,7 @@
                     DisplayMemberPath="PortKey"
                     SelectedValueBinding="{Binding PortKey}"
                    />
-                <DataGridCheckBoxColumn
+                <!--<DataGridCheckBoxColumn
                     Width="*"
                     Binding="{Binding IsSysDate}"
                     Header="是否系统时间">
@@ -109,7 +109,7 @@
                             <Setter Property="Margin" Value="10,0,0,0" />
                         </Style>
                     </DataGridCheckBoxColumn.CellStyle>
-                </DataGridCheckBoxColumn>
+                </DataGridCheckBoxColumn>-->
                 <DataGridCheckBoxColumn
                     Width="0.5*"
                     Binding="{Binding IsEnable}"

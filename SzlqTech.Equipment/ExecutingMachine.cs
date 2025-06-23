@@ -211,7 +211,7 @@ namespace SzlqTech.Equipment
                         }
                         else
                         {
-                            if (machineDetail.ScanStatus == SettingStatus.Enable)
+                            if (machineDetail.IsEnableScan)
                             {
                                 PLCScanDictionary.AddToStartScan(machineDetail.PortKey, tcpDevice, machineDetail.Address,
                                     machineDetail.DataTypeEnum, machineDetail.ScanCycle);
@@ -273,7 +273,7 @@ namespace SzlqTech.Equipment
                     try
                     {
                         if(item.OperateResult.IsSuccess)
-                            item.SendHeartbeatPositiveSignal(50);
+                            item.SendHeartbeatPositiveSignal(200);
                     }
                     catch (Exception ex)
                     {
@@ -281,7 +281,7 @@ namespace SzlqTech.Equipment
                         logger.InfoHandler("执行心跳扫描任务错误");
                     }
                 });
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
             }
            
         }
@@ -391,6 +391,38 @@ namespace SzlqTech.Equipment
            return  PLCDictionary.Get(key).Write(value);
         }
 
+        public dynamic ReadValueByPortKey(string portKey)
+        {
+           var item= PLCDictionary.Get(portKey);
+           dynamic? data = null;
+            if (item == null)
+            {
+                throw new EquipmentException($"未找到端口键为{portKey}的PLC数据项");
+            }
+            switch (item.DataType) 
+            {
+                case DataType.Bool:
+                    data= item.ReadBool();
+                    break;
+                case DataType.Int16:
+                    data= item.ReadInt16();
+                    break;
+                case DataType.Int32:
+                    data = item.ReadInt32();
+                    break;
+                case DataType.Float:
+                    data = item.ReadFloat();
+                    break;
+                case DataType.Double:
+                    data = item.ReadInt32();
+                    break;
+                case DataType.String:
+                    data = item.ReadFloat();
+                    break;
+            }
+            return data;
+        }
+
 
         #endregion
 
@@ -429,6 +461,40 @@ namespace SzlqTech.Equipment
         public async Task<bool> WriteValueAsync(string key, object value)
         {
             return await PLCDictionary.Get(key).WriteAsync(value);
+        }
+
+     
+
+        public async Task<dynamic> ReadValueByPortKeyAsync(string portKey)
+        {
+            var item = PLCDictionary.Get(portKey);
+            dynamic? data = null;
+            if (item == null)
+            {
+                throw new EquipmentException($"未找到端口键为{portKey}的PLC数据项");
+            }
+            switch (item.DataType)
+            {
+                case DataType.Bool:
+                    data =await item.ReadBoolAsync();
+                    break;
+                case DataType.Int16:
+                    data =await item.ReadInt16Async();
+                    break;
+                case DataType.Int32:
+                    data =await item.ReadInt32Async();
+                    break;
+                case DataType.Float:
+                    data =await item.ReadFloatAsync();
+                    break;
+                case DataType.Double:
+                    data =await item.ReadInt32Async();
+                    break;
+                case DataType.String:
+                    data =await item.ReadFloatAsync();
+                    break;
+            }
+            return data;
         }
 
         #endregion

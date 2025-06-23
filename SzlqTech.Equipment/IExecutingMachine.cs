@@ -76,6 +76,8 @@ namespace SzlqTech.Equipment
         string ReadStringValue(string key);
 
         bool WriteValue(string key, object value);
+
+        dynamic ReadValueByPortKey(string portKey);
         #endregion
 
         #region 异步读写数据
@@ -92,6 +94,8 @@ namespace SzlqTech.Equipment
         Task<string> ReadStringValueAsync(string key);
 
         Task<bool> WriteValueAsync(string key, object value);
+
+        Task<dynamic> ReadValueByPortKeyAsync(string portKey);
         #endregion
 
     }

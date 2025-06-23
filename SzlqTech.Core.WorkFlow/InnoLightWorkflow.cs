@@ -44,5 +44,15 @@ namespace SzlqTech.Core.WorkFlow
             };
             aggregator.SendMachineDataModel(model);       
         }
+
+        public virtual dynamic ReadData(string portKey)
+        {
+          return  executingMachine.ReadValueByPortKey(portKey);
+        }
+
+        public virtual async Task<dynamic> ReadDataAsync(string portKey)
+        {
+            return await executingMachine.ReadValueByPortKeyAsync(portKey);
+        }
     }
 }
