@@ -363,4 +363,22 @@
   <data name="TotalPageName" xml:space="preserve">
     <value>จำนวนหน้าทั้งหมด</value>
   </data>
+  <data name="ZHTitle" xml:space="preserve">
+    <value>หัวเรื่องภาษาจีน</value>
+  </data>
+  <data name="USTitle" xml:space="preserve">
+    <value>คำบรรยายภาษาอังกฤษ</value>
+  </data>
+  <data name="TaiTitle" xml:space="preserve">
+    <value>ชื่อภาษาไทย</value>
+  </data>
+  <data name="BindingName" xml:space="preserve">
+    <value>ชื่อการลาก</value>
+  </data>
+  <data name="ScanPortKey" xml:space="preserve">
+    <value>กุญแจ ที่จะเก็บพอร์ต</value>
+  </data>
+  <data name="IsEnable" xml:space="preserve">
+    <value>เปิดใช้งาน</value>
+  </data>
 </root>

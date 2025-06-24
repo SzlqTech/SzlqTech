@@ -88,6 +88,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 绑定名称 的本地化字符串。
+        /// </summary>
+        public static string BindingName {
+            get {
+                return ResourceManager.GetString("BindingName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 取消 的本地化字符串。
         /// </summary>
         public static string Cancel {
@@ -327,6 +336,15 @@ namespace SzlqTech.Localization.Resources {
         public static string InnoLight {
             get {
                 return ResourceManager.GetString("InnoLight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用 的本地化字符串。
+        /// </summary>
+        public static string IsEnable {
+            get {
+                return ResourceManager.GetString("IsEnable", resourceCulture);
             }
         }
         
@@ -655,6 +673,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 采集端口键 的本地化字符串。
+        /// </summary>
+        public static string ScanPortKey {
+            get {
+                return ResourceManager.GetString("ScanPortKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 启动 的本地化字符串。
         /// </summary>
         public static string Start {
@@ -745,6 +772,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 泰文标题 的本地化字符串。
+        /// </summary>
+        public static string TaiTitle {
+            get {
+                return ResourceManager.GetString("TaiTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 标题 的本地化字符串。
         /// </summary>
         public static string Title {
@@ -790,11 +826,29 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 英文标题 的本地化字符串。
+        /// </summary>
+        public static string USTitle {
+            get {
+                return ResourceManager.GetString("USTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 工作流程 的本地化字符串。
         /// </summary>
         public static string WorkFlow {
             get {
                 return ResourceManager.GetString("WorkFlow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 中文标题 的本地化字符串。
+        /// </summary>
+        public static string ZHTitle {
+            get {
+                return ResourceManager.GetString("ZHTitle", resourceCulture);
             }
         }
     }

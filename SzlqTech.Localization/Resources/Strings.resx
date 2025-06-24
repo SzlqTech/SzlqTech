@@ -343,4 +343,22 @@
   <data name="TotalPageName" xml:space="preserve">
     <value>总页数</value>
   </data>
+  <data name="ZHTitle" xml:space="preserve">
+    <value>中文标题</value>
+  </data>
+  <data name="USTitle" xml:space="preserve">
+    <value>英文标题</value>
+  </data>
+  <data name="TaiTitle" xml:space="preserve">
+    <value>泰文标题</value>
+  </data>
+  <data name="BindingName" xml:space="preserve">
+    <value>绑定名称</value>
+  </data>
+  <data name="ScanPortKey" xml:space="preserve">
+    <value>采集端口键</value>
+  </data>
+  <data name="IsEnable" xml:space="preserve">
+    <value>启用</value>
+  </data>
 </root>

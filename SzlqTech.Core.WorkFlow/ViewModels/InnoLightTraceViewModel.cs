@@ -127,6 +127,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         public const string SecondMachineName = "OETray1";
 
+        public const string ThirdMachineName = "OETray2";
+
         #endregion
 
         #region 命令
@@ -210,6 +212,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 if (control != null)
                 {
                     this.dataGrid = control.OETrayGrid;
+                    this.secondDataGrid = control.SecondGrid;
+                    this.thirdDataGrid = control.thirddGrid;
                 }
             }
             await InitDataGrid();
@@ -262,6 +266,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 }
             });
             InitDataGridColumns(FirstMachineName, dataGrid);
+            InitDataGridColumns(SecondMachineName, secondDataGrid);
+            InitDataGridColumns(ThirdMachineName, thirdDataGrid);
         }
 
         /// <summary>
@@ -291,7 +297,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// </summary>
         /// <param name="model"></param>
         /// <param name="name">机器名称</param>
-        private void ReadData(MachineDataModel model, string name)
+        private void ReadData(MachineDataModel model, string name, ObservableCollection<ExpandoObject> datas)
         {
             List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
             if (model != null && model.MachineData.Data is bool value)
@@ -305,7 +311,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                         if (data != null) item.Value = data;
                        
                     }     
-                    RreshDataGrid(name);
+                    RreshDataGrid(name,datas);
                 }
             }
         }
@@ -314,7 +320,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// 刷新DataGrid数据
         /// </summary>
         /// <param name="name">机器名称</param>
-        private void RreshDataGrid(string name)
+        private void RreshDataGrid(string name, ObservableCollection<ExpandoObject> datas)
         {
             List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
             dynamic obj = new ExpandoObject();
@@ -334,7 +340,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-                OETrayDataVos.Add(obj);
+                datas.Add(obj);
             });
 
         }
@@ -360,13 +366,23 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         }
         #endregion
 
-        #region OE Tray上料
+        #region dataGrid 定义
 
         [ObservableProperty]
         public ObservableCollection<ExpandoObject> oETrayDataVos;
 
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> secondDataVos;
+
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> thirdDataVos;
+
         private DataGrid dataGrid;
-       
+
+        private DataGrid secondDataGrid;
+
+        private DataGrid thirdDataGrid;
+
         #endregion
 
         #region IO
@@ -375,8 +391,9 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         {
             switch (model.MachineData.PortKey)
             {
-                case FirstReadSignalKey: ReadData(model, FirstMachineName); break;
-                case SecondReadSignalKey: ReadData(model, SecondMachineName); break;
+                case FirstReadSignalKey: ReadData(model, FirstMachineName,OETrayDataVos); break;
+                case SecondReadSignalKey: ReadData(model, SecondMachineName, SecondDataVos); break;
+                case ThirdReadSignalKey: ReadData(model, ThirdMachineName, ThirdDataVos); break;
             }
         }
 

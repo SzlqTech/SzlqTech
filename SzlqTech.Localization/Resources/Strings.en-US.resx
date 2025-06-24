@@ -363,4 +363,22 @@
   <data name="TotalPageName" xml:space="preserve">
     <value>Total Pages</value>
   </data>
+  <data name="ZHTitle" xml:space="preserve">
+    <value>Chinese Title</value>
+  </data>
+  <data name="USTitle" xml:space="preserve">
+    <value>English Title</value>
+  </data>
+  <data name="TaiTitle" xml:space="preserve">
+    <value>Thai Title</value>
+  </data>
+  <data name="BindingName" xml:space="preserve">
+    <value>Binding Name</value>
+  </data>
+  <data name="ScanPortKey" xml:space="preserve">
+    <value>Acquisition Port Key</value>
+  </data>
+  <data name="IsEnable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
 </root>

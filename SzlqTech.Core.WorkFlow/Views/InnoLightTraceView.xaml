@@ -76,7 +76,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-               
+
             </StackPanel>
 
             <Grid Grid.Row="1">
@@ -101,37 +101,29 @@
                             IsReadOnly="True"
                             ItemsSource="{Binding OETrayDataVos}" />
 
-                       
+
                     </TabItem>
                     <TabItem Header="载具换盘">
                         <DataGrid
+                            x:Name="SecondGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding OETrayDataVos}" />
                     </TabItem>
                     <TabItem Header="清洁+拔防尘塞">
                         <DataGrid
+                            x:Name="thirddGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding OETrayDataVos}" />
                     </TabItem>
                     <TabItem Header="OE点胶">
                         <DataGrid
