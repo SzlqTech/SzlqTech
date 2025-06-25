@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bogus.DataSets;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
@@ -241,48 +240,56 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                                  .GroupBy(m => m.PortName)
                                  .ToList();
             DicMachineSetting.Clear();
-            foreach (var group in groupedResults)
+
+            var tasks = groupedResults.Select(async group =>
             {
-                List<PLCDataModel> PLCDatas = new List<PLCDataModel>();
-                var portName = group.Key;
-                var machine = (await machineSettingService.ListAsync(o => o.PortName == portName)).FirstOrDefault();
-                
-                if (machine != null)
+                try
                 {
-                    DicMachineSetting.Add(portName, machine);
-                    var dataCollections = await machineDataCollectService.ListAsync(o => o.MachineId == machine.Id);
-                    foreach (var item in dataCollections)
+                    List<PLCDataModel> PLCDatas = new List<PLCDataModel>();
+                    var portName = group.Key;
+                    var machine = (await machineSettingService.ListAsync(o => o.PortName == portName)).FirstOrDefault();
+                    if (machine != null)
                     {
-                        var title = string.Empty;
-                        if (CurrLanguage == "zh-CN")
+                        DicMachineSetting.Add(portName, machine);
+                        var dataCollections = await machineDataCollectService.ListAsync(o => o.MachineId == machine.Id);
+                        foreach (var item in dataCollections)
                         {
-                            title = item.ZhHeaderTitle;
+                            var title = string.Empty;
+                            if (CurrLanguage == "zh-CN")
+                            {
+                                title = item.ZhHeaderTitle;
+                            }
+                            else if (CurrLanguage == "en-US")
+                            {
+                                title = item.EnHeaderTitle;
+                            }
+                            else if (CurrLanguage == "th-TH")
+                            {
+                                title = item.TaiHeaderTitle;
+                            }
+                            PLCDatas.Add(new PLCDataModel()
+                            {
+                                Title = title,
+                                PortKey = item.PortKey,
+                                BindingName = item.BindingName,
+                                MachineId = machine.Id,
+                                MachineName = machine.PortName
+                            });
                         }
-                        else if (CurrLanguage == "en-US")
-                        {
-                            title = item.EnHeaderTitle;
-                        }
-                        else if (CurrLanguage == "th-TH")
-                        {
-                            title = item.TaiHeaderTitle;
-                        }
-                        PLCDatas.Add(new PLCDataModel()
-                        {
-                            Title = title,
-                            PortKey = item.PortKey,
-                            BindingName = item.BindingName,
-                            MachineId = machine.Id,
-                            MachineName=machine.PortName
-                        });
+                        DicPLCDatas.Add(portName, PLCDatas);
                     }
-                    DicPLCDatas.Add(portName, PLCDatas);
                 }
-            }
-            //await Parallel.ForEachAsync(groupedResults, async (group, token) =>
-            //{
+                catch (Exception ex)
+                {
+                    logger.ErrorHandler($"加载datagrid数据错误，错误原因:{ex.Message}");
+                }
+            });
 
-            //});
-
+            //加载动画
+            await SetBusyAsync(async () =>
+            {
+                await Task.WhenAll(tasks);
+            });
            
             InitDataGridColumns(FirstMachineName, dataGrid);
             InitDataGridColumns(SecondMachineName, secondDataGrid);
@@ -308,9 +315,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 //按单元格内容自适应
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                 grid?.Columns?.Add(column);
-            }
-
-           
+            }       
         }
 
         /// <summary>
@@ -326,12 +331,12 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 if (value)
                 {
                   foreach (var item in PLCDatas)
-                    {
-                        if (item.PortKey == DataCollectEnum.SysDate.ToString()) continue;                
-                        dynamic? data = workflow.ReadData(item.PortKey);
-                        if (data != null) item.Value = data;
+                  {
+                    if (item.PortKey == DataCollectEnum.SysDate.ToString()) continue;                
+                    dynamic? data = workflow.ReadData(item.PortKey);
+                    if (data != null) item.Value = data;
                        
-                    }     
+                   }     
                     RreshDataGrid(name,datas);
                 }
             }
@@ -375,10 +380,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             //存储数据 测试
             List<DataCollectModel> model = new List<DataCollectModel>();
             DicMachineSetting.TryGetValue(name,out MachineSetting machine);
-            foreach (var item in plcModels)
+            //foreach (var item in plcModels)
+            //{
+            //    model.Add(new DataCollectModel() { Key = item.BindingName, Value = item.Value});
+            //}
+
+            Parallel.ForEach(plcModels, item =>
             {
-                model.Add(new DataCollectModel() { Key = item.BindingName, Value = item.Value});
-            }
+                model.Add(new DataCollectModel() { Key = item.BindingName, Value = item.Value });
+            });
 
             List<string> keys = model.Select(x => x.Key).ToList();
             List<string> values = model.Select(x => $"{x.Value}").ToList();
@@ -405,13 +415,19 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             if (keys.Count != values.Count) return;
             List<DataCollectModel> model = new List<DataCollectModel>();
             dynamic obj = new ExpandoObject();
-
             int i = 0;
             foreach (var item in keys)
-            {           
-                var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
-                itemDict[item] = values[i];
-                i++;
+            {
+                try
+                {
+                    var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
+                    itemDict[item] = values[i];
+                    i++;
+                }
+                catch (Exception ex)
+                {
+                    logger.ErrorHandler($"加载数据错误，原因:{ex.Message}"); ;
+                }
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
