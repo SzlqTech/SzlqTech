@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Bogus.DataSets;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using NLog;
 using Prism.Events;
 using Prism.Ioc;
@@ -11,6 +13,7 @@ using System.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Common.Helper;
 using SzlqTech.Common.Nlogs;
@@ -37,12 +40,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         private readonly IMapper mapper;
         private readonly IMachineSettingService machineSettingService;
         private readonly IMachineDataCollectService machineDataCollectService;
+        private readonly IDataCollectService dataCollectService;
         private InnoLightWorkflow workflow;
         private readonly IEventAggregator aggregator;
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,
-            IMapper mapper,IMachineSettingService machineSettingService,IMachineDataCollectService machineDataCollectService)
+            IMapper mapper,IMachineSettingService machineSettingService,IMachineDataCollectService machineDataCollectService,
+            IDataCollectService dataCollectService
+            )
         {
             Title = LocalizationService.GetString(AppLocalizations.DataCollection);
             this.dialog = dialog;
@@ -50,6 +56,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             this.mapper = mapper;
             this.machineSettingService = machineSettingService;
             this.machineDataCollectService = machineDataCollectService;
+            this.dataCollectService = dataCollectService;
             workflow = ContainerLocator.Container.Resolve<InnoLightWorkflow>();
             workflow.PLCDataReceived -= OnMachineDataReceived;
             workflow.PLCDataReceived += OnMachineDataReceived;
@@ -132,6 +139,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         #endregion
 
         #region 命令
+
+        public Dictionary<string, MachineSetting> DicMachineSetting = new Dictionary<string, MachineSetting>();
 
         [ObservableProperty]
         
@@ -231,14 +240,16 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             var groupedResults = (machineSettingService.List(o => o.IsEnable))
                                  .GroupBy(m => m.PortName)
                                  .ToList();
-          
-            await Parallel.ForEachAsync(groupedResults, async (group, token) =>
+            DicMachineSetting.Clear();
+            foreach (var group in groupedResults)
             {
                 List<PLCDataModel> PLCDatas = new List<PLCDataModel>();
                 var portName = group.Key;
                 var machine = (await machineSettingService.ListAsync(o => o.PortName == portName)).FirstOrDefault();
+                
                 if (machine != null)
                 {
+                    DicMachineSetting.Add(portName, machine);
                     var dataCollections = await machineDataCollectService.ListAsync(o => o.MachineId == machine.Id);
                     foreach (var item in dataCollections)
                     {
@@ -260,11 +271,19 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                             Title = title,
                             PortKey = item.PortKey,
                             BindingName = item.BindingName,
+                            MachineId = machine.Id,
+                            MachineName=machine.PortName
                         });
                     }
                     DicPLCDatas.Add(portName, PLCDatas);
                 }
-            });
+            }
+            //await Parallel.ForEachAsync(groupedResults, async (group, token) =>
+            //{
+
+            //});
+
+           
             InitDataGridColumns(FirstMachineName, dataGrid);
             InitDataGridColumns(SecondMachineName, secondDataGrid);
             InitDataGridColumns(ThirdMachineName, thirdDataGrid);
@@ -290,6 +309,8 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                 grid?.Columns?.Add(column);
             }
+
+           
         }
 
         /// <summary>
@@ -317,12 +338,12 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         }
 
         /// <summary>
-        /// 刷新DataGrid数据
+        /// 刷新从PLC读取的DataGrid数据
         /// </summary>
         /// <param name="name">机器名称</param>
         private void RreshDataGrid(string name, ObservableCollection<ExpandoObject> datas)
         {
-            List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
+            List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);           
             dynamic obj = new ExpandoObject();
             
             foreach (var item in PLCDatas)
@@ -336,13 +357,66 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 {
                     // 动态添加属性
                     itemDict[item.BindingName] = item.Value;
-                }
+                }          
             }
+            SaveDataGrid(PLCDatas, name);
             Application.Current.Dispatcher.Invoke(() =>
             {
                 datas.Add(obj);
             });
 
+        }
+
+        /// <summary>
+        /// 存储数据到数据库
+        /// </summary>
+        private void SaveDataGrid(List<PLCDataModel> plcModels,string name)
+        {
+            //存储数据 测试
+            List<DataCollectModel> model = new List<DataCollectModel>();
+            DicMachineSetting.TryGetValue(name,out MachineSetting machine);
+            foreach (var item in plcModels)
+            {
+                model.Add(new DataCollectModel() { Key = item.BindingName, Value = item.Value});
+            }
+
+            List<string> keys = model.Select(x => x.Key).ToList();
+            List<string> values = model.Select(x => $"{x.Value}").ToList();
+
+            DataCollectVo vo = new DataCollectVo()
+            {
+                Key = JsonConvert.SerializeObject(keys),
+                Value = JsonConvert.SerializeObject(values),
+                Id = SnowFlake.NewLongId,
+                MachineId = machine?.Id,
+                Name = machine?.PortName
+            };
+            var dataCollect = mapper.Map<DataCollect>(vo);
+            dataCollectService.SaveOrUpdate(dataCollect);
+        }
+
+        /// <summary>
+        /// 加载从数据库读取的数据
+        /// </summary>
+        private void LoadDataGrid(DataCollectVo vo, ObservableCollection<ExpandoObject> datas)
+        {
+            List<string> keys =JsonConvert.DeserializeObject<List<string>>(vo.Key);
+            List<string> values = JsonConvert.DeserializeObject<List<string>>(vo.Value);
+            if (keys.Count != values.Count) return;
+            List<DataCollectModel> model = new List<DataCollectModel>();
+            dynamic obj = new ExpandoObject();
+
+            int i = 0;
+            foreach (var item in keys)
+            {           
+                var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
+                itemDict[item] = values[i];
+                i++;
+            }
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                datas.Add(obj);
+            });
         }
 
         /// <summary>

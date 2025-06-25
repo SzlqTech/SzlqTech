@@ -15,5 +15,11 @@ namespace SzlqTech.Core.WorkFlow.Vos
         public string Title { get; set; }
 
         public dynamic? Value { get; set; }
+
+        public long MachineId { get; set; }
+
+        public string MachineName { get; set; }
+
+      
     }
 }

@@ -38,7 +38,7 @@ namespace SzlqTech.Extensions
             container.Register<ISysUserRepository, SysUserRepository>();
             container.Register<ISysUserDetailRepository, SysUserDetailRepository>();
             container.Register<IMachineDataCollectRepostory, MachineDataCollectRepostory>();
-
+            container.Register<IDataCollectRepository,DataCollectRepository>();
         }
 
         public static void AddDbService(this IContainerRegistry container)
@@ -59,6 +59,7 @@ namespace SzlqTech.Extensions
             container.Register<ISysUserService, SysUserServiceImpl>();
             container.Register<ISysUserDetailService, SysUserDetailServiceImpl>();
             container.Register<IMachineDataCollectService, MachineDataCollectServiceImpl>();
+            container.Register<IDataCollectService,DataCollectServiceImpl>();
         } 
         #endregion
 

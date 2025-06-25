@@ -29,5 +29,6 @@ SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
 //db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(SysRoleMenu));
 //db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(SysSequence));
 //db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(SysUserDetail));
-//MachineDataCollect
-db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(MachineDataCollect));
+//MachineDataCollect DataCollect
+//db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(MachineDataCollect));
+db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(DataCollect));
