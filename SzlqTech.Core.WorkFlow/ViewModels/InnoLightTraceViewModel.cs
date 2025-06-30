@@ -64,6 +64,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             aggregator = ContainerLocator.Container.Resolve<IEventAggregator>();
             aggregator.ResgiterMachineDataModel(OnMachineDataReceived, "InnoLightTraceViewModel");
             this.OETrayDataVos = new ObservableCollection<ExpandoObject>();
+            this.VehicleReamingDataVos = new ObservableCollection<ExpandoObject>();
+            this.ClearingDataVos = new ObservableCollection<ExpandoObject>();
+            this.OEDispensingDataVos=new ObservableCollection<ExpandoObject>();
+            this.HousingLoadingDataVos = new ObservableCollection<ExpandoObject>();
+            this.GluingAssemblyDataVos= new ObservableCollection<ExpandoObject>();
+            this.TightenScrewsDataVos = new ObservableCollection<ExpandoObject>();
+            this.LiftingRefluxDataVos = new ObservableCollection<ExpandoObject>();
+            this.DetectionDataVos = new ObservableCollection<ExpandoObject>();
+            this.BakingTrayDataVos = new ObservableCollection<ExpandoObject>();
             IsOpen = false;
         }
 
@@ -359,6 +368,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// <param name="name">机器名称</param>
         private void ReadData(MachineDataModel model, string name, ObservableCollection<ExpandoObject> datas)
         {
+            
             List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
             if (model != null && model.MachineData.Data is bool value)
             {
@@ -401,7 +411,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             SaveDataGrid(PLCDatas, name);
             Application.Current.Dispatcher.Invoke(() =>
             {
-                datas.Add(obj);
+                datas?.Add(obj);
             });
 
         }
@@ -585,15 +595,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             switch (model.MachineData.PortKey)
             {
                 case FirstReadSignalKey: ReadData(model, FirstMachineName,OETrayDataVos); break;
-                case SecondReadSignalKey: ReadData(model, SecondMachineName, ClearingDataVos); break;
+                case SecondReadSignalKey: ReadData(model, SecondMachineName, VehicleReamingDataVos); break;
                 case ThirdReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
-                case FourthReadSignalKey: ReadData(model, FirstMachineName, OETrayDataVos); break;
-                case FifthReadSignalKey: ReadData(model, SecondMachineName, ClearingDataVos); break;
-                case SixthReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
-                case SeventhReadSignalKey: ReadData(model, FirstMachineName, OETrayDataVos); break;
-                case EighthReadSignalKey: ReadData(model, SecondMachineName, ClearingDataVos); break;
-                case NinthReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
-                case TenthReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
+                case FourthReadSignalKey: ReadData(model, FourthMachineName, OEDispensingDataVos); break;
+                case FifthReadSignalKey: ReadData(model, FifthMachineName, HousingLoadingDataVos); break;
+                case SixthReadSignalKey: ReadData(model, SixthMachineName, GluingAssemblyDataVos); break;
+                case SeventhReadSignalKey: ReadData(model, SeventhMachineName, TightenScrewsDataVos); break;
+                case EighthReadSignalKey: ReadData(model, EighthMachineName, LiftingRefluxDataVos); break;
+                case NinthReadSignalKey: ReadData(model, NinthMachineName, DetectionDataVos); break;
+                case TenthReadSignalKey: ReadData(model, TenthMachineName, BakingTrayDataVos); break;
             }
         }
 
@@ -637,6 +647,34 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                     case FirstMachineName:
                         LoadDataGrid(vos,OETrayDataVos);
                         break;
+                    case SecondMachineName:
+                        LoadDataGrid(vos, VehicleReamingDataVos);
+                        break;
+                    case ThirdMachineName:
+                        LoadDataGrid(vos, ClearingDataVos);
+                        break;
+                    case FourthMachineName:
+                        LoadDataGrid(vos, OEDispensingDataVos);
+                        break;
+                    case FifthMachineName:
+                        LoadDataGrid(vos, HousingLoadingDataVos);
+                        break;
+                    case SixthMachineName:
+                        LoadDataGrid(vos, GluingAssemblyDataVos);
+                        break;
+                    case SeventhMachineName:
+                        LoadDataGrid(vos, TightenScrewsDataVos);
+                        break;
+                    case EighthMachineName:
+                        LoadDataGrid(vos, LiftingRefluxDataVos);
+                        break;
+                    case NinthMachineName:
+                        LoadDataGrid(vos, DetectionDataVos);
+                        break;
+                    case TenthMachineName:
+                        LoadDataGrid(vos, BakingTrayDataVos);
+                        break;
+                       
 
                 }
 
