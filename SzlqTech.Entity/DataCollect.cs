@@ -1,6 +1,8 @@
 ﻿using SqlSugar;
 namespace SzlqTech.Entity
 {
+    [SugarIndex("index_name", nameof(DataCollect.Name), OrderByType.Asc)]
+    [SugarIndex("index_key", nameof(DataCollect.Key), OrderByType.Asc)]
     [SugarTable("data_collect", TableDescription = "采集数据列表")]
     public class DataCollect:BaseAuditableEntity
     {

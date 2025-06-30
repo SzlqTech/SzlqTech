@@ -131,10 +131,23 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         public const string FirstMachineName= "OETray";
 
-        public const string SecondMachineName = "OETray1";
+        public const string SecondMachineName = "VehicleReaming";
 
-        public const string ThirdMachineName = "OETray2";
+        public const string ThirdMachineName = "Clearing";
 
+        public const string FourthMachineName = "OEDispensing";
+
+        public const string FifthMachineName = "housingLoading";
+
+        public const string SixthMachineName = "GluingAssembly";
+
+        public const string SeventhMachineName = "TightenScrews";
+
+        public const string EighthMachineName = "LiftingReflux";
+
+        public const string NinthMachineName = "Detection";
+
+        public const string TenthMachineName = "BakingTray";
         #endregion
 
         #region 命令
@@ -220,8 +233,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 if (control != null)
                 {
                     this.dataGrid = control.OETrayGrid;
-                    this.secondDataGrid = control.SecondGrid;
-                    this.thirdDataGrid = control.thirddGrid;
+                    this.vehicleReamingDataGrid = control.SecondGrid;
+                    this.clearingDataGrid = control.thirddGrid;
+                    this.oEDispensingdataGrid = control.fourthGrid;
+                    this.housingLoadingDataGrid = control.fifthGrid;
+                    this.gluingAssemblyDataGrid = control.sixthGrid;
+                    this.tightenScrewsdataGrid = control.seventhGrid;
+                    this.liftingRefluxDataGrid = control.eighthGrid;
+                    this.detectionDataGrid = control.ninthGrid;
+                    this.bakingTrayDataGrid = control.tenthGrid;
                 }
             }
             await InitDataGrid();
@@ -236,7 +256,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         public async Task InitDataGrid()
         {
             DicPLCDatas.Clear();
-            var groupedResults = (machineSettingService.List(o => o.IsEnable))
+            var groupedResults = (machineSettingService.List())
                                  .GroupBy(m => m.PortName)
                                  .ToList();
             DicMachineSetting.Clear();
@@ -290,10 +310,24 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             {
                 await Task.WhenAll(tasks);
             });
-           
+
+            LoadDataGridColumms();
+            await InitDataGridDatas();
+        }
+
+        //加载Datagrid数据列
+        public void LoadDataGridColumms()
+        {
             InitDataGridColumns(FirstMachineName, dataGrid);
-            InitDataGridColumns(SecondMachineName, secondDataGrid);
-            InitDataGridColumns(ThirdMachineName, thirdDataGrid);
+            InitDataGridColumns(SecondMachineName, vehicleReamingDataGrid);
+            InitDataGridColumns(ThirdMachineName, clearingDataGrid);
+            InitDataGridColumns(FourthMachineName, oEDispensingdataGrid);
+            InitDataGridColumns(FifthMachineName, housingLoadingDataGrid);
+            InitDataGridColumns(SixthMachineName, gluingAssemblyDataGrid);
+            InitDataGridColumns(SeventhMachineName, tightenScrewsdataGrid);
+            InitDataGridColumns(EighthMachineName, liftingRefluxDataGrid);
+            InitDataGridColumns(NinthMachineName, detectionDataGrid);
+            InitDataGridColumns(TenthMachineName, bakingTrayDataGrid);
         }
 
         /// <summary>
@@ -408,31 +442,35 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// <summary>
         /// 加载从数据库读取的数据
         /// </summary>
-        private void LoadDataGrid(DataCollectVo vo, ObservableCollection<ExpandoObject> datas)
+        private void LoadDataGrid(List<DataCollectVo> vos, ObservableCollection<ExpandoObject> datas)
         {
-            List<string> keys =JsonConvert.DeserializeObject<List<string>>(vo.Key);
-            List<string> values = JsonConvert.DeserializeObject<List<string>>(vo.Value);
-            if (keys.Count != values.Count) return;
-            List<DataCollectModel> model = new List<DataCollectModel>();
-            dynamic obj = new ExpandoObject();
-            int i = 0;
-            foreach (var item in keys)
+            foreach (var vo in vos)
             {
-                try
+                List<string> keys = JsonConvert.DeserializeObject<List<string>>(vo.Key);
+                List<string> values = JsonConvert.DeserializeObject<List<string>>(vo.Value);
+                if (keys.Count != values.Count) return;
+                List<DataCollectModel> model = new List<DataCollectModel>();
+                dynamic obj = new ExpandoObject();
+                int i = 0;
+                foreach (var item in keys)
                 {
-                    var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
-                    itemDict[item] = values[i];
-                    i++;
+                    try
+                    {
+                        var itemDict = (IDictionary<string, object>)obj; // 转换为字典接口
+                        itemDict[item] = values[i];
+                        i++;
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.ErrorHandler($"加载数据错误，原因:{ex.Message}"); ;
+                    }
                 }
-                catch (Exception ex)
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    logger.ErrorHandler($"加载数据错误，原因:{ex.Message}"); ;
-                }
+                    datas.Add(obj);
+                });
             }
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                datas.Add(obj);
-            });
+           
         }
 
         /// <summary>
@@ -458,20 +496,85 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
 
         #region dataGrid 定义
 
+        /// <summary>
+        /// OE Tray上料
+        /// </summary>
         [ObservableProperty]
         public ObservableCollection<ExpandoObject> oETrayDataVos;
 
+        /// <summary>
+        /// 载具换盘
+        /// </summary>
         [ObservableProperty]
-        public ObservableCollection<ExpandoObject> secondDataVos;
+        public ObservableCollection<ExpandoObject> vehicleReamingDataVos;
 
+        /// <summary>
+        /// 清洁+拔防尘塞
+        /// </summary>
         [ObservableProperty]
-        public ObservableCollection<ExpandoObject> thirdDataVos;
+        public ObservableCollection<ExpandoObject> clearingDataVos;
+
+        /// <summary>
+        ///OE点胶
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> oEDispensingDataVos;
+
+        /// <summary>
+        ///housing 上料
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> housingLoadingDataVos;
+
+        /// <summary>
+        ///点胶合装
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> gluingAssemblyDataVos;
+
+        /// <summary>
+        /// 拧螺丝
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> tightenScrewsDataVos;
+
+        /// <summary>
+        ///升降回流
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> liftingRefluxDataVos;
+
+        /// <summary>
+        ///检测
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> detectionDataVos;
+
+        /// <summary>
+        ///烤盘上下料
+        /// </summary>
+        [ObservableProperty]
+        public ObservableCollection<ExpandoObject> bakingTrayDataVos;
 
         private DataGrid dataGrid;
 
-        private DataGrid secondDataGrid;
+        private DataGrid vehicleReamingDataGrid;
 
-        private DataGrid thirdDataGrid;
+        private DataGrid clearingDataGrid;
+
+        private DataGrid oEDispensingdataGrid;
+
+        private DataGrid housingLoadingDataGrid;
+
+        private DataGrid gluingAssemblyDataGrid;
+
+        private DataGrid tightenScrewsdataGrid;
+
+        private DataGrid liftingRefluxDataGrid;
+
+        private DataGrid detectionDataGrid;
+
+        private DataGrid bakingTrayDataGrid;
 
         #endregion
 
@@ -482,8 +585,15 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             switch (model.MachineData.PortKey)
             {
                 case FirstReadSignalKey: ReadData(model, FirstMachineName,OETrayDataVos); break;
-                case SecondReadSignalKey: ReadData(model, SecondMachineName, SecondDataVos); break;
-                case ThirdReadSignalKey: ReadData(model, ThirdMachineName, ThirdDataVos); break;
+                case SecondReadSignalKey: ReadData(model, SecondMachineName, ClearingDataVos); break;
+                case ThirdReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
+                case FourthReadSignalKey: ReadData(model, FirstMachineName, OETrayDataVos); break;
+                case FifthReadSignalKey: ReadData(model, SecondMachineName, ClearingDataVos); break;
+                case SixthReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
+                case SeventhReadSignalKey: ReadData(model, FirstMachineName, OETrayDataVos); break;
+                case EighthReadSignalKey: ReadData(model, SecondMachineName, ClearingDataVos); break;
+                case NinthReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
+                case TenthReadSignalKey: ReadData(model, ThirdMachineName, ClearingDataVos); break;
             }
         }
 
@@ -510,7 +620,30 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                 };
                 MachineLinks.Add(vo);
             }
+
+          
         }
+
+        private async Task InitDataGridDatas()
+        {
+            //从数据库加载当天的数据
+            List<DataCollect> dataCollects =await dataCollectService.ListAsync(O => Convert.ToDateTime(O.CreateTime).Date == DateTime.Now.Date);
+            var groups = dataCollects.GroupBy(x => x.Name).ToList(); ;
+            foreach (var group in groups)
+            {
+                List<DataCollectVo> vos = mapper.Map<List<DataCollectVo>>(group);
+                switch (group.Key) 
+                {
+                    case FirstMachineName:
+                        LoadDataGrid(vos,OETrayDataVos);
+                        break;
+
+                }
+
+            }
+        }
+
+
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {

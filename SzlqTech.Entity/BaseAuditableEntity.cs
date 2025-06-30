@@ -3,6 +3,7 @@
 
 namespace SzlqTech.Entity
 {
+    //[SugarIndex("index_id", nameof(BaseAuditableEntity.Id), OrderByType.Asc)]
     public class BaseAuditableEntity:BaseEntity
     {
         [SugarColumn(ColumnName = "create_user", IsNullable = true, ColumnDescription = "创建用户id")]
@@ -39,8 +40,8 @@ namespace SzlqTech.Entity
         [SugarColumn(ColumnName = "remark", IsNullable = true, ColumnDescription = "备注")]
         public string? Remark { get; set; }
 
-
-        [SugarColumn(ColumnName = "id", ColumnDescription = "主键",IsPrimaryKey =true)]
+      
+        [SugarColumn(ColumnName = "id", ColumnDescription = "主键",IsPrimaryKey =true)]    
         public long Id { get; set; }
     }
 }

@@ -83,6 +83,10 @@ namespace SqlqTech.SharedView.ViewModels
                     }
                 });           
             }
+            else
+            {
+                SendErrorMsg();
+            }
         }
 
         [RelayCommand]

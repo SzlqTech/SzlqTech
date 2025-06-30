@@ -112,7 +112,7 @@
                             CanUserSortColumns="False"
                             ColumnWidth="*"
                             IsReadOnly="True"
-                            ItemsSource="{Binding OETrayDataVos}" />
+                            ItemsSource="{Binding VehicleReamingDataVos}" />
                     </TabItem>
                     <TabItem Header="清洁+拔防尘塞">
                         <DataGrid
@@ -123,112 +123,84 @@
                             CanUserSortColumns="False"
                             ColumnWidth="*"
                             IsReadOnly="True"
-                            ItemsSource="{Binding OETrayDataVos}" />
+                            ItemsSource="{Binding ClearingDataVos}" />
                     </TabItem>
                     <TabItem Header="OE点胶">
                         <DataGrid
+                            x:Name="fourthGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding OEDispensingDataVos}" />
                     </TabItem>
                     <TabItem Header="housing 上料">
                         <DataGrid
+                            x:Name="fifthGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding HousingLoadingDataVos}" />
                     </TabItem>
                     <TabItem Header="点胶合装">
                         <DataGrid
+                            x:Name="sixthGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding GluingAssemblyDataVos}" />
                     </TabItem>
                     <TabItem Header="拧螺丝">
                         <DataGrid
+                            x:Name="seventhGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding TightenScrewsDataVos}" />
                     </TabItem>
                     <TabItem Header="升降回流">
                         <DataGrid
+                            x:Name="eighthGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding LiftingRefluxDataVos}" />
                     </TabItem>
                     <TabItem Header="检测">
                         <DataGrid
+                            x:Name="ninthGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding DetectionDataVos}" />
                     </TabItem>
                     <TabItem Header="烤盘上下料">
                         <DataGrid
+                            x:Name="tenthGrid"
                             Margin="5"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserSortColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="产品条码" />
-                                <DataGridTextColumn Width="*" Header="SN" />
-                                <DataGridTextColumn Width="*" Header="入站时间" />
-                                <DataGridTextColumn Width="*" Header="出站时间" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            ColumnWidth="*"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding BakingTrayDataVos}" />
                     </TabItem>
                 </TabControl>
                 <ItemsControl
