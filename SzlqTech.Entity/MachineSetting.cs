@@ -42,7 +42,11 @@ namespace SzlqTech.Entity
 
 
         [SugarColumn(ColumnName = "is_enable", ColumnDescription = "是否启用", Length = 50)]
-        public bool IsEnable { get; set; } 
+        public bool IsEnable { get; set; }
+
+        //ReverseString
+        [SugarColumn(ColumnName = "reverse_string", ColumnDescription = "反转字符", Length = 50)]
+        public bool ReverseString { get; set; }
 
     }
 }

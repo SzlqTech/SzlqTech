@@ -997,7 +997,7 @@ namespace SzlqTech.Equipment.Machine
 
         public static string ReadString(this PLCData item,ushort length=60, bool failThrowEx = true)
         {
-            if (item.DataType != DataType.Double)
+            if (item.DataType != DataType.String)
             {
                 throw new ArgumentException(ReadArgumentExceptionMessage);
             }

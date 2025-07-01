@@ -102,6 +102,17 @@
                         </Style>
                     </DataGridCheckBoxColumn.CellStyle>
                 </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn
+                    Width="0.5*"
+                    Binding="{Binding ReverseString}"
+                    Header="{loc:Loc ReverseString}">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="10,0" />
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
                 <DataGridTextColumn
                     Width="0.7*"
                     md:TextFieldAssist.TextBoxIsMultiLine="True"
@@ -113,7 +124,7 @@
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn Width="*" Header="{loc:Loc Operation}">
+                <DataGridTemplateColumn Width="1.5*" Header="{loc:Loc Operation}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

@@ -381,4 +381,7 @@
   <data name="IsEnable" xml:space="preserve">
     <value>เปิดใช้งาน</value>
   </data>
+  <data name="ReverseString" xml:space="preserve">
+    <value>กลับข้อความ</value>
+  </data>
 </root>

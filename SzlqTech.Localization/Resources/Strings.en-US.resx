@@ -381,4 +381,7 @@
   <data name="IsEnable" xml:space="preserve">
     <value>Enable</value>
   </data>
+  <data name="ReverseString" xml:space="preserve">
+    <value>Reverse String</value>
+  </data>
 </root>

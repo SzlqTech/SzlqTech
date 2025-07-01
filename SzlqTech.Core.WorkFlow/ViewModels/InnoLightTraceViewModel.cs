@@ -387,13 +387,13 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// <param name="model"></param>
         /// <param name="name">机器名称</param>
         private void ReadData(MachineDataModel model, string name, ObservableCollection<ExpandoObject> datas)
-        {         
-            List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
+        {               
             if (model != null && model.MachineData.Data is bool value)
             {
                 if (value)
                 {
-                  foreach (var item in PLCDatas)
+                    List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
+                    foreach (var item in PLCDatas)
                   {
                     if (item.PortKey == DataCollectEnum.SysDate.ToString()) continue;                
                     dynamic? data = workflow.ReadData(item.PortKey);

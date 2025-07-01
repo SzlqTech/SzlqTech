@@ -28,7 +28,9 @@ namespace SzlqTech.Common.EnumType
         Double,
         //DoubleArray,
         String,
-        //ProductKey
-        ProductKey
+        //产品键
+        ProductKey,
+        ////心跳键
+        //HeartBeatKey
     }
 }

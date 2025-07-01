@@ -619,6 +619,15 @@ namespace SzlqTech.Localization.Resources {
         }
         
         /// <summary>
+        ///   查找类似 反转字符串 的本地化字符串。
+        /// </summary>
+        public static string ReverseString {
+            get {
+                return ResourceManager.GetString("ReverseString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 角色管理 的本地化字符串。
         /// </summary>
         public static string RoleManager {

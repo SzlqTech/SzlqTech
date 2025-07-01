@@ -138,7 +138,7 @@ namespace SzlqTech.Equipment
                 switch (machineSetting.MachineModelEnum)
                 {
                     case MachineModel.SiemensS200Smart:
-                        var smart = new SiemensS7Net(SiemensPLCS.S200Smart, machineSetting.PortKey);
+                        var smart = new SiemensS7Net(SiemensPLCS.S200Smart, machineSetting.PortKey);                         
                         TCPDeviceDictionary.Add(machineSetting.PortKey, smart);
                         break;
 
@@ -147,32 +147,37 @@ namespace SzlqTech.Equipment
                         TCPDeviceDictionary.Add(machineSetting.PortKey, s1200);
                         break;
                     case MachineModel.SiemensS1500:
-                        var s1500 = new SiemensS7Net(SiemensPLCS.S1500, machineSetting.PortKey);
+                        var s1500 = new SiemensS7Net(SiemensPLCS.S1500, machineSetting.PortKey);                
                         TCPDeviceDictionary.Add(machineSetting.PortKey, s1500);
                         break;
 
                     case MachineModel.InovanceAMNet:
                         var amNet = new InovanceTcpNet(InovanceSeries.AM, machineSetting.PortKey);
+                        amNet.IsStringReverse = machineSetting.ReverseString;
                         TCPDeviceDictionary.Add(machineSetting.PortKey, amNet);
                         break;
 
                     case MachineModel.InovanceEasyNet:
                         var easy = new InovanceTcpNet(InovanceSeries.H5U, machineSetting.PortKey);
+                        easy.IsStringReverse= machineSetting.ReverseString;
                         TCPDeviceDictionary.Add(machineSetting.PortKey, easy);
                         break;
 
                     case MachineModel.InovanceH3UNet:
                         var h3u = new InovanceTcpNet(InovanceSeries.H3U, machineSetting.PortKey);
+                        h3u.IsStringReverse= machineSetting.ReverseString;
                         TCPDeviceDictionary.Add(machineSetting.PortKey, h3u);
                         break;
 
                     case MachineModel.InovanceH5UNet:
                         var h5u = new InovanceTcpNet(InovanceSeries.H5U, machineSetting.PortKey);
+                        h5u.IsStringReverse = machineSetting.ReverseString;
                         TCPDeviceDictionary.Add(machineSetting.PortKey, h5u);
                         break;
 
                     case MachineModel.ModbusTcp:
                         var modbusTcp = new ModbusTcpNet(machineSetting.PortKey);
+                        modbusTcp.IsStringReverse= machineSetting.ReverseString;
                         TCPDeviceDictionary.Add(machineSetting.PortKey, modbusTcp);
                         break;
                     //case MachineModel.BeckoffAds2:
@@ -434,10 +439,11 @@ namespace SzlqTech.Equipment
                     data = item.ReadFloat();
                     break;
                 case DataType.Double:
-                    data = item.ReadInt32();
+                    data = item.ReadDouble();
                     break;
                 case DataType.String:
-                    data = item.ReadFloat();
+                    string str = item.ReadString().TrimStart('\0').TrimEnd('\0');
+                    data = str;
                     break;
             }
             return data;
@@ -515,10 +521,10 @@ namespace SzlqTech.Equipment
                     data =await item.ReadFloatAsync();
                     break;
                 case DataType.Double:
-                    data =await item.ReadInt32Async();
+                    data =await item.ReadDoubleAsync();
                     break;
                 case DataType.String:
-                    data =await item.ReadFloatAsync();
+                    data =await item.ReadStringAsync();
                     break;
             }
             return data;
