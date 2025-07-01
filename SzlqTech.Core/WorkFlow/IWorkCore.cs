@@ -1,4 +1,7 @@
 ﻿
+using SzlqTech.Common.EnumType;
+using SzlqTech.Entity;
+
 namespace SzlqTech.Core.WorkFlow
 {
     public interface IWorkCore
@@ -29,6 +32,8 @@ namespace SzlqTech.Core.WorkFlow
         string ReadStringValue(string key);
 
         bool WriteValue(string key, object value);
+
+        bool WriteValueByMachine(MachineDetail detail,DataType dataType, object value);
         #endregion
 
         #region 异步读写数据
@@ -45,6 +50,8 @@ namespace SzlqTech.Core.WorkFlow
         Task<string> ReadStringValueAsync(string key);
 
         Task<bool> WriteValueAsync(string key, object value);
+
+        Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value);
         #endregion
     }
 }

@@ -28,6 +28,8 @@ using SzlqTech.Entity;
 using SzlqTech.Equipment.Machine;
 using SzlqTech.IService;
 using SzlqTech.Localization;
+using SzlqTech.Common.EnumType;
+
 
 namespace SzlqTech.Core.WorkFlow.ViewModels
 {
@@ -40,13 +42,14 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         private readonly IMachineSettingService machineSettingService;
         private readonly IMachineDataCollectService machineDataCollectService;
         private readonly IDataCollectService dataCollectService;
+        private readonly IMachineDetailService machineDetailService;
         private InnoLightWorkflow workflow;
         private readonly IEventAggregator aggregator;
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public InnoLightTraceViewModel(IHostDialogService dialog,IProductService productService,
             IMapper mapper,IMachineSettingService machineSettingService,IMachineDataCollectService machineDataCollectService,
-            IDataCollectService dataCollectService
+            IDataCollectService dataCollectService,IMachineDetailService machineDetailService
             )
         {
             Title = LocalizationService.GetString(AppLocalizations.DataCollection);
@@ -56,6 +59,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             this.machineSettingService = machineSettingService;
             this.machineDataCollectService = machineDataCollectService;
             this.dataCollectService = dataCollectService;
+            this.machineDetailService = machineDetailService;
             workflow = ContainerLocator.Container.Resolve<InnoLightWorkflow>();
             workflow.PLCDataReceived -= OnMachineDataReceived;
             workflow.PLCDataReceived += OnMachineDataReceived;
@@ -187,8 +191,24 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                     {
                         //启动成功发送产品号
                         SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
-                        await workflow.WriteValueAsync(ProductSignalKey,Convert.ToInt32(SelectedProductVo.ProductCode));
-
+                        //给所有已经开启的PLC发送指令
+                        var machines = await machineSettingService.ListAsync(o=>o.IsEnable);
+                        if (machines != null)
+                        {
+                            var tasks = machines.ToList().Select(async machine =>
+                            {
+                                var machineDetail = machineDetailService.GetFirstOrDefault(o => o.MachineId == machine.Id && o.PortKey == ProductSignalKey);
+                                if (machineDetail != null)
+                                {
+                                    if(!await workflow.WriteValueByMachineAsync(machineDetail, DataType.Int32, Convert.ToInt32(SelectedProductVo.ProductCode)))
+                                    {
+                                        logger.ErrorHandler($"{machine.PortName} 写入产品{SelectedProductVo.ProductCode}失败");
+                                    }
+                                }
+                            });
+                            
+                            await Task.WhenAll(tasks);
+                        }
                     }
                     else SendMessage(LocalizationService.GetString(AppLocalizations.StartError));
                 }
@@ -367,8 +387,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// <param name="model"></param>
         /// <param name="name">机器名称</param>
         private void ReadData(MachineDataModel model, string name, ObservableCollection<ExpandoObject> datas)
-        {
-            
+        {         
             List<PLCDataModel> PLCDatas = GetPLCDatasByName(name);
             if (model != null && model.MachineData.Data is bool value)
             {

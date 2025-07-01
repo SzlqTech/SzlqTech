@@ -27,6 +27,8 @@ namespace SzlqTech.Common.EnumType
         //FloatArray,
         Double,
         //DoubleArray,
-        String
+        String,
+        //ProductKey
+        ProductKey
     }
 }

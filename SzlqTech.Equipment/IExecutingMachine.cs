@@ -1,5 +1,7 @@
 ﻿using NPOI.SS.Formula.Functions;
+using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Extensions;
+using SzlqTech.Entity;
 using SzlqTech.Equipment.Machine;
 
 namespace SzlqTech.Equipment
@@ -79,6 +81,8 @@ namespace SzlqTech.Equipment
 
         bool WriteValue(string key, object value);
 
+        bool WriteValueByMachine(MachineDetail detail, DataType dataType, object value);
+
         dynamic ReadValueByPortKey(string portKey);
         #endregion
 
@@ -98,6 +102,8 @@ namespace SzlqTech.Equipment
         Task<bool> WriteValueAsync(string key, object value);
 
         Task<dynamic> ReadValueByPortKeyAsync(string portKey);
+
+        Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value);
         #endregion
 
     }

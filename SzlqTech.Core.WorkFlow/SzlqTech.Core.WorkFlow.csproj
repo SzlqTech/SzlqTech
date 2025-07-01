@@ -18,6 +18,8 @@
 
 	<ItemGroup>
 		
+		<ProjectReference Include="..\SzlqTech.Common\SzlqTech.Common.csproj" />
+		
 		<ProjectReference Include="..\SzlqTech.Core\SzlqTech.Core.csproj" />
 		<ProjectReference Include="..\SzlqTech.Localization\SzlqTech.Localization.csproj" />
 		<ProjectReference Include="..\SzlqTech.Repository\SzlqTech.Repository.csproj" />

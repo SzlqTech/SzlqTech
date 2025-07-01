@@ -1,7 +1,9 @@
 ﻿using NLog;
+using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Common.MultiThreads;
 using SzlqTech.Common.Nlogs;
+using SzlqTech.Entity;
 using SzlqTech.Equipment;
 using SzlqTech.Equipment.Machine;
 using SzlqTech.Equipment.Scanner;
@@ -299,6 +301,11 @@ namespace SzlqTech.Core.WorkFlow
             return ExecutingMachine.WriteValue(key,value);
         }
 
+        public virtual bool WriteValueByMachine(MachineDetail detail, DataType dataType, object value)
+        {
+            return ExecutingMachine.WriteValueByMachine(detail, dataType, value);
+        }
+
         public virtual async Task<bool> ReadBoolValueAsync(string key)
         {
             return await ExecutingMachine.ReadBoolValueAsync(key);
@@ -332,6 +339,11 @@ namespace SzlqTech.Core.WorkFlow
         public virtual async Task<bool> WriteValueAsync(string key, object value)
         {
            return await ExecutingMachine.WriteValueAsync(key, value);
+        }
+
+        public async Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value)
+        {
+            return await ExecutingMachine.WriteValueByMachineAsync(detail,dataType,value);
         }
 
         #endregion

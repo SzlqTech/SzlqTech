@@ -9,6 +9,7 @@ using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Common.MultiThreads;
 using SzlqTech.Common.Nlogs;
+using SzlqTech.Entity;
 using SzlqTech.Equipment.Machine;
 using SzlqTech.IService;
 
@@ -41,6 +42,8 @@ namespace SzlqTech.Equipment
         /// 心跳键
         /// </summary>
         private const string HeartbeatKey = "Heartbeat";
+
+        private const string ProductKey = "ProductKey";
 
         /// <summary>
         /// 网口TCP设备字典
@@ -219,14 +222,22 @@ namespace SzlqTech.Equipment
                         }
                         else
                         {
-                            if (machineDetail.IsEnableScan)
+                            if (machineDetail.DataType == (int)DataType.ProductKey)
                             {
-                                PLCScanDictionary.AddToStartScan(machineDetail.PortKey, tcpDevice, machineDetail.Address,
-                                    machineDetail.DataTypeEnum, machineDetail.ScanCycle);
+                                continue;
                             }
+                            else
+                            {
+                                if (machineDetail.IsEnableScan)
+                                {
+                                    PLCScanDictionary.AddToStartScan(machineDetail.PortKey, tcpDevice, machineDetail.Address,
+                                        machineDetail.DataTypeEnum, machineDetail.ScanCycle);
+                                }
 
-                            PLCDictionary.Add(machineDetail.PortKey, tcpDevice, machineDetail.Address,
-                                machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType);
+                                PLCDictionary.Add(machineDetail.PortKey, tcpDevice, machineDetail.Address,
+                                    machineDetail.DataTypeEnum, machineDetail.DecimalPointShiftType);
+                            }
+                            
                         }
 
                     }
@@ -432,7 +443,14 @@ namespace SzlqTech.Equipment
             return data;
         }
 
-
+        public bool WriteValueByMachine(MachineDetail detail, DataType dataType, object value)
+        {
+            var machine = machineSettingService.GetById(detail.MachineId);
+            if (machine == null) return false;
+            TCPDeviceDictionary.TryGetValue(machine.PortKey,out NetworkDeviceBase device);
+            if(device == null) return false;
+            return device.WriteByMachine(dataType, detail.Address, value);
+        }
         #endregion
 
         #region 异步读写数据
@@ -504,6 +522,16 @@ namespace SzlqTech.Equipment
                     break;
             }
             return data;
+        }
+
+       
+        public async Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value)
+        {
+            var machine =await machineSettingService.GetByIdAsync(detail.MachineId);
+            if (machine == null) return false;
+            TCPDeviceDictionary.TryGetValue(machine.PortKey, out NetworkDeviceBase device);
+            if (device == null) return false;
+            return await device.WriteByMachineAsync(dataType, detail.Address, value);
         }
 
         #endregion

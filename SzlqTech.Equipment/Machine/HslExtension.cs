@@ -1,5 +1,6 @@
 ﻿
 using HslCommunication;
+using HslCommunication.Core;
 using NLog;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
@@ -212,6 +213,204 @@ namespace SzlqTech.Equipment.Machine
             return operateResult.IsSuccess;
         }
 
+        public static bool WriteByMachine(this IReadWriteDevice item, DataType dataType,string Address, dynamic data, DecimalPointShiftType DecimalPointShiftType= DecimalPointShiftType.None, bool failThrowEx = false)
+        {
+            OperateResult operateResult;
+            string dataTypeMessage = "当前写入的数据类型与配置的不一致";
+            switch (dataType)
+            {
+                case DataType.Bool:
+                    if (data is not bool boolValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = item.Write(Address, boolValue);
+                    break;
+
+                case DataType.Byte:
+                    if (data is not byte byteValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = item.Write(Address, byteValue);
+                    break;
+
+                case DataType.Int16:
+                    operateResult = data switch
+                    {
+                        short val => item.Write(Address, val),
+                        decimal val => item.Write(Address,
+                            Convert.ToInt16((int)(val * (10 ^ (int)DecimalPointShiftType)))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.UInt16:
+                    operateResult = data switch
+                    {
+                        ushort val => item.Write(Address, val),
+                        decimal val => item.Write(Address,
+                            Convert.ToUInt16(val * (10 ^ (int)DecimalPointShiftType))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.Int32:
+                    operateResult = data switch
+                    {
+                        int val => item.Write(Address, val),
+                        decimal val => item.Write(Address,
+                            Convert.ToInt32(val * (10 ^ (int)DecimalPointShiftType))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.UInt32:
+                    operateResult = data switch
+                    {
+                        uint val => item.Write(Address, val),
+                        decimal val => item.Write(Address,
+                            Convert.ToUInt32(val * (10 ^ (int)DecimalPointShiftType))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.Int64:
+                    if (data is not long longValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = item.Write(Address, longValue);
+                    break;
+
+                case DataType.UInt64:
+                    if (data is not ulong ulongValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = item.Write(Address, ulongValue);
+                    break;
+
+                case DataType.Float:
+                    if (data is not float floatValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = item.Write(Address, floatValue);
+                    break;
+
+                case DataType.Double:
+                    if (data is not double doubleValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = item.Write(Address, doubleValue);
+                    break;
+
+                default:
+                    throw new ArgumentException("数据类型配置错误");
+            }
+
+            if (!operateResult.IsSuccess)
+            {
+                string writeFailMessage = $"PLC写入失败, 地址为[{Address}]";
+                if (failThrowEx)
+                {
+                    // throw new EquipmentException(writeFailMessage);
+                }
+                else
+                {
+                    Logger.Error(writeFailMessage);
+                }
+            }
+            else
+            {
+                Logger.Info($"地址为[{Address}]写入值$[{data}]");
+            }
+            return operateResult.IsSuccess;
+        }
+
+
+        public static async Task<bool> WriteByMachineAsync(this IReadWriteDevice item, DataType dataType, string Address, dynamic data, DecimalPointShiftType DecimalPointShiftType = DecimalPointShiftType.None, bool failThrowEx = false)
+        {
+            OperateResult operateResult;
+            string dataTypeMessage = "当前写入的数据类型与配置的不一致";
+            switch (dataType)
+            {
+                case DataType.Bool:
+                    if (data is not bool boolValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult =await item.WriteAsync(Address, boolValue);
+                    break;
+
+                case DataType.Byte:
+                    if (data is not byte byteValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = await item.WriteAsync(Address, byteValue);
+                    break;
+
+                case DataType.Int16:
+                    operateResult = data switch
+                    {
+                        short val => await item.WriteAsync(Address, val),
+                        decimal val => await item.WriteAsync(Address,
+                            Convert.ToInt16((int)(val * (10 ^ (int)DecimalPointShiftType)))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.UInt16:
+                    operateResult = data switch
+                    {
+                        ushort val => await item.WriteAsync(Address, val),
+                        decimal val => await item.WriteAsync(Address,
+                            Convert.ToUInt16(val * (10 ^ (int)DecimalPointShiftType))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.Int32:
+                    operateResult = data switch
+                    {
+                        int val => await item.WriteAsync(Address, val),
+                        decimal val => await item.WriteAsync(Address,
+                            Convert.ToInt32(val * (10 ^ (int)DecimalPointShiftType))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.UInt32:
+                    operateResult = data switch
+                    {
+                        uint val => await item.WriteAsync(Address, val),
+                        decimal val => await item.WriteAsync(Address,
+                            Convert.ToUInt32(val * (10 ^ (int)DecimalPointShiftType))),
+                        _ => throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]")
+                    };
+                    break;
+
+                case DataType.Int64:
+                    if (data is not long longValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = await item.WriteAsync(Address, longValue);
+                    break;
+
+                case DataType.UInt64:
+                    if (data is not ulong ulongValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = await item.WriteAsync(Address, ulongValue);
+                    break;
+
+                case DataType.Float:
+                    if (data is not float floatValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = await item.WriteAsync(Address, floatValue);
+                    break;
+
+                case DataType.Double:
+                    if (data is not double doubleValue) throw new ArgumentException($"{dataTypeMessage}, 地址是[{Address}]");
+                    operateResult = await item.WriteAsync(Address, doubleValue);
+                    break;
+
+                default:
+                    throw new ArgumentException("数据类型配置错误");
+            }
+
+            if (!operateResult.IsSuccess)
+            {
+                string writeFailMessage = $"PLC写入失败, 地址为[{Address}]";
+                if (failThrowEx)
+                {
+                    // throw new EquipmentException(writeFailMessage);
+                }
+                else
+                {
+                    Logger.Error(writeFailMessage);
+                }
+            }
+            else
+            {
+                Logger.Info($"地址为[{Address}]写入值$[{data}]");
+            }
+            return operateResult.IsSuccess;
+        }
 
         public static async Task<bool> WriteAsync(this PLCData item, dynamic data, bool failThrowEx = true)
         {
