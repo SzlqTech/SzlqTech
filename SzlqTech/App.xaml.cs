@@ -59,6 +59,7 @@ namespace SzlqTech
             Initialization();
             //Configure();
             InitNlog();
+            RegisterEvents();
             var appStart = ContainerLocator.Container.Resolve<IAppStartService>();         
             appStart.CreateShell();
             var dialog = Container.Resolve<IDialogService>();

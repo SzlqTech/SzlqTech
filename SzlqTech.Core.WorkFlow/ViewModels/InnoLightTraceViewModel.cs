@@ -78,11 +78,14 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             this.DetectionDataVos = new ObservableCollection<ExpandoObject>();
             this.BakingTrayDataVos = new ObservableCollection<ExpandoObject>();
             IsOpen = false;
+            Content= LocalizationService.GetString(AppLocalizations.Start);
         }
 
         private void OnMachineStatusRecevied(object? sender, TEventArgs<bool> e)
         {
             IsOpen = e.Data;
+            Content= IsOpen==true? LocalizationService.GetString(AppLocalizations.Stop): LocalizationService.GetString(AppLocalizations.Start);
+
         }
 
         private void OnMachineDataReceived(object? sender, TEventArgs<List<MachineLinkData>> e)
@@ -171,12 +174,35 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         
         public bool isOpen;
 
-        public bool CanButtonExcute => !IsOpen;
+        [ObservableProperty]
+        public string content;
 
-        public bool CanClose => IsOpen;
 
         [RelayCommand]
-        public async Task Start()
+        public async Task Excute()
+        {
+            if (!IsOpen)
+            {
+                await Start();
+            }
+            else
+            {
+                await Stop();
+            }
+           
+        }
+
+        public bool Valid()
+        {
+            if (SelectedProductVo == null)
+            {
+                SendMessage(LocalizationService.GetString(AppLocalizations.ProudctSelectedNull));
+                return false;
+            }
+            return true;
+        }
+
+        private async Task Start()
         {
             if (Valid())
             {
@@ -192,7 +218,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                         //启动成功发送产品号
                         SendMessage(LocalizationService.GetString(AppLocalizations.StartSuccess));
                         //给所有已经开启的PLC发送指令
-                        var machines = await machineSettingService.ListAsync(o=>o.IsEnable);
+                        var machines = await machineSettingService.ListAsync(o => o.IsEnable);
                         if (machines != null)
                         {
                             var tasks = machines.ToList().Select(async machine =>
@@ -200,13 +226,13 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
                                 var machineDetail = machineDetailService.GetFirstOrDefault(o => o.MachineId == machine.Id && o.PortKey == ProductSignalKey);
                                 if (machineDetail != null)
                                 {
-                                    if(!await workflow.WriteValueByMachineAsync(machineDetail, DataType.Int32, Convert.ToInt32(SelectedProductVo.ProductCode)))
+                                    if (!await workflow.WriteValueByMachineAsync(machineDetail, DataType.Int32, Convert.ToInt32(SelectedProductVo.ProductCode)))
                                     {
                                         logger.ErrorHandler($"{machine.PortName} 写入产品{SelectedProductVo.ProductCode}失败");
                                     }
                                 }
                             });
-                            
+
                             await Task.WhenAll(tasks);
                         }
                     }
@@ -220,17 +246,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             }
         }
 
-        public bool Valid()
-        {
-            if (SelectedProductVo == null)
-            {
-                SendMessage(LocalizationService.GetString(AppLocalizations.ProudctSelectedNull));
-                return false;
-            }
-            return true;
-        }
-
-        [RelayCommand]
+        
         public async Task Stop()
         {
             if (!IsOpen) return;
@@ -636,7 +652,7 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
         /// <returns></returns>
         public async Task Init()
         {
-            List<MachineSetting> machineSettings = await machineSettingService.ListAsync(o => o.IsEnable);
+            List<MachineSetting> machineSettings = await machineSettingService.ListAsync(o => o.IsEnable&&o.MachineModel!=(int)MachineModel.SEC_GEM);
             if (machineSettings == null || machineSettings.Count == 0) return;
             MachineLinks = new ObservableCollection<MachineLinkVo>();
             foreach (var item in machineSettings)

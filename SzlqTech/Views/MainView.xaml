@@ -356,7 +356,7 @@
 
                     </ComboBox>
                     <TextBlock Text="{loc:Loc Title}" VerticalAlignment="Center"/>-->
-                    <ToggleButton
+                    <!--<ToggleButton
                         x:Name="toggleShowPanel"
                         Margin="5"
                         Padding="10,5"
@@ -369,7 +369,7 @@
                                 Source="{Binding appService.Photo, Converter={StaticResource bytesToImageConverter}}" />
                             <TextBlock Margin="5,0" Text="{Binding appService.UserNameAndSurname}" />
                         </StackPanel>
-                    </ToggleButton>
+                    </ToggleButton>-->
 
                     <Button
                         x:Name="BtnMin"

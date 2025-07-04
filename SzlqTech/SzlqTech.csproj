@@ -72,7 +72,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\SqlqTech.SharedView\SqlqTech.SharedView.csproj" />
-	  <ProjectReference Include="..\SzlqTech.Carmera\SzlqTech.Carmera.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Core.WorkFlow\SzlqTech.Core.WorkFlow.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Core\SzlqTech.Core.csproj" />
 	  <ProjectReference Include="..\SzlqTech.Localization\SzlqTech.Localization.csproj" />

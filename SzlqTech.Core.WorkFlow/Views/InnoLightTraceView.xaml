@@ -20,7 +20,7 @@
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <converter:LinkToImageConverter x:Key="linkToImage" />
-
+        <converter:StartButtonConverter x:Key="btnToImage"/>
     </UserControl.Resources>
     <Grid>
 
@@ -53,15 +53,16 @@
                     VerticalAlignment="Center"
                     Background="Transparent"
                     BorderThickness="1"
-                    Command="{Binding StartCommand}">
+                    Command="{Binding ExcuteCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
-                            <Image Width="20" Source="/SzlqTech.Core.WorkFlow;component/Assets/start.png" />
-                            <TextBlock Margin="5,0" Text="{loc:Loc Start}" />
+                            <Image Width="20" Source="{Binding IsOpen,Converter={StaticResource btnToImage}}" />
+                            <TextBlock Margin="5,0" Text="{Binding Content}" />
                         </StackPanel>
+                        
                     </Button.Content>
                 </Button>
-                <Button
+                <!--<Button
                     Width="120"
                     Height="40"
                     Margin="10"
@@ -75,7 +76,7 @@
                             <TextBlock Margin="5,0" Text="{loc:Loc Stop}" />
                         </StackPanel>
                     </Button.Content>
-                </Button>
+                </Button>-->
 
             </StackPanel>
 

@@ -38,6 +38,9 @@ namespace SzlqTech.Common.EnumType
         [Description("汇川AM系列以太网驱动")]
         InovanceAMNet = 23,
 
+        [Description("SEC/GEM标准协议")]
+        SEC_GEM = 24,
+
         //[Description("倍福Twincat2系列以太网驱动")]
         //BeckoffAds2 =24,
 

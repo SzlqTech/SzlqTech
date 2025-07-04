@@ -103,6 +103,8 @@ namespace SzlqTech.Core.Consts
         public const string PageUnit = "PageUnit";
 
         public const string TotalPageName = "TotalPageName";
+
+      
         #endregion
 
         #region Message
