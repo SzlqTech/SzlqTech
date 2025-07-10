@@ -1,4 +1,7 @@
-﻿using NPOI.SS.Formula.Functions;
+﻿using HslCommunication;
+using HslCommunication.Secs;
+using HslCommunication.Secs.Types;
+using NPOI.SS.Formula.Functions;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Entity;
@@ -104,6 +107,10 @@ namespace SzlqTech.Equipment
         Task<dynamic> ReadValueByPortKeyAsync(string portKey);
 
         Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value);
+        #endregion
+
+        #region Secs   
+        SecsHsms GetSecsHsms(string portKey);
         #endregion
 
     }

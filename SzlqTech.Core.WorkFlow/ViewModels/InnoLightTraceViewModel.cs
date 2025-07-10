@@ -264,7 +264,6 @@ namespace SzlqTech.Core.WorkFlow.ViewModels
             {
                 SendMessage(LocalizationService.GetString(AppLocalizations.StopSuccess));
             }
-
         }
 
 

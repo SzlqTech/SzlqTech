@@ -1,9 +1,18 @@
 ﻿using Dm;
+using HslCommunication;
+using HslCommunication.BasicFramework;
+using HslCommunication.Core;
 using HslCommunication.Core.Net;
+using HslCommunication.Core.Pipe;
 using HslCommunication.ModBus;
 using HslCommunication.Profinet.Inovance;
 using HslCommunication.Profinet.Siemens;
+using HslCommunication.Secs;
+using HslCommunication.Secs.Helper;
+using HslCommunication.Secs.Types;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using NLog;
+using System.Net.Sockets;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Exceptions;
 using SzlqTech.Common.Extensions;
@@ -50,6 +59,8 @@ namespace SzlqTech.Equipment
         /// </summary>
         public Dictionary<string, NetworkDeviceBase> TCPDeviceDictionary { get; } = new Dictionary<string, NetworkDeviceBase>();
 
+        public Dictionary<string, SecsHsms> SecsDictionary { get; }=new Dictionary<string, SecsHsms>();
+
 
         /// <summary>
         /// PLC扫描项目字典
@@ -78,7 +89,7 @@ namespace SzlqTech.Equipment
         public ExecutingMachine(IMachineSettingService machineSettingService,IMachineDetailService machineDetailService)
         {
             this.machineSettingService = machineSettingService;
-            this.machineDetailService = machineDetailService;
+            this.machineDetailService = machineDetailService; 
         }
 
 
@@ -127,7 +138,7 @@ namespace SzlqTech.Equipment
         public void GetMachines()
         {
             TCPDeviceDictionary.Clear();
-
+            SecsDictionary.Clear();
             var machineSettings = machineSettingService.List(o => o.IsEnable);
             if (machineSettings.Count == 0)
             {
@@ -180,14 +191,14 @@ namespace SzlqTech.Equipment
                         modbusTcp.IsStringReverse= machineSetting.ReverseString;
                         TCPDeviceDictionary.Add(machineSetting.PortKey, modbusTcp);
                         break;
-                    //case MachineModel.BeckoffAds2:
-                    //    var beckoff2Tcp = new BeckhoffAdsNet(machineSetting.PortKey,801);
-                    //    TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff2Tcp);
-                    //    break;
-                    //case MachineModel.BeckoffAds3:
-                    //    var beckoff3Tcp = new BeckhoffAdsNet(machineSetting.PortKey, 851);
-                    //    TCPDeviceDictionary.Add(machineSetting.PortKey, beckoff3Tcp);
-                    //    break;
+                    case MachineModel.SEC_GEM:
+                        var secs = new SecsHsms();
+                        string[] strs = machineSetting.PortKey.Split(':');
+                        secs.IpAddress = strs[0];
+                        secs.Port =Convert.ToInt16(strs[1]);
+                        secs.DeviceID = 1;
+                        SecsDictionary.Add(machineSetting.PortKey, secs);
+                        break;
                     default:
                         throw new NotImplementedException("暂未支持");
                 }
@@ -246,7 +257,21 @@ namespace SzlqTech.Equipment
                         }
 
                     }
-                }         
+                }
+                foreach (var item in SecsDictionary)
+                {
+                    var secs = item.Value;
+                    secs.OnSecsMessageReceived -= Secs_OnSecsMessageReceived;
+                    secs.OnSecsMessageReceived += Secs_OnSecsMessageReceived;
+                    try
+                    {
+                        OperateResult connect = secs.ConnectServer();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -263,6 +288,15 @@ namespace SzlqTech.Equipment
                     throw new EquipmentException("没有可用的PLC设备，请检查网络连接或PLC配置。");
                 }
                 RaiseMachineStatusReceived(IsOpen);
+            }
+        }
+
+        private void Secs_OnSecsMessageReceived(object sender, SecsMessage secsMessage)
+        {
+            // 判断要不要返回，当且 F 为单数，且树形控件的返回数据不为空时，进行返回数据操作
+            if (secsMessage.FunctionNo != 0 && secsMessage.FunctionNo % 2 == 1)
+            {
+
             }
         }
 
@@ -539,6 +573,23 @@ namespace SzlqTech.Equipment
             if (device == null) return false;
             return await device.WriteByMachineAsync(dataType, detail.Address, value);
         }
+
+        #endregion
+
+        #region Secs
+      
+
+        public SecsHsms GetSecsHsms(string portKey)
+        {
+            if (SecsDictionary.ContainsKey(portKey))
+            {
+                return SecsDictionary[portKey];
+            }
+            return null;
+        }
+
+
+
 
         #endregion
     }

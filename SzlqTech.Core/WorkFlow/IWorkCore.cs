@@ -1,4 +1,5 @@
 ﻿
+using HslCommunication.Secs;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Entity;
 
@@ -53,5 +54,7 @@ namespace SzlqTech.Core.WorkFlow
 
         Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value);
         #endregion
+
+        SecsHsms GetSecsHsms(string portKey);
     }
 }

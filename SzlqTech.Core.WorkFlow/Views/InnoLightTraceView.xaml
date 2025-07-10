@@ -20,7 +20,7 @@
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <converter:LinkToImageConverter x:Key="linkToImage" />
-        <converter:StartButtonConverter x:Key="btnToImage"/>
+        <converter:StartButtonConverter x:Key="btnToImage" />
     </UserControl.Resources>
     <Grid>
 
@@ -56,10 +56,10 @@
                     Command="{Binding ExcuteCommand}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
-                            <Image Width="20" Source="{Binding IsOpen,Converter={StaticResource btnToImage}}" />
+                            <Image Width="20" Source="{Binding IsOpen, Converter={StaticResource btnToImage}}" />
                             <TextBlock Margin="5,0" Text="{Binding Content}" />
                         </StackPanel>
-                        
+
                     </Button.Content>
                 </Button>
                 <!--<Button

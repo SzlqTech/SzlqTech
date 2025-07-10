@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using HslCommunication.Secs;
+using NLog;
 using SzlqTech.Common.EnumType;
 using SzlqTech.Common.Extensions;
 using SzlqTech.Common.MultiThreads;
@@ -344,6 +345,11 @@ namespace SzlqTech.Core.WorkFlow
         public async Task<bool> WriteValueByMachineAsync(MachineDetail detail, DataType dataType, object value)
         {
             return await ExecutingMachine.WriteValueByMachineAsync(detail,dataType,value);
+        }
+
+        public SecsHsms GetSecsHsms(string portKey)
+        {
+            return ExecutingMachine.GetSecsHsms(portKey);
         }
 
         #endregion
