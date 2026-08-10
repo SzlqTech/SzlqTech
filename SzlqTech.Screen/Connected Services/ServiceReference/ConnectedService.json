@@ -1,0 +1,16 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://10.200.17.130:8082/EquipInfoService/SN_MoveInOutService.svc"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ServiceReference"
+    ],
+    "targetFramework": "net8.0-windows10.0.19041.0",
+    "typeReuseMode": "All"
+  }
+}
